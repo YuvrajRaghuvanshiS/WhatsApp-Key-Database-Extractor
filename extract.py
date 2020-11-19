@@ -52,8 +52,9 @@ def USBMode() :
     
 def LinuxMode() : 
     CustomPrint('Installing dependencies for linux systems...', 'green')
-    process = subprocess.Popen('bin/linux_dependencies.sh')
-    process.wait()
+    bashCommand = "bash bin/linux_dependencies.sh"
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
