@@ -22,11 +22,16 @@
     <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWEW6A5EEWXHOVNGGS7X73Q2" alt="Logo" width="320" height="100">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">WhatsApp Key/DB Extractor</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Extract key/msgstore.db from /data/data/com.whatsapp without root.
     <br />
+</p>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)
+
+<p align="center">
     <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor"><strong>Explore the docs »</strong></a>
     <br />
     <br />
@@ -38,6 +43,8 @@
   </p>
 </p>
 
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)
 
 
 <!-- TABLE OF CONTENTS -->
