@@ -81,7 +81,8 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ### Built With
 * [Python](https://www.python.org/)
 * [Bash](https://www.gnu.org/software/bash/)
-* [Java](https://www.java.com/)
+    ###### Depends upon    
+    * [Java](https://www.java.com/)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
