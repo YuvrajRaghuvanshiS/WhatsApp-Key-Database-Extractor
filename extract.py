@@ -1,4 +1,4 @@
-from os import system
+import os
 from termcolor import colored, cprint
 import subprocess
 import platform
@@ -10,9 +10,17 @@ if platform.system() == 'Windows' : isWindows = True
 if platform.system() == 'Linux' : isLinux = True
 
 def main() :
-    
+    CheckBinIfWindows()
     ShowBanner()
     CheckJAVA()
+
+def CheckBinIfWindows() : 
+    if (isWindows and not os.path.isdir('bin')) : 
+        CustomPrint('I can not find /bin folder, check again...', 'green')
+        Exit()
+    else : 
+        pass
+
 
 def ShowBanner() : 
     banner_path = 'non_essentials/banner.txt'
@@ -45,12 +53,13 @@ def TCPMode() :
     if(devicePort=='') : devicePort = '5555'
     CustomPrint(deviceIP,'green')
     CustomPrint(devicePort,'green')
-    if(isLinux) : LinuxMode()
+    if(isLinux) : LinuxTCP()
+    else : WindowsTCP()
 
 def USBMode() : 
     pass
     
-def LinuxMode() : 
+def LinuxTCP() : 
     CustomPrint('Installing dependencies for linux systems...', 'green')
     bashCommand = "bash bin/linux_dependencies.sh"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
@@ -59,6 +68,9 @@ def LinuxMode() :
         print(error)
         Exit()
     CustomPrint('\nDependencies installed successfully.', 'green')
+
+def WindowsTCP() : 
+    pass
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
