@@ -1,6 +1,6 @@
 from os import system
 from termcolor import colored, cprint
-import os
+import subprocess
 import platform
 
 # Detect OS
@@ -52,7 +52,8 @@ def USBMode() :
     
 def LinuxMode() : 
     CustomPrint('Installing dependencies for linux systems...', 'green')
-    os.popen('sudo bash bin/linux_dependencies.sh')
+    process = subprocess.Popen('bin/linux_dependencies.sh')
+    process.wait()
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
