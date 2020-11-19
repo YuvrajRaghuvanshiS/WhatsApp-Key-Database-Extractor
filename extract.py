@@ -13,7 +13,6 @@ def main() :
     
     ShowBanner()
     CheckJAVA()
-    TCPorUSB()
 
 def ShowBanner() : 
     banner_path = 'non_essentials/banner.txt'
@@ -36,7 +35,7 @@ def CheckJAVA() :
         quit()
 
 def TCPorUSB() : 
-    isTCP = CustomInput('\nuse (T)CP or (U)SB? : ', 'green')
+    isTCP = CustomInput('\nUse (T)CP or (U)SB? : ', 'green')
     if(isTCP=='t') : TCPMode()
     else : USBMode()
 
@@ -46,10 +45,14 @@ def TCPMode() :
     if(devicePort=='') : devicePort = '5555'
     CustomPrint(deviceIP,'green')
     CustomPrint(devicePort,'green')
+    if(isLinux) : LinuxMode()
 
 def USBMode() : 
     pass
     
+def LinuxMode() : 
+    CustomPrint('Installing dependencies for linux systems...', 'green')
+    os.popen('bash bin/linux_dependencies.sh')
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
