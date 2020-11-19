@@ -86,7 +86,12 @@ def WindowsUSB() :
     CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
 
 def LinuxUSB() : 
-    pass
+    os.system("adb kill-server")
+    CustomPrint('Plug device via USB now..', 'green')
+    os.system('adb wait-for-device')
+    deviceName='adb shell getprop ro.product.model'
+    CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
+
 
 
 def CustomPrint(textToPrint, color, attr=[]) : 
