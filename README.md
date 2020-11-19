@@ -19,7 +19,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
   <h3 align="center">Best-README-Template</h3>
@@ -60,7 +60,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
 
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 
@@ -190,4 +190,4 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/YuvrajRaghuvanshiS
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png
