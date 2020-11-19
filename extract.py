@@ -1,7 +1,10 @@
 import os
+from os.path import islink
 from termcolor import colored, cprint
 import subprocess
+from subprocess import check_output
 import platform
+import re
 
 # Detect OS
 isWindows = False
@@ -9,6 +12,8 @@ isLinux = False
 if platform.system() == 'Windows' : isWindows = True 
 if platform.system() == 'Linux' : isLinux = True
 
+# Global Variables
+SDKVersion = ''
 def main() :
     CheckBinIfWindows()
     ShowBanner()
@@ -96,8 +101,21 @@ def USBMode() :
     if(isWindows) : WindowsUSB()
     else : LinuxUSB()
 
-def WindowsAfterConnect() : 
-    pass
+def AfterConnect() : 
+    adb = 'bin\\adb.exe'
+    delete = 'del'
+    tmp = 'tmp  \\*'
+    confirmDelete = '/q'
+    if(isLinux) : 
+        adb = 'adb'
+        delete = 'rm -rf'
+        tmp = 'del/*'
+        confirmDelete = '-y'
+    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output('adb shell getprop ro.build.version.sdk'.split()))).group(0))
+    if not (SDKVersion <= 13) : 
+        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
+        CustomPrint('Cleaning up temporary direcory.', 'green')
+        os.system(delete + ' /q ' + tmp)
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
@@ -105,7 +123,7 @@ def WindowsTCP(deviceIP, devicePort) :
     os.system('bin\\adb.exe connect ' + deviceIP + ':' + devicePort)
     deviceName='adb shell getprop ro.product.model'
     CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
-    WindowsAfterConnect()
+    AfterConnect()
 
 def WindowsUSB() : 
     os.system("bin\\adb.exe kill-server")
@@ -114,8 +132,7 @@ def WindowsUSB() :
     os.system('bin\\adb.exe wait-for-device')
     deviceName='adb shell getprop ro.product.model'
     CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
-    WindowsAfterConnect()
-
+    AfterConnect()
 
 if __name__ == "__main__":
     main()
