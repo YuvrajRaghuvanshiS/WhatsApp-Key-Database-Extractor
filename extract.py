@@ -36,9 +36,9 @@ def CustomPrint(textToPrint, color, attr=[]) :
 
 def CustomInput(textToInput, color, attr=[]) : 
     if(isWindows) : 
-        return input(textToInput)
+        return input(textToInput).casefold()
     else : 
-        return input(colored(textToInput, color, attrs=attr))
+        return input(colored(textToInput, color, attrs=attr)).casefold()
 
 
 if __name__ == "__main__":
