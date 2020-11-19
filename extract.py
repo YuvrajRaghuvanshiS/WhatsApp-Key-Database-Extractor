@@ -58,6 +58,7 @@ def LinuxUSB() :
     os.system('adb start-server')
     deviceName='adb shell getprop ro.product.model'
     CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
+    AfterConnect()
 
 def LinuxTCP(deviceIP, devicePort) : 
     CustomPrint('Installing dependencies (if not already installed)...', 'green')
@@ -73,6 +74,7 @@ def LinuxTCP(deviceIP, devicePort) :
     CustomPrint('Connecting to device', 'green')
     os.system("adb kill-server")
     os.system('adb connect ' + deviceIP + ':' + devicePort)
+    AfterConnect()
 
 def ShowBanner() : 
     banner_path = 'non_essentials/banner.txt'
@@ -104,24 +106,24 @@ def USBMode() :
 def AfterConnect() : 
     adb = 'bin\\adb.exe'
     delete = 'del'
-    tmp = 'tmp  \\*'
+    tmp = 'tmp\\*'
     confirmDelete = '/q'
     if(isLinux) : 
         adb = 'adb'
         delete = 'rm -rf'
-        tmp = 'del/*'
-        confirmDelete = '-y'
-    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output('adb shell getprop ro.build.version.sdk'.split()))).group(0))
+        tmp = 'tmp/*'
+        confirmDelete = ''
+    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb +' shell getprop ro.build.version.sdk'.split()))).group(0))
     if not (SDKVersion <= 13) : 
         CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
         CustomPrint('Cleaning up temporary direcory.', 'green')
-        os.system(delete + ' /q ' + tmp)
+        os.system(delete + ' ' + confirmDelete + ' '  + tmp)
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
     os.system("bin\\adb.exe kill-server")
     os.system('bin\\adb.exe connect ' + deviceIP + ':' + devicePort)
-    deviceName='adb shell getprop ro.product.model'
+    deviceName='bin\\adb.exe shell getprop ro.product.model'
     CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
     AfterConnect()
 
