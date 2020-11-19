@@ -75,7 +75,7 @@ def LinuxTCP() :
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
     os.system("bin\\adb.exe kill-server")
-    os.system('bin\\adb.exe connect ' + deviceIP + ':' + deviceIP)
+    os.system('bin\\adb.exe connect ' + deviceIP + ':' + devicePort)
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
