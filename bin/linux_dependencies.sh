@@ -4,5 +4,5 @@ run_install()
     apt-get install ${dependencies[@]}
 }
 
-dependencies=("adb" "curl" "grep" "java" "tar" "tr")
+dependencies=("adb" "curl" "grep" "tar")
 dpkg -s "${dependencies[@]}" >/dev/null 2>&1 || run_install

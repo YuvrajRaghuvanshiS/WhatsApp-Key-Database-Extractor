@@ -52,7 +52,7 @@ def USBMode() :
     
 def LinuxMode() : 
     CustomPrint('Installing dependencies for linux systems...', 'green')
-    os.popen('bash bin/linux_dependencies.sh')
+    os.popen('sudo bash bin/linux_dependencies.sh')
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
