@@ -95,11 +95,14 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+* O/S: Windows Vista, Windows 7, Windows 8, Windows 10, Mac OS X or Linux  
+* Java - If not installed [click here](https://www.java.com/en/download/)
+* ADB (Android Debug Bridge) Drivers [download here](https://developer.android.com/studio/releases/platform-tools) 
+* USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
+     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number  
+     multiple times until you're finally declared a developer.  
+* Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
+
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
@@ -118,7 +121,7 @@ npm install
 ```JS
 const API_KEY = 'ENTER YOUR API';
 ```
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
 ### Troubleshooting
 * If you have never used USB Debugging before, you may also need to verify the fingerprint.  
