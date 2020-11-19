@@ -1,7 +1,9 @@
 from termcolor import colored, cprint
+import os
 
 try:
-    banner = open('non_essentials\\banner.txt','r')
+    banner_path = 'non_essentials/banner.txt'
+    banner = open(banner_path,'r')
     banner_content = banner.read()
     cprint(banner_content, 'green', attrs=['bold'])
     banner.close()
