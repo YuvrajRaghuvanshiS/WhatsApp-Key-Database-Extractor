@@ -132,7 +132,7 @@ def WindowsUSB() :
     CustomPrint('Plug device via USB now..', 'green')
     os.system('bin\\adb.exe start-server')
     os.system('bin\\adb.exe wait-for-device')
-    deviceName='adb shell getprop ro.product.model'
+    deviceName='bin\\adb.exe shell getprop ro.product.model'
     CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
     AfterConnect()
 
