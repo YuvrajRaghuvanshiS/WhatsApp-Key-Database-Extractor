@@ -22,7 +22,8 @@ def ShowBanner() :
 
 def CheckJAVA() : 
     # after checking if false returns
-    pass
+    noJAVAContinue = CustomInput('\nIt looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green')
+    CustomPrint(noJAVAContinue, 'green')
 
 def TCPorUSB() : 
     pass
@@ -32,6 +33,12 @@ def CustomPrint(textToPrint, color, attr=[]) :
         print(textToPrint)
     else : 
         cprint(textToPrint, color, attrs=attr)
+
+def CustomInput(textToInput, color, attr=[]) : 
+    if(isWindows) : 
+        return input(textToInput)
+    else : 
+        return input(colored(textToInput, color, attrs=attr))
 
 
 if __name__ == "__main__":
