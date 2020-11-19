@@ -52,25 +52,26 @@ def TCPMode() :
     if(devicePort=='') : devicePort = '5555'
     CustomPrint(deviceIP,'green')
     CustomPrint(devicePort,'green')
-    if(isLinux) : LinuxTCP()
+    if(isLinux) : LinuxTCP(deviceIP, devicePort)
     else : WindowsTCP(deviceIP, devicePort)
 
 def USBMode() : 
     pass
     
-def LinuxTCP() : 
-    CustomPrint('Installing dependencies for linux systems...', 'green')
+def LinuxTCP(deviceIP, devicePort) : 
+    CustomPrint('Installing dependencies (if not already installed)...', 'green')
     bashCommand = "bash bin/linux_dependencies.sh"
-
     # could use os.system but that would affect error output
-
+    # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
-    if(error!='None') : 
-        print(error)
-        Exit()
+    # if(error!='None') : 
+    #     print(error)
+    #     Exit()
     CustomPrint('\nDependencies installed successfully. Starting...', 'green')
-    
+    CustomPrint('Connecting to device', 'green')
+    os.system("adb kill-server")
+    os.system('adb connect' + deviceIP + ':' + devicePort)
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
