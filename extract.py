@@ -33,31 +33,27 @@ def ShowBanner() :
 def CheckJAVA() : 
     isJAVAInstalled = False
     # after checking if false returns
-    noJAVAContinue = CustomInput('\nIt looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green')
+    noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green')
     if(noJAVAContinue=='c') : 
-        CustomPrint('\nContinuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
+        CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
         TCPorUSB()
     else : 
         Exit()
 
-
 def TCPorUSB() : 
-    isTCP = CustomInput('\nUse (T)CP or (U)SB? : ', 'green')
+    isTCP = CustomInput('Use (T)CP or (U)SB? : ', 'green')
     if(isTCP=='t') : TCPMode()
     else : USBMode()
 
 def TCPMode() : 
-    deviceIP = CustomInput('\nEnter IP address of target device : ', 'green')
-    devicePort = CustomInput('\nEnter port number, leave empty for default : ', 'green')
+    deviceIP = CustomInput('Enter IP address of target device : ', 'green')
+    devicePort = CustomInput('Enter port number, leave empty for default : ', 'green')
     if(devicePort=='') : devicePort = '5555'
     CustomPrint(deviceIP,'green')
     CustomPrint(devicePort,'green')
     if(isLinux) : LinuxTCP(deviceIP, devicePort)
     else : WindowsTCP(deviceIP, devicePort)
 
-def USBMode() : 
-    pass
-    
 def LinuxTCP(deviceIP, devicePort) : 
     CustomPrint('Installing dependencies (if not already installed)...', 'green')
     bashCommand = "bash bin/linux_dependencies.sh"
@@ -68,15 +64,30 @@ def LinuxTCP(deviceIP, devicePort) :
     # if(error!='None') : 
     #     print(error)
     #     Exit()
-    CustomPrint('\nDependencies installed successfully. Starting...', 'green')
+    CustomPrint('Dependencies installed successfully. Starting...', 'green')
     CustomPrint('Connecting to device', 'green')
     os.system("adb kill-server")
-    os.system('adb connect' + deviceIP + ':' + devicePort)
+    os.system('adb connect ' + deviceIP + ':' + devicePort)
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
     os.system("bin\\adb.exe kill-server")
     os.system('bin\\adb.exe connect ' + deviceIP + ':' + devicePort)
+
+def USBMode() : 
+    if(isWindows) : WindowsUSB()
+    else : LinuxUSB()
+
+def WindowsUSB() : 
+    os.system("bin\\adb.exe kill-server")
+    CustomPrint('Plug device via USB now..', 'green')
+    os.system('bin\\adb.exe wait-for-device')
+    deviceName='adb shell getprop ro.product.model'
+    CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
+
+def LinuxUSB() : 
+    pass
+
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
