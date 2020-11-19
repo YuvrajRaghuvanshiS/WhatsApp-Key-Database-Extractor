@@ -31,8 +31,8 @@ def CheckJAVA() :
         CustomPrint('\nContinuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
         TCPorUSB()
     else : 
-        CustomPrint('\nExiting...', 'green')
-        quit()
+        Exit()
+
 
 def TCPorUSB() : 
     isTCP = CustomInput('\nUse (T)CP or (U)SB? : ', 'green')
@@ -55,6 +55,10 @@ def LinuxMode() :
     bashCommand = "bash bin/linux_dependencies.sh"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
+    if(error!='None') : 
+        print(error)
+        Exit()
+    CustomPrint('\nDependencies installed successfully.', 'green')
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
@@ -68,6 +72,9 @@ def CustomInput(textToInput, color, attr=[]) :
     else : 
         return input(colored(textToInput, color, attrs=attr)).casefold()
 
+def Exit():
+    CustomPrint('\nExiting...', 'green')
+    quit()
 
 if __name__ == "__main__":
     main()
