@@ -121,11 +121,11 @@ const API_KEY = 'ENTER YOUR API';
 
 
 ### Troubleshooting
- 1. If you have never used USB Debugging before, you may also need to verify the fingerprint.  
- 2. If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
- 3. Linux and Mac OS X users may need to set the script permissions as executable. Depending on the  adb permissions, you may also need to "sudo ./WhatsAppKeyDBExtract.sh" from your command console.  
- 4. If you're having issues with "WhatsAppKeyDBExtract.bat" then right click "WhatsAppKeyDBExtract.ps1" and select "Run with PowerShell". You may have to enter "y" at first run for execution policy. 
- 5. If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
+* If you have never used USB Debugging before, you may also need to verify the fingerprint.  
+* If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
+* Linux and Mac OS X users may need to set the script permissions as executable. Depending on the  adb permissions, you may also need to "sudo ./WhatsAppKeyDBExtract.sh" from your command console.  
+* If you're having issues with "WhatsAppKeyDBExtract.bat" then right click "WhatsAppKeyDBExtract.ps1" and select "Run with PowerShell". You may have to enter "y" at first run for execution policy. 
+* If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
