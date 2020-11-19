@@ -18,8 +18,7 @@ def CheckBinIfWindows() :
     if (isWindows and not os.path.isdir('bin')) : 
         CustomPrint('I can not find /bin folder, check again...', 'green')
         Exit()
-    else : 
-        pass
+    pass
 
 
 def ShowBanner() : 
@@ -54,7 +53,7 @@ def TCPMode() :
     CustomPrint(deviceIP,'green')
     CustomPrint(devicePort,'green')
     if(isLinux) : LinuxTCP()
-    else : WindowsTCP()
+    else : WindowsTCP(deviceIP, devicePort)
 
 def USBMode() : 
     pass
@@ -62,15 +61,21 @@ def USBMode() :
 def LinuxTCP() : 
     CustomPrint('Installing dependencies for linux systems...', 'green')
     bashCommand = "bash bin/linux_dependencies.sh"
+
+    # could use os.system but that would affect error output
+
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
     if(error!='None') : 
         print(error)
         Exit()
-    CustomPrint('\nDependencies installed successfully.', 'green')
+    CustomPrint('\nDependencies installed successfully. Starting...', 'green')
+    
 
-def WindowsTCP() : 
-    pass
+def WindowsTCP(deviceIP, devicePort) : 
+    CustomPrint('Connecting to device', 'green')
+    os.system("bin\\adb.exe kill-server")
+    os.system('bin\\adb.exe connect ' + deviceIP + ':' + deviceIP)
 
 def CustomPrint(textToPrint, color, attr=[]) : 
     if(isWindows) : 
