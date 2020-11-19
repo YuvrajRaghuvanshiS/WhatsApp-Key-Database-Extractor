@@ -20,16 +20,6 @@ def CheckBinIfWindows() :
         Exit()
     pass
 
-
-def ShowBanner() : 
-    banner_path = 'non_essentials/banner.txt'
-    banner = open(banner_path,'r')
-    banner_content = banner.read()
-    CustomPrint(banner_content, 'green', ['bold'])
-    banner.close()
-    CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============', 'green', ['bold'])
-    CustomPrint('\n================================================================================\n===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===\n===   unencrypted file) and your \'key\' file from \'\\data\\data\\com.whatsapp\'   ===\n===  directory in Android 4.0+ device without root access. However you need  ===\n===   to have JAVA installed on your system in order to \'view the  extract\'. ===\n===  If you don\'t have JAVA installed then you can \'view extract\' later by   ===\n===   running \'view_extract.py\'. The idea is to install a \'Legacy WhatsApp\'  ===\n===       temporarily on your device in order to get the android backup      ===\n===     permission. You WILL NOT lose any data and your current WhatsApp     ===\n===   version will be installed after this process so don\'t panic and don\'t  ===\n=== stop this script while it\'s working. However if something fails you can  ===\n===    run \'restore_whatsapp.py\' and reinstall current WhatsApp or simply    ===\n=== update that from Google Play Store. But it\'s always a good idea to take  ===\n===  a backup. For that go to \'WhatsApp settings\\Chat Settings\\Chat Backup\'  ===\n===              here take a local bacakup. Prepare for Worst.               ===\n===                      Script by : Yuvraj Raghuvanshi                      ===\n===                      Github.com/YuvrajRaghuvanshiS                       ===\n================================================================================', 'green')
-
 def CheckJAVA() : 
     isJAVAInstalled = False
     # after checking if false returns
@@ -40,19 +30,29 @@ def CheckJAVA() :
     else : 
         Exit()
 
-def TCPorUSB() : 
-    isTCP = CustomInput('Use (T)CP or (U)SB? : ', 'green')
-    if(isTCP=='t') : TCPMode()
-    else : USBMode()
+def CustomInput(textToInput, color, attr=[]) : 
+    if(isWindows) : 
+        return input(textToInput).casefold()
+    else : 
+        return input(colored(textToInput, color, attrs=attr)).casefold()
 
-def TCPMode() : 
-    deviceIP = CustomInput('Enter IP address of target device : ', 'green')
-    devicePort = CustomInput('Enter port number, leave empty for default : ', 'green')
-    if(devicePort=='') : devicePort = '5555'
-    CustomPrint(deviceIP,'green')
-    CustomPrint(devicePort,'green')
-    if(isLinux) : LinuxTCP(deviceIP, devicePort)
-    else : WindowsTCP(deviceIP, devicePort)
+def CustomPrint(textToPrint, color, attr=[]) : 
+    if(isWindows) : 
+        print(textToPrint)
+    else : 
+        cprint(textToPrint, color, attrs=attr)
+
+def Exit():
+    CustomPrint('\nExiting...', 'green')
+    quit()
+
+def LinuxUSB() : 
+    os.system("adb kill-server")
+    CustomPrint('Plug device via USB now..', 'green')
+    os.system('adb wait-for-device')
+    os.system('adb start-server')
+    deviceName='adb shell getprop ro.product.model'
+    CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
 
 def LinuxTCP(deviceIP, devicePort) : 
     CustomPrint('Installing dependencies (if not already installed)...', 'green')
@@ -69,46 +69,53 @@ def LinuxTCP(deviceIP, devicePort) :
     os.system("adb kill-server")
     os.system('adb connect ' + deviceIP + ':' + devicePort)
 
-def WindowsTCP(deviceIP, devicePort) : 
-    CustomPrint('Connecting to device', 'green')
-    os.system("bin\\adb.exe kill-server")
-    os.system('bin\\adb.exe connect ' + deviceIP + ':' + devicePort)
+def ShowBanner() : 
+    banner_path = 'non_essentials/banner.txt'
+    banner = open(banner_path,'r')
+    banner_content = banner.read()
+    CustomPrint(banner_content, 'green', ['bold'])
+    banner.close()
+    CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============', 'green', ['bold'])
+    CustomPrint('\n================================================================================\n===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===\n===   unencrypted file) and your \'key\' file from \'\\data\\data\\com.whatsapp\'   ===\n===  directory in Android 4.0+ device without root access. However you need  ===\n===   to have JAVA installed on your system in order to \'view the  extract\'. ===\n===  If you don\'t have JAVA installed then you can \'view extract\' later by   ===\n===   running \'view_extract.py\'. The idea is to install a \'Legacy WhatsApp\'  ===\n===       temporarily on your device in order to get the android backup      ===\n===     permission. You WILL NOT lose any data and your current WhatsApp     ===\n===   version will be installed after this process so don\'t panic and don\'t  ===\n=== stop this script while it\'s working. However if something fails you can  ===\n===    run \'restore_whatsapp.py\' and reinstall current WhatsApp or simply    ===\n=== update that from Google Play Store. But it\'s always a good idea to take  ===\n===  a backup. For that go to \'WhatsApp settings\\Chat Settings\\Chat Backup\'  ===\n===              here take a local bacakup. Prepare for Worst.               ===\n===                      Script by : Yuvraj Raghuvanshi                      ===\n===                      Github.com/YuvrajRaghuvanshiS                       ===\n================================================================================', 'green')
+
+def TCPMode() : 
+    deviceIP = CustomInput('Enter IP address of target device : ', 'green')
+    devicePort = CustomInput('Enter port number, leave empty for default : ', 'green')
+    if(devicePort=='') : devicePort = '5555'
+    CustomPrint(deviceIP,'green')
+    CustomPrint(devicePort,'green')
+    if(isLinux) : LinuxTCP(deviceIP, devicePort)
+    else : WindowsTCP(deviceIP, devicePort)
+
+def TCPorUSB() : 
+    isTCP = CustomInput('Use (T)CP or (U)SB? : ', 'green')
+    if(isTCP=='t') : TCPMode()
+    else : USBMode()
 
 def USBMode() : 
     if(isWindows) : WindowsUSB()
     else : LinuxUSB()
 
+def WindowsAfterConnect() : 
+    pass
+
+def WindowsTCP(deviceIP, devicePort) : 
+    CustomPrint('Connecting to device', 'green')
+    os.system("bin\\adb.exe kill-server")
+    os.system('bin\\adb.exe connect ' + deviceIP + ':' + devicePort)
+    deviceName='adb shell getprop ro.product.model'
+    CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
+    WindowsAfterConnect()
+
 def WindowsUSB() : 
     os.system("bin\\adb.exe kill-server")
     CustomPrint('Plug device via USB now..', 'green')
+    os.system('bin\\adb.exe start-server')
     os.system('bin\\adb.exe wait-for-device')
     deviceName='adb shell getprop ro.product.model'
     CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
+    WindowsAfterConnect()
 
-def LinuxUSB() : 
-    os.system("adb kill-server")
-    CustomPrint('Plug device via USB now..', 'green')
-    os.system('adb wait-for-device')
-    deviceName='adb shell getprop ro.product.model'
-    CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
-
-
-
-def CustomPrint(textToPrint, color, attr=[]) : 
-    if(isWindows) : 
-        print(textToPrint)
-    else : 
-        cprint(textToPrint, color, attrs=attr)
-
-def CustomInput(textToInput, color, attr=[]) : 
-    if(isWindows) : 
-        return input(textToInput).casefold()
-    else : 
-        return input(colored(textToInput, color, attrs=attr)).casefold()
-
-def Exit():
-    CustomPrint('\nExiting...', 'green')
-    quit()
 
 if __name__ == "__main__":
     main()
