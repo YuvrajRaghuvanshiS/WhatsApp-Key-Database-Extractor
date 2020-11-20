@@ -139,7 +139,7 @@ def AfterConnect() :
         Exit()
     WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
-    versionName = re.search("(?<=versionName=)(.*)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
+    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
     contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
     downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
 
