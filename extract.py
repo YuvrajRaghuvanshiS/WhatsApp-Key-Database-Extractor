@@ -75,10 +75,10 @@ def LinuxBashDependencies():
     # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
-    CustomPrint(output, 'green')
     if(error!=None) : 
         CustomPrint(error,'red')
         Exit()
+    CustomPrint(output, 'green')
     CustomPrint('Dependencies installed successfully. Starting...', 'green')
 
 def LinuxUSB() : 
