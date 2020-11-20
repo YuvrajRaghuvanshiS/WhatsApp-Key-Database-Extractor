@@ -15,6 +15,17 @@ if platform.system() == 'Linux' : isLinux = True
 # Global Variables
 SDKVersion = ''
 
+#Global command line helpers
+adb = 'bin\\adb.exe'
+delete = 'del'
+tmp = 'tmp\\*'
+confirmDelete = '/q'
+if(isLinux) : 
+    adb = 'adb'
+    delete = 'rm -rf'
+    tmp = 'tmp/*'
+    confirmDelete = ''
+
 def main() :
     CheckBinIfWindows()
     ShowBanner()
@@ -50,6 +61,7 @@ def CustomPrint(textToPrint, color, attr=[]) :
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
+
     quit()
 
 def LinuxUSB() : 
@@ -105,21 +117,12 @@ def USBMode() :
     else : LinuxUSB()
 
 def AfterConnect() : 
-    adb = 'bin\\adb.exe'
-    delete = 'del'
-    tmp = 'tmp\\*'
-    confirmDelete = '/q'
-    if(isLinux) : 
-        adb = 'adb'
-        delete = 'rm -rf'
-        tmp = 'tmp/*'
-        confirmDelete = ''
     SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb +' shell getprop ro.build.version.sdk'))).group(0))
-    # remove not later it is for testing of if condition only.
-    if not (SDKVersion <= 13) : 
+    if (SDKVersion <= 13) : 
         CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
         CustomPrint('Cleaning up temporary direcory.', 'green')
         os.system(delete + ' ' + confirmDelete + ' '  + tmp)
+        Exit()
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
