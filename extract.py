@@ -67,7 +67,7 @@ def AfterConnect() :
             CustomPrint('Found legacy WhatsApp 2.11.431 in ' + helpers + ' folder')
         
         os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
-
+        CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + ' folder.')
   
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
