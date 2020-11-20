@@ -70,8 +70,8 @@ def Exit():
 
 def LinuxUSB() : 
     os.system(adb + ' kill-server')
-    CustomPrint('Plug device via USB now..', 'green')
     os.system(adb + ' start-server')
+    CustomPrint('Plug device via USB now..', 'green')
     os.system(adb + ' wait-for-device')
     deviceName= adb + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
@@ -142,8 +142,8 @@ def WindowsTCP(deviceIP, devicePort) :
 
 def WindowsUSB() : 
     os.system(adb + ' kill-server')
-    CustomPrint('Plug device via USB now..', 'green')
     os.system(adb + ' start-server')
+    CustomPrint('Plug device via USB now..', 'green')
     os.system(adb + ' wait-for-device')
     deviceName= adb + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
