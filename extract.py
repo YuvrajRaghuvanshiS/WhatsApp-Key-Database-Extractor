@@ -61,7 +61,7 @@ def CustomPrint(textToPrint, color, attr=[]) :
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
-
+    os.system('bin\\adb.exe kill-server')
     quit()
 
 def LinuxUSB() : 
