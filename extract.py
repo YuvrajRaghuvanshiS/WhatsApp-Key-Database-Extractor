@@ -90,8 +90,10 @@ def LinuxTCP(deviceIP, devicePort) :
         Exit()
     CustomPrint('Dependencies installed successfully. Starting...', 'green')
     CustomPrint('Connecting to device', 'green')
-    os.system("adb kill-server")
-    os.system('adb connect ' + deviceIP + ':' + devicePort)
+    os.system(adb + ' kill-server')
+    os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
+    deviceName= adb + ' shell getprop ro.product.model'
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
 
 def ShowBanner() : 
