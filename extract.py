@@ -117,8 +117,8 @@ def TCPMode() :
     else : WindowsTCP(deviceIP, devicePort)
 
 def TCPorUSB() : 
-    isTCP = CustomInput('Use (T)CP or (U)SB? : ', 'green')
-    if(isTCP=='t') : TCPMode()
+    connectionMode = CustomInput('Use (T)CP or (U)SB? : ', 'green') or 'u'
+    if(connectionMode=='t') : TCPMode()
     else : USBMode()
 
 def USBMode() : 
