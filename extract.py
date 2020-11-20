@@ -14,17 +14,20 @@ if platform.system() == 'Linux' : isLinux = True
 
 # Global Variables
 SDKVersion = ''
+WhatsAppPath = ''
 
 #Global command line helpers
 adb = 'bin\\adb.exe'
 delete = 'del'
 tmp = 'tmp\\*'
 confirmDelete = '/q'
+grep = 'bin\\grep.exe'
 if(isLinux) : 
     adb = 'adb'
     delete = 'rm -rf'
     tmp = 'tmp/*'
     confirmDelete = ''
+    grep = 'grep'
 
 def main() :
     CheckBinIfWindows()
@@ -123,6 +126,8 @@ def AfterConnect() :
         CustomPrint('Cleaning up temporary direcory.', 'green')
         os.system(delete + ' ' + confirmDelete + ' '  + tmp)
         Exit()
+    WhatsAppPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + '.apk'
+    print(WhatsAppPath)
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
