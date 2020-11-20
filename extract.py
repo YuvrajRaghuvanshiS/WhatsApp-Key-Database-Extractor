@@ -68,7 +68,8 @@ def AfterConnect() :
         
         os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
         CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + ' folder.')
-  
+        os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
+
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
         CustomPrint('I can not find /bin folder, check again...', 'green')
