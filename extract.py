@@ -104,10 +104,8 @@ def ShowBanner() :
 
 def TCPMode() : 
     deviceIP = CustomInput('Enter IP address of target device : ', 'green')
-    devicePort = CustomInput('Enter port number, leave empty for default : ', 'green')
+    devicePort = CustomInput('Enter port number, leave empty for default (5555) : ', 'green')
     if(devicePort=='') : devicePort = '5555'
-    CustomPrint(deviceIP,'green')
-    CustomPrint(devicePort,'green')
     if(isLinux) : LinuxTCP(deviceIP, devicePort)
     else : WindowsTCP(deviceIP, devicePort)
 
