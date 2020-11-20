@@ -14,6 +14,7 @@ if platform.system() == 'Linux' : isLinux = True
 
 # Global Variables
 SDKVersion = ''
+
 def main() :
     CheckBinIfWindows()
     ShowBanner()
@@ -113,7 +114,7 @@ def AfterConnect() :
         delete = 'rm -rf'
         tmp = 'tmp/*'
         confirmDelete = ''
-    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb +' shell getprop ro.build.version.sdk'.split()))).group(0))
+    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb +' shell getprop ro.build.version.sdk'))).group(0))
     if not (SDKVersion <= 13) : 
         CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
         CustomPrint('Cleaning up temporary direcory.', 'green')
