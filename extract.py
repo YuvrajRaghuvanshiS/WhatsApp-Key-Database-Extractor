@@ -128,6 +128,8 @@ def AfterConnect() :
         os.system(delete + ' ' + confirmDelete + ' '  + tmp)
         Exit()
     WhatsAppPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
+    SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
+    print(SDPath)
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
