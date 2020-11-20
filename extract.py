@@ -25,14 +25,14 @@ appURLWhatsCryptCDN = 'http://whatcrypt.com/WhatsApp-2.11.431.apk'
 # Global command line helpers
 adb = 'bin\\adb.exe'
 delete = 'del'
-tmp = 'tmp\\*'
+tmp = 'tmp\\'
 confirmDelete = '/q'
 grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
 if(isLinux) : 
     adb = 'adb'
     delete = 'rm -rf'
-    tmp = 'tmp/*'
+    tmp = 'tmp/'
     confirmDelete = ''
     grep = 'grep'
     curl = 'curl'
@@ -137,13 +137,13 @@ def AfterConnect() :
     if (SDKVersion <= 13) : 
         CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
         CustomPrint('Cleaning up temporary direcory.', 'green')
-        os.system(delete + ' ' + confirmDelete + ' '  + tmp)
+        os.system(delete + ' ' + confirmDelete + ' '  + tmp + '*')
         Exit()
     WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
     SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
-    CustomPrint('WhatsApp V' + versionName + ' installed on device. Backing it up in tmp folder.')
+    CustomPrint('WhatsApp V' + versionName + ' installed on device. Backing it up in ' + tmp + ' folder.')
     if(version.parse(versionName) > version.parse('2.11.431')) :
         pass
     #backup whatsapp
