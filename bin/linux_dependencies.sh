@@ -7,4 +7,4 @@ run_install()
 
 dependencies=("adb" "curl" "grep" "tar")
 dpkg -s "${dependencies[@]}" >/dev/null 2>&1 || run_install
-echo "Dependencies installed..."
+echo "Dependencies installed successfully. Starting..."

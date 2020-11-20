@@ -79,7 +79,6 @@ def LinuxBashDependencies():
         CustomPrint(error,'red')
         Exit()
     CustomPrint(output, 'green')
-    CustomPrint('Dependencies installed successfully. Starting...', 'green')
 
 def LinuxUSB() : 
     LinuxBashDependencies()
