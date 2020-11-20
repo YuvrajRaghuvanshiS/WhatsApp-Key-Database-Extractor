@@ -1,10 +1,11 @@
 import os
-from os.path import islink
+from packaging.version import Version
 from termcolor import colored, cprint
 import subprocess
 from subprocess import check_output
 import platform
 import re
+from packaging import version
 
 # Detect OS
 isWindows = False
@@ -101,6 +102,7 @@ def LinuxTCP(deviceIP, devicePort) :
     CustomPrint('Connecting to device', 'green')
     os.system(adb + ' kill-server')
     os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
+    os.system(adb + ' wait-for-device')
     deviceName= adb + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
@@ -142,6 +144,8 @@ def AfterConnect() :
     SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
     CustomPrint('WhatsApp V' + versionName + ' installed on device. Backing it up in tmp folder.')
+    if(version.parse(versionName) > version.parse('2.11.431')) :
+        pass
     #backup whatsapp
     contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
     downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
@@ -151,6 +155,7 @@ def WindowsTCP(deviceIP, devicePort) :
     os.system(adb + ' kill-server')
     os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
     deviceName= adb + ' shell getprop ro.product.model'
+    os.system(adb + ' wait-for-device')
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
 
