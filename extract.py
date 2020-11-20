@@ -133,10 +133,10 @@ def AfterConnect() :
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
-    os.system("bin\\adb.exe kill-server")
-    os.system('bin\\adb.exe connect ' + deviceIP + ':' + devicePort)
-    deviceName='bin\\adb.exe shell getprop ro.product.model'
-    CustomPrint('Connected to ' + str(subprocess.Popen(deviceName.split(), stdout=subprocess.PIPE).communicate()[0]) , 'green')
+    os.system(adb + ' kill-server')
+    os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
+    deviceName= adb + ' shell getprop ro.product.model'
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
 
 def WindowsUSB() : 
