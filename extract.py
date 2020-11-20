@@ -61,14 +61,25 @@ def AfterConnect() :
     CustomPrint('WhatsApp V' + versionName + ' installed on device')
     if (version.parse(versionName) > version.parse('2.11.431')) :
         if not (os.path.isfile(helpers + 'LegacyWhatsApp.apk')) : 
-            CustomPrint('Downloading legacy WhatsApp 2.11.431 to helpers folder')
+            CustomPrint('Downloading legacy WhatsApp V2.11.431 to helpers folder')
             wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
         else : 
-            CustomPrint('Found legacy WhatsApp 2.11.431 in ' + helpers + ' folder')
+            CustomPrint('Found legacy WhatsApp V2.11.431 in ' + helpers + ' folder')
         
         os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
-        CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + ' folder.')
-        os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
+        CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
+        #os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
+        CustomPrint('Backup complete.')
+        if(SDKVersion >= 23) :
+            CustomPrint('Removing WhatsApp, skipping data.')
+            #os.system(adb + ' pm uninstall -k com.whatsapp')
+            CustomPrint('Removed.')
+        CustomPrint("installing Legacy WhatsApp V2.11.431, hold tight now.")
+        if(SDKVersion >= 17) :
+            os.system(adb + ' install -r -d '+ tmp + 'LegacyWhatsApp.apk')
+        else : 
+            os.system(adb + ' install -r '+ tmp + 'LegacyWhatsApp.apk')
+        CustomPrint('Installation Complete.')
 
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
