@@ -16,6 +16,7 @@ if platform.system() == 'Linux' : isLinux = True
 SDKVersion = ''
 WhatsAppPath = ''
 SDPath = '' #Internal storage.
+versionName = ''
 
 #Global command line helpers
 adb = 'bin\\adb.exe'
@@ -51,13 +52,13 @@ def CheckJAVA() :
     else : 
         Exit()
 
-def CustomInput(textToInput, color, attr=[]) : 
+def CustomInput(textToInput, color = 'green', attr=[]) : 
     if(isWindows) : 
         return input(textToInput).casefold()
     else : 
         return input(colored(textToInput, color, attrs=attr)).casefold()
 
-def CustomPrint(textToPrint, color, attr=[]) : 
+def CustomPrint(textToPrint, color = 'green', attr=[]) : 
     if(isWindows) : 
         print(textToPrint)
     else : 
@@ -133,8 +134,7 @@ def AfterConnect() :
         Exit()
     WhatsAppPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
-    print(SDPath)
-
+    
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
     os.system(adb + ' kill-server')
