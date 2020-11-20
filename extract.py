@@ -6,6 +6,7 @@ from subprocess import check_output
 import platform
 import re
 from packaging import version
+import wget
 
 # Detect OS
 isWindows = False
@@ -19,8 +20,8 @@ WhatsAppapkPath = ''
 SDPath = '' # Internal storage.
 versionName = ''
 contentLength = '' # To check if APK even exists at a given path to download!
-appURLWhatsAppCDN = 'http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
-appURLWhatsCryptCDN = 'http://whatcrypt.com/WhatsApp-2.11.431.apk'
+appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
+appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 # Global command line helpers
 adb = 'bin\\adb.exe'
@@ -29,6 +30,7 @@ tmp = 'tmp\\'
 confirmDelete = '/q'
 grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
+helpers = 'helpers\\'
 if(isLinux) : 
     adb = 'adb'
     delete = 'rm -rf'
@@ -36,6 +38,7 @@ if(isLinux) :
     confirmDelete = ''
     grep = 'grep'
     curl = 'curl'
+    helpers = 'helpers/'
 
 def main() :
     CheckBinIfWindows()
@@ -142,13 +145,16 @@ def AfterConnect() :
     WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
     SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
-    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
-    CustomPrint('WhatsApp V' + versionName + ' installed on device. Backing it up in ' + tmp + ' folder.')
-    if(version.parse(versionName) > version.parse('2.11.431')) :
-        pass
-    #backup whatsapp
     contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
     downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
+    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
+    CustomPrint('WhatsApp V' + versionName + ' installed on device. Backing it up in ' + tmp + ' folder.')
+    #backup whatsapp
+    if (version.parse(versionName) > version.parse('2.11.431')) :
+        if not (os.path.isfile(helpers + 'LegacyWhatsApp.apk')) : 
+            CustomPrint('Downloading legacy WhatsApp 2.11.431 to helpers folder')
+            wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
+    
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
