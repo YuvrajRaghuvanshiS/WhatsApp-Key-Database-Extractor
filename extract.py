@@ -66,20 +66,15 @@ def AfterConnect() :
         else : 
             CustomPrint('Found legacy WhatsApp V2.11.431 in ' + helpers + ' folder')
         
-        os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
-        CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
-        #os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
-        CustomPrint('Backup complete.')
-        if(SDKVersion >= 23) :
-            CustomPrint('Removing WhatsApp, skipping data.')
-            #os.system(adb + ' pm uninstall -k com.whatsapp')
-            CustomPrint('Removed.')
-        CustomPrint("installing Legacy WhatsApp V2.11.431, hold tight now.")
-        if(SDKVersion >= 17) :
-            os.system(adb + ' install -r -d '+ tmp + 'LegacyWhatsApp.apk')
-        else : 
-            os.system(adb + ' install -r '+ tmp + 'LegacyWhatsApp.apk')
-        CustomPrint('Installation Complete.')
+        BackupWhatsApp(SDKVersion, versionName)
+        RemoveWhatsApp(SDKVersion)
+        InstallLegacy(SDKVersion)
+
+def BackupWhatsApp(SDKVersion, versionName):
+    os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
+    CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
+    #os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
+    CustomPrint('Backup complete.')
 
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
@@ -114,6 +109,14 @@ def Exit():
     os.system('bin\\adb.exe kill-server')
     quit()
 
+def InstallLegacy(SDKVersion):
+    CustomPrint("installing Legacy WhatsApp V2.11.431, hold tight now.")
+    if(SDKVersion >= 17) :
+        os.system(adb + ' install -r -d '+ tmp + 'LegacyWhatsApp.apk')
+    else : 
+        os.system(adb + ' install -r '+ tmp + 'LegacyWhatsApp.apk')
+    CustomPrint('Installation Complete.')
+
 def LinuxBashDependencies():
     CustomPrint('Installing dependencies (if not already installed)...', 'green')
     bashCommand = "bash bin/linux_dependencies.sh"
@@ -145,6 +148,12 @@ def LinuxTCP(deviceIP, devicePort) :
     deviceName= adb + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
+
+def RemoveWhatsApp(SDKVersion):
+    if(SDKVersion >= 23) :
+        CustomPrint('Removing WhatsApp, skipping data.')
+        #os.system(adb + ' pm uninstall -k com.whatsapp')
+        CustomPrint('Removed.')
 
 def ShowBanner() : 
     banner_path = 'non_essentials/banner.txt'
