@@ -84,9 +84,10 @@ def LinuxTCP(deviceIP, devicePort) :
     # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
-    # if(error!='None') : 
-    #     print(error)
-    #     Exit()
+    CustomPrint(output, 'green')
+    if(error!=None) : 
+        CustomPrint(error,'red')
+        Exit()
     CustomPrint('Dependencies installed successfully. Starting...', 'green')
     CustomPrint('Connecting to device', 'green')
     os.system("adb kill-server")
