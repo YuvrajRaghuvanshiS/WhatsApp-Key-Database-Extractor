@@ -68,16 +68,7 @@ def Exit():
     os.system('bin\\adb.exe kill-server')
     quit()
 
-def LinuxUSB() : 
-    os.system(adb + ' kill-server')
-    os.system(adb + ' start-server')
-    CustomPrint('Plug device via USB now..', 'green')
-    os.system(adb + ' wait-for-device')
-    deviceName= adb + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
-    AfterConnect()
-
-def LinuxTCP(deviceIP, devicePort) : 
+def LinuxBashDependencies():
     CustomPrint('Installing dependencies (if not already installed)...', 'green')
     bashCommand = "bash bin/linux_dependencies.sh"
     # could use os.system but that would affect error output
@@ -89,6 +80,19 @@ def LinuxTCP(deviceIP, devicePort) :
         CustomPrint(error,'red')
         Exit()
     CustomPrint('Dependencies installed successfully. Starting...', 'green')
+
+def LinuxUSB() : 
+    LinuxBashDependencies()
+    os.system(adb + ' kill-server')
+    os.system(adb + ' start-server')
+    CustomPrint('Plug device via USB now..', 'green')
+    os.system(adb + ' wait-for-device')
+    deviceName= adb + ' shell getprop ro.product.model'
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
+    AfterConnect()
+
+def LinuxTCP(deviceIP, devicePort) : 
+    LinuxBashDependencies()
     CustomPrint('Connecting to device', 'green')
     os.system(adb + ' kill-server')
     os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
