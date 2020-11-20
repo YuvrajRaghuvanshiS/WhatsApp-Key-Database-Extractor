@@ -45,6 +45,30 @@ def main() :
     ShowBanner()
     CheckJAVA()
 
+def AfterConnect() : 
+    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb +' shell getprop ro.build.version.sdk'))).group(0))
+    if (SDKVersion <= 13) : 
+        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
+        CustomPrint('Cleaning up temporary direcory.', 'green')
+        os.system(delete + ' ' + confirmDelete + ' '  + tmp + '*')
+        Exit()
+    WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
+    if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
+    SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
+    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
+    downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
+    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
+    CustomPrint('WhatsApp V' + versionName + ' installed on device')
+    if (version.parse(versionName) > version.parse('2.11.431')) :
+        if not (os.path.isfile(helpers + 'LegacyWhatsApp.apk')) : 
+            CustomPrint('Downloading legacy WhatsApp 2.11.431 to helpers folder')
+            wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
+        else : 
+            CustomPrint('Found legacy WhatsApp 2.11.431 in ' + helpers + ' folder')
+        
+        os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
+
+  
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
         CustomPrint('I can not find /bin folder, check again...', 'green')
@@ -133,28 +157,7 @@ def TCPorUSB() :
 
 def USBMode() : 
     if(isWindows) : WindowsUSB()
-    else : LinuxUSB()
-
-def AfterConnect() : 
-    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb +' shell getprop ro.build.version.sdk'))).group(0))
-    if (SDKVersion <= 13) : 
-        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
-        CustomPrint('Cleaning up temporary direcory.', 'green')
-        os.system(delete + ' ' + confirmDelete + ' '  + tmp + '*')
-        Exit()
-    WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
-    if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
-    SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
-    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
-    downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
-    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
-    CustomPrint('WhatsApp V' + versionName + ' installed on device. Backing it up in ' + tmp + ' folder.')
-    #backup whatsapp
-    if (version.parse(versionName) > version.parse('2.11.431')) :
-        if not (os.path.isfile(helpers + 'LegacyWhatsApp.apk')) : 
-            CustomPrint('Downloading legacy WhatsApp 2.11.431 to helpers folder')
-            wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
-    
+    else : LinuxUSB()  
 
 def WindowsTCP(deviceIP, devicePort) : 
     CustomPrint('Connecting to device', 'green')
