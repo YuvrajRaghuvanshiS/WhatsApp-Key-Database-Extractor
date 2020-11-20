@@ -45,7 +45,7 @@ def CheckBinIfWindows() :
 def CheckJAVA() : 
     isJAVAInstalled = False
     # after checking if false returns
-    noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green')
+    noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green') or 'c'
     if(noJAVAContinue=='c') : 
         CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
         TCPorUSB()
