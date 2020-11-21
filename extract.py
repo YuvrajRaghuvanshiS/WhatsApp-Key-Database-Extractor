@@ -64,10 +64,10 @@ def AfterConnect() :
             CustomPrint('Downloading legacy WhatsApp V2.11.431 to helpers folder')
             wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
         else : 
-            CustomPrint('Found legacy WhatsApp V2.11.431 in ' + helpers + ' folder')
+            CustomPrint('Found legacy WhatsApp V2.11.431 apk in ' + helpers + ' folder')
         
         BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
-        RemoveWhatsApp(SDKVersion)
+        UninstallWhatsApp(SDKVersion)
         InstallLegacy(SDKVersion)
         CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab')
         os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
@@ -75,9 +75,9 @@ def AfterConnect() :
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
-    CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
+    CustomPrint('Backing up WhatsApp ' + versionName + ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
     os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
-    CustomPrint('Backup complete.')
+    CustomPrint('Apk backup complete.')
 
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
@@ -164,11 +164,11 @@ def LinuxUSB() :
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
 
-def RemoveWhatsApp(SDKVersion):
+def UninstallWhatsApp(SDKVersion):
     if(SDKVersion >= 23) :
-        CustomPrint('Removing WhatsApp, skipping data.')
-        os.system(adb + ' pm uninstall -k com.whatsapp')
-        CustomPrint('Removed.')
+        CustomPrint('Uninstalling WhatsApp, skipping data.')
+        os.system(adb + ' shell pm uninstall -k com.whatsapp')
+        CustomPrint('Uninstalled.')
 
 def ShowBanner() : 
     banner_path = 'non_essentials/banner.txt'
