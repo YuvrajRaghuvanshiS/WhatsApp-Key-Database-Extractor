@@ -126,7 +126,8 @@ python3 extract.py
 * If you have never used USB Debugging before, you may also need to verify the fingerprint.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
-
+* Stuck on Linux dependencies installation? Run `bash bin/linux_dependencies.sh` from main directory.
+* WhatsApp crashing? Run `python3 restore_whatsapp.py`. Or "clear data/storage" / uninstall and reinstall from Play Store.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
