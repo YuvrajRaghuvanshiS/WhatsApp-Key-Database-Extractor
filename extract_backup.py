@@ -41,6 +41,7 @@ if(isLinux) :
 
 
 def main() : 
+    ShowBanner()
     ExtractAB()
 
 def CleanTmp() :
@@ -58,7 +59,18 @@ def ExtractAB() :
             TakingOutMainFiles()
         except Exception as e : 
             CustomPrint(e)
-        
+
+def ShowBanner() : 
+    banner_path = 'non_essentials/banner.txt'
+    try : 
+        banner = open(banner_path,'r')
+        banner_content = banner.read()
+        CustomPrint(banner_content, 'green', ['bold'])
+        banner.close()
+    except Exception as e : 
+        CustomPrint(e)
+    CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============\n', 'green', ['bold'])
+    
 def TakingOutMainFiles() : 
     targetName = CustomInput('Enter a reference name for this target. : ') or 'target'
     os.mkdir(extracted + '/' + targetName) if not (os.path.isdir(extracted + '/' + targetName)) else CustomPrint('Folder already exists.')
