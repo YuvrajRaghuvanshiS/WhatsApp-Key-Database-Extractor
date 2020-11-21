@@ -1,13 +1,8 @@
 import os
-from os.path import realpath
-from packaging.version import Version
 from termcolor import colored, cprint
 import subprocess
 from subprocess import check_output
 import platform
-import re
-from packaging import version
-import wget
 from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
 from helpers.WIndowsTU import WindowsTCP, WindowsUSB
@@ -50,15 +45,6 @@ def main() :
     CheckBinIfWindows()
     ShowBanner()
     CheckJAVA()
-
-def RealDeal(SDKVersion, WhatsAppapkPath, versionName) : 
-    BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
-    UninstallWhatsApp(SDKVersion)
-    InstallLegacy(SDKVersion)
-    BackupWhatsAppDataasAb(SDKVersion)
-    ReinstallWhatsApp()
-    CustomPrint('Our work with device has finished, it is safe to remove it now.')
-    ExtractAB()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
@@ -119,6 +105,15 @@ def LinuxBashDependencies():
         Exit()
     CustomPrint(output, 'green')
 
+def RealDeal(SDKVersion, WhatsAppapkPath, versionName) : 
+    BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
+    UninstallWhatsApp(SDKVersion)
+    InstallLegacy(SDKVersion)
+    BackupWhatsAppDataasAb(SDKVersion)
+    ReinstallWhatsApp()
+    CustomPrint('Our work with device has finished, it is safe to remove it now.')
+    ExtractAB()
+
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
     try : 
@@ -145,9 +140,10 @@ def TCPMode() :
     if(devicePort=='') : devicePort = '5555'
     if(isLinux) : 
         LinuxBashDependencies()
-        RealDeal() if LinuxTCP(deviceIP, devicePort) else Exit()
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = LinuxTCP(deviceIP, devicePort)
+        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
     else : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB()
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsTCP(deviceIP, devicePort)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 def TCPorUSB() : 
@@ -172,7 +168,8 @@ def USBMode() :
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
     else : 
         LinuxBashDependencies()
-        RealDeal() if LinuxUSB() else Exit() 
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB()
+        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
     main()

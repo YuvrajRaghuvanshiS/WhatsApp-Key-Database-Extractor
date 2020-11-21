@@ -2,9 +2,12 @@ import re
 from .CustomCI import CustomInput, CustomPrint
 import os
 from subprocess import check_output
+from packaging import version
+import wget
 
 # Global variables
-helpers = 'helpers/'
+appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
+appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 def AfterConnect() : 
     SDKVersion = int(re.search('[0-9]{2,3}', str(check_output('adb shell getprop ro.build.version.sdk'))).group(0))
@@ -19,7 +22,16 @@ def AfterConnect() :
     contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output('curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output('adb shell dumpsys package com.whatsapp'))).group(1)
     CustomPrint('WhatsApp V' + versionName + ' installed on device')
-    return 1
+    downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
+    if (version.parse(versionName) > version.parse('2.11.431')) :
+        if not (os.path.isfile('helpers/LegacyWhatsApp.apk')) : 
+            CustomPrint('Downloading legacy WhatsApp V2.11.431 to helpers folder')
+            wget.download(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
+        else : 
+            CustomPrint('Found legacy WhatsApp V2.11.431 apk in helpers folder')
+ 
+    return 1, SDKVersion, WhatsAppapkPath, versionName
+
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
@@ -37,7 +49,7 @@ def LinuxTCP(deviceIP, devicePort) :
         Exit()
     deviceName= 'adb shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)", str(check_output(deviceName.split()))).group(1) , 'green')
-    AfterConnect()
+    return AfterConnect()
 
 def LinuxUSB() : 
     try : 
@@ -50,4 +62,4 @@ def LinuxUSB() :
         Exit()
     deviceName= 'adb shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)", str(check_output(deviceName.split()))).group(1) , 'green')
-    AfterConnect()
+    return AfterConnect()
