@@ -10,6 +10,7 @@ import wget
 from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
 from helpers.WIndowsTU import WindowsTCP, WindowsUSB
+from helpers.LinuxTU import LinuxTCP, LinuxUSB
 
 # Detect OS
 isWindows = False
@@ -136,34 +137,6 @@ def LinuxBashDependencies():
         Exit()
     CustomPrint(output, 'green')
 
-def LinuxTCP(deviceIP, devicePort) : 
-    LinuxBashDependencies()
-    CustomPrint('Connecting to device', 'green')
-    try : 
-        os.system(adb + ' kill-server')
-        os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
-        os.system(adb + ' wait-for-device')
-    except Exception as e : 
-        CustomPrint(e)
-        Exit()
-    deviceName= adb + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
-    AfterConnect()
-
-def LinuxUSB() : 
-    LinuxBashDependencies()
-    try : 
-        os.system(adb + ' kill-server')
-        os.system(adb + ' start-server')
-        CustomPrint('Plug device via USB now..', 'green')
-        os.system(adb + ' wait-for-device')
-    except Exception as e : 
-        CustomPrint(e)
-        Exit()
-    deviceName= adb + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
-    AfterConnect()
-
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
     try : 
@@ -188,7 +161,9 @@ def TCPMode() :
     deviceIP = CustomInput('Enter IP address of target device : ', 'green')
     devicePort = CustomInput('Enter port number, leave empty for default (5555) : ', 'green')
     if(devicePort=='') : devicePort = '5555'
-    if(isLinux) : LinuxTCP(deviceIP, devicePort)
+    if(isLinux) : 
+        LinuxBashDependencies()
+        AfterConnect() if LinuxTCP(deviceIP, devicePort) else Exit()
     else : AfterConnect() if WindowsTCP(deviceIP, devicePort) else Exit()
 
 def TCPorUSB() : 
@@ -210,7 +185,9 @@ def UninstallWhatsApp(SDKVersion):
 def USBMode() : 
     if(isWindows) : 
         AfterConnect() if WindowsUSB() else Exit()
-    else : LinuxUSB()  
+    else : 
+        LinuxBashDependencies()
+        AfterConnect() if LinuxUSB() else Exit() 
 
 if __name__ == "__main__":
     main()
