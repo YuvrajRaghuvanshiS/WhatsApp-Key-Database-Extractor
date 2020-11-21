@@ -142,9 +142,12 @@ def LinuxUSB() :
 def LinuxTCP(deviceIP, devicePort) : 
     LinuxBashDependencies()
     CustomPrint('Connecting to device', 'green')
-    os.system(adb + ' kill-server')
-    os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
-    os.system(adb + ' wait-for-device')
+    try : 
+        os.system(adb + ' kill-server')
+        os.system(adb + ' connect ' + deviceIP + ':' + devicePort)
+        os.system(adb + ' wait-for-device')
+    except Exception as e : 
+        CustomPrint(e)
     deviceName= adb + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
