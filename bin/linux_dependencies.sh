@@ -5,6 +5,6 @@ run_install()
 }
 
 
-dependencies=("adb" "curl" "grep" "tar")
+dependencies=("adb" "curl" "grep" "tar" "openjdk-11-jdk")
 dpkg -s "${dependencies[@]}" >/dev/null 2>&1 || run_install
 echo "Dependencies installed successfully. Starting..."
