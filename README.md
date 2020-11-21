@@ -116,9 +116,9 @@ git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.
 ```sh
 python3 -m pip install -r requirements.txt
 ```
-3. Run `extract.py`
+3. Run `wa-kdbe.py`
 ```JS
-python3 extract.py
+python3 wa-kdbe.py
 ```
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
