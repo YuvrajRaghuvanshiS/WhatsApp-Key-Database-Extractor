@@ -1,4 +1,5 @@
 import os
+from os.path import realpath
 from packaging.version import Version
 from termcolor import colored, cprint
 import subprocess
@@ -19,13 +20,14 @@ if platform.system() == 'Windows' : isWindows = True
 if platform.system() == 'Linux' : isLinux = True
 
 # Global Variables
-SDKVersion = ''
-WhatsAppapkPath = ''
-SDPath = '' # Internal storage.
-versionName = ''
-contentLength = '' # To check if APK even exists at a given path to download!
+# SDKVersion = ''
+# WhatsAppapkPath = ''
+# SDPath = '' # Internal storage.
+# versionName = ''
+# contentLength = '' # To check if APK even exists at a given path to download!
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
+# ACReturnCode = ''
 
 # Global command line helpers
 adb = 'bin\\adb.exe'
@@ -49,34 +51,14 @@ def main() :
     ShowBanner()
     CheckJAVA()
 
-def AfterConnect() : 
-    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb +' shell getprop ro.build.version.sdk'))).group(0))
-    if (SDKVersion <= 13) : 
-        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
-        CustomPrint('Cleaning up temporary direcory.', 'green')
-        os.system(delete + ' ' + confirmDelete + ' '  + tmp + '*')
-        Exit()
-    WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
-    if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
-    SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
-    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
-    downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
-    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ' shell dumpsys package com.whatsapp'))).group(1)
-    CustomPrint('WhatsApp V' + versionName + ' installed on device')
-    if (version.parse(versionName) > version.parse('2.11.431')) :
-        if not (os.path.isfile(helpers + 'LegacyWhatsApp.apk')) : 
-            CustomPrint('Downloading legacy WhatsApp V2.11.431 to helpers folder')
-            wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
-        else : 
-            CustomPrint('Found legacy WhatsApp V2.11.431 apk in ' + helpers + ' folder')
-        
-        BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
-        UninstallWhatsApp(SDKVersion)
-        InstallLegacy(SDKVersion)
-        BackupWhatsAppDataasAb(SDKVersion)
-        ReinstallWhatsApp()
-        CustomPrint('Our work with device has finished, it is safe to remove it now.')
-        ExtractAB()
+def RealDeal(SDKVersion, WhatsAppapkPath, versionName) : 
+    BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
+    UninstallWhatsApp(SDKVersion)
+    InstallLegacy(SDKVersion)
+    BackupWhatsAppDataasAb(SDKVersion)
+    ReinstallWhatsApp()
+    CustomPrint('Our work with device has finished, it is safe to remove it now.')
+    ExtractAB()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
@@ -163,8 +145,8 @@ def TCPMode() :
     if(devicePort=='') : devicePort = '5555'
     if(isLinux) : 
         LinuxBashDependencies()
-        AfterConnect() if LinuxTCP(deviceIP, devicePort) else Exit()
-    else : AfterConnect() if WindowsTCP(deviceIP, devicePort) else Exit()
+        RealDeal() if LinuxTCP(deviceIP, devicePort) else Exit()
+    else : RealDeal() if WindowsTCP(deviceIP, devicePort) else Exit()
 
 def TCPorUSB() : 
     connectionMode = CustomInput('Use (T)CP or (U)SB? : ', 'green') or 'u'
@@ -184,10 +166,11 @@ def UninstallWhatsApp(SDKVersion):
 
 def USBMode() : 
     if(isWindows) : 
-        AfterConnect() if WindowsUSB() else Exit()
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB()
+        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
     else : 
         LinuxBashDependencies()
-        AfterConnect() if LinuxUSB() else Exit() 
+        RealDeal() if LinuxUSB() else Exit() 
 
 if __name__ == "__main__":
     main()
