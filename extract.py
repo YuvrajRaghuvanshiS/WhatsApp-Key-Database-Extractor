@@ -69,8 +69,11 @@ def AfterConnect() :
         BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
         UninstallWhatsApp(SDKVersion)
         InstallLegacy(SDKVersion)
-        CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab')
-        os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
+        CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab. May take time, don\'t panic.')
+        try : 
+            os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
+        except Exception as e : 
+            CustomPrint(e)
         CustomPrint('Done backing up data.')
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
