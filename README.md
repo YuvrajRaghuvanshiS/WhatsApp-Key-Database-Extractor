@@ -8,10 +8,10 @@
 -->
 [![contributors-shield]](contributors-url)
 [![forks-shield]](forks-url)
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![stars-shield]][stars-url]
+[![issues-shield]][issues-url]
+[![license-shield]][license-url]
+[![commit-shield]]
 
 
 
@@ -204,6 +204,5 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 [issues-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues
 [license-shield]: https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=License
 [license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/YuvrajRaghuvanshiS
 [product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWEW6A5EEWXHOVNGGS7X73Q2
+[commit-shield]: https://img.shields.io/github/commit-activity/m/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Commit%20Rate
