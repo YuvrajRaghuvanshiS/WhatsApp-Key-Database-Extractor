@@ -66,14 +66,17 @@ def AfterConnect() :
         else : 
             CustomPrint('Found legacy WhatsApp V2.11.431 in ' + helpers + ' folder')
         
-        BackupWhatsApp(SDKVersion, versionName)
+        BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
         RemoveWhatsApp(SDKVersion)
         InstallLegacy(SDKVersion)
+        CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab')
+        os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
+        CustomPrint('Done backing up data.')
 
-def BackupWhatsApp(SDKVersion, versionName):
+def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
     CustomPrint('Backing up WhatsApp ' + versionName + ', the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
-    #os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
+    os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
     CustomPrint('Backup complete.')
 
 def CheckBinIfWindows() : 
@@ -133,20 +136,6 @@ def LinuxBashDependencies():
         Exit()
     CustomPrint(output, 'green')
 
-def LinuxUSB() : 
-    LinuxBashDependencies()
-    try : 
-        os.system(adb + ' kill-server')
-        os.system(adb + ' start-server')
-        CustomPrint('Plug device via USB now..', 'green')
-        os.system(adb + ' wait-for-device')
-    except Exception as e : 
-        CustomPrint(e)
-        Exit()
-    deviceName= adb + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
-    AfterConnect()
-
 def LinuxTCP(deviceIP, devicePort) : 
     LinuxBashDependencies()
     CustomPrint('Connecting to device', 'green')
@@ -161,10 +150,24 @@ def LinuxTCP(deviceIP, devicePort) :
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
 
+def LinuxUSB() : 
+    LinuxBashDependencies()
+    try : 
+        os.system(adb + ' kill-server')
+        os.system(adb + ' start-server')
+        CustomPrint('Plug device via USB now..', 'green')
+        os.system(adb + ' wait-for-device')
+    except Exception as e : 
+        CustomPrint(e)
+        Exit()
+    deviceName= adb + ' shell getprop ro.product.model'
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
+    AfterConnect()
+
 def RemoveWhatsApp(SDKVersion):
     if(SDKVersion >= 23) :
         CustomPrint('Removing WhatsApp, skipping data.')
-        #os.system(adb + ' pm uninstall -k com.whatsapp')
+        os.system(adb + ' pm uninstall -k com.whatsapp')
         CustomPrint('Removed.')
 
 def ShowBanner() : 
