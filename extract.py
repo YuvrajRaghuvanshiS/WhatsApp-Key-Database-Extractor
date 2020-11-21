@@ -69,18 +69,22 @@ def AfterConnect() :
         BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
         UninstallWhatsApp(SDKVersion)
         InstallLegacy(SDKVersion)
-        CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab. May take time, don\'t panic.')
-        try : 
-            os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
-        except Exception as e : 
-            CustomPrint(e)
-        CustomPrint('Done backing up data.')
+        BackupWhatsAppDataasAb(SDKVersion)
+
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
     CustomPrint('Backing up WhatsApp ' + versionName + ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
     os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
     CustomPrint('Apk backup complete.')
+
+def BackupWhatsAppDataasAb(SDKVersion):
+    CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab. May take time, don\'t panic.')
+    try : 
+        os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
+    except Exception as e : 
+        CustomPrint(e)
+    CustomPrint('Done backing up data.')
 
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
