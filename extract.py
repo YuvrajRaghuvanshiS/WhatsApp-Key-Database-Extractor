@@ -7,6 +7,7 @@ import platform
 import re
 from packaging import version
 import wget
+from helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False
@@ -71,7 +72,7 @@ def AfterConnect() :
         InstallLegacy(SDKVersion)
         BackupWhatsAppDataasAb(SDKVersion)
         ReinstallWhatsApp()
-
+        # extract bakup.
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
@@ -102,18 +103,6 @@ def CheckJAVA() :
         TCPorUSB()
     else : 
         Exit()
-
-def CustomInput(textToInput, color = 'green', attr=[]) : 
-    if(isWindows) : 
-        return input(textToInput).casefold()
-    else : 
-        return input(colored(textToInput, color, attrs=attr)).casefold()
-
-def CustomPrint(textToPrint, color = 'green', attr=[]) : 
-    if(isWindows) : 
-        print(textToPrint)
-    else : 
-        cprint(textToPrint, color, attrs=attr)
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
