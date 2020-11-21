@@ -203,7 +203,7 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 [issues-shield]: https://img.shields.io/github/issues/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Issues
 [issues-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues
 [license-shield]: https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=License
-[license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE.txt
+[license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/YuvrajRaghuvanshiS
 [product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWEW6A5EEWXHOVNGGS7X73Q2
