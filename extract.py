@@ -122,7 +122,11 @@ def LinuxBashDependencies():
     bashCommand = "bash bin/linux_dependencies.sh"
     # could use os.system but that would affect error output
     # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
-    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    try : 
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    except Exception as e : 
+        CustomPrint(e)
+        Exit()
     output, error = process.communicate()
     if(error!=None) : 
         CustomPrint(error,'red')
