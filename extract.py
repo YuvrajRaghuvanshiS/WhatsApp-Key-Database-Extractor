@@ -70,6 +70,7 @@ def AfterConnect() :
         UninstallWhatsApp(SDKVersion)
         InstallLegacy(SDKVersion)
         BackupWhatsAppDataasAb(SDKVersion)
+        ReinstallWhatsApp()
 
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
@@ -171,11 +172,12 @@ def LinuxUSB() :
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     AfterConnect()
 
-def UninstallWhatsApp(SDKVersion):
-    if(SDKVersion >= 23) :
-        CustomPrint('Uninstalling WhatsApp, skipping data.')
-        os.system(adb + ' shell pm uninstall -k com.whatsapp')
-        CustomPrint('Uninstalled.')
+def ReinstallWhatsApp():
+    try : 
+        os.system(adb + ' install -r -d ' + tmp + 'WhatsAppbackup.apk')
+    except Exception as e : 
+        print(e)
+        CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
 
 def ShowBanner() : 
     banner_path = 'non_essentials/banner.txt'
@@ -200,6 +202,12 @@ def TCPorUSB() :
     connectionMode = CustomInput('Use (T)CP or (U)SB? : ', 'green') or 'u'
     if(connectionMode=='t') : TCPMode()
     else : USBMode()
+
+def UninstallWhatsApp(SDKVersion):
+    if(SDKVersion >= 23) :
+        CustomPrint('Uninstalling WhatsApp, skipping data.')
+        os.system(adb + ' shell pm uninstall -k com.whatsapp')
+        CustomPrint('Uninstalled.')
 
 def USBMode() : 
     if(isWindows) : WindowsUSB()
