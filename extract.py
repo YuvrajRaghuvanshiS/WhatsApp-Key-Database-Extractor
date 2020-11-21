@@ -8,6 +8,7 @@ import re
 from packaging import version
 import wget
 from helpers.CustomCI import CustomInput, CustomPrint
+from extract_backup import ExtractAB
 
 # Detect OS
 isWindows = False
@@ -72,7 +73,7 @@ def AfterConnect() :
         InstallLegacy(SDKVersion)
         BackupWhatsAppDataasAb(SDKVersion)
         ReinstallWhatsApp()
-        # extract bakup.
+        ExtractAB()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
