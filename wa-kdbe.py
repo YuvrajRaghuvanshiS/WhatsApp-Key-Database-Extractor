@@ -146,7 +146,7 @@ def LinuxTCP(deviceIP, devicePort) :
         CustomPrint(e)
         Exit()
     deviceName= adb + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName.split()))).group(1) , 'green')
     AfterConnect()
 
 def LinuxUSB() : 
@@ -160,7 +160,7 @@ def LinuxUSB() :
         CustomPrint(e)
         Exit()
     deviceName= adb + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName.split()))).group(1) , 'green')
     AfterConnect()
 
 def ReinstallWhatsApp():
