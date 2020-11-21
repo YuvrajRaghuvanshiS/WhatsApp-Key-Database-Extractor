@@ -146,7 +146,9 @@ def TCPMode() :
     if(isLinux) : 
         LinuxBashDependencies()
         RealDeal() if LinuxTCP(deviceIP, devicePort) else Exit()
-    else : RealDeal() if WindowsTCP(deviceIP, devicePort) else Exit()
+    else : 
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB()
+        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 def TCPorUSB() : 
     connectionMode = CustomInput('Use (T)CP or (U)SB? : ', 'green') or 'u'
