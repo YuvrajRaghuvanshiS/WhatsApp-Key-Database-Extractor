@@ -164,6 +164,7 @@ def LinuxUSB() :
     AfterConnect()
 
 def ReinstallWhatsApp():
+    CustomPrint('Reinstallting original WhatsApp.')
     try : 
         os.system(adb + ' install -r -d ' + tmp + 'WhatsAppbackup.apk')
     except Exception as e : 
