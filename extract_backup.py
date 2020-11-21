@@ -36,7 +36,7 @@ if(isLinux) :
     grep = 'grep'
     curl = 'curl'
     helpers = 'helpers/'
-    bin = 'bin/'
+    bin = ''
     tar = 'tar'
 
 
