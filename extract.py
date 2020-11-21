@@ -73,6 +73,7 @@ def AfterConnect() :
         InstallLegacy(SDKVersion)
         BackupWhatsAppDataasAb(SDKVersion)
         ReinstallWhatsApp()
+        CustomPrint('Our work with device has finished, it is safe to remove it now.')
         ExtractAB()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
