@@ -89,22 +89,6 @@ def InstallLegacy(SDKVersion):
         os.system(adb + ' install -r '+ helpers + 'LegacyWhatsApp.apk')
     CustomPrint('Installation Complete.')
 
-def LinuxBashDependencies():
-    CustomPrint('Installing dependencies (if not already installed)...', 'green')
-    bashCommand = "bash bin/linux_dependencies.sh"
-    # could use os.system but that would affect error output
-    # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
-    try : 
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-    except Exception as e : 
-        CustomPrint(e)
-        Exit()
-    output, error = process.communicate()
-    if(error!=None) : 
-        CustomPrint(error,'red')
-        Exit()
-    CustomPrint(output, 'green')
-
 def RealDeal(SDKVersion, WhatsAppapkPath, versionName) : 
     BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
     UninstallWhatsApp(SDKVersion)
@@ -139,7 +123,6 @@ def TCPMode() :
     devicePort = CustomInput('Enter port number, leave empty for default (5555) : ', 'green')
     if(devicePort=='') : devicePort = '5555'
     if(isLinux) : 
-        LinuxBashDependencies()
         ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = LinuxTCP(deviceIP, devicePort)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
     else : 
@@ -167,7 +150,6 @@ def USBMode() :
         ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB()
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
     else : 
-        LinuxBashDependencies()
         ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB()
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 

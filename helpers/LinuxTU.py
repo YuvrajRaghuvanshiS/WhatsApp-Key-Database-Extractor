@@ -4,6 +4,7 @@ import os
 from subprocess import check_output
 from packaging import version
 import wget
+import subprocess
 
 # Global variables
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
@@ -38,7 +39,24 @@ def Exit():
     os.system('bin\\adb.exe kill-server')
     quit()
 
+def LinuxBashDependencies():
+    CustomPrint('Installing dependencies (if not already installed)...', 'green')
+    bashCommand = "bash bin/linux_dependencies.sh"
+    # could use os.system but that would affect error output
+    # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
+    try : 
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    except Exception as e : 
+        CustomPrint(e)
+        Exit()
+    output, error = process.communicate()
+    if(error!=None) : 
+        CustomPrint(error,'red')
+        Exit()
+    CustomPrint(output, 'green')
+
 def LinuxTCP(deviceIP, devicePort) : 
+    LinuxBashDependencies()
     CustomPrint('Connecting to device', 'green')
     try : 
         os.system('adb kill-server')
@@ -52,6 +70,7 @@ def LinuxTCP(deviceIP, devicePort) :
     return AfterConnect()
 
 def LinuxUSB() : 
+    LinuxBashDependencies()
     try : 
         os.system('adb kill-server')
         os.system('adb start-server')
