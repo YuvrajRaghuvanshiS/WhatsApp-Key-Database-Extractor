@@ -48,7 +48,7 @@ def CleanTmp() :
         if(os.path.isdir(tmp)) : 
             CustomPrint('Cleaning up tmp folder...')
             os.remove('tmp/whatsapp.tar')
-            #os.remove('tmp/whatsapp.ab')
+            os.remove('tmp/whatsapp.ab')
     
 def ExtractAB() :
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
