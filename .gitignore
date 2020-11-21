@@ -1,7 +1,5 @@
-non_essentials/__pycache__/
 non_essentials/todo.txt
 .vscode/
 helpers/LegacyWhatsApp.apk
-tmp/WhatsAppbackup.apk
-tmp/whatsapp.ab
-helpers/__pycache__/
+tmp/*
+*/__pycache__/
