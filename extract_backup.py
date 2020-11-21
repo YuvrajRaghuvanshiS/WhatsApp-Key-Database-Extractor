@@ -1,4 +1,5 @@
 from os.path import isdir
+from shutil import move
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
 from packaging.version import Version
@@ -25,7 +26,7 @@ grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
 helpers = 'helpers\\'
 bin = 'bin\\'
-extracted = 'extracted\\'
+extracted = 'extracted'
 tar = 'tar.exe'
 if(isLinux) : 
     adb = 'adb'
@@ -36,9 +37,18 @@ if(isLinux) :
     curl = 'curl'
     helpers = 'helpers/'
     bin = 'bin/'
-    extracted = 'extracted/'
     tar = 'tar'
 
+
+def main() : 
+    ExtractAB()
+
+def CleanTmp() :
+        if(os.path.isdir(tmp)) : 
+            CustomPrint('Cleaning up tmp folder...')
+            os.remove('tmp/whatsapp.tar')
+            #os.remove('tmp/whatsapp.ab')
+    
 def ExtractAB() :
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
         abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
@@ -51,15 +61,18 @@ def ExtractAB() :
         
 def TakingOutMainFiles() : 
     targetName = CustomInput('Enter a reference name for this target. : ') or 'target'
-    os.mkdir(extracted + targetName) if not (os.path.isdir(extracted + targetName)) else CustomPrint('Folder already exists.')
+    os.mkdir(extracted + '/' + targetName) if not (os.path.isdir(extracted + '/' + targetName)) else CustomPrint('Folder already exists.')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/f/key')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/msgstore.db')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/wa.db')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/axolotl.db')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db')
+        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/f/key') ; os.replace('tmp/apps/com.whatsapp/f/key', extracted + '/' + targetName + '/key')
+        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/msgstore.db') ; os.replace('tmp/apps/com.whatsapp/db/msgstore.db', extracted + '/' + targetName + '/msgstore.db')
+        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/wa.db') ; os.replace('tmp/apps/com.whatsapp/db/wa.db', extracted + '/' + targetName + '/wa.db')
+        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/axolotl.db') ; os.replace('tmp/apps/com.whatsapp/db/axolotl.db' , extracted + '/' + targetName + '/axolotl.db')
+        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + '/' + targetName + '/chatsettings.db')
+        CleanTmp()
     except Exception as e : 
         CustomPrint(e)
+        CleanTmp()
 
-ExtractAB()
+if __name__ == "__main__":
+    main()

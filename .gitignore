@@ -3,3 +3,5 @@ non_essentials/todo.txt
 helpers/LegacyWhatsApp.apk
 tmp/*
 */__pycache__/
+extracted/*
+__pycache__/*
