@@ -205,9 +205,14 @@ def TCPorUSB() :
 
 def UninstallWhatsApp(SDKVersion):
     if(SDKVersion >= 23) :
-        CustomPrint('Uninstalling WhatsApp, skipping data.')
-        os.system(adb + ' shell pm uninstall -k com.whatsapp')
-        CustomPrint('Uninstalled.')
+        try : 
+            CustomPrint('Uninstalling WhatsApp, skipping data.')
+            os.system(adb + ' shell pm uninstall -k com.whatsapp')
+            CustomPrint('Uninstalled.')
+        except Exception as e : 
+            CustomPrint('Could not uninstall WhatsApp.')
+            CustomPrint(e)
+            Exit()
 
 def USBMode() : 
     if(isWindows) : WindowsUSB()
