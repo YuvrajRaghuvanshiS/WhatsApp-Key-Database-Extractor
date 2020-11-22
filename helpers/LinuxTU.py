@@ -53,7 +53,7 @@ def LinuxBashDependencies():
     if(error!=None) : 
         CustomPrint(error,'red')
         Exit()
-    CustomPrint(re.search("(?<=b')(.*)(?=\\\\n)", str(output)), 'green'
+    CustomPrint(re.search("(?<=b')(.*)(?=\\\\n)", str(output)), 'green')
 
 def LinuxTCP(deviceIP, devicePort) : 
     LinuxBashDependencies()
