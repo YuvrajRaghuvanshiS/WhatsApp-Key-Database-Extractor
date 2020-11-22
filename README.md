@@ -19,7 +19,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
-    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWEW6A5EEWXHOVNGGS7X73Q2" alt="Logo" width="320" height="100">
+    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWK47BBABIJSNTQ3IS7YNU5E" alt="Logo" width="320" height="100">
   </a>
 
   <h3 align="center">WhatsApp Key/DB Extractor</h3>
@@ -61,7 +61,6 @@
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
@@ -70,7 +69,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
+[![Glimpse][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
 
 This project is inspired by [EliteAndroidApps/WhatsApp-Key-DB-Extractor](https://github.com/EliteAndroidApps/WhatsApp-Key-DB-Extractor). Since Android v4.0+ Google has removed adb backup  and apps no longer supported being abcked up by "adb backup -f myApp.ab -apk com.foobar.app". However there is one catch in this scenario and that is some old version of many apps including WhatsApp support that to this day, and that's the idea...
 
@@ -80,9 +79,9 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 
 ### Built With
 * [Python](https://www.python.org/)
-* [Bash](https://www.gnu.org/software/bash/)
-    ##### Depends upon    
-    * [Java](https://www.java.com/)
+[Bash](https://www.gnu.org/software/bash/) (for Linux and OS X)
+#### Depends upon    
+* [Java](https://www.java.com/) (To extract backup)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
@@ -175,18 +174,9 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+<!--## Acknowledgements
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
+-->
 
 
 
@@ -204,5 +194,5 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 [issues-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues
 [license-shield]: https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=License
 [license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE
-[product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWEW6A5EEWXHOVNGGS7X73Q2
+[product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWK47BBABIJSNTQ3IS7YNU5E
 [commit-shield]: https://img.shields.io/github/commit-activity/m/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Commit%20Rate
