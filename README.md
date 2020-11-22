@@ -1,19 +1,9 @@
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![contributors-shield]](contributors-url)
 [![forks-shield]](forks-url)
 [![stars-shield]][stars-url]
 [![issues-shield]][issues-url]
 [![license-shield]][license-url]
 ![commit-shield]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -46,8 +36,6 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)
 
-
-<!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
 * [About the Project](#about-the-project)
@@ -57,16 +45,14 @@
   * [Installation](#installation)
   * [Troubleshooting](#troubleshooting)
 * [Usage](#usage)
+* [Limitations](#limitations)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
 
-
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![Glimpse][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
@@ -85,7 +71,6 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
 After [intallation](#installation) follow on screen instructions.
@@ -131,21 +116,24 @@ python3 wa-kdbe.py
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-<!-- USAGE EXAMPLES -->
 ## Usage
 
 Working on passing params... Make a fork send pulls. Send Help.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-<!-- ROADMAP -->
+## Limitations
+
+* TCP can not create '.ab' file, USB is the only option for now.
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
+
 ## Roadmap
 
 See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -158,14 +146,12 @@ Contributions are what make the open source community such an amazing place to b
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-<!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-<!-- CONTACT -->
 ## Contact
 
 Yuvraj Raghuvanshi - [Twitter](https://twitter.com/Yuvraj+R_S) - YuvrajRaghuvanshi.S@protonmail.com
@@ -174,17 +160,6 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-<!-- ACKNOWLEDGEMENTS -->
-<!--## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
--->
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?style=flat-square&label=Contributors
 [contributors-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Fork
