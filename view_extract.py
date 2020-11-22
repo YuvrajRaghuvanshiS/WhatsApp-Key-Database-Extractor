@@ -38,6 +38,7 @@ if(isLinux) :
 
 
 def main() : 
+    os.system('cls' if os.name == 'nt' else 'clear')
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()

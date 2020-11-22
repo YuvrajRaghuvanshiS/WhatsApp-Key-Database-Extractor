@@ -44,6 +44,7 @@ if(isLinux) :
     helpers = 'helpers/'
 
 def main() :
+    os.system('cls' if os.name == 'nt' else 'clear')
     CheckBinIfWindows()
     ShowBanner()
     global isJAVAInstalled
