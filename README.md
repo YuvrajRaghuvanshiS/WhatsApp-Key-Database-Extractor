@@ -56,6 +56,7 @@
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
+* [Agreement](#agreement)
 * [Contact](#contact)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
@@ -156,6 +157,13 @@ Contributions are what make the open source community such an amazing place to b
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
+
+## Agreement
+
+I made this project because it was hard for me to kill time and the other one was very old. 
+By using this project you agreed that you will be responsible for your actions however you perform them. Do not use this tool to creep on others. Cheers.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
