@@ -51,12 +51,14 @@ def main() :
     TCPorUSB()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
+    os.system('adb wait-for-device')
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
     CustomPrint('Backing up WhatsApp ' + versionName + ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
     os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
     CustomPrint('Apk backup complete.')
 
 def BackupWhatsAppDataasAb(SDKVersion):
+    os.system('adb wait-for-device')
     CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab. May take time, don\'t panic.')
     try : 
         os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
@@ -90,6 +92,7 @@ def Exit():
     quit()
 
 def InstallLegacy(SDKVersion):
+    os.system('adb wait-for-device')
     CustomPrint("installing Legacy WhatsApp V2.11.431, hold tight now.")
     if(SDKVersion >= 17) :
         os.system(adb + ' install -r -d '+ helpers + 'LegacyWhatsApp.apk')
@@ -107,6 +110,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     ExtractAB(isJAVAInstalled)
 
 def ReinstallWhatsApp():
+    os.system('adb wait-for-device')
     CustomPrint('Reinstallting original WhatsApp.')
     try : 
         os.system(adb + ' install -r -d ' + tmp + 'WhatsAppbackup.apk')
@@ -150,6 +154,7 @@ def TCPorUSB() :
     else : USBMode()
 
 def UninstallWhatsApp(SDKVersion):
+    os.system('adb wait-for-device')
     if(SDKVersion >= 23) :
         try : 
             CustomPrint('Uninstalling WhatsApp, skipping data.')
