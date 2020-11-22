@@ -1,21 +1,18 @@
-from os.path import isdir, islink
-from shutil import move
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
-from packaging.version import Version
-from termcolor import colored, cprint
 import subprocess
-from subprocess import check_output
 import platform
 import re
-from packaging import version
-import wget
+
 
 # Detect OS
 isWindows = False
 isLinux = False
 if platform.system() == 'Windows' : isWindows = True 
 if platform.system() == 'Linux' : isLinux = True
+
+# Global variables
+isJAVAInstalled = False
 
 # Global command line helpers
 adb = 'bin\\adb.exe'
@@ -42,15 +39,39 @@ if(isLinux) :
 
 def main() : 
     ShowBanner()
-    ExtractAB()
+    global isJAVAInstalled
+    isJAVAInstalled = CheckJAVA()
+    ExtractAB(isJAVAInstalled)
+
+def CheckJAVA() : 
+    JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output('java -version'.split(), stderr=subprocess.STDOUT))).group(1)
+    isJAVAInstalled = True if(JAVAVersion) else False
+    if (isJAVAInstalled) : 
+        CustomPrint('Found Java installed on system. Continuing...')
+        return isJAVAInstalled
+    else : 
+        noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green') or 'c'
+        if(noJAVAContinue=='c') : 
+            CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
+            return isJAVAInstalled
+        else : 
+            Exit()
 
 def CleanTmp() :
         if(os.path.isdir(tmp)) : 
             CustomPrint('Cleaning up tmp folder...')
             os.remove('tmp/whatsapp.tar')
             os.remove('tmp/whatsapp.ab')
-    
-def ExtractAB() :
+
+def Exit():
+    CustomPrint('\nExiting...', 'green')
+    os.system('bin\\adb.exe kill-server')
+    quit()
+
+def ExtractAB(isJAVAInstalled) :
+    if not (isJAVAInstalled) : 
+        CustomPrint('Can not detect JAVA on system.')
+        Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
         abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
         try : 
