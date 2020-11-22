@@ -19,9 +19,9 @@ def AfterConnect() :
         Exit()
     WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output('adb shell pm path com.whatsapp'.split()))).group(1) + 'apk'
     if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
-    SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output('adb shell "echo $EXTERNAL_STORAGE"'.split()))).group(1)
+    #SDPath = re.search("(?<=b')(.*)(?=\\\\n)", str(check_output('adb shell "echo $EXTERNAL_STORAGE"'.split()))).group(1)
     contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output('curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'.split()))).group(1))
-    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output('adb shell dumpsys package com.whatsapp'.split()))).group(1)
+    versionName = re.search("(?<=versionName=)(.*?)(?=\\\\n)", str(check_output('adb shell dumpsys package com.whatsapp'.split()))).group(1)
     CustomPrint('WhatsApp V' + versionName + ' installed on device')
     downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN
     if (version.parse(versionName) > version.parse('2.11.431')) :
@@ -53,7 +53,7 @@ def LinuxBashDependencies():
     if(error!=None) : 
         CustomPrint(error,'red')
         Exit()
-    CustomPrint(re.search("(?<=b')(.*)(?=\\\\n)", str(output)), 'green')
+    CustomPrint(re.search("(?<=b')(.*)(?=\\\\n)", str(output)).group(1), 'green')
 
 def LinuxTCP(deviceIP, devicePort) : 
     LinuxBashDependencies()
