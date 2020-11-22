@@ -1,3 +1,17 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=Repo%20Size)
+![GitHub top language](https://img.shields.io/github/languages/top/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
+![License](https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=License)
+![Depends](https://img.shields.io/badge/Depends-JAVA-informational)
+
+
+<br />
+
+![Windows](https://img.shields.io/badge/Widows-Tested-success)
+![Kali](https://img.shields.io/badge/Kali-Tested-success)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-Tested-success)
+![OSX](https://img.shields.io/badge/Mac-Not%20Tested-orange)
+
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
