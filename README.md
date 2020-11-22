@@ -94,7 +94,8 @@ After [intallation](#installation) follow on screen instructions.
 
 ### Prerequisites
 
-* O/S: Windows Vista, Windows 7, Windows 8, Windows 10, Mac OS X or Linux  
+* O/S: Windows Vista, Windows 7, Windows 8, Windows 10, Mac OS X or Linux 
+* Python 3.x
 * Java - If not installed [click here](https://www.java.com/en/download/)
 * ADB (Android Debug Bridge) Drivers [download here](https://developer.android.com/studio/releases/platform-tools) 
 * USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
