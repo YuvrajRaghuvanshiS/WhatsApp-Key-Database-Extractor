@@ -65,7 +65,7 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 
 ### Built With
 * [Python](https://www.python.org/)
-[Bash](https://www.gnu.org/software/bash/) (for Linux and OS X)
+* [Bash](https://www.gnu.org/software/bash/) (for Linux and OS X)
 #### Depends upon    
 * [Java](https://www.java.com/) (To extract backup)
 
