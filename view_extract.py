@@ -62,6 +62,7 @@ def CleanTmp() :
             CustomPrint('Cleaning up tmp folder...')
             os.remove('tmp/whatsapp.tar')
             os.remove('tmp/whatsapp.ab')
+            os.remove('tmp\WhatsAppbackup.apk')
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
