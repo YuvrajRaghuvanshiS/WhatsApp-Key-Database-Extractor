@@ -1,3 +1,4 @@
+from enum import Flag
 import os
 from termcolor import colored, cprint
 import subprocess
@@ -23,7 +24,7 @@ if platform.system() == 'Linux' : isLinux = True
 # contentLength = '' # To check if APK even exists at a given path to download!
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
-# ACReturnCode = ''
+isJAVAInstalled = False
 
 # Global command line helpers
 adb = 'bin\\adb.exe'
@@ -45,7 +46,8 @@ if(isLinux) :
 def main() :
     CheckBinIfWindows()
     ShowBanner()
-    isJAVAinstalled = CheckJAVA()
+    global isJAVAInstalled
+    isJAVAInstalled = CheckJAVA()
     TCPorUSB()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
