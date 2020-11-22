@@ -145,7 +145,7 @@ def TCPMode() :
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 def TCPorUSB() : 
-    connectionMode = CustomInput('Use (T)CP or (U)SB? : ', 'green') or 'u'
+    connectionMode = CustomInput('Use (T)CP or (U)SB? TCP is non functional as of now. : ', 'green') or 'u'
     if(connectionMode=='t') : TCPMode()
     else : USBMode()
 
