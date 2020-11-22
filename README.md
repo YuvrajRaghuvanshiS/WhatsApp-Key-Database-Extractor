@@ -1,15 +1,8 @@
-[![contributors-shield]](contributors-url)
-[![forks-shield]](forks-url)
-[![stars-shield]][stars-url]
-[![issues-shield]][issues-url]
-[![license-shield]][license-url]
-![commit-shield]
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
-    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWK47BBABIJSNTQ3IS7YNU5E" alt="Logo" width="320" height="100">
+    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
   <h3 align="center">WhatsApp Key/DB Extractor</h3>
@@ -160,15 +153,5 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-[contributors-shield]: https://img.shields.io/github/contributors/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?style=flat-square&label=Contributors
-[contributors-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Fork
-[forks-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/network/members
-[stars-shield]: https://img.shields.io/github/stars/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Stars
-[stars-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/stargazers
-[issues-shield]: https://img.shields.io/github/issues/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Issues
-[issues-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues
-[license-shield]: https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=License
 [license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE
-[product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DWK47BBABIJSNTQ3IS7YNU5E
-[commit-shield]: https://img.shields.io/github/commit-activity/m/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=Commit%20Rate
+[product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png
