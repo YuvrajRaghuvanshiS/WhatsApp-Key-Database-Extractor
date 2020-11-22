@@ -7,6 +7,7 @@ from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
 from helpers.WIndowsTU import WindowsTCP, WindowsUSB
 from helpers.LinuxTU import LinuxTCP, LinuxUSB
+import re
 
 # Detect OS
 isWindows = False
@@ -44,7 +45,8 @@ if(isLinux) :
 def main() :
     CheckBinIfWindows()
     ShowBanner()
-    CheckJAVA()
+    isJAVAinstalled = CheckJAVA()
+    TCPorUSB()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
@@ -67,14 +69,18 @@ def CheckBinIfWindows() :
     pass
 
 def CheckJAVA() : 
-    isJAVAInstalled = False
-    # after checking if false returns
-    noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green') or 'c'
-    if(noJAVAContinue=='c') : 
-        CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
-        TCPorUSB()
+    JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output('java -version'.split(), stderr=subprocess.STDOUT))).group(1)
+    isJAVAInstalled = True if(JAVAVersion) else False
+    if (isJAVAInstalled) : 
+        CustomPrint('Found Java installed on system. Continuing...')
+        return isJAVAInstalled
     else : 
-        Exit()
+        noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green') or 'c'
+        if(noJAVAContinue=='c') : 
+            CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
+            return isJAVAInstalled
+        else : 
+            Exit()
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
