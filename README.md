@@ -26,7 +26,7 @@
     <br />
 </p>
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 <p align="center">
     <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor"><strong>Explore the docs »</strong></a>
@@ -41,7 +41,7 @@
 </p>
 
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ## Table of Contents
 
