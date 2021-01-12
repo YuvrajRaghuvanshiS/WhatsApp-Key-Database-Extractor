@@ -16,7 +16,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
-    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png?token=AMT67DUEBACDW6TMPAYREIS76BWGC" alt="Logo" width="320" height="100">
+    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
   <h3 align="center">WhatsApp Key/DB Extractor</h3>
