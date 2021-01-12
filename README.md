@@ -26,20 +26,6 @@
     <br />
 </p>
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
-
-<p align="center">
-    <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">View Demo</a>
-    ·
-    <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues">Request Feature</a>
-  </p>
-</p>
-
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
