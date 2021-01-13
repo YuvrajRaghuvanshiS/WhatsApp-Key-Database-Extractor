@@ -63,7 +63,7 @@ def CleanTmp() :
             CustomPrint('Cleaning up tmp folder...')
             os.remove('tmp/whatsapp.tar')
             os.remove('tmp/whatsapp.ab')
-            os.remove('tmp\WhatsAppbackup.apk')
+            #os.remove('tmp\WhatsAppbackup.apk') Not removing backup apk
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
@@ -95,15 +95,15 @@ def ShowBanner() :
     CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============\n', 'green', ['bold'])
     
 def TakingOutMainFiles() : 
-    targetName = CustomInput('Enter a reference name for this target. : ') or 'target'
-    os.mkdir(extracted + '/' + targetName) if not (os.path.isdir(extracted + '/' + targetName)) else CustomPrint('Folder already exists.')
+    userName = CustomInput('Enter a reference name for this user. : ') or 'user'
+    os.mkdir(extracted + '/' + userName) if not (os.path.isdir(extracted + '/' + userName)) else CustomPrint('Folder already exists.')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
-        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/f/key') ; os.replace('tmp/apps/com.whatsapp/f/key', extracted + '/' + targetName + '/key')
-        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/msgstore.db') ; os.replace('tmp/apps/com.whatsapp/db/msgstore.db', extracted + '/' + targetName + '/msgstore.db')
-        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/wa.db') ; os.replace('tmp/apps/com.whatsapp/db/wa.db', extracted + '/' + targetName + '/wa.db')
-        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/axolotl.db') ; os.replace('tmp/apps/com.whatsapp/db/axolotl.db' , extracted + '/' + targetName + '/axolotl.db')
-        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + '/' + targetName + '/chatsettings.db')
+        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/f/key') ; os.replace('tmp/apps/com.whatsapp/f/key', extracted + '/' + userName + '/key')
+        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/msgstore.db') ; os.replace('tmp/apps/com.whatsapp/db/msgstore.db', extracted + '/' + userName + '/msgstore.db')
+        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/wa.db') ; os.replace('tmp/apps/com.whatsapp/db/wa.db', extracted + '/' + userName + '/wa.db')
+        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/axolotl.db') ; os.replace('tmp/apps/com.whatsapp/db/axolotl.db' , extracted + '/' + userName + '/axolotl.db')
+        os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + '/' + userName + '/chatsettings.db')
         # Reset bin here...
         CleanTmp()
     except Exception as e : 
