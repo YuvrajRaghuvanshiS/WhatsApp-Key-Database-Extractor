@@ -37,7 +37,6 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Troubleshooting](#troubleshooting)
-* [Usage](#usage)
 * [Limitations](#limitations)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -111,11 +110,6 @@ python3 wa-kdbe.py
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
-## Usage
-
-Working on passing params... Make a fork send pulls. Send Help.
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png)
 
 ## Limitations
 
