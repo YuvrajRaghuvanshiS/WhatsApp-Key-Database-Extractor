@@ -37,7 +37,6 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Troubleshooting](#troubleshooting)
-* [Limitations](#limitations)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -109,12 +108,6 @@ python3 wa-kdbe.py
 * Stuck on Linux dependencies installation? Run `bash bin/linux_dependencies.sh` from main directory.
 * WhatsApp crashing? Run `python3 restore_whatsapp.py`. Or "clear data/storage" / uninstall and reinstall from Play Store.
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
-
-
-## Limitations
-
-* TCP can not create '.ab' file, USB is the only option for now.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
