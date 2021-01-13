@@ -6,8 +6,8 @@ from subprocess import check_output
 import platform
 from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
-from helpers.WIndowsTU import WindowsTCP, WindowsUSB
-from helpers.LinuxTU import LinuxTCP, LinuxUSB
+from helpers.WIndowsUSB import WindowsUSB
+from helpers.LinuxUSB import LinuxUSB
 import re
 
 # Detect OS
@@ -49,7 +49,7 @@ def main() :
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
-    TCPorUSB()
+    USBMode()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
@@ -133,22 +133,6 @@ def ShowBanner() :
         intro.close()
     except Exception as e : 
         CustomPrint(e)
-
-def TCPMode() : 
-    deviceIP = CustomInput('Enter IP address of target device : ', 'green')
-    devicePort = CustomInput('Enter port number, leave empty for default (5555) : ', 'green')
-    if(devicePort=='') : devicePort = '5555'
-    if(isLinux) : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = LinuxTCP(deviceIP, devicePort)
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
-    else : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsTCP(deviceIP, devicePort)
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
-
-def TCPorUSB() : 
-    connectionMode = CustomInput('Use (T)CP or (U)SB? TCP is non functional as of now. : ', 'green') or 'u'
-    if(connectionMode=='t') : TCPMode()
-    else : USBMode()
 
 def UninstallWhatsApp(SDKVersion):
     if(SDKVersion >= 23) :
