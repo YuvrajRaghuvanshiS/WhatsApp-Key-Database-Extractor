@@ -2,6 +2,11 @@
 ===                                                                          ===
 ===     Turn on USB debugging in android settings before getting started.    ===
 ===                                                                          ===
+===  xxxxx  PLEASE TAKE WHATSAPP CHAT BACKUP BEFORE GETTING STARTED.  xxxxx  ===
+===                                                                          ===
+===       For that go to 'WhatsApp settings\Chat Settings\Chat Backup'       ===
+===              here take a local bacakup. Prepare for Worst.               ===
+===                                                                          ===
 ===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===
 ===   unencrypted file) and your 'key' file from '\data\data\com.whatsapp'   ===
 ===  directory in Android 4.0+ device without root access. However you need  ===
@@ -9,13 +14,11 @@
 ===  If you don't have JAVA installed then you can 'view extract' later by   ===
 ===   running 'view_extract.py'. The idea is to install a 'Legacy WhatsApp'  ===
 ===       temporarily on your device in order to get the android backup      ===
-===     permission. You WILL NOT lose any data and your current WhatsApp     ===
+===    permission. You should not lose any data and your current WhatsApp    ===
 ===   version will be installed after this process so don't panic and don't  ===
 === stop this script while it's working. However if something fails you can  ===
 ===    run 'restore_whatsapp.py' and reinstall current WhatsApp or simply    ===
-=== update that from Google Play Store. But it's always a good idea to take  ===
-===  a backup. For that go to 'WhatsApp settings\Chat Settings\Chat Backup'  ===
-===              here take a local bacakup. Prepare for Worst.               ===
+===                    update that from Google Play Store.                   ===
 ===                                                                          ===
 ===                      Script by : Yuvraj Raghuvanshi                      ===
 ===                      Github.com/YuvrajRaghuvanshiS                       ===
