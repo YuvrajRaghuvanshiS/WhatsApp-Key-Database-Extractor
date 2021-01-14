@@ -102,6 +102,15 @@ python3 wa-kdbe.py
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting
+
+```sh
+* daemon not running. starting it now on port 5037 *
+* daemon started successfully *
+List of devices attached 
+0123a4b5678	device
+emulator-5554 unauthorized
+```
+* Choose device from "List of devices attached" : 0123a4b5678
 * If you have never used USB Debugging before, you may also need to verify the fingerprint.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
