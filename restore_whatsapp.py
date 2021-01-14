@@ -1,4 +1,5 @@
 from helpers.CustomCI import CustomPrint
+from helpers.ADBDeviceSerialId import GetASBDeviceSerialId
 import platform
 import os
 
@@ -9,10 +10,10 @@ if platform.system() == 'Windows' : isWindows = True
 if platform.system() == 'Linux' : isLinux = True
 
 # Global command line helpers
-adb = 'bin\\adb.exe'
+adb = 'bin\\adb.exe -s ' + str(GetASBDeviceSerialId())
 tmp = 'tmp\\'
 if(isLinux) : 
-    adb = 'adb'
+    adb = 'adb -s ' + str(GetASBDeviceSerialId())
     tmp = 'tmp/'
 
 def ReinstallWhatsApp():
