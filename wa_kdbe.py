@@ -1,4 +1,5 @@
 from enum import Flag
+from helpers.ADBDeviceSerialId import GetASBDeviceSerialId
 import os
 from termcolor import colored, cprint
 import subprocess
@@ -27,7 +28,7 @@ appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
 
 # Global command line helpers
-adb = 'bin\\adb.exe'
+adb = 'bin\\adb.exe -s ' + str(GetASBDeviceSerialId())
 delete = 'del'
 tmp = 'tmp\\'
 confirmDelete = '/q'
@@ -35,7 +36,7 @@ grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
 helpers = 'helpers\\'
 if(isLinux) : 
-    adb = 'adb'
+    adb = 'adb -s ' + str(GetASBDeviceSerialId())
     delete = 'rm -rf'
     tmp = 'tmp/'
     confirmDelete = ''

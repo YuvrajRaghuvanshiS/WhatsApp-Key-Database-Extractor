@@ -1,3 +1,4 @@
+from helpers.ADBDeviceSerialId import GetASBDeviceSerialId
 from CustomCI import CustomInput, CustomPrint
 import os
 from subprocess import check_output
@@ -15,7 +16,7 @@ appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 # Global command line helpers
-adb = 'bin\\adb.exe'
+adb = 'bin\\adb.exe -s ' + str(GetASBDeviceSerialId())
 tmp = 'tmp\\'
 grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
