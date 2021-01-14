@@ -105,7 +105,11 @@ def TakingOutMainFiles() :
         os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/axolotl.db') ; os.replace('tmp/apps/com.whatsapp/db/axolotl.db' , extracted + '/' + userName + '/axolotl.db')
         os.system('' if (isLinux) else bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + '/' + userName + '/chatsettings.db')
         # Reset bin here...
-        CleanTmp()
+        
+        CustomPrint('\nIf you do not see any errors in above lines in extracting/fluffing whatsapp.ab you SHOULD choose to clean temporary folder. It contains your chats in UN-ENCRYPTED format.','green')
+        _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ','green') or 'y'
+        if(_cleanTemp.upper()=='y'.upper()) : 
+            CleanTmp()
     except Exception as e : 
         CustomPrint(e)
         CleanTmp()
