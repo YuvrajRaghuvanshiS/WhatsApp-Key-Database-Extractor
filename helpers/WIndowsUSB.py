@@ -52,14 +52,6 @@ def Exit():
 
 
 def WindowsUSB() : 
-    try : 
-        os.system(adb + ' kill-server')
-        os.system(adb + ' start-server')
-        CustomPrint('Plug device via USB now..', 'green')
-        os.system(adb + ' wait-for-device')
-    except Exception as e : 
-        CustomPrint(e)
-        Exit()
     deviceName= adb + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
     return AfterConnect()
