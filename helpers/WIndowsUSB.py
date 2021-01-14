@@ -1,4 +1,4 @@
-from .CustomCI import CustomInput, CustomPrint
+from CustomCI import CustomInput, CustomPrint
 import os
 from subprocess import check_output
 import re

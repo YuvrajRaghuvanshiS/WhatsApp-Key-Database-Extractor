@@ -1,5 +1,5 @@
 import re
-from .CustomCI import CustomInput, CustomPrint
+from CustomCI import CustomInput, CustomPrint
 import os
 from subprocess import check_output
 from packaging import version
