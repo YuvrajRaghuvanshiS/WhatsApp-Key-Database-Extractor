@@ -97,7 +97,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     userName = CustomInput('Enter a reference name for this user. : ') or 'user'
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
     # copy from to here.
-    os.system('mv ' + tmp + 'whatsapp.ab ' + extracted + userName + '\whatsapp.ab')
+    os.system('mv ' + tmp + 'whatsapp.ab ' + extracted + userName + '/whatsapp.ab')
     CustomPrint('Done copying. Now run \'view_extract.py\' from computer.')
 
 def ReinstallWhatsApp():

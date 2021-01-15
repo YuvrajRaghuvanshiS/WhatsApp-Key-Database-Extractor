@@ -63,12 +63,24 @@ def ExtractAB(isJAVAInstalled) :
     if not (isJAVAInstalled) : 
         CustomPrint('Can not detect JAVA on system.')
         Exit()
+    # Ask if already have whatsapp.ab file and continuing the process, if so then check in extracted folder first and continue.
+    if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper()=='y'.upper()) : 
+        userName = CustomInput('Enter name for this user (same as before.) : ') or 'user'
+        abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
+        try : 
+            os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
+            CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
+            TakingOutMainFiles(userName)
+        except Exception as e : 
+            CustomPrint(e)
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
+        CustomPrint('Found whatsapp.ab in tmp folder. Continuing')
+        userName = CustomInput('Enter a reference name for this user. : ') or 'user'
         abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
         try : 
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
             CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ')
-            TakingOutMainFiles()
+            TakingOutMainFiles(userName)
         except Exception as e : 
             CustomPrint(e)
 
@@ -83,8 +95,7 @@ def ShowBanner() :
         CustomPrint(e)
     CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============\n', 'green', ['bold'])
     
-def TakingOutMainFiles() : 
-    userName = CustomInput('Enter a reference name for this user. : ') or 'user'
+def TakingOutMainFiles(userName) : 
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
