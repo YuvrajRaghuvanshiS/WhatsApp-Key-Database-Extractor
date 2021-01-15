@@ -15,27 +15,15 @@ if platform.system() == 'Linux' : isLinux = True
 isJAVAInstalled = False
 
 # Global command line helpers
-adb = 'bin\\adb.exe'
-delete = 'del'
-tmp = 'tmp\\'
-confirmDelete = '/q'
-grep = 'bin\\grep.exe'
-curl = 'bin\\curl.exe'
-helpers = 'helpers\\'
-bin = 'bin\\'
-extracted = 'extracted'
-tar = 'tar.exe'
-if(isLinux) : 
-    adb = 'adb'
-    delete = 'rm -rf'
-    tmp = 'tmp/'
-    confirmDelete = ''
-    grep = 'grep'
-    curl = 'curl'
-    helpers = 'helpers/'
-    bin = 'bin/'
-    tar = 'tar'
-
+adb = 'adb'
+delete = 'rm -rf'
+tmp = 'tmp/'
+confirmDelete = ''
+grep = 'grep'
+curl = 'curl'
+helpers = 'helpers/'
+bin = 'bin/'
+tar = 'tar'
 
 def main() : 
     os.system('cls' if os.name == 'nt' else 'clear')
