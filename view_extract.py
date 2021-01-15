@@ -4,13 +4,6 @@ import subprocess
 import platform
 import re
 
-
-# Detect OS
-isWindows = False
-isLinux = False
-if platform.system() == 'Windows' : isWindows = True 
-if platform.system() == 'Linux' : isLinux = True
-
 # Global variables
 isJAVAInstalled = False
 
@@ -56,7 +49,7 @@ def CleanTmp() :
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
-    os.system('bin\\adb.exe kill-server')
+    os.system('adb kill-server')
     quit()
 
 def ExtractAB(isJAVAInstalled) :
@@ -103,7 +96,7 @@ def TakingOutMainFiles(userName) :
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
-        bin = '' if(isLinux) else 'bin\\'
+        bin = ''
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/f/key') ; os.replace('tmp/apps/com.whatsapp/f/key', extracted + userName + '/key')
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/msgstore.db') ; os.replace('tmp/apps/com.whatsapp/db/msgstore.db', extracted + userName + '/msgstore.db')
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/wa.db') ; os.replace('tmp/apps/com.whatsapp/db/wa.db', extracted + userName + '/wa.db')

@@ -74,7 +74,7 @@ def CheckJAVA() :
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
-    os.system('bin\\adb.exe kill-server')
+    os.system('adb kill-server')
     quit()
 
 def InstallLegacy(SDKVersion):
