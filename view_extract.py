@@ -68,7 +68,7 @@ def CleanTmp() :
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
-    os.system('bin\\adb.exe kill-server')
+    os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     quit()
 
 def ExtractAB(isJAVAInstalled) :
