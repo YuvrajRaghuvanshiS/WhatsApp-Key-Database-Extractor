@@ -43,9 +43,9 @@ def Exit():
     os.system('adb kill-server')
     quit()
 
-def LinuxBashDependencies():
+def TermuxDependencies():
     CustomPrint('Installing dependencies (if not already installed)...', 'green')
-    bashCommand = "bash bin/linux_dependencies.sh"
+    bashCommand = "bash bin/termux_dependencies.sh"
     # could use os.system but that would affect error output
     # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
     try : 
@@ -59,8 +59,8 @@ def LinuxBashDependencies():
         Exit()
     CustomPrint(re.search("(?<=b')(.*)(?=\\\\n)", str(output)).group(1), 'green')
 
-def LinuxUSB() : 
-    LinuxBashDependencies()
+def TermuxMode() : 
+    TermuxDependencies()
     _deviceName= 'adb -s ' + serialId + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)", str(check_output(_deviceName.split()))).group(1) , 'green')
     return AfterConnect()

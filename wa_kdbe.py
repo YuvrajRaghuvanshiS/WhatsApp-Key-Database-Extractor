@@ -7,7 +7,7 @@ from subprocess import check_output
 import platform
 from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
-from helpers.LinuxUSB import LinuxUSB
+from helpers.Termux import TermuxMode
 import re
 
 # Global Variables
@@ -132,7 +132,7 @@ def UninstallWhatsApp(SDKVersion):
             Exit()
 
 def USBMode() :  
-    ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB()
+    ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  TermuxMode()
     RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
