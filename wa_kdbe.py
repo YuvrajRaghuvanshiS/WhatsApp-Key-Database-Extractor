@@ -35,7 +35,8 @@ def main() :
     CheckBin()
     ShowBanner()
     global isJAVAInstalled
-    isJAVAInstalled = CheckJAVA()
+    #isJAVAInstalled = CheckJAVA()
+    CustomPrint('Temporarily continuing without Java.')
     USBMode()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
