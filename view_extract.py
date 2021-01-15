@@ -26,9 +26,8 @@ bin = 'bin/'
 tar = 'tar'
 extracted = 'extracted/'
 
-
 def main() : 
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
