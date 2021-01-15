@@ -92,6 +92,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     ReinstallWhatsApp()
     CustomPrint('Our work with device has finished, it is safe to remove it now.')
     ExtractAB(isJAVAInstalled)
+    # ask to extract ab or do backup and view it later.
 
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
