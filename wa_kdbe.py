@@ -28,6 +28,7 @@ confirmDelete = ''
 grep = 'grep'
 curl = 'curl'
 helpers = 'helpers/'
+extracted = 'extracted/'
 
 def main() :
     os.system('clear')
@@ -90,9 +91,14 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
-    CustomPrint('Our work with device has finished, it is safe to remove it now.')
-    ExtractAB(isJAVAInstalled)
-    # ask to extract ab or do backup and view it later.
+    CustomPrint('Our work with device has finished.')
+    # ExtractAB(isJAVAInstalled)
+    CustomPrint('Extraction is not possible on termux as of now. I have to back \'whatsapp.ab\' up in \'extracted\' folder.')
+    userName = CustomInput('Enter a reference name for this user. : ') or 'user'
+    os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
+    # copy from to here.
+    os.system('mv ' + tmp + 'whatsapp.ab ' + extracted + userName + '\whatsapp.ab')
+    CustomPrint('Done copying. Now run \'view_extract.py\' from computer.')
 
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
