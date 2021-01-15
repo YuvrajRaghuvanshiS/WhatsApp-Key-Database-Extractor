@@ -94,11 +94,12 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     CustomPrint('Our work with device has finished.')
     # ExtractAB(isJAVAInstalled)
     CustomPrint('Extraction is not possible on termux as of now. I have to back \'whatsapp.ab\' up in \'extracted\' folder.')
-    userName = CustomInput('Enter a reference name for this user. : ') or 'user'
+    userName = CustomInput('Enter a reference name for this user (Remeber this name for later). : ') or 'user'
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
     # copy from to here.
     os.system('mv ' + tmp + 'whatsapp.ab ' + extracted + userName + '/whatsapp.ab')
-    CustomPrint('Done copying. Now run \'view_extract.py\' from computer.')
+    CustomPrint('Done copying, deleting from \'tmp\' folder. Now run \'view_extract.py\' from computer.')
+    os.system('rm -rf ' + tmp + 'whatsapp.ab')
 
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
