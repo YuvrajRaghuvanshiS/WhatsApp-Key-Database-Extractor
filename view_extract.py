@@ -67,12 +67,16 @@ def ExtractAB(isJAVAInstalled) :
     if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper()=='y'.upper()) : 
         userName = CustomInput('Enter name for this user (same as before.) : ') or 'user'
         abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
-        try : 
-            os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-            CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
-            TakingOutMainFiles(userName)
-        except Exception as e : 
-            CustomPrint(e)
+        if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
+            try : 
+                os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
+                CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
+                TakingOutMainFiles(userName)
+            except Exception as e : 
+                CustomPrint(e)
+        else : 
+            CustomPrint('Could not find whatsapp.ab in extracted folder, did you name your user properly?')
+            Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
         CustomPrint('Found whatsapp.ab in tmp folder. Continuing')
         userName = CustomInput('Enter a reference name for this user. : ') or 'user'
