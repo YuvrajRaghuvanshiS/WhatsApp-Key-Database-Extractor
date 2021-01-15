@@ -7,15 +7,8 @@ from subprocess import check_output
 import platform
 from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
-from helpers.WIndowsUSB import WindowsUSB
 from helpers.LinuxUSB import LinuxUSB
 import re
-
-# Detect OS
-isWindows = False
-isLinux = False
-if platform.system() == 'Windows' : isWindows = True 
-if platform.system() == 'Linux' : isLinux = True
 
 # Global Variables
 # SDKVersion = ''
@@ -28,25 +21,17 @@ appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
 
 # Global command line helpers
-adb = 'bin\\adb.exe -s ' + str(GetASBDeviceSerialId())
-delete = 'del'
-tmp = 'tmp\\'
-confirmDelete = '/q'
-grep = 'bin\\grep.exe'
-curl = 'bin\\curl.exe'
-helpers = 'helpers\\'
-if(isLinux) : 
-    adb = 'adb -s ' + str(GetASBDeviceSerialId())
-    delete = 'rm -rf'
-    tmp = 'tmp/'
-    confirmDelete = ''
-    grep = 'grep'
-    curl = 'curl'
-    helpers = 'helpers/'
+adb = 'adb -s ' + str(GetASBDeviceSerialId())
+delete = 'rm -rf'
+tmp = 'tmp/'
+confirmDelete = ''
+grep = 'grep'
+curl = 'curl'
+helpers = 'helpers/'
 
 def main() :
-    os.system('cls' if os.name == 'nt' else 'clear')
-    CheckBinIfWindows()
+    os.system('clear')
+    CheckBin()
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
@@ -66,8 +51,8 @@ def BackupWhatsAppDataasAb(SDKVersion):
         CustomPrint(e)
     CustomPrint('Done backing up data.')
 
-def CheckBinIfWindows() : 
-    if (isWindows and not os.path.isdir('bin')) : 
+def CheckBin() : 
+    if (not os.path.isdir('bin')) : 
         CustomPrint('I can not find bin folder, check again...', 'green')
         Exit()
     pass
@@ -125,7 +110,7 @@ def ShowBanner() :
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============\n', 'green', ['bold'])
+    CustomPrint('WhatsApp Key/DB Extrator on non-rooted Android\n', 'green', ['bold'])
     intro_path = 'non_essentials/intro.txt'
     try : 
         intro = open(intro_path,'r')
@@ -146,13 +131,9 @@ def UninstallWhatsApp(SDKVersion):
             CustomPrint(e)
             Exit()
 
-def USBMode() : 
-    if(isWindows) : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB()
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
-    else : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB()
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
+def USBMode() :  
+    ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB()
+    RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
     main()
