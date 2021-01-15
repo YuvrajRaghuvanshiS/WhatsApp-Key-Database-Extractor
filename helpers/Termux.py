@@ -49,16 +49,10 @@ def TermuxDependencies():
     # could use os.system but that would affect error output
     # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
     try : 
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        os.system(bashCommand)
     except Exception as e : 
         CustomPrint(e)
         Exit()
-    output, error = process.communicate()
-    if(error!=None) : 
-        CustomPrint(error,'red')
-        Exit()
-    CustomPrint(re.search("(?<=b')(.*)(?=\\\\n)", str(output)).group(1), 'green')
-
 def TermuxMode() : 
     TermuxDependencies()
     _deviceName= 'adb -s ' + serialId + ' shell getprop ro.product.model'
