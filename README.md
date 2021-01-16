@@ -12,7 +12,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
-    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
+    <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
   <h3 align="center">WhatsApp Key/DB Extractor Termux Edition</h3>
@@ -161,4 +161,4 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 [license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE
-[product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png
+[product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux/helpers/banner.png
