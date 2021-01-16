@@ -89,13 +89,17 @@ After [intallation](#installation) follow on screen instructions.
 
 1. Clone the repo
 ```sh
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git
+git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
 2. Get python requirements
 ```sh
 python3 -m pip install -r requirements.txt
 ```
-3. Run `wa-kdbe.py`
+3. Install Dependencies (for linux and OSX)
+```JS
+bash bin/linux_dependencies.sh
+```
+4. Run `wa-kdbe.py`
 ```JS
 python3 wa-kdbe.py
 ```
