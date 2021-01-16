@@ -6,11 +6,7 @@
 
 <br />
 
-![Windows](https://img.shields.io/badge/Widows-Tested-success)
-![Kali](https://img.shields.io/badge/Kali-Tested-success)
-![Ubuntu](https://img.shields.io/badge/Ubuntu-Tested-success)
-![OSX](https://img.shields.io/badge/Mac-Not%20Tested-orange)
-
+![Termux](https://img.shields.io/badge/Termux-Beta-red)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -19,7 +15,7 @@
     <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
-  <h3 align="center">WhatsApp Key/DB Extractor</h3>
+  <h3 align="center">WhatsApp Key/DB Extractor Termux Edition</h3>
 
   <p align="center">
     Extract key/msgstore.db from /data/data/com.whatsapp without root.
@@ -58,9 +54,9 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 
 ### Built With
 * [Python](https://www.python.org/)
-* [Bash](https://www.gnu.org/software/bash/) (for Linux and OS X)
+* [Bash](https://www.gnu.org/software/bash/)
 #### Depends upon    
-* [Java](https://www.java.com/) (To extract backup)
+* [Java](https://github.com/Hax4us/java/) (To extract backup)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
@@ -74,10 +70,11 @@ After [intallation](#installation) follow on screen instructions.
 
 ### Prerequisites
 
-* O/S: Windows Vista, Windows 7, Windows 8, Windows 10, Mac OS X or Linux 
-* Python 3.x
-* Java - If not installed [click here](https://www.java.com/en/download/)
-* ADB (Android Debug Bridge) Drivers [download here](https://developer.android.com/studio/releases/platform-tools) 
+* Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/repository/browse/?fdid=com.termux)
+* Python 3.x : `pkg install python -y`
+* Proot : To make Java work `pkg install proot -y && proot login`
+* [Java](https://github.com/Hax4us/java/) : `apt update && ap install wget -y && wget https://raw.githubusercontent.com/Hax4us/java/master/installjava && sh installjava`
+* [ADB (Android Debug Bridge)](https://github.com/MasterDevX/Termux-ADB) Drivers : `apt update && apt install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh` 
 * USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
      If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer.  
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
@@ -89,13 +86,17 @@ After [intallation](#installation) follow on screen instructions.
 
 1. Clone the repo
 ```sh
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git
+git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Databse-Extractor
 ```
 2. Get python requirements
 ```sh
 python3 -m pip install -r requirements.txt
 ```
-3. Run `wa-kdbe.py`
+3. Get Termux dependencies (skip if already installed proot, adb, java etc.)
+```JS
+sh bin/termux_dependencies.sh
+```
+4. Run `wa-kdbe.py`
 ```JS
 python3 wa-kdbe.py
 ```
