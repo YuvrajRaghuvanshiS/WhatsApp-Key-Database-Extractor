@@ -1,4 +1,4 @@
-from helpers.ADBDeviceSerialId import GetASBDeviceSerialId
+from ADBDeviceSerialId import GetASBDeviceSerialId
 import re
 from CustomCI import CustomInput, CustomPrint
 import os
