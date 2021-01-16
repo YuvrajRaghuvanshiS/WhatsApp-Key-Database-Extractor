@@ -94,7 +94,7 @@ python3 -m pip install -r requirements.txt
 ```
 3. Get Termux dependencies (skip if already installed proot, adb, java etc.)
 ```JS
-sh bin/termux_dependencies.sh
+python helpers/termux_dependencies.py
 ```
 4. Run `wa-kdbe.py`
 ```JS
