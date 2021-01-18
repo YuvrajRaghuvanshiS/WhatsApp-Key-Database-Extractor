@@ -1,5 +1,5 @@
 from enum import Flag
-from helpers.ADBDeviceSerialId import GetASBDeviceSerialId
+import helpers.ADBDeviceSerialId as deviceId
 import os
 from termcolor import colored, cprint
 import subprocess
@@ -26,9 +26,10 @@ if platform.system() == 'Linux' : isLinux = True
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
+ADBSerialId = deviceId.init()
 
 # Global command line helpers
-adb = 'bin\\adb.exe -s ' + str(GetASBDeviceSerialId())
+adb = 'bin\\adb.exe -s ' + ADBSerialId
 delete = 'del'
 tmp = 'tmp\\'
 confirmDelete = '/q'
@@ -36,7 +37,7 @@ grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
 helpers = 'helpers\\'
 if(isLinux) : 
-    adb = 'adb -s ' + str(GetASBDeviceSerialId())
+    adb = 'adb -s ' + ADBSerialId
     delete = 'rm -rf'
     tmp = 'tmp/'
     confirmDelete = ''
@@ -148,10 +149,10 @@ def UninstallWhatsApp(SDKVersion):
 
 def USBMode() : 
     if(isWindows) : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB()
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB(ADBSerialId)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
     else : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB()
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB(ADBSerialId)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
