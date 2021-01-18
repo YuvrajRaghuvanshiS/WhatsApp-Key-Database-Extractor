@@ -74,7 +74,7 @@ After [intallation](#installation) follow on screen instructions.
 
 ### Prerequisites
 
-* O/S: Windows Vista, Windows 7, Windows 8, Windows 10, Mac OS X or Linux 
+* O/S: Any windows/Mac/Linux. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
 * Python 3.x
 * Java - If not installed [click here](https://www.java.com/en/download/)
 * ADB (Android Debug Bridge) Drivers [download here](https://developer.android.com/studio/releases/platform-tools) 
