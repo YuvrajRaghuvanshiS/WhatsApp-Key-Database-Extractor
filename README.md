@@ -85,19 +85,19 @@ After [intallation](#installation) follow on screen instructions.
 ### Installation
 
 1. Clone the repo
-```sh
+```
 git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Databse-Extractor
 ```
 2. Get python requirements
-```sh
+```python
 python3 -m pip install -r requirements.txt
 ```
 3. Get Termux dependencies (skip if already installed proot, adb, java etc.)
-```JS
+```python
 python helpers/termux_dependencies.py
 ```
 4. Run `wa-kdbe.py`
-```JS
+```python
 python3 wa-kdbe.py
 ```
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
