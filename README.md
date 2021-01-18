@@ -42,6 +42,8 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
+### For this to work user first needs to run 'adb tcpip port' from computer which defeats the entire purpose. I was too late to notice that. This "Termux Edition" is no longer maintained!
+
 ## About The Project
 
 [![Glimpse][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
