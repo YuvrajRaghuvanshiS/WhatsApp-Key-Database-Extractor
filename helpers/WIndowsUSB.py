@@ -1,4 +1,4 @@
-from CustomCI import CustomInput, CustomPrint
+from CustomCI import CustomPrint
 import os
 from subprocess import check_output
 import re
@@ -31,7 +31,7 @@ def AfterConnect(ADBSerialId) :
     WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ADBSerialId + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
     SDPath = re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"'))).group(1)
-    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
+    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1)) # To check if APK even exists at a given path to download!
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(adb + ADBSerialId + ' shell dumpsys package com.whatsapp'))).group(1)
     CustomPrint('WhatsApp V' + versionName + ' installed on device')
     downloadAppFrom = appURLWhatsAppCDN if(contentLength == 18329558) else appURLWhatsCryptCDN

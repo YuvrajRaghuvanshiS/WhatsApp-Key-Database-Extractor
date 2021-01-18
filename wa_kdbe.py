@@ -1,9 +1,6 @@
-from enum import Flag
 import helpers.ADBDeviceSerialId as deviceId
 import os
-from termcolor import colored, cprint
 import subprocess
-from subprocess import check_output
 import platform
 from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
@@ -18,11 +15,6 @@ if platform.system() == 'Windows' : isWindows = True
 if platform.system() == 'Linux' : isLinux = True
 
 # Global Variables
-# SDKVersion = ''
-# WhatsAppapkPath = ''
-# SDPath = '' # Internal storage.
-# versionName = ''
-# contentLength = '' # To check if APK even exists at a given path to download!
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False

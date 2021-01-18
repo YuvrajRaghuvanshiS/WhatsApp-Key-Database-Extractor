@@ -1,4 +1,4 @@
-from CustomCI import CustomInput, CustomPrint
+from CustomCI import CustomInput
 import os
 import platform
 
