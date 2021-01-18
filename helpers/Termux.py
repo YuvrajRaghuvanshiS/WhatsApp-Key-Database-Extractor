@@ -43,18 +43,9 @@ def Exit():
     os.system('adb kill-server')
     quit()
 
-def TermuxDependencies():
-    CustomPrint('Installing dependencies (if not already installed)...', 'green')
-    bashCommand = "bash bin/termux_dependencies.sh"
-    # could use os.system but that would affect error output
-    # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
-    try : 
-        os.system(bashCommand)
-    except Exception as e : 
-        CustomPrint(e)
-        Exit()
 def TermuxMode() : 
-    TermuxDependencies()
+    os.system('fish')
+    os.system('proot login')
     _deviceName= 'adb -s ' + serialId + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)", str(check_output(_deviceName.split()))).group(1) , 'green')
     return AfterConnect()
