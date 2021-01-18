@@ -88,26 +88,27 @@ After [intallation](#installation) follow on screen instructions.
 ### Installation
 
 1. Clone the repo
-```sh
+```
 git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
 2. Get python requirements
-```sh
+```python
 python3 -m pip install -r requirements.txt
 ```
 3. Install Dependencies (for linux and OSX)
-```JS
-bash bin/linux_dependencies.sh
+```bash
+chmod +x bin/linux_dependencies.sh
+sudo ./bin/linuxdependencies.sh
 ```
 4. Run `wa-kdbe.py`
-```JS
+```python
 python3 wa-kdbe.py
 ```
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting
 
-```sh
+```bash
 * daemon not running. starting it now on port 5037 *
 * daemon started successfully *
 List of devices attached 

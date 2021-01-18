@@ -41,24 +41,7 @@ def Exit():
     os.system('adb kill-server')
     quit()
 
-def LinuxBashDependencies():
-    CustomPrint('Installing dependencies (if not already installed)...', 'green')
-    bashCommand = "bash bin/linux_dependencies.sh"
-    # could use os.system but that would affect error output
-    # and ye har bar na chle installing dependenciess iska bhi kuch krkna h
-    try : 
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-    except Exception as e : 
-        CustomPrint(e)
-        Exit()
-    output, error = process.communicate()
-    if(error!=None) : 
-        CustomPrint(error,'red')
-        Exit()
-    CustomPrint(re.search("(?<=b')(.*)(?=\\\\n)", str(output)).group(1), 'green')
-
-def LinuxUSB(ADBSerialId) : 
-    LinuxBashDependencies()
+def LinuxUSB(ADBSerialId) :
     _deviceName= 'adb -s ' + ADBSerialId + ' shell getprop ro.product.model'
     CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)", str(check_output(_deviceName.split()))).group(1) , 'green')
     return AfterConnect(ADBSerialId)
