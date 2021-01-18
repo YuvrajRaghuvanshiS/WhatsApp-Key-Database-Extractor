@@ -1,6 +1,5 @@
 from CustomCI import CustomInput
 import os
-import platform
 
 def init() : 
     

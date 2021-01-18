@@ -1,7 +1,6 @@
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
 import subprocess
-import platform
 import re
 
 # Global variables

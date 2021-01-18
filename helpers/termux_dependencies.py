@@ -1,4 +1,4 @@
-from CustomCI import CustomInput, CustomPrint
+from CustomCI import CustomPrint
 import os
 
 def InstallTermuxDependencies() : 

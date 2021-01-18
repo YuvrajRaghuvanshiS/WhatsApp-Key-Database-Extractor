@@ -1,10 +1,7 @@
-from enum import Flag
 import helpers.ADBDeviceSerialId as deviceId
 import os
 from termcolor import colored, cprint
 import subprocess
-from subprocess import check_output
-import platform
 from helpers.CustomCI import CustomInput, CustomPrint
 from view_extract import ExtractAB
 from helpers.Termux import TermuxMode
