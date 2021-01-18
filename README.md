@@ -15,7 +15,7 @@
     <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/termux/helpers/banner.png" alt="Logo" width="200" height="150">
   </a>
 
-  <h3 align="center">WhatsApp Key/DB Extractor Termux Edition</h3>
+  <h3 align="center">WhatsApp Key/DB Extractor Termux Edition (Beta)</h3>
 
   <p align="center">
     Extract key/msgstore.db from /data/data/com.whatsapp without root.
@@ -90,7 +90,7 @@ git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.
 ```
 2. Get python requirements
 ```python
-python3 -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 3. Get Termux dependencies (skip if already installed proot, adb, java etc.)
 ```python
@@ -98,7 +98,7 @@ python helpers/termux_dependencies.py
 ```
 4. Run `wa-kdbe.py`
 ```python
-python3 wa-kdbe.py
+python wa-kdbe.py
 ```
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
@@ -115,7 +115,7 @@ emulator-5554 unauthorized
 * If you have never used USB Debugging before, you may also need to verify the fingerprint.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
-* Stuck on Linux dependencies installation? Run `bash bin/linux_dependencies.sh` from main directory.
+* Try to keep screen on getting termux dependencies.
 * WhatsApp crashing? Run `python3 restore_whatsapp.py`. Or "clear data/storage" / uninstall and reinstall from Play Store.
 
 

@@ -1,5 +1,5 @@
 from enum import Flag
-from helpers.ADBDeviceSerialId import GetASBDeviceSerialId
+import helpers.ADBDeviceSerialId as deviceId
 import os
 from termcolor import colored, cprint
 import subprocess
@@ -19,9 +19,10 @@ import re
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
+ADBSerialId = deviceId.init()
 
 # Global command line helpers
-adb = 'adb -s ' + str(GetASBDeviceSerialId())
+adb = 'adb -s ' + ADBSerialId
 delete = 'rm -rf'
 tmp = 'tmp/'
 confirmDelete = ''
@@ -141,7 +142,7 @@ def UninstallWhatsApp(SDKVersion):
             Exit()
 
 def USBMode() :  
-    ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  TermuxMode()
+    ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  TermuxMode(ADBSerialId)
     RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
