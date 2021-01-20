@@ -62,9 +62,9 @@ def CheckJAVA() :
 def CleanTmp() :
         if(os.path.isdir(tmp)) : 
             CustomPrint('Cleaning up tmp folder...')
-            os.remove('tmp/whatsapp.tar')
-            os.remove('tmp/whatsapp.ab')
-            #os.remove('tmp\WhatsAppbackup.apk') Not removing backup apk
+            os.remove(tmp + 'whatsapp.tar')
+            os.remove(tmp + 'whatsapp.ab')
+            os.remove(tmp + 'WhatsAppbackup.apk')
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
@@ -128,6 +128,9 @@ def TakingOutMainFiles(userName) :
         _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ','green') or 'y'
         if(_cleanTemp.upper()=='y'.upper()) : 
             CleanTmp()
+        
+        # Compress/decompress.
+
     except Exception as e : 
         CustomPrint(e)
         CleanTmp()
