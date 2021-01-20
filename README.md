@@ -75,9 +75,9 @@ After [intallation](#installation) follow on screen instructions.
 ### Prerequisites
 
 * O/S: Any windows/Mac/Linux. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
-* Python 3.x
-* Java - If not installed [click here](https://www.java.com/en/download/)
-* ADB (Android Debug Bridge) Drivers [download here](https://developer.android.com/studio/releases/platform-tools) 
+* [Python 3.x](https://www.python.org/downloads/)
+* [Java](https://www.java.com/en/download/)
+* [ADB Drivers](https://developer.android.com/studio/releases/platform-tools) 
 * USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
      If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer.  
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
