@@ -3,6 +3,7 @@ import os
 import subprocess
 import platform
 import re
+import protect
 
 
 # Detect OS
@@ -66,6 +67,7 @@ def Exit():
 def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
     if not (isJAVAInstalled) : 
         CustomPrint('Can not detect JAVA on system.')
+        # move whatsapp.ab from tmp to user specified folder.
         Exit()
     # Ask if already have whatsapp.ab file and continuing the process, if so then check in extracted folder first and continue.
     if(not callingFromOtherModule) : 
@@ -122,6 +124,13 @@ def TakingOutMainFiles(userName) :
             CleanTmp()
         
         # Compress/decompress.
+        # temp window block.
+        if(isWindows) : 
+            CustomPrint('You should not leave these extracted database and other files hanging in folder, it is very insecure.')
+            createArchive = CustomInput('Would you like to create a password protected archive? (default y) : ') or 'y'
+            if(createArchive.upper() == 'Y') : 
+                CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
+                protect.Compress(userName)
 
     except Exception as e : 
         CustomPrint(e)
