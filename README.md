@@ -127,6 +127,8 @@ emulator-5554 unauthorized
 ## Roadmap
 
 See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
+#### ToDo
+* Zip extracted folder with password.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
