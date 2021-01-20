@@ -56,8 +56,8 @@ def CleanTmp() :
         if(os.path.isdir(tmp)) : 
             CustomPrint('Cleaning up tmp folder...')
             os.remove(tmp + 'whatsapp.tar')
-            os.remove(tmp + 'whatsapp.ab')
             os.remove(tmp + 'WhatsAppbackup.apk')
+            os.remove(tmp + 'whatsapp.ab')
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
@@ -65,9 +65,14 @@ def Exit():
     quit()
 
 def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
+    # isJAVAInstalled = False # Test.
     if not (isJAVAInstalled) : 
         CustomPrint('Can not detect JAVA on system.')
         # move whatsapp.ab from tmp to user specified folder.
+        userName = CustomInput('Enter a name for this user. : ')
+        os.mkdir(extracted + userName)
+        os.rename(tmp + 'whatsapp.ab', extracted + userName + '/whatsapp.ab')
+        CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
         Exit()
     # Ask if already have whatsapp.ab file and continuing the process, if so then check in extracted folder first and continue.
     if(not callingFromOtherModule) : 
@@ -82,7 +87,7 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
                 except Exception as e : 
                     CustomPrint(e)
             else : 
-                CustomPrint('Could not find whatsapp.ab in extracted folder, did you name your user properly?')
+                CustomPrint('Could not find whatsapp.ab in ' + extracted + userName + ' folder, did you name your user properly?')
                 Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
         CustomPrint('Found whatsapp.ab in tmp folder. Continuing')
@@ -123,7 +128,6 @@ def TakingOutMainFiles(userName) :
         if(_cleanTemp.upper()=='y'.upper()) : 
             CleanTmp()
         
-        # Compress/decompress.
         # temp window block.
         if(isWindows) : 
             CustomPrint('You should not leave these extracted database and other files hanging in folder, it is very insecure.')
