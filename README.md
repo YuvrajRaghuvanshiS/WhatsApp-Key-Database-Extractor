@@ -151,7 +151,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Agreement
 
 I made this project because it was hard for me to kill time and the other one was very old. 
-By using this project you agreed that you will be responsible for your actions however you perform them. Do not use this tool to creep on others. Cheers.
+This tool is provided "as-is" and hence you will be responsible however you use it. Cheers☕
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
