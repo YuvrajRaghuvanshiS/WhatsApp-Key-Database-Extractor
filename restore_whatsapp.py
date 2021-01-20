@@ -11,10 +11,9 @@ if platform.system() == 'Linux' : isLinux = True
 
 # Global command line helpers
 adb = 'bin\\adb.exe -s '
-tmp = 'tmp\\'
+tmp = 'tmp/'
 if(isLinux) : 
     adb = 'adb -s '
-    tmp = 'tmp/'
 
 def ReinstallWhatsApp(ADBSerialId):
     CustomPrint('Reinstallting original WhatsApp.')

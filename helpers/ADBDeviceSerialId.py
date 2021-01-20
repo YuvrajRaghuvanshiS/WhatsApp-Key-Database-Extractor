@@ -14,10 +14,8 @@ def init() :
     rootDir = os.path.abspath(os.path.join(currDir, '..'))
 
     adb = rootDir + '\\bin\\adb.exe'
-    tmp = rootDir + '\\tmp\\'
     if(isLinux) : 
         adb = 'adb'
-        tmp = 'tmp/'
 
     os.system(adb + ' devices')
     ADBSerialId = CustomInput('Choose device from "List of devices attached"\nFor example : 7835fd84543/emulator-5554 : ', 'green')

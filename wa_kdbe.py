@@ -22,20 +22,14 @@ ADBSerialId = deviceId.init()
 
 # Global command line helpers
 adb = 'bin\\adb.exe -s ' + ADBSerialId
-delete = 'del'
-tmp = 'tmp\\'
-confirmDelete = '/q'
+tmp = 'tmp/'
 grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
-helpers = 'helpers\\'
+helpers = 'helpers/'
 if(isLinux) : 
     adb = 'adb -s ' + ADBSerialId
-    delete = 'rm -rf'
-    tmp = 'tmp/'
-    confirmDelete = ''
     grep = 'grep'
     curl = 'curl'
-    helpers = 'helpers/'
 
 def main() :
     os.system('cls' if os.name == 'nt' else 'clear')

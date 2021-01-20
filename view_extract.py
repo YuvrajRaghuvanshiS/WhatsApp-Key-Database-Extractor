@@ -16,26 +16,18 @@ isJAVAInstalled = False
 
 # Global command line helpers
 adb = 'bin\\adb.exe'
-delete = 'del'
-tmp = 'tmp\\'
-confirmDelete = '/q'
+tmp = 'tmp/'
 grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
-helpers = 'helpers\\'
-bin = 'bin\\'
-extracted = 'extracted\\'
+helpers = 'helpers/'
+bin = 'bin/'
+extracted = 'extracted/'
 tar = 'tar.exe'
 if(isLinux) : 
     adb = 'adb'
-    delete = 'rm -rf'
-    tmp = 'tmp/'
-    confirmDelete = ''
     grep = 'grep'
     curl = 'curl'
-    helpers = 'helpers/'
-    bin = 'bin/'
     tar = 'tar'
-    extracted = 'extracted/'
 
 
 def main() : 
