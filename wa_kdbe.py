@@ -43,7 +43,11 @@ def main() :
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
-    USBMode()
+    readInstruction = CustomInput('Please read above instructions carefully. Continue? (default y) : ') or 'y'
+    if(readInstruction.upper() == 'Y') : 
+        USBMode()
+    else : 
+        Exit()
 
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
@@ -69,7 +73,7 @@ def CheckJAVA() :
     JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output('java -version'.split(), stderr=subprocess.STDOUT))).group(1)
     isJAVAInstalled = True if(JAVAVersion) else False
     if (isJAVAInstalled) : 
-        CustomPrint('Found Java installed on system. Continuing...')
+        CustomPrint('Found Java installed on system.')
         return isJAVAInstalled
     else : 
         noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green') or 'c'
