@@ -46,6 +46,7 @@ def main() :
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
     CustomPrint('Backing up WhatsApp ' + versionName + ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
+    os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint('Folder ' + tmp + ' already exists.')
     os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
     CustomPrint('Apk backup complete.')
 
