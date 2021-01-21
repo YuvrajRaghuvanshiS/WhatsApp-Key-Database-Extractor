@@ -68,7 +68,7 @@ def DeleteUserZip(userZip) :
     except Exception as e : 
         CustomPrint(e)
         CustomPrint('Please manually delete it.')
-        Exit()
+    Exit()
 
 def Exit():
     CustomPrint('\nExiting...')
@@ -81,7 +81,8 @@ def ListUserFiles() :
         CustomPrint('No user files found in ' + extracted + ' folder.')
         Exit()
     for file in allFiles : 
-        CustomPrint(file)
+        if(file != '.placeholder') : 
+            CustomPrint(file)
 
 def ListUserFolders() : 
     CustomPrint('\nAvailable user folders in extracted directory.\n')
