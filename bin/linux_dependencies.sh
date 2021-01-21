@@ -7,11 +7,13 @@ apt-get update
 
 echo "Installing packages."
 
-for package in adb curl grep tar openjdk-11-jdk
+for package in adb curl grep tar openjdk-11-jdk p7zip-full
 do
 
-apt-get install -qq --print-uris $package >> script.log 2>>script_error.log
+apt-get install -y $package
 
 done
 
 echo "Done installing packages. Cheers."
+
+# Do not edit this with any other OS than linux. It will edit the line endings and mess with interpreter and won't work.
