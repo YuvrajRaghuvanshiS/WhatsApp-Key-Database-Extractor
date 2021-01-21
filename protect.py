@@ -1,6 +1,7 @@
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
 import platform
+import shutil
 
 # Detect OS
 isWindows = False
@@ -11,6 +12,9 @@ if platform.system() == 'Linux' : isLinux = True
 # Global command line helpers
 extracted = 'extracted/'
 bin = 'bin/'
+sevenZip = 'bin\\7za.exe'
+if(isLinux) : 
+    sevenZip = '7z'
 
 def main() : 
     CustomPrint('This utility is for archiving your output folder with password to enchance it\'s security. Secure is a relative term. Choose longer password.')
@@ -40,7 +44,7 @@ def Compress(userFolder) :
         password = CustomInput('Choose a password for zip : ')
         if(password) : 
             password = ' -p' + password 
-        os.system(bin + '7za.exe a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password)
+        os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'
         if(deleteUserFolder.upper() == 'Y') : 
@@ -51,7 +55,7 @@ def Compress(userFolder) :
 def DeleteUserFolder(userFolder) : 
     CustomPrint('Deleting...')
     try : 
-        os.remove(extracted + userFolder)
+        shutil.rmtree(extracted + userFolder)
     except Exception as e : 
         CustomPrint(e)
         CustomPrint('Please manually delete it.')
@@ -101,7 +105,7 @@ def Uncompress(userZip) :
         password = CustomInput('Enter password, leave empty for none : ')
         if(password) : 
             password = ' -p' + password
-        os.system(bin + '7za.exe e -aot ' + extracted + userZip + ' -o' + extracted + userZip.replace('.7z', '') + password)
+        os.system(sevenZip + ' e -aot ' + extracted + userZip + ' -o' + extracted + userZip.replace('.7z', '') + password)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then you can delete user zip file.')
         deleteUserZip = CustomInput('Delete ' + userZip + ' ? (default n) : ') or 'n'
         if(deleteUserZip.upper() == 'Y') : 
