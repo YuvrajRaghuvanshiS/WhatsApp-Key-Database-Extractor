@@ -9,14 +9,8 @@ if platform.system() == 'Windows' : isWindows = True
 if platform.system() == 'Linux' : isLinux = True
 
 # Global command line helpers
-currDir = os.path.dirname(os.path.realpath(__file__))
-extracted = 'extracted\\'
-bin = 'bin\\'
-if(isLinux) : 
-    extracted = 'extracted/'
-
-def init() : 
-    currDir = os.path.dirname(os.path.realpath(__file__))
+extracted = 'extracted/'
+bin = 'bin/'
 
 def main() : 
     CustomPrint('This utility is for archiving your output folder with password to enchance it\'s security. Secure is a relative term. Choose longer password.')
