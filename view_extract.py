@@ -65,12 +65,11 @@ def Exit():
     quit()
 
 def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
-    # isJAVAInstalled = False # Test.
     if not (isJAVAInstalled) : 
         CustomPrint('Can not detect JAVA on system.')
         # move whatsapp.ab from tmp to user specified folder.
         userName = CustomInput('Enter a name for this user. : ')
-        os.mkdir(extracted + userName)
+        os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder ' + extracted + userName + ' exists.')
         os.rename(tmp + 'whatsapp.ab', extracted + userName + '/whatsapp.ab')
         CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
         Exit()
