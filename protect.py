@@ -72,13 +72,19 @@ def Exit():
 
 def ListUserFiles() : 
     CustomPrint('\nAvailable user files in extracted directory.\n')
-    allFies = next(os.walk(extracted))[2]
-    for file in allFies : 
+    allFiles = next(os.walk(extracted))[2]
+    if(len(allFiles) == 1 and os.path.isfile(extracted + '.placeholder')) : 
+        CustomPrint('No user files found in ' + extracted + ' folder.')
+        Exit()
+    for file in allFiles : 
         CustomPrint(file)
 
 def ListUserFolders() : 
     CustomPrint('\nAvailable user folders in extracted directory.\n')
     allFolders = next(os.walk(extracted))[1]
+    if(len(allFolders)==0) : 
+        CustomPrint('No folders found in ' + extracted + ' folder.')
+        Exit()
     for folder in allFolders : 
         CustomPrint(folder)
 
