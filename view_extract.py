@@ -1,3 +1,4 @@
+import shutil
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
 import subprocess
@@ -55,9 +56,7 @@ def CheckJAVA() :
 def CleanTmp() :
         if(os.path.isdir(tmp)) : 
             CustomPrint('Cleaning up tmp folder...')
-            os.remove(tmp + 'whatsapp.tar')
-            os.remove(tmp + 'WhatsAppbackup.apk')
-            os.remove(tmp + 'whatsapp.ab')
+            shutil.rmtree(tmp)
 
 def Exit():
     CustomPrint('\nExiting...', 'green')
