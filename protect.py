@@ -34,17 +34,15 @@ def main() :
             isCompressing = CustomInput('Choose either \'c\' or \'d\' : ')
             continue
 
-def Compress(userFolder) : 
+def Compress(userFolder, protectPass) : 
     if(not os.path.isdir(extracted + userFolder)) : 
         CustomPrint('Could not find directory ' + extracted + userFolder)
     elif(len(os.listdir(extracted + userFolder)) == 0) : 
         CustomPrint('User folder is empty.')
         Exit()
-    else : 
-        password = CustomInput('Choose a password for zip : ')
-        if(password) : 
-            password = ' -p' + password 
-        os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password)
+    else :  
+        protectPass = ' -p' + protectPass 
+        os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + protectPass)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'
         if(deleteUserFolder.upper() == 'Y') : 
