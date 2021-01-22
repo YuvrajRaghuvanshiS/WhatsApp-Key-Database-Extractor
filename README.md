@@ -113,6 +113,9 @@ optional arguments:
   -p , --protect        Password to compress database into encrypted archive format.
 
   ex : python wa_kdbe.py qqqq yuvraj -p 1234
+
+  IMP : This process is enough in itself, if Java is installed then you don't need to run further scripts
+        Instructions below are standalone version of their specified workings.
 ```
 
 5. Run `view_extract.py with argument` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
@@ -130,6 +133,22 @@ optional arguments:
   ex : python view_extract.py qqqq yuvraj -p 1234
 
   IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<user>' folder or in 'tmp' folder.
+```
+
+6. Run `protect.py with argument` : To compress/decompress user folder with(out) password for safekeeping.
+```
+usage: protect.py [-h] (-c | -d) [-p PASSWORD] userName
+
+positional arguments (required):
+  userName              Reference name of this user.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c, --compress        Compress user folder
+  -d, --decompress      Decompress user 7z file.
+  -p , --password       Password to compress database into encrypted archive format.
+
+  ex : python protect.py -c yuvraj -p 1234
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
