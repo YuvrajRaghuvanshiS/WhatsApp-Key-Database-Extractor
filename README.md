@@ -100,9 +100,12 @@ python3 -m pip install -r requirements.txt
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linuxdependencies.sh
 ```
-4. Run `wa-kdbe.py`
-```python
-python3 wa-kdbe.py
+4. Run `wa-kdbe.py with arguments`
+```
+python wa_kdbe.py [-h] [-p PROTECT] abPass userName
+abPass : Password for whatsapp.ab during full backup of WhatsApp. (Required)
+userName : Reference name for current user. (Required)
+protect : Password to compress database into encrypted archive format. (Optional)
 ```
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 

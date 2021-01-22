@@ -1,3 +1,4 @@
+from packaging.version import parse
 import helpers.ADBDeviceSerialId as deviceId
 import os
 import subprocess
@@ -7,6 +8,7 @@ from view_extract import ExtractAB
 from helpers.WIndowsUSB import WindowsUSB
 from helpers.LinuxUSB import LinuxUSB
 import re
+import argparse
 
 # Detect OS
 isWindows = False
@@ -18,18 +20,6 @@ if platform.system() == 'Linux' : isLinux = True
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
-ADBSerialId = deviceId.init()
-
-# Global command line helpers
-adb = 'bin\\adb.exe -s ' + ADBSerialId
-tmp = 'tmp/'
-grep = 'bin\\grep.exe'
-curl = 'bin\\curl.exe'
-helpers = 'helpers/'
-if(isLinux) : 
-    adb = 'adb -s ' + ADBSerialId
-    grep = 'grep'
-    curl = 'curl'
 
 def main() :
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -52,6 +42,7 @@ def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
 
 def BackupWhatsAppDataasAb(SDKVersion):
     CustomPrint('Backing up WhatsApp data as ' + tmp + 'whatsapp.ab. May take time, don\'t panic.')
+    CustomPrint('Enter \'' + abPass + '\' as password when promted on device.')
     try : 
         os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
     except Exception as e : 
@@ -98,7 +89,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
     CustomPrint('Our work with device has finished, it is safe to remove it now.')
-    ExtractAB(isJAVAInstalled)
+    ExtractAB(isJAVAInstalled, abPass, userName, protectPass)
 
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
@@ -147,4 +138,28 @@ def USBMode() :
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('abPass', help='Password for whatsapp.ab.')
+    parser.add_argument('userName', help='Reference name of this user.')
+    parser.add_argument('-p', '--protect', help='Password to compress database into encrypted archive format.')
+    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') todo : add a logger later.
+
+    args=parser.parse_args('qqqq yuvraj -p 1234'.split())
+    abPass = args.abPass
+    userName = args.userName
+    protectPass = args.protect
+    
+    ADBSerialId = deviceId.init()
+
+    # Global command line helpers
+    adb = 'bin\\adb.exe -s ' + ADBSerialId
+    tmp = 'tmp/'
+    grep = 'bin\\grep.exe'
+    curl = 'bin\\curl.exe'
+    helpers = 'helpers/'
+    if(isLinux) : 
+        adb = 'adb -s ' + ADBSerialId
+        grep = 'grep'
+        curl = 'curl'
+
     main()

@@ -64,11 +64,10 @@ def Exit():
     os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     quit()
 
-def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
+def ExtractAB(isJAVAInstalled, abPass, userName, protectPass, callingFromOtherModule = True) :
     if not (isJAVAInstalled) : 
         CustomPrint('Can not detect JAVA on system.')
         # move whatsapp.ab from tmp to user specified folder.
-        userName = CustomInput('Enter a name for this user. : ')
         os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder ' + extracted + userName + ' exists.')
         os.rename(tmp + 'whatsapp.ab', extracted + userName + '/whatsapp.ab')
         CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
@@ -76,13 +75,11 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
     # Ask if already have whatsapp.ab file and continuing the process, if so then check in extracted folder first and continue.
     if(not callingFromOtherModule) : 
         if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper()=='y'.upper()) : 
-            userName = CustomInput('Enter name for this user (same as before.) : ') or 'user'
-            abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
             if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
                 try : 
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
                     CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
-                    TakingOutMainFiles(userName)
+                    TakingOutMainFiles(userName, protectPass)
                 except Exception as e : 
                     CustomPrint(e)
             else : 
@@ -90,12 +87,10 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
                 Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
         CustomPrint('Found whatsapp.ab in tmp folder. Continuing')
-        userName = CustomInput('Enter a reference name for this user. : ') or 'user'
-        abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
         try : 
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
             CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ')
-            TakingOutMainFiles(userName)
+            TakingOutMainFiles(userName, protectPass)
         except Exception as e : 
             CustomPrint(e)
 
@@ -110,7 +105,7 @@ def ShowBanner() :
         CustomPrint(e)
     CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============\n', 'green', ['bold'])
     
-def TakingOutMainFiles(userName) : 
+def TakingOutMainFiles(userName, protectPass) : 
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
@@ -125,15 +120,11 @@ def TakingOutMainFiles(userName) :
         CustomPrint('\nIf you do not see any errors in above lines in extracting/fluffing whatsapp.ab you SHOULD choose to clean temporary folder. It contains your chats in UN-ENCRYPTED format.','green')
         _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ','green') or 'y'
         if(_cleanTemp.upper()=='y'.upper()) : 
-            CleanTmp()
+            CleanTmp() # ust remove tmp recursively.
         
-        # temp window block.
-        if(isWindows) : 
-            CustomPrint('You should not leave these extracted database and other files hanging in folder, it is very insecure.')
-            createArchive = CustomInput('Would you like to create a password protected archive? (default y) : ') or 'y'
-            if(createArchive.upper() == 'Y') : 
-                CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
-                protect.Compress(userName)
+        if(protectPass) : 
+            CustomPrint('Now an archive will be created in extracted folder with password : \'' + protectPass + '\' and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
+            protect.Compress(userName, protectPass)
 
     except Exception as e : 
         CustomPrint(e)
