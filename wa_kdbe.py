@@ -109,7 +109,7 @@ def ShowBanner() :
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator on non-rooted Android ============\n', 'green', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', 'green', ['bold'])
     intro_path = 'non_essentials/intro.txt'
     try : 
         intro = open(intro_path,'r')
