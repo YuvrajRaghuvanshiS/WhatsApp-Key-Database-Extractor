@@ -126,7 +126,7 @@ def TakingOutMainFiles(userName, protectPass) :
             CleanTmp()
         
         if(protectPass) : 
-            CustomPrint('Now an archive will be created in extracted folder with password : \'' + protectPass + '\' and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
+            CustomPrint('Now an archive will be created in extracted folder with password \'' + protectPass + '\' and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.', 'yellow')
             protect.Compress(userName, protectPass)
 
     except Exception as e : 
