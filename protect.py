@@ -45,6 +45,7 @@ def Compress(userFolder, protectPass) :
         os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + protectPass)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'
+        # TODO : use -y flag to deleteuserfolder automatically.
         if(deleteUserFolder.upper() == 'Y') : 
             DeleteUserFolder(userFolder)
         else : 

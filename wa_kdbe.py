@@ -27,6 +27,7 @@ def main() :
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
+    # TODO : use -y flag to assume readinstruction read automatically.
     readInstruction = CustomInput('Please read above instructions carefully. Continue? (default y) : ') or 'y'
     if(readInstruction.upper() == 'Y') : 
         USBMode()

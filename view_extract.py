@@ -114,12 +114,12 @@ def TakingOutMainFiles(userName, protectPass) :
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/wa.db') ; os.replace('tmp/apps/com.whatsapp/db/wa.db', extracted + userName + '/wa.db')
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/axolotl.db') ; os.replace('tmp/apps/com.whatsapp/db/axolotl.db' , extracted + userName + '/axolotl.db')
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + userName + '/chatsettings.db')
-        # Reset bin here...
         
+        # TODO : use -y flag to cleantmp automatically.
         CustomPrint('\nIf you do not see any errors in above lines in extracting/fluffing whatsapp.ab you SHOULD choose to clean temporary folder. It contains your chats in UN-ENCRYPTED format.','green')
         _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ','green') or 'y'
         if(_cleanTemp.upper()=='y'.upper()) : 
-            CleanTmp() # ust remove tmp recursively.
+            CleanTmp()
         
         if(protectPass) : 
             CustomPrint('Now an archive will be created in extracted folder with password : \'' + protectPass + '\' and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
