@@ -115,7 +115,7 @@ optional arguments:
   ex : python wa_kdbe.py qqqq yuvraj -p 1234
 ```
 
-5. Run `view_extract.py with argument : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.`
+5. Run `view_extract.py with argument` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
 ```
 usage: view_extract.py [-h] [-p PROTECT] abPass userName
 
