@@ -1,3 +1,4 @@
+import argparse
 import shutil
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
@@ -37,7 +38,7 @@ def main() :
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
-    ExtractAB(isJAVAInstalled, False)
+    ExtractAB(isJAVAInstalled, abPass, userName, protectPass, False)
 
 def CheckJAVA() : 
     JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output('java -version'.split(), stderr=subprocess.STDOUT))).group(1)
@@ -76,6 +77,7 @@ def ExtractAB(isJAVAInstalled, abPass, userName, protectPass, callingFromOtherMo
         if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper()=='y'.upper()) : 
             if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
                 try : 
+                    CustomPrint('Fluffing whatsapp.ab file, may take some time. Be patient.')
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
                     CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
                     TakingOutMainFiles(userName, protectPass)
@@ -83,12 +85,14 @@ def ExtractAB(isJAVAInstalled, abPass, userName, protectPass, callingFromOtherMo
                     CustomPrint(e)
             else : 
                 CustomPrint('Could not find whatsapp.ab in ' + extracted + userName + ' folder, did you name your user properly?')
+                CustomPrint('May be that \'whatsapp.ab\' file is still in ' + tmp +' folder. Enter \'n\' next time.')
                 Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
         CustomPrint('Found whatsapp.ab in tmp folder. Continuing')
         try : 
+            CustomPrint('Fluffing whatsapp.ab file, may take some time. Be patient.')
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-            CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ')
+            CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab to ' + tmp + 'whatsapp.tar ')
             TakingOutMainFiles(userName, protectPass)
         except Exception as e : 
             CustomPrint(e)
@@ -130,4 +134,15 @@ def TakingOutMainFiles(userName, protectPass) :
         CleanTmp()
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('abPass', help='Password for whatsapp.ab.')
+    parser.add_argument('userName', help='Reference name of this user.')
+    parser.add_argument('-p', '--protect', help='Password to compress database into encrypted archive format.')
+    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') todo : add a logger later.
+
+    args=parser.parse_args('qqqq yuvraj -p 1234'.split())
+    # args = parser.parse_args()
+    abPass = args.abPass
+    userName = args.userName
+    protectPass = args.protect
     main()

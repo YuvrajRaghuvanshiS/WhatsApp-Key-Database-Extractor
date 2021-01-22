@@ -114,6 +114,24 @@ optional arguments:
 
   ex : python wa_kdbe.py qqqq yuvraj -p 1234
 ```
+
+5. Run `view_extract.py with argument : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.`
+```
+usage: view_extract.py [-h] [-p PROTECT] abPass userName
+
+positional arguments (required):
+  abPass                Password for whatsapp.ab.
+  userName              Reference name of this user.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p , --protect        Password to compress database into encrypted archive format.
+  
+  ex : python view_extract.py qqqq yuvraj -p 1234
+
+  IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<user>' folder or in 'tmp' folder.
+```
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting

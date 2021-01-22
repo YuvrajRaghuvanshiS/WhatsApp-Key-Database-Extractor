@@ -145,8 +145,8 @@ if __name__ == "__main__":
     parser.add_argument('-p', '--protect', help='Password to compress database into encrypted archive format.')
     # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') todo : add a logger later.
 
-    # args=parser.parse_args('qqqq yuvraj -p 1234'.split())
-    args = parser.parse_args()
+    args=parser.parse_args('qqqq yuvraj -p 1234'.split())
+    # args = parser.parse_args()
     abPass = args.abPass
     userName = args.userName
     protectPass = args.protect
