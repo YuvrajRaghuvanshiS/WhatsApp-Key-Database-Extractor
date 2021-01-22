@@ -102,10 +102,17 @@ sudo ./bin/linuxdependencies.sh
 ```
 4. Run `wa-kdbe.py with arguments`
 ```
-python wa_kdbe.py [-h] [-p PROTECT] abPass userName
-abPass : Password for whatsapp.ab during full backup of WhatsApp. (Required)
-userName : Reference name for current user. (Required)
-protect : Password to compress database into encrypted archive format. (Optional)
+usage: wa_kdbe.py [-h] [-p PROTECT] abPass userName
+
+positional arguments (required):
+  abPass                Password for whatsapp.ab.
+  userName              Reference name of this user.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p , --protect        Password to compress database into encrypted archive format.
+
+  ex : python wa_kdbe.py qqqq yuvraj -p 1234
 ```
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
