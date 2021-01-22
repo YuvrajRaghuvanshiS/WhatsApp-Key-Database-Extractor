@@ -36,6 +36,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
+  * [Working](#working)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -100,7 +101,12 @@ python3 -m pip install -r requirements.txt
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linuxdependencies.sh
 ```
-4. Run `wa-kdbe.py with arguments`
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
+### Working
+
+Run `wa-kdbe.py with arguments`
 ```
 usage: wa_kdbe.py [-h] [-p PROTECT] abPass userName
 
@@ -114,11 +120,11 @@ optional arguments:
 
   ex : python wa_kdbe.py qqqq yuvraj -p 1234
 
-  IMP : This process is enough in itself, if Java is installed then you don't need to run further scripts
+  IMP : This process is enough in itself, if Java is installed then you don't need to run further scripts.
         Instructions below are standalone version of their specified workings.
 ```
 
-5. Run `view_extract.py with argument` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
+Run `view_extract.py with argument` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
 ```
 usage: view_extract.py [-h] [-p PROTECT] abPass userName
 
@@ -132,10 +138,10 @@ optional arguments:
   
   ex : python view_extract.py qqqq yuvraj -p 1234
 
-  IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<user>' folder or in 'tmp' folder.
+  IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
 ```
 
-6. Run `protect.py with argument` : To compress/decompress user folder with(out) password for safekeeping.
+Run `protect.py with argument` : To compress/decompress user folder with(out) password for safekeeping.
 ```
 usage: protect.py [-h] (-c | -d) [-p PASSWORD] userName
 
