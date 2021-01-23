@@ -47,9 +47,9 @@ def CheckJAVA() :
         CustomPrint('Found Java installed on system. Continuing...')
         return isJAVAInstalled
     else : 
-        noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green') or 'c'
+        noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'red') or 'c'
         if(noJAVAContinue=='c') : 
-            CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
+            CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'yellow')
             return isJAVAInstalled
         else : 
             Exit()
@@ -60,7 +60,7 @@ def CleanTmp() :
             shutil.rmtree(tmp)
 
 def Exit():
-    CustomPrint('\nExiting...', 'green')
+    CustomPrint('\nExiting...')
     os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     quit()
 
@@ -102,11 +102,11 @@ def ShowBanner() :
     try : 
         banner = open(banner_path,'r')
         banner_content = banner.read()
-        CustomPrint(banner_content, 'green', ['bold'])
+        CustomPrint(banner_content, ['bold'])
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', 'green', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', ['bold'])
     
 def TakingOutMainFiles(userName, protectPass) : 
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
@@ -120,8 +120,8 @@ def TakingOutMainFiles(userName, protectPass) :
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + userName + '/chatsettings.db')
         
         # TODO : use -y flag to cleantmp automatically.
-        CustomPrint('\nIf you do not see any errors in above lines in extracting/fluffing whatsapp.ab you SHOULD choose to clean temporary folder. It contains your chats in UN-ENCRYPTED format.','green')
-        _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ','green') or 'y'
+        CustomPrint('\nIf you do not see any errors in above lines in extracting/fluffing whatsapp.ab you SHOULD choose to clean temporary folder. It contains your chats in UN-ENCRYPTED format.','yellow')
+        _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ') or 'y'
         if(_cleanTemp.upper()=='y'.upper()) : 
             CleanTmp()
         
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     parser.add_argument('abPass', help='Password for whatsapp.ab.')
     parser.add_argument('userName', help='Reference name of this user.')
     parser.add_argument('-p', '--protect', help='Password to compress database into encrypted archive format.')
-    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') todo : add a logger later.
+    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') TODO : add a logger later.
 
     # args=parser.parse_args('qqqq yuvraj -p 1234'.split())
     args = parser.parse_args()

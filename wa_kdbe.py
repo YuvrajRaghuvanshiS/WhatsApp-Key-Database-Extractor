@@ -52,7 +52,7 @@ def BackupWhatsAppDataasAb(SDKVersion):
 
 def CheckBinIfWindows() : 
     if (isWindows and not os.path.isdir('bin')) : 
-        CustomPrint('I can not find bin folder, check again...', 'green')
+        CustomPrint('I can not find bin folder, check again...', 'red')
         Exit()
     pass
 
@@ -63,15 +63,15 @@ def CheckJAVA() :
         CustomPrint('Found Java installed on system.')
         return isJAVAInstalled
     else : 
-        noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'green') or 'c'
+        noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'red') or 'c'
         if(noJAVAContinue=='c') : 
-            CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'green')
+            CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'yellow')
             return isJAVAInstalled
         else : 
             Exit()
 
 def Exit():
-    CustomPrint('\nExiting...', 'green')
+    CustomPrint('\nExiting...')
     os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     quit()
 
@@ -105,16 +105,16 @@ def ShowBanner() :
     try : 
         banner = open(banner_path,'r')
         banner_content = banner.read()
-        CustomPrint(banner_content, 'green', ['bold'])
+        CustomPrint(banner_content, ['bold'])
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', 'green', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', ['bold'])
     intro_path = 'non_essentials/intro.txt'
     try : 
         intro = open(intro_path,'r')
         intro_content = intro.read()
-        CustomPrint(intro_content, 'green', ['bold'])
+        CustomPrint(intro_content, ['bold'])
         intro.close()
     except Exception as e : 
         CustomPrint(e)
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     parser.add_argument('abPass', help='Password for whatsapp.ab.')
     parser.add_argument('userName', help='Reference name of this user.')
     parser.add_argument('-p', '--protect', help='Password to compress database into encrypted archive format.')
-    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') todo : add a logger later.
+    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') TODO : add a logger later.
 
     # args=parser.parse_args('qqqq yuvraj -p 1234'.split())
     args = parser.parse_args()

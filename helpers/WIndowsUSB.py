@@ -24,8 +24,8 @@ helpers = 'helpers/'
 def AfterConnect(ADBSerialId) : 
     SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(adb + ADBSerialId + ' shell getprop ro.build.version.sdk'))).group(0))
     if (SDKVersion <= 13) : 
-        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
-        CustomPrint('Cleaning up temporary direcory.', 'green')
+        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'red')
+        CustomPrint('Cleaning up temporary direcory.', 'red')
         os.remove(tmp)
         Exit()
     WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(adb + ADBSerialId + ' shell pm path com.whatsapp'))).group(1) + 'apk'
@@ -45,12 +45,12 @@ def AfterConnect(ADBSerialId) :
     return 1, SDKVersion, WhatsAppapkPath, versionName
 
 def Exit():
-    CustomPrint('\nExiting...', 'green')
+    CustomPrint('\nExiting...')
     os.system('bin\\adb.exe kill-server')
     quit()
 
 
 def WindowsUSB(ADBSerialId) : 
     deviceName= adb + ADBSerialId + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1) , 'green')
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)", str(check_output(deviceName))).group(1))
     return AfterConnect(ADBSerialId)

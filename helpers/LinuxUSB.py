@@ -14,8 +14,8 @@ def AfterConnect(ADBSerialId) :
     _sdkVersionText = 'adb -s ' + ADBSerialId + ' shell getprop ro.build.version.sdk'
     SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(_sdkVersionText.split()))).group(0))
     if (SDKVersion <= 13) : 
-        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'green')
-        CustomPrint('Cleaning up temporary direcory.', 'green')
+        CustomPrint('Unsupported device. This method only works on Android v4.0 or higer.', 'red')
+        CustomPrint('Cleaning up temporary direcory.', 'red')
         os.system('rm -rf tmp/*')
         Exit()
     _waPathText = 'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp'
@@ -37,11 +37,11 @@ def AfterConnect(ADBSerialId) :
     return 1, SDKVersion, WhatsAppapkPath, versionName
 
 def Exit():
-    CustomPrint('\nExiting...', 'green')
+    CustomPrint('\nExiting...')
     os.system('adb kill-server')
     quit()
 
 def LinuxUSB(ADBSerialId) :
     _deviceName= 'adb -s ' + ADBSerialId + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)", str(check_output(_deviceName.split()))).group(1) , 'green')
+    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)", str(check_output(_deviceName.split()))).group(1))
     return AfterConnect(ADBSerialId)

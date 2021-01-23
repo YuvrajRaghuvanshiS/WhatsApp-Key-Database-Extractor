@@ -91,7 +91,7 @@ if __name__ == "__main__":
     group.add_argument('-d', '--decompress', help='Decompress user 7z file.', action='store_true')
     parser.add_argument('userName', help='Reference name of this user.')
     parser.add_argument('-p', '--password', help='Password to compress database into encrypted archive format.')
-    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') todo : add a logger later.
+    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') TODO : add a logger later.
 
     # args=parser.parse_args('-c yuvraj -p 1234'.split())
     args = parser.parse_args()
