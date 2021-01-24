@@ -102,11 +102,11 @@ def ShowBanner() :
     try : 
         banner = open(banner_path,'r')
         banner_content = banner.read()
-        CustomPrint(banner_content, ['bold'])
+        CustomPrint(banner_content, 'green', ['bold'])
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', 'green', ['bold'])
     
 def TakingOutMainFiles(userName, protectPass) : 
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')

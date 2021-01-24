@@ -105,16 +105,16 @@ def ShowBanner() :
     try : 
         banner = open(banner_path,'r')
         banner_content = banner.read()
-        CustomPrint(banner_content, ['bold'])
+        CustomPrint(banner_content, 'green', ['bold'])
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', 'green', ['bold'])
     intro_path = 'non_essentials/intro.txt'
     try : 
         intro = open(intro_path,'r')
         intro_content = intro.read()
-        CustomPrint(intro_content, ['bold'])
+        CustomPrint(intro_content, 'green', ['bold'])
         intro.close()
     except Exception as e : 
         CustomPrint(e)
