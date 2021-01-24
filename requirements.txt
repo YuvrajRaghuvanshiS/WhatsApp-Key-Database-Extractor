@@ -1,4 +1,3 @@
 termcolor
 packaging
 wget
-shutil
