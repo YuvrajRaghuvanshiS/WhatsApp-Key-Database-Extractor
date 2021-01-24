@@ -106,7 +106,7 @@ sudo ./bin/linuxdependencies.sh
 
 ### Working
 
-Run `wa-kdbe.py with arguments`
+* Run `wa-kdbe.py with arguments`
 ```
 usage: wa_kdbe.py [-h] [-p PROTECT] abPass userName
 
@@ -124,7 +124,7 @@ optional arguments:
         Instructions below are standalone version of their specified workings.
 ```
 
-Run `view_extract.py with argument` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
+* Run `view_extract.py with argument` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
 ```
 usage: view_extract.py [-h] [-p PROTECT] abPass userName
 
@@ -141,7 +141,7 @@ optional arguments:
   IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
 ```
 
-Run `protect.py with argument` : To compress/decompress user folder with(out) password for safekeeping.
+* Run `protect.py with argument` : To compress/decompress user folder with(out) password for safekeeping.
 ```
 usage: protect.py [-h] (-c | -d) [-p PASSWORD] userName
 
@@ -155,6 +155,8 @@ optional arguments:
   -p , --password       Password to compress database into encrypted archive format.
 
   ex : python protect.py -c yuvraj -p 1234
+  
+  IMP : For this to work there should be 'userName' folder or 'userName.7z' file 'extracted' folder.
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
