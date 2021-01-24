@@ -1,15 +1,16 @@
-![GitHub repo size](https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=Repo%20Size)
+![GitHub repo size](https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=repo%20size)
 ![GitHub top language](https://img.shields.io/github/languages/top/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
-![License](https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=License)
-![Depends](https://img.shields.io/badge/Depends-JAVA-informational)
+![License](https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=license)
+![Depends](https://img.shields.io/badge/depends-JAVA-informational)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=yuvrajraghuvanshis.whatsapp-key-database-extractor)
 
 
 <br />
 
-![Windows](https://img.shields.io/badge/Widows-Tested-success)
-![Kali](https://img.shields.io/badge/Kali-Tested-success)
-![Ubuntu](https://img.shields.io/badge/Ubuntu-Tested-success)
-![OSX](https://img.shields.io/badge/Mac-Not%20Tested-orange)
+![Windows](https://img.shields.io/badge/windows-tested-success)
+![Kali](https://img.shields.io/badge/kali-tested-success)
+![Ubuntu](https://img.shields.io/badge/ubuntu-tested-success)
+![OSX](https://img.shields.io/badge/mac-not%20tested-orange)
 
 
 <!-- PROJECT LOGO -->
