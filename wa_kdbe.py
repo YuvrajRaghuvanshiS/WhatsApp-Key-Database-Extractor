@@ -76,7 +76,7 @@ def Exit():
     quit()
 
 def InstallLegacy(SDKVersion):
-    CustomPrint("installing Legacy WhatsApp V2.11.431, hold tight now.")
+    CustomPrint('Installing legacy WhatsApp V2.11.431, hold tight now.')
     if(SDKVersion >= 17) :
         os.system(adb + ' install -r -d '+ helpers + 'LegacyWhatsApp.apk')
     else : 

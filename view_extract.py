@@ -67,14 +67,12 @@ def Exit():
 def ExtractAB(isJAVAInstalled, abPass, userName, protectPass, callingFromOtherModule = True) :
     if not (isJAVAInstalled) : 
         CustomPrint('Can not detect JAVA on system.')
-        # move whatsapp.ab from tmp to user specified folder.
         os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder ' + extracted + userName + ' exists.')
         os.rename(tmp + 'whatsapp.ab', extracted + userName + '/whatsapp.ab')
         CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
         Exit()
-    # Ask if already have whatsapp.ab file and continuing the process, if so then check in extracted folder first and continue.
     if(not callingFromOtherModule) : 
-        if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper()=='y'.upper()) : 
+        if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper() == 'Y') : 
             if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
                 try : 
                     CustomPrint('Fluffing whatsapp.ab file, may take some time. Be patient.')
@@ -122,7 +120,7 @@ def TakingOutMainFiles(userName, protectPass) :
         # TODO : use -y flag to cleantmp automatically.
         CustomPrint('\nIf you do not see any errors in above lines in extracting/fluffing whatsapp.ab you SHOULD choose to clean temporary folder. It contains your chats in UN-ENCRYPTED format.','yellow')
         _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ') or 'y'
-        if(_cleanTemp.upper()=='y'.upper()) : 
+        if(_cleanTemp.upper() == 'Y') : 
             CleanTmp()
         
         if(protectPass) : 
