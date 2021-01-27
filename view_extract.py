@@ -1,3 +1,4 @@
+import shutil
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
 import subprocess
@@ -55,10 +56,7 @@ def CheckJAVA() :
 def CleanTmp() :
         if(os.path.isdir(tmp)) : 
             CustomPrint('Cleaning up tmp folder...')
-            os.remove(tmp + 'whatsapp.tar')
-            os.remove(tmp + 'WhatsAppbackup.apk')
-            os.remove(tmp + 'whatsapp.ab')
-
+            shutil.rmtree(tmp)
 def Exit():
     CustomPrint('\nExiting...')
     os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
@@ -76,7 +74,7 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
     if(not callingFromOtherModule) : 
         if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper()=='y'.upper()) : 
             userName = CustomInput('Enter name for this user (same as before.) : ') or 'user'
-            abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
+            abPass = CustomInput('Enter same password which you entered on device when prompted earlier. : ')
             if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
                 try : 
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
@@ -90,7 +88,7 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
         CustomPrint('Found whatsapp.ab in tmp folder. Continuing')
         userName = CustomInput('Enter a reference name for this user. : ') or 'user'
-        abPass = CustomInput('Please enter password for backup (leave empty for none) : ')
+        abPass = CustomInput('Enter same password which you entered on device when prompted earlier. : ')
         try : 
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
             CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ')
@@ -121,10 +119,7 @@ def TakingOutMainFiles(userName) :
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + userName + '/chatsettings.db')
         # Reset bin here...
         
-        CustomPrint('\nIf you do not see any errors in above lines in extracting/fluffing whatsapp.ab you SHOULD choose to clean temporary folder. It contains your chats in UN-ENCRYPTED format.','green')
-        _cleanTemp = CustomInput('Would you like to clean tmp folder? (default y) : ','green') or 'y'
-        if(_cleanTemp.upper()=='y'.upper()) : 
-            CleanTmp()
+        CleanTmp()
         
         # temp window block.
         if(isWindows) : 
@@ -133,6 +128,8 @@ def TakingOutMainFiles(userName) :
             if(createArchive.upper() == 'Y') : 
                 CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
                 protect.Compress(userName)
+            else : 
+                CustomPrint('Your whatsapp database along with other files is in ' + extracted + userName + ' folder.')
 
     except Exception as e : 
         CustomPrint(e)
