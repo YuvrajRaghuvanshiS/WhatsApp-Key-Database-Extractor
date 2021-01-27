@@ -17,6 +17,8 @@ def init() :
     if(isLinux) : 
         adb = 'adb'
 
+    os.system(adb + ' kill-server')
+    os.system(adb + ' start-server')
     os.system(adb + ' devices')
     ADBSerialId = CustomInput('Choose device from "List of devices attached"\nFor example : 7835fd84543/emulator-5554 : ')
     return ADBSerialId
