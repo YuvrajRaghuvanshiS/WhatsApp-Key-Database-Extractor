@@ -121,15 +121,13 @@ def TakingOutMainFiles(userName) :
         
         CleanTmp()
         
-        # temp window block.
-        if(isWindows) : 
-            CustomPrint('You should not leave these extracted database and other files hanging in folder, it is very insecure.')
-            createArchive = CustomInput('Would you like to create a password protected archive? (default y) : ') or 'y'
-            if(createArchive.upper() == 'Y') : 
-                CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
-                protect.Compress(userName)
-            else : 
-                CustomPrint('Your whatsapp database along with other files is in ' + extracted + userName + ' folder.')
+        CustomPrint('You should not leave these extracted database and other files hanging in folder, it is very insecure.')
+        createArchive = CustomInput('Would you like to create a password protected archive? (default y) : ') or 'y'
+        if(createArchive.upper() == 'Y') : 
+            CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
+            protect.Compress(userName)
+        else : 
+            CustomPrint('Your whatsapp database along with other files is in ' + extracted + userName + ' folder.')
 
     except Exception as e : 
         CustomPrint(e)
