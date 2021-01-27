@@ -47,21 +47,13 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-## About The Project
-
-[![Glimpse][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
+## About the Project
 
 This project is inspired by [EliteAndroidApps/WhatsApp-Key-DB-Extractor](https://github.com/EliteAndroidApps/WhatsApp-Key-DB-Extractor). Since Android v4.0+ Google has removed adb backup  and apps no longer supported being abcked up by "adb backup -f myApp.ab -apk com.foobar.app". However there is one catch in this scenario and that is some old version of many apps including WhatsApp support that to this day, and that's the idea...
 
 The idea is to install "Legacy Version" of WhatsApp on you device via adb and use "adb backup"  to fetch files from "/data/data/com.whatsapp" folder which includes both the 'key' and 'msgstore.db' (non encrypted) file and after that restore current WhatsApp.
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
-
-### Built With
-* [Python](https://www.python.org/)
-* [Bash](https://www.gnu.org/software/bash/) (for Linux and OS X)
-#### Depends upon    
-* [Java](https://www.java.com/) (To extract backup)
+It is build with [Python](https://www.python.org/) and [Bash](https://www.gnu.org/software/bash/) (for Linux and OS X) and depends on [Java](https://www.java.com/) (to extract backup).
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
@@ -75,28 +67,29 @@ After [intallation](#installation) follow on screen instructions.
 
 ### Prerequisites
 
-* O/S: Any windows/Mac/Linux. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
+* O/S: Compatible and tested are Windows & Linux. Mac should be possible as well. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
 * [Python 3.x](https://www.python.org/downloads/)
 * [Java](https://www.java.com/en/download/)
 * [ADB Drivers](https://developer.android.com/studio/releases/platform-tools) 
-* USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
-     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer.  
+* USB Debugging must be enabled on the target Android device. Settings -> Developer Options -> (Debugging) USB debugging  
+     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number 10 times until you're declared a developer.  
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Installation
+Enter the follwing code into the terminal of your choice, on Windows for example cmd.exe. Remember to got into the folder of the code first (via cd). 
 
-1. Clone the repo
+1. Clone / download the repo
 ```bash
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
+git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git
 ```
 2. Get python requirements
 ```python
 python3 -m pip install -r requirements.txt
 ```
-3. Install Dependencies (for linux and OSX)
+3. For linux and OSX: Install Dependencies 
 ```bash
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linuxdependencies.sh
@@ -105,6 +98,8 @@ sudo ./bin/linuxdependencies.sh
 ```python
 python3 wa_kdbe.py
 ```
+4.1 "Choose device from 'List of devices attached'": Here you have to copy-paste the name of your device from the devices list above.
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting
@@ -116,7 +111,6 @@ List of devices attached
 0123a4b5678	device
 emulator-5554 unauthorized
 ```
-* Choose device from "List of devices attached" : 0123a4b5678
 * If you have never used USB Debugging before, you may also need to verify the fingerprint.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
@@ -125,12 +119,9 @@ emulator-5554 unauthorized
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-## Roadmap
+## Roadmap and ToDo
 
 See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
-#### ToDo
-* ![Status](https://img.shields.io/badge/Status-Done-success) Zip extracted folder with password.
-* ![Status](https://img.shields.io/badge/Status-Removed-red) Command line arguments
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
