@@ -1,4 +1,3 @@
-import argparse
 from helpers.CustomCI import CustomInput, CustomPrint
 import os
 import platform
@@ -19,24 +18,35 @@ if(isLinux) :
 
 def main() : 
     CustomPrint('This utility is for archiving your output folder with password to enchance it\'s security. Secure is a relative term. Choose longer password.')
-    if(isCompress) : 
-        Compress(userName, protectPass)
+    isCompressing = CustomInput('Are you (C)ompressing or (D)ecompressing? : ')
+    while(True) : 
+        if(isCompressing.upper() == 'C') : 
+            ListUserFolders()
+            userFolder = CustomInput('\nEnter a name of folder from above (case sensitive) : ')
+            Compress(userFolder)
+            break
+        elif(isCompressing.upper() == 'D') : 
+            ListUserFiles()
+            userZip = CustomInput('\nEnter a name of file from above (case sensitive) : ')
+            Uncompress(userZip)
+            break
+        else : 
+            isCompressing = CustomInput('Choose either \'c\' or \'d\' : ')
+            continue
 
-    if(isDecompress) : 
-        Decompress(userName, protectPass)
-
-def Compress(userFolder, protectPass) : 
+def Compress(userFolder) : 
     if(not os.path.isdir(extracted + userFolder)) : 
         CustomPrint('Could not find directory ' + extracted + userFolder)
     elif(len(os.listdir(extracted + userFolder)) == 0) : 
         CustomPrint('User folder is empty.')
         Exit()
-    else :  
-        protectPass = ' -p' + protectPass 
-        os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + protectPass)
+    else : 
+        password = CustomInput('Choose a password for zip : ')
+        if(password) : 
+            password = ' -p' + password 
+        os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'
-        # TODO : use -y flag to deleteuserfolder automatically.
         if(deleteUserFolder.upper() == 'Y') : 
             DeleteUserFolder(userFolder)
         else : 
@@ -64,7 +74,26 @@ def Exit():
     CustomPrint('\nExiting...')
     quit()
 
-def Decompress(userZip, protectPass) : 
+def ListUserFiles() : 
+    CustomPrint('\nAvailable user files in extracted directory.\n')
+    allFiles = next(os.walk(extracted))[2]
+    if(len(allFiles) == 1 and os.path.isfile(extracted + '.placeholder')) : 
+        CustomPrint('No user files found in ' + extracted + ' folder.')
+        Exit()
+    for file in allFiles : 
+        if(file != '.placeholder') : 
+            CustomPrint(file)
+
+def ListUserFolders() : 
+    CustomPrint('\nAvailable user folders in extracted directory.\n')
+    allFolders = next(os.walk(extracted))[1]
+    if(len(allFolders)==0) : 
+        CustomPrint('No folders found in ' + extracted + ' folder.')
+        Exit()
+    for folder in allFolders : 
+        CustomPrint(folder)
+
+def Uncompress(userZip) : 
     if(not str(userZip).endswith('7z')) : 
         userZip = userZip + '.7z'
 
@@ -74,9 +103,10 @@ def Decompress(userZip, protectPass) :
         CustomPrint(extracted + userZip + ' is empty.')
         Exit()
     else : 
-        if(protectPass) : 
-            protectPass = ' -p' + protectPass
-        os.system(sevenZip + ' e -aot ' + extracted + userZip + ' -o' + extracted + userZip.replace('.7z', '') + protectPass)
+        password = CustomInput('Enter password, leave empty for none : ')
+        if(password) : 
+            password = ' -p' + password
+        os.system(sevenZip + ' e -aot ' + extracted + userZip + ' -o' + extracted + userZip.replace('.7z', '') + password)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then you can delete user zip file.')
         deleteUserZip = CustomInput('Delete ' + userZip + ' ? (default n) : ') or 'n'
         if(deleteUserZip.upper() == 'Y') : 
@@ -85,20 +115,6 @@ def Decompress(userZip, protectPass) :
             Exit()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    group = parser.add_mutually_exclusive_group(required = True)
-    group.add_argument('-c', '--compress', help='Compress user folder', action='store_true')
-    group.add_argument('-d', '--decompress', help='Decompress user 7z file.', action='store_true')
-    parser.add_argument('userName', help='Reference name of this user.')
-    parser.add_argument('-p', '--password', help='Password to compress database into encrypted archive format.')
-    # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') TODO : add a logger later.
-
-    # args=parser.parse_args('-c yuvraj -p 1234'.split())
-    args = parser.parse_args()
-    isCompress = args.compress
-    isDecompress = args.decompress
-    userName = args.userName
-    protectPass = args.password
     main()
 
 

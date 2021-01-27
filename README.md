@@ -37,7 +37,6 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-  * [Working](#working)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -102,64 +101,10 @@ python3 -m pip install -r requirements.txt
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linuxdependencies.sh
 ```
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
-
-### Working
-
-* Run `wa-kdbe.py with arguments`
+4. Run `wa_kdbe.py`
+```python
+python3 wa_kdbe.py
 ```
-usage: wa_kdbe.py [-h] [-p PROTECT] abPass userName
-
-positional arguments (required):
-  abPass                Choose a password for whatsapp.ab.
-  userName              Reference name of this user.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -p , --protect        Password to compress database into encrypted archive format.
-
-  ex : python wa_kdbe.py qqqq yuvraj -p 1234
-
-  IMP : This process is enough in itself, if Java is installed then you don't need to run further scripts.
-        Instructions below are standalone version of their specified workings.
-```
-
-* Run `view_extract.py with argument` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
-```
-usage: view_extract.py [-h] [-p PROTECT] abPass userName
-
-positional arguments (required):
-  abPass                Password for whatsapp.ab.
-  userName              Reference name of this user.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -p , --protect        Password to compress database into encrypted archive format.
-  
-  ex : python view_extract.py qqqq yuvraj -p 1234
-
-  IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
-```
-
-* Run `protect.py with argument` : To compress/decompress user folder with(out) password for safekeeping.
-```
-usage: protect.py [-h] (-c | -d) [-p PASSWORD] userName
-
-positional arguments (required):
-  userName              Reference name of this user.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -c, --compress        Compress user folder
-  -d, --decompress      Decompress user 7z file.
-  -p , --password       Password to compress database into encrypted archive format.
-
-  ex : python protect.py -c yuvraj -p 1234
-  
-  IMP : For this to work there should be 'userName' folder or 'userName.7z' file 'extracted' folder.
-```
-
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting
