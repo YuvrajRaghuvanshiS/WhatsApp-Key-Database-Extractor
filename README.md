@@ -112,7 +112,7 @@ sudo ./bin/linuxdependencies.sh
 usage: wa_kdbe.py [-h] [-p PROTECT] abPass userName
 
 positional arguments (required):
-  abPass                Password for whatsapp.ab.
+  abPass                Choose a password for whatsapp.ab.
   userName              Reference name of this user.
 
 optional arguments:

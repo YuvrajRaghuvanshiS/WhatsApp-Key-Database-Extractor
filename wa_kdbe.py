@@ -140,7 +140,7 @@ def USBMode() :
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('abPass', help='Password for whatsapp.ab.')
+    parser.add_argument('abPass', help='Chooose a password for whatsapp.ab.')
     parser.add_argument('userName', help='Reference name of this user.')
     parser.add_argument('-p', '--protect', help='Password to compress database into encrypted archive format.')
     # parser.add_argument('-s', '--save', help='Save to log file.', action='store_true') TODO : add a logger later.
