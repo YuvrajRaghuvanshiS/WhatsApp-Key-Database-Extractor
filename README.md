@@ -105,13 +105,19 @@ sudo ./bin/linuxdependencies.sh
 ```python
 python3 wa_kdbe.py
 ```
+4.1 Enter `device serial id`
+```
+List of devices attached 
+0123a4b5678	device
+Choose device from "List of devices attached" : __________
+(Copy paste your device serial id from above, i.e. 0123a4b5678)
+```
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting
 
 ```bash
-* daemon not running. starting it now on port 5037 *
-* daemon started successfully *
 List of devices attached 
 0123a4b5678	device
 emulator-5554 unauthorized
