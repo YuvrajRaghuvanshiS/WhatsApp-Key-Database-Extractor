@@ -20,10 +20,10 @@
     <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
-  <h3 align="center">WhatsApp Key/DB Extractor</h3>
+  <h3 align="center">WhatsApp Key/DataBase Extractor</h3>
 
   <p align="center">
-    Extract key/msgstore.db from /data/data/com.whatsapp without root.
+    Extract key/msgstore.db from /data/data/com.whatsapp in android without root.
     <br />
 </p>
 
@@ -50,7 +50,7 @@
 
 ## About The Project
 
-[![Glimpse][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
+<!--[![Glimpse][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)-->
 
 This project is inspired by [EliteAndroidApps/WhatsApp-Key-DB-Extractor](https://github.com/EliteAndroidApps/WhatsApp-Key-DB-Extractor). Since Android v4.0+ Google has removed adb backup  and apps no longer supported being abcked up by "adb backup -f myApp.ab -apk com.foobar.app". However there is one catch in this scenario and that is some old version of many apps including WhatsApp support that to this day, and that's the idea...
 
@@ -117,7 +117,7 @@ Choose device from "List of devices attached" : __________
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Standalone operations
-These operations are standalone implementation of their defined task. One need to run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.
+<details><summary>Click to expand</summary>These operations are standalone implementation of their defined task. One need to run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.
 
 1. Run `view_extract.py` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
 ```
@@ -137,6 +137,7 @@ IMP : For this to work there should either be "userName" folder or "userName.7z"
 ```
 python restore.py
 ```
+</details>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
