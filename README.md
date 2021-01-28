@@ -37,6 +37,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
+  * [Standalone Operations](standalone-operations)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -111,6 +112,30 @@ List of devices attached
 0123a4b5678	device
 Choose device from "List of devices attached" : __________
 (Copy paste your device serial id from above, i.e. 0123a4b5678)
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
+### Standalone operations
+These operations are standalone implementation of their defined task. One need to run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.
+
+1. Run `view_extract.py` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
+```
+python view_extract.py
+
+IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
+```
+
+2. Run `protect.py` : To compress/decompress user folder with(out) password for safekeeping.
+```
+python protect.py
+
+IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is reference user name you entered earlier.
+```
+
+3. Run `restore.py` : To reinstall WhatsApp on device.
+```
+python restore.py
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
