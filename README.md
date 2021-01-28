@@ -117,6 +117,7 @@ List of devices attached
 emulator-5554 unauthorized
 ```
 * Choose device from "List of devices attached" : 0123a4b5678
+* If list is empty close terminal, remove and replug the device, and re-run the script. [Read More](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
 * If you have never used USB Debugging before, you may also need to verify the fingerprint.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
