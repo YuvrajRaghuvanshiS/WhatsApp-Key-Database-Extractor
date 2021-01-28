@@ -37,7 +37,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-  * [Standalone Operations](standalone-operations)
+  * [Standalone Operations](#standalone-operations)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
