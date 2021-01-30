@@ -106,12 +106,13 @@ sudo ./bin/linuxdependencies.sh
 ```python
 python3 wa_kdbe.py
 ```
-4.1 Enter `device serial id`
+4.1 Select `device`
 ```
-List of devices attached 
-0123a4b5678	device
-Choose device from "List of devices attached" : __________
-(Copy paste your device serial id from above, i.e. 0123a4b5678)
+List of devices attached
+
+1. 01234ab56c7  device  Redmi 5 Plus
+2. ab0123cd  device  Redmi Note 9 Pro
+Enter device number (for ex : 2) : _
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)

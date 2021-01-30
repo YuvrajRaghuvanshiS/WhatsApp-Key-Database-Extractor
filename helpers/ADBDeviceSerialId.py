@@ -1,6 +1,7 @@
-from CustomCI import CustomInput
+from CustomCI import CustomInput, CustomPrint
 import os
 import platform
+import subprocess as sp
 
 def init() : 
     # Detect OS
@@ -16,9 +17,31 @@ def init() :
     adb = rootDir + '\\bin\\adb.exe'
     if(isLinux) : 
         adb = 'adb'
-
-    os.system(adb + ' kill-server')
+    
+    cmd = adb + ' devices'
+    os.system(adb + ' kill-server') # Start server before getting list to avoid daemon texts.
     os.system(adb + ' start-server')
-    os.system(adb + ' devices')
-    ADBSerialId = CustomInput('Choose device from "List of devices attached"\nFor example : 7835fd84543/emulator-5554 : ')
-    return ADBSerialId
+    proc = sp.Popen(cmd.split(),stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE, shell=False)
+    output, error = proc.communicate(); output = output.decode('utf-8'); error = error.decode('utf-8')
+    # TODO : Show error and exit.
+    # TODO : Autoconnect if only one device.
+    if len(output) == 0 : 
+        output = None  
+    else : 
+        output = [x.strip() for x in output.split('\n') if len(x.strip()) > 0]
+    deviceToConnect = None
+    CustomPrint(output[0] + '\n')
+    i = 1
+    for device in output[1:] : 
+        name = adb + ' -s ' + device.split()[0] + ' shell getprop ro.product.model'
+        CustomPrint(str(i) + '. ' + device.split()[0] + '  ' + device.split()[1] + '  ' + sp.getoutput(name).strip()) ; i += 1
+
+    while deviceToConnect is None : 
+        deviceIndex = int(CustomInput('Enter device number (for ex : 2) : '))
+        if deviceIndex <= 0 or deviceIndex + 1 > len(output) : 
+            continue
+        deviceToConnect = output[deviceIndex]
+
+    return deviceToConnect.split()[0]
+    
+# TODO : Check if device is device, offline, or unauthorised
