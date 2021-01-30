@@ -23,21 +23,27 @@ def init() :
     os.system(adb + ' start-server')
     proc = sp.Popen(cmd.split(),stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE, shell=False)
     output, error = proc.communicate(); output = output.decode('utf-8'); error = error.decode('utf-8')
-    # TODO : Show error and exit.
     # TODO : Autoconnect if only one device.
     if len(output) == 0 or error : 
         output = None
         CustomPrint(error, 'red')
         Exit()
-
     else : 
         output = [x.strip() for x in output.split('\n') if len(x.strip()) > 0]
-    deviceToConnect = None
+
+    if(len(output) == 1) : 
+        CustomPrint('Could not find any connected device. ', 'red')
+        Exit()
+
+    deviceToConnect = None; i = 1
+    if(len(output) == 2) : 
+        return output[1].split()[0]
+
     CustomPrint(output[0] + '\n')
-    i = 1
-    for device in output[1:] : 
-        name = adb + ' -s ' + device.split()[0] + ' shell getprop ro.product.model'
-        CustomPrint(str(i) + '. ' + device.split()[0] + '  ' + device.split()[1] + '  ' + sp.getoutput(name).strip()) ; i += 1
+    if deviceToConnect is None : 
+        for device in output[1:] : 
+            name = adb + ' -s ' + device.split()[0] + ' shell getprop ro.product.model'
+            CustomPrint(str(i) + '. ' + device.split()[0] + '  ' + device.split()[1] + '  ' + sp.getoutput(name).strip()) ; i += 1
 
     while deviceToConnect is None : 
         deviceIndex = int(CustomInput('Enter device number (for ex : 2) : '))
