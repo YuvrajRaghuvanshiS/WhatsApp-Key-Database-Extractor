@@ -23,7 +23,7 @@ def init() :
     os.system(adb + ' start-server')
     proc = sp.Popen(cmd.split(),stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE, shell=False)
     output, error = proc.communicate(); output = output.decode('utf-8'); error = error.decode('utf-8')
-    # TODO : Autoconnect if only one device.
+
     if len(output) == 0 or error : 
         output = None
         CustomPrint(error, 'red')
@@ -37,6 +37,12 @@ def init() :
 
     deviceToConnect = None; i = 1
     if(len(output) == 2) : 
+        if(output[1].split()[1] == 'offline') : 
+            CustomPrint('Device is offline, try turning off USB debugging and turn on again.', 'yellow')
+            Exit()
+        if(output[1].split()[1] == 'unauthorized') : 
+            CustomPrint('Device unauthorized. Please check the confirmation dialog on your device.', 'red')
+            Exit()
         return output[1].split()[0]
 
     CustomPrint(output[0] + '\n')
@@ -51,9 +57,13 @@ def init() :
             continue
         deviceToConnect = output[deviceIndex]
 
+    if(deviceToConnect.split()[1] == 'offline') : 
+        CustomPrint('Device is offline, try turning off USB debugging and turn on again.', 'yellow')
+        Exit()
+    if(deviceToConnect.split()[1] == 'unauthorized') : 
+        CustomPrint('Device unauthorized. Please check the confirmation dialog on your device.', 'red')
+        Exit()
     return deviceToConnect.split()[0]
-    
-# TODO : Check if device is device, offline, or unauthorised
 
 def Exit():
     CustomPrint('\nExiting...')
