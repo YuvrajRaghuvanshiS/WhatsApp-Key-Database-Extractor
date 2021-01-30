@@ -25,8 +25,11 @@ def init() :
     output, error = proc.communicate(); output = output.decode('utf-8'); error = error.decode('utf-8')
     # TODO : Show error and exit.
     # TODO : Autoconnect if only one device.
-    if len(output) == 0 : 
-        output = None  
+    if len(output) == 0 or error : 
+        output = None
+        CustomPrint(error, 'red')
+        Exit()
+
     else : 
         output = [x.strip() for x in output.split('\n') if len(x.strip()) > 0]
     deviceToConnect = None
@@ -45,3 +48,7 @@ def init() :
     return deviceToConnect.split()[0]
     
 # TODO : Check if device is device, offline, or unauthorised
+
+def Exit():
+    CustomPrint('\nExiting...')
+    quit()
