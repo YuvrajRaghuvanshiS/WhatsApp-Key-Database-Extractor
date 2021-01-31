@@ -22,7 +22,7 @@ def AfterConnect(ADBSerialId) :
     _waPathText = 'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp'
     WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(_waPathText.split()))).group(1) + 'apk'
     if not (WhatsAppapkPath) : CustomPrint('Looks like WhatsApp is not installed on device.') ; Exit()
-    sdPath = getoutput('adb -s ' + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"')
+    sdPath = getoutput('adb -s ' + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
     contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output('curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'.split()))).group(1)) # To check if APK even exists at a given path to download!
     _versionNameText = 'adb -s ' + ADBSerialId + ' shell dumpsys package com.whatsapp'
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\n)", str(check_output(_versionNameText.split()))).group(1)
