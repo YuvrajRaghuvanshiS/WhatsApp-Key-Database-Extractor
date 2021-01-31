@@ -141,10 +141,10 @@ def UninstallWhatsApp(SDKVersion):
 
 def USBMode() : 
     if(isWindows) : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = WindowsUSB(ADBSerialId)
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = WindowsUSB(ADBSerialId)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
     else : 
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName =  LinuxUSB(ADBSerialId)
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath =  LinuxUSB(ADBSerialId)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
