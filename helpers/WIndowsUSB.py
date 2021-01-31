@@ -1,9 +1,11 @@
-from CustomCI import CustomPrint
 import os
-from subprocess import check_output
 import re
-from packaging import version
+from subprocess import check_output
+
 import wget
+from packaging import version
+
+from CustomCI import CustomPrint
 
 # Global Variables
 SDKVersion = ''

@@ -1,7 +1,8 @@
-from helpers.CustomCI import CustomInput, CustomPrint
 import os
 import platform
 import shutil
+
+from helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False

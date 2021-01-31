@@ -1,7 +1,8 @@
-from helpers.CustomCI import CustomPrint
-import helpers.ADBDeviceSerialId as deviceId
-import platform
 import os
+import platform
+
+import helpers.ADBDeviceSerialId as deviceId
+from helpers.CustomCI import CustomPrint
 
 # Detect OS
 isWindows = False

@@ -1,7 +1,9 @@
-from CustomCI import CustomInput, CustomPrint
 import os
 import platform
 import subprocess as sp
+
+from CustomCI import CustomInput, CustomPrint
+
 
 def init() : 
     # Detect OS
@@ -19,7 +21,7 @@ def init() :
         adb = 'adb'
     
     cmd = adb + ' devices'
-    os.system(adb + ' kill-server') # Start server before getting list to avoid daemon texts.
+    os.system(adb + ' kill-server') # Kill server before getting list to avoid daemon texts.
     os.system(adb + ' start-server')
     proc = sp.Popen(cmd.split(),stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE, shell=False)
     output, error = proc.communicate(); output = output.decode('utf-8'); error = error.decode('utf-8')

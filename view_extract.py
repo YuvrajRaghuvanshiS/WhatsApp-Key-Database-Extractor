@@ -1,11 +1,11 @@
-import shutil
-from helpers.CustomCI import CustomInput, CustomPrint
 import os
-import subprocess
 import platform
 import re
-import protect
+import shutil
+import subprocess
 
+import protect
+from helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False

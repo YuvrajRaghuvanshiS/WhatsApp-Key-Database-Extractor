@@ -1,10 +1,11 @@
-import re
-from CustomCI import CustomPrint
 import os
+import re
 from subprocess import check_output
-from packaging import version
+
 import wget
-import subprocess
+from packaging import version
+
+from CustomCI import CustomPrint
 
 # Global variables
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'

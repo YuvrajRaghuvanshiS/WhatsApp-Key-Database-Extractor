@@ -1,12 +1,13 @@
-import helpers.ADBDeviceSerialId as deviceId
 import os
-import subprocess
 import platform
-from helpers.CustomCI import CustomInput, CustomPrint
-from view_extract import ExtractAB
-from helpers.WIndowsUSB import WindowsUSB
-from helpers.LinuxUSB import LinuxUSB
 import re
+import subprocess
+
+import helpers.ADBDeviceSerialId as deviceId
+from helpers.CustomCI import CustomInput, CustomPrint
+from helpers.LinuxUSB import LinuxUSB
+from helpers.WIndowsUSB import WindowsUSB
+from view_extract import ExtractAB
 
 # Detect OS
 isWindows = False
