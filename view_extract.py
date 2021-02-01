@@ -55,7 +55,7 @@ def CheckJAVA() :
 
 def CleanTmp() :
         if(os.path.isdir(tmp)) : 
-            CustomPrint('Cleaning up tmp folder...')
+            CustomPrint('Cleaning up tmp folder...','yellow')
             shutil.rmtree(tmp)
 def Exit():
     CustomPrint('\nExiting...')
@@ -123,7 +123,7 @@ def TakingOutMainFiles(userName) :
         CustomPrint('You should not leave these extracted database and other files hanging in folder, it is very insecure.')
         createArchive = CustomInput('Would you like to create a password protected archive? (default y) : ') or 'y'
         if(createArchive.upper() == 'Y') : 
-            CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
+            CustomPrint('\nNow an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.','yellow')
             protect.Compress(userName)
         else : 
             CustomPrint('\a\nYour whatsapp database along with other files is in ' + extracted + userName + ' folder.\n','yellow')

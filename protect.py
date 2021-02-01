@@ -48,7 +48,7 @@ def Compress(userFolder) :
         os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'
-        CustomPrint('\a\nYour \'' + userFolder + '.7z\' file is in extracted folder.\n','yellow')
+        CustomPrint('\a\nYour \'' + userFolder + '.7z\' file is in extracted folder. Password is : ' + password.replace(' -p','') + '\n','yellow')
         if(deleteUserFolder.upper() == 'Y') : 
             DeleteUserFolder(userFolder)
             # TODO : Open in explorer after compressing and decompressing.
