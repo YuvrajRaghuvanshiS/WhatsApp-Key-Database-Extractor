@@ -75,6 +75,13 @@ def DeleteUserZip(userZip) :
 
 def Exit():
     CustomPrint('\nExiting...')
+    try : # Open in explorer.
+        if(isWindows) : 
+            os.startfile(os.path.realpath(extracted))
+        else : 
+            os.system('xdg-open ' + os.path.realpath(extracted))
+    except Exception as e : 
+        pass
     quit()
 
 def ListUserFiles() : 
