@@ -48,8 +48,10 @@ def Compress(userFolder) :
         os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'
+        CustomPrint('\a\nYour \'' + userFolder + '.7z\' file is in extracted folder.\n','yellow')
         if(deleteUserFolder.upper() == 'Y') : 
             DeleteUserFolder(userFolder)
+            # TODO : Open in explorer after compressing and decompressing.
         else : 
             Exit()
 
@@ -79,7 +81,7 @@ def ListUserFiles() :
     CustomPrint('\nAvailable user files in extracted directory.\n')
     allFiles = next(os.walk(extracted))[2]
     if(len(allFiles) == 1 and os.path.isfile(extracted + '.placeholder')) : 
-        CustomPrint('No user files found in ' + extracted + ' folder.')
+        CustomPrint('No user files found in ' + extracted + ' folder.','red')
         Exit()
     for file in allFiles : 
         if(file != '.placeholder') : 
@@ -89,7 +91,7 @@ def ListUserFolders() :
     CustomPrint('\nAvailable user folders in extracted directory.\n')
     allFolders = next(os.walk(extracted))[1]
     if(len(allFolders)==0) : 
-        CustomPrint('No folders found in ' + extracted + ' folder.')
+        CustomPrint('No folders found in ' + extracted + ' folder.','red')
         Exit()
     for folder in allFolders : 
         CustomPrint(folder)
@@ -110,6 +112,7 @@ def Uncompress(userZip) :
         os.system(sevenZip + ' e -aot ' + extracted + userZip + ' -o' + extracted + userZip.replace('.7z', '') + password)
         CustomPrint('\nIf you see \'Everything is OK\' in above line then you can delete user zip file.')
         deleteUserZip = CustomInput('Delete ' + userZip + ' ? (default n) : ') or 'n'
+        CustomPrint('\a\nYour extracted \'' + userZip.replace('.7z','') + '\' folder is in extracted folder.\n','yellow')
         if(deleteUserZip.upper() == 'Y') : 
             DeleteUserZip(userZip)
         else : 
