@@ -127,6 +127,11 @@ def TakingOutMainFiles(userName) :
             protect.Compress(userName)
         else : 
             CustomPrint('\a\nYour whatsapp database along with other files is in ' + extracted + userName + ' folder.\n','yellow')
+            try : # Open in explorer.
+                if(isWindows) : 
+                    os.startfile(os.path.realpath(extracted + userName))
+                else : 
+                    os.system('xdg-open ' + os.path.realpath(extracted + userName))
 
     except Exception as e : 
         CustomPrint(e)
