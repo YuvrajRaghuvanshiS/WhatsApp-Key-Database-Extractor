@@ -38,7 +38,7 @@ def main() :
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
-    readInstruction = CustomInput('Please read above instructions carefully. Continue? (default y) : ') or 'y'
+    readInstruction = CustomInput('\n\aPlease read above instructions carefully \u2191 . Continue? (default y) : ','yellow') or 'y'
     if(readInstruction.upper() == 'Y') : 
         USBMode()
     else : 
@@ -73,7 +73,7 @@ def CheckJAVA() :
         return isJAVAInstalled
     else : 
         noJAVAContinue = CustomInput('It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'red') or 'c'
-        if(noJAVAContinue=='c') : 
+        if(noJAVAContinue.upper() == 'C') : 
             CustomPrint('Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'yellow')
             return isJAVAInstalled
         else : 

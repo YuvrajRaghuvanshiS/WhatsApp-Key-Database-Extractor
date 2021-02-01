@@ -1,10 +1,8 @@
 ================================================================================
 ===                                                                          ===
-===     Turn on USB debugging in android settings before getting started.    ===
-===                                                                          ===
 ===  xxxxx  PLEASE TAKE WHATSAPP CHAT BACKUP BEFORE GETTING STARTED.  xxxxx  ===
 ===                                                                          ===
-===       For that go to 'WhatsApp settings\Chat Settings\Chat Backup'       ===
+===    For that go to 'WhatsApp settings => Chat Settings => Chat Backup'    ===
 ===              here take a local bacakup. Prepare for Worst.               ===
 ===                                                                          ===
 ===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===
