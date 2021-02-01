@@ -47,7 +47,7 @@ def init() :
             Exit()
         return output[1].split()[0]
 
-    CustomPrint(output[0] + '\n')
+    CustomPrint(output[0]); print('\n')
     if deviceToConnect is None : 
         for device in output[1:] : 
             name = adb + ' -s ' + device.split()[0] + ' shell getprop ro.product.model'
@@ -68,5 +68,6 @@ def init() :
     return deviceToConnect.split()[0]
 
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
     quit()

@@ -58,7 +58,8 @@ def CleanTmp() :
             CustomPrint('Cleaning up tmp folder...','yellow')
             shutil.rmtree(tmp)
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
     os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     quit()
 
@@ -102,11 +103,11 @@ def ShowBanner() :
     try : 
         banner = open(banner_path,'r')
         banner_content = banner.read()
-        CustomPrint(banner_content, 'green', ['bold'])
+        CustomPrint(banner_content, 'green', ['bold'], False)
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'], False)
     
 def TakingOutMainFiles(userName) : 
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint('Folder ' + extracted + 'already exists.','yellow')
@@ -125,10 +126,12 @@ def TakingOutMainFiles(userName) :
         CustomPrint('You should not leave these extracted database and other files hanging in folder, it is very insecure.')
         createArchive = CustomInput('Would you like to create a password protected archive? (default y) : ') or 'y'
         if(createArchive.upper() == 'Y') : 
-            CustomPrint('\nNow an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.','yellow')
+            print('\n')
+            CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.','yellow')
             protect.Compress(userName)
         else : 
-            CustomPrint('\a\nYour whatsapp database along with other files is in ' + extracted + userName + ' folder.\n','yellow')
+            print('\n')
+            CustomPrint('\aYour whatsapp database along with other files is in ' + extracted + userName + ' folder.','yellow'); print('\n')
             try : # Open in explorer.
                 if(isWindows) : 
                     os.startfile(os.path.realpath(extracted + userName))

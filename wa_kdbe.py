@@ -37,8 +37,8 @@ def main() :
     CheckBinIfWindows()
     ShowBanner()
     global isJAVAInstalled
-    isJAVAInstalled = CheckJAVA()
-    readInstruction = CustomInput('\n\aPlease read above instructions carefully \u2191 . Continue? (default y) : ','yellow') or 'y'
+    isJAVAInstalled = CheckJAVA(); print('\n')
+    readInstruction = CustomInput('\aPlease read above instructions carefully \u2191 . Continue? (default y) : ','yellow') or 'y'
     if(readInstruction.upper() == 'Y') : 
         USBMode()
     else : 
@@ -80,7 +80,8 @@ def CheckJAVA() :
             Exit()
 
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
     os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     quit()
 
@@ -97,8 +98,8 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     UninstallWhatsApp(SDKVersion)
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
-    ReinstallWhatsApp()
-    CustomPrint('\a\nOur work with device has finished, it is safe to remove it now.\n', 'yellow')
+    ReinstallWhatsApp(); print('\n')
+    CustomPrint('\aOur work with device has finished, it is safe to remove it now.', 'yellow'); print('\n')
     ExtractAB(isJAVAInstalled)
 
 def ReinstallWhatsApp():
@@ -114,16 +115,16 @@ def ShowBanner() :
     try : 
         banner = open(banner_path,'r')
         banner_content = banner.read()
-        CustomPrint(banner_content, 'green', ['bold'])
+        CustomPrint(banner_content, 'green', ['bold'], False)
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'], False)
     intro_path = 'non_essentials/intro.txt'
     try : 
         intro = open(intro_path,'r')
         intro_content = intro.read()
-        CustomPrint(intro_content, 'green', ['bold'])
+        CustomPrint(intro_content, 'green', ['bold'], False)
         intro.close()
     except Exception as e : 
         CustomPrint(e)

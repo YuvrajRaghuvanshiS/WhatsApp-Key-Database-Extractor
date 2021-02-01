@@ -160,6 +160,7 @@ See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Databas
 * ![Status](https://img.shields.io/badge/Status-Done-success) Zip extracted folder with password.
 * ![Status](https://img.shields.io/badge/Status-Removed-red) Command line arguments
 * ![Status](https://img.shields.io/badge/Status-Done-sucess) ADB Devices menu.
+* ![Status](https://img.shields.io/badge/Status-Done-sucess) Implement datetime.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
