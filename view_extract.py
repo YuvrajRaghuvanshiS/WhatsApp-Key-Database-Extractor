@@ -108,7 +108,7 @@ def ShowBanner() :
     CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'])
     
 def TakingOutMainFiles(userName) : 
-    os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.')
+    os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.', 'yellow')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
         bin = '' if(isLinux) else 'bin\\'
@@ -117,7 +117,6 @@ def TakingOutMainFiles(userName) :
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/wa.db') ; os.replace('tmp/apps/com.whatsapp/db/wa.db', extracted + userName + '/wa.db')
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/axolotl.db') ; os.replace('tmp/apps/com.whatsapp/db/axolotl.db' , extracted + userName + '/axolotl.db')
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' + tmp + ' apps/com.whatsapp/db/chatsettings.db') ; os.replace('tmp/apps/com.whatsapp/db/chatsettings.db', extracted + userName + '/chatsettings.db')
-        # Reset bin here...
         
         CleanTmp()
         
@@ -127,7 +126,7 @@ def TakingOutMainFiles(userName) :
             CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.')
             protect.Compress(userName)
         else : 
-            CustomPrint('Your whatsapp database along with other files is in ' + extracted + userName + ' folder.')
+            CustomPrint('\a\nYour whatsapp database along with other files is in ' + extracted + userName + ' folder.\n','yellow')
 
     except Exception as e : 
         CustomPrint(e)

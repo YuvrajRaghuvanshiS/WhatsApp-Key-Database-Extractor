@@ -47,7 +47,7 @@ def main() :
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion > 11) else os.system(adb + ' shell am kill com.whatsapp')
     CustomPrint('Backing up WhatsApp ' + versionName + ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
-    os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint('Folder ' + tmp + ' already exists.')
+    os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint('Folder ' + tmp + ' already exists.', 'yellow')
     os.system(adb + ' pull ' + WhatsAppapkPath + ' ' + tmp + 'WhatsAppbackup.apk')
     CustomPrint('Apk backup complete.')
 
@@ -98,7 +98,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
-    CustomPrint('Our work with device has finished, it is safe to remove it now.', 'yellow')
+    CustomPrint('\a\nOur work with device has finished, it is safe to remove it now.\n', 'yellow')
     ExtractAB(isJAVAInstalled)
 
 def ReinstallWhatsApp():
