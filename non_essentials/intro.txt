@@ -3,7 +3,7 @@
 ===  xxxxx  PLEASE TAKE WHATSAPP CHAT BACKUP BEFORE GETTING STARTED.  xxxxx  ===
 ===                                                                          ===
 ===    For that go to 'WhatsApp settings => Chat Settings => Chat Backup'    ===
-===              here take a local bacakup. Prepare for Worst.               ===
+===              here take a local backup. Prepare for Worst.                ===
 ===                                                                          ===
 ===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===
 ===   unencrypted file) and your 'key' file from '\data\data\com.whatsapp'   ===

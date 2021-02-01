@@ -132,6 +132,7 @@ def TakingOutMainFiles(userName) :
         else : 
             print('\n')
             CustomPrint('\aYour whatsapp database along with other files is in ' + extracted + userName + ' folder.','yellow'); print('\n')
+            CustomInput('Press any key to continue.')
             try : # Open in explorer.
                 if(isWindows) : 
                     os.startfile(os.path.realpath(extracted + userName))

@@ -49,9 +49,9 @@ def Compress(userFolder) :
         CustomPrint('If you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'; print('\n')
         CustomPrint('\aYour \'' + userFolder + '.7z\' file is in extracted folder. Password is : ' + password.replace(' -p',''), 'yellow'); print('\n')
+        CustomInput('Press any key to continue.')
         if(deleteUserFolder.upper() == 'Y') : 
             DeleteUserFolder(userFolder)
-            # TODO : Open in explorer after compressing and decompressing.
         else : 
             Exit()
 
@@ -123,6 +123,7 @@ def Uncompress(userZip) :
         CustomPrint('If you see \'Everything is OK\' in above line then you can delete user zip file.')
         deleteUserZip = CustomInput('Delete ' + userZip + ' ? (default n) : ') or 'n'; print('\n')
         CustomPrint('\aYour extracted \'' + userZip.replace('.7z','') + '\' folder is in extracted folder.','yellow'); print('\n')
+        CustomInput('Press any key to continue.')
         if(deleteUserZip.upper() == 'Y') : 
             DeleteUserZip(userZip)
         else : 
