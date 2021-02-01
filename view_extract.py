@@ -132,6 +132,9 @@ def TakingOutMainFiles(userName) :
                     os.startfile(os.path.realpath(extracted + userName))
                 else : 
                     os.system('xdg-open ' + os.path.realpath(extracted + userName))
+            
+            except Exception as e : 
+                pass
 
     except Exception as e : 
         CustomPrint(e)
