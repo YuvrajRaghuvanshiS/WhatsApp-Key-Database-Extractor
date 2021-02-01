@@ -98,7 +98,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName) :
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
-    CustomPrint('Our work with device has finished, it is safe to remove it now.')
+    CustomPrint('Our work with device has finished, it is safe to remove it now.', 'yellow')
     ExtractAB(isJAVAInstalled)
 
 def ReinstallWhatsApp():
@@ -118,7 +118,7 @@ def ShowBanner() :
         banner.close()
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ============\n', 'green', ['bold'])
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'])
     intro_path = 'non_essentials/intro.txt'
     try : 
         intro = open(intro_path,'r')

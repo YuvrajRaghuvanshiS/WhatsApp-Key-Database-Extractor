@@ -34,7 +34,7 @@ def init() :
         output = [x.strip() for x in output.split('\n') if len(x.strip()) > 0]
 
     if(len(output) == 1) : 
-        CustomPrint('Could not find any connected device. ', 'red')
+        CustomPrint('Could not find any connected device. Is USB Debugging on?', 'red')
         Exit()
 
     deviceToConnect = None; i = 1
