@@ -67,6 +67,7 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
         CustomPrint('Can not detect JAVA on system.')
         # move whatsapp.ab from tmp to user specified folder.
         userName = CustomInput('Enter a name for this user. : ')
+        os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint('Folder ' + extracted + 'already exists.','yellow')
         os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder ' + extracted + userName + ' exists.')
         os.rename(tmp + 'whatsapp.ab', extracted + userName + '/whatsapp.ab')
         CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
@@ -108,6 +109,7 @@ def ShowBanner() :
     CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'])
     
 def TakingOutMainFiles(userName) : 
+    os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint('Folder ' + extracted + 'already exists.','yellow')
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.', 'yellow')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
