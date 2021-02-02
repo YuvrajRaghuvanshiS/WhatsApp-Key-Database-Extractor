@@ -8,11 +8,6 @@ from packaging import version
 from CustomCI import CustomPrint
 
 # Global Variables
-SDKVersion = ''
-WhatsAppapkPath = ''
-SDPath = '' # Internal storage.
-versionName = ''
-contentLength = '' # To check if APK even exists at a given path to download!
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
