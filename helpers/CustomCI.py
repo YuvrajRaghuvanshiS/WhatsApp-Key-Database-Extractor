@@ -9,6 +9,7 @@ def CustomInput(textToInput, color = 'green', attr=[], getTime = True) :
 
 def CustomPrint(textToPrint, color = 'green', attr=[], getTime = True) : 
     time = GetTime() if getTime else ''
+    textToPrint = str(textToPrint)
     cprint(time + textToPrint, color, attrs=attr)
 
 def GetTime() : 
