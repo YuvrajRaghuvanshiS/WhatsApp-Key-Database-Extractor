@@ -95,7 +95,7 @@ git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.
 ```
 2. Get python requirements
 ```python
-python3 -m pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 3. Install Dependencies (for linux and OSX)
 ```bash
@@ -105,13 +105,6 @@ sudo ./bin/linuxdependencies.sh
 4. Run `wa_kdbe.py`
 ```python
 python3 wa_kdbe.py
-```
-4.1 Enter `device serial id`
-```
-List of devices attached 
-0123a4b5678	device
-Choose device from "List of devices attached" : __________
-(Copy paste your device serial id from above, i.e. 0123a4b5678)
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
@@ -143,17 +136,12 @@ python restore.py
 
 ### Troubleshooting
 
-```bash
-List of devices attached 
-0123a4b5678	device
-emulator-5554 unauthorized
-```
-* Choose device from "List of devices attached" : 0123a4b5678
 * If list is empty close terminal, remove and replug the device, and re-run the script. [Read More](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
-* If you have never used USB Debugging before, you may also need to verify the fingerprint.  
+* If you have never used USB Debugging before, you may also need to verify the fingerprint by ticking the checkbox and tapping 'allow' on device popup.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
 * WhatsApp crashing? Run `python3 restore_whatsapp.py`. Or "clear data/storage" / uninstall and reinstall from Play Store.
+* In MIUI, `Failure [INSTALL_FAILED_USER_RESTRICTED: Install canceled by user]` occurs during installation of LegacyWhatsapp.apk, fix it by [allowing install via adb](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/16#issuecomment-768927639)
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
@@ -164,6 +152,8 @@ See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Databas
 #### ToDo
 * ![Status](https://img.shields.io/badge/Status-Done-success) Zip extracted folder with password.
 * ![Status](https://img.shields.io/badge/Status-Removed-red) Command line arguments
+* ![Status](https://img.shields.io/badge/Status-Done-sucess) ADB Devices menu.
+* ![Status](https://img.shields.io/badge/Status-Done-sucess) Implement datetime.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 

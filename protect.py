@@ -1,7 +1,8 @@
-from helpers.CustomCI import CustomInput, CustomPrint
 import os
 import platform
 import shutil
+
+from helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False
@@ -21,13 +22,13 @@ def main() :
     isCompressing = CustomInput('Are you (C)ompressing or (D)ecompressing? : ')
     while(True) : 
         if(isCompressing.upper() == 'C') : 
-            ListUserFolders()
-            userFolder = CustomInput('\nEnter a name of folder from above (case sensitive) : ')
+            ListUserFolders(); print('\n')
+            userFolder = CustomInput('Enter a name of folder from above (case sensitive) : ')
             Compress(userFolder)
             break
         elif(isCompressing.upper() == 'D') : 
-            ListUserFiles()
-            userZip = CustomInput('\nEnter a name of file from above (case sensitive) : ')
+            ListUserFiles(); print('\n')
+            userZip = CustomInput('Enter a name of file from above (case sensitive) : ')
             Uncompress(userZip)
             break
         else : 
@@ -44,9 +45,11 @@ def Compress(userFolder) :
         password = CustomInput('Choose a password for zip : ')
         if(password) : 
             password = ' -p' + password 
-        os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password)
-        CustomPrint('\nIf you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
-        deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'
+        os.system(sevenZip + ' a -t7z -mhe ' + extracted + userFolder + ' ' + extracted + userFolder + '/* ' + password); print('\n')
+        CustomPrint('If you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
+        deleteUserFolder = CustomInput('Delete ' + userFolder + ' folder? (default y) : ') or 'y'; print('\n')
+        CustomPrint('\aYour \'' + userFolder + '.7z\' file is in extracted folder. Password is : ' + password.replace(' -p',''), 'yellow'); print('\n')
+        CustomInput('Press any key to continue.')
         if(deleteUserFolder.upper() == 'Y') : 
             DeleteUserFolder(userFolder)
         else : 
@@ -71,24 +74,34 @@ def DeleteUserZip(userZip) :
     Exit()
 
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
+    try : # Open in explorer.
+        if(isWindows) : 
+            os.startfile(os.path.realpath(extracted))
+        else : 
+            os.system('xdg-open ' + os.path.realpath(extracted))
+    except Exception as e : 
+        pass
     quit()
 
 def ListUserFiles() : 
-    CustomPrint('\nAvailable user files in extracted directory.\n')
+    print('\n')
+    CustomPrint('Available user files in extracted directory.'); print('\n')
     allFiles = next(os.walk(extracted))[2]
     if(len(allFiles) == 1 and os.path.isfile(extracted + '.placeholder')) : 
-        CustomPrint('No user files found in ' + extracted + ' folder.')
+        CustomPrint('No user files found in ' + extracted + ' folder.','red')
         Exit()
     for file in allFiles : 
         if(file != '.placeholder') : 
             CustomPrint(file)
 
 def ListUserFolders() : 
-    CustomPrint('\nAvailable user folders in extracted directory.\n')
+    print('\n')
+    CustomPrint('Available user folders in extracted directory.'); print('\n')
     allFolders = next(os.walk(extracted))[1]
     if(len(allFolders)==0) : 
-        CustomPrint('No folders found in ' + extracted + ' folder.')
+        CustomPrint('No folders found in ' + extracted + ' folder.','red')
         Exit()
     for folder in allFolders : 
         CustomPrint(folder)
@@ -106,9 +119,11 @@ def Uncompress(userZip) :
         password = CustomInput('Enter password, leave empty for none : ')
         if(password) : 
             password = ' -p' + password
-        os.system(sevenZip + ' e -aot ' + extracted + userZip + ' -o' + extracted + userZip.replace('.7z', '') + password)
-        CustomPrint('\nIf you see \'Everything is OK\' in above line then you can delete user zip file.')
-        deleteUserZip = CustomInput('Delete ' + userZip + ' ? (default n) : ') or 'n'
+        os.system(sevenZip + ' e -aot ' + extracted + userZip + ' -o' + extracted + userZip.replace('.7z', '') + password); print('\n')
+        CustomPrint('If you see \'Everything is OK\' in above line then you can delete user zip file.')
+        deleteUserZip = CustomInput('Delete ' + userZip + ' ? (default n) : ') or 'n'; print('\n')
+        CustomPrint('\aYour extracted \'' + userZip.replace('.7z','') + '\' folder is in extracted folder.','yellow'); print('\n')
+        CustomInput('Press any key to continue.')
         if(deleteUserZip.upper() == 'Y') : 
             DeleteUserZip(userZip)
         else : 

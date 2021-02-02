@@ -1,7 +1,8 @@
-from helpers.CustomCI import CustomPrint
-import helpers.ADBDeviceSerialId as deviceId
-import platform
 import os
+import platform
+
+import helpers.ADBDeviceSerialId as deviceId
+from helpers.CustomCI import CustomPrint
 
 # Detect OS
 isWindows = False
@@ -28,4 +29,6 @@ def ReinstallWhatsApp(ADBSerialId):
 
 if __name__ == "__main__":
     ADBSerialId = deviceId.init()
+    if(not ADBSerialId) : 
+        quit()
     ReinstallWhatsApp(ADBSerialId)

@@ -1,6 +1,9 @@
-from CustomCI import CustomInput
 import os
 import platform
+import subprocess as sp
+
+from CustomCI import CustomInput, CustomPrint
+
 
 def init() : 
     # Detect OS
@@ -16,9 +19,55 @@ def init() :
     adb = rootDir + '\\bin\\adb.exe'
     if(isLinux) : 
         adb = 'adb'
-
-    os.system(adb + ' kill-server')
+    
+    cmd = adb + ' devices'
+    os.system(adb + ' kill-server') # Kill server before getting list to avoid daemon texts.
     os.system(adb + ' start-server')
-    os.system(adb + ' devices')
-    ADBSerialId = CustomInput('Choose device from "List of devices attached"\nFor example : 7835fd84543/emulator-5554 : ')
-    return ADBSerialId
+    proc = sp.Popen(cmd.split(),stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE, shell=False)
+    output, error = proc.communicate(); output = output.decode('utf-8'); error = error.decode('utf-8')
+
+    if len(output) == 0 or error : 
+        output = None
+        CustomPrint(error, 'red')
+        Exit()
+    else : 
+        output = [x.strip() for x in output.split('\n') if len(x.strip()) > 0]
+
+    if(len(output) == 1) : 
+        CustomPrint('Could not find any connected device. Is USB Debugging on?', 'red')
+        return ''
+        
+    deviceToConnect = None; i = 1
+    if(len(output) == 2) : 
+        if(output[1].split()[1] == 'offline') : 
+            CustomPrint('Device is offline, try turning off USB debugging and turn on again.', 'yellow')
+            Exit()
+        if(output[1].split()[1] == 'unauthorized') : 
+            CustomPrint('Device unauthorized. Please check the confirmation dialog on your device.', 'red')
+            Exit()
+        return output[1].split()[0]
+
+    CustomPrint(output[0]); print('\n')
+    if deviceToConnect is None : 
+        for device in output[1:] : 
+            name = adb + ' -s ' + device.split()[0] + ' shell getprop ro.product.model'
+            CustomPrint(str(i) + '. ' + device.split()[0] + '  ' + device.split()[1] + '  ' + sp.getoutput(name).strip()) ; i += 1
+
+    while deviceToConnect is None : 
+        deviceIndex = int(CustomInput('Enter device number (for ex : 2) : '))
+        if deviceIndex <= 0 or deviceIndex + 1 > len(output) : 
+            continue
+        deviceToConnect = output[deviceIndex]
+
+    if(deviceToConnect.split()[1] == 'offline') : 
+        CustomPrint('Device is offline, try turning off USB debugging and turn on again.', 'yellow')
+        Exit()
+    if(deviceToConnect.split()[1] == 'unauthorized') : 
+        CustomPrint('Device unauthorized. Please check the confirmation dialog on your device.', 'red')
+        Exit()
+    return deviceToConnect.split()[0]
+
+def Exit():
+    print('\n')
+    CustomPrint('Exiting...')
+    quit()
