@@ -1,7 +1,9 @@
+import argparse
 import os
 import platform
 import re
 import subprocess
+import time
 
 import helpers.ADBDeviceSerialId as deviceId
 from helpers.CustomCI import CustomInput, CustomPrint
@@ -19,19 +21,6 @@ if platform.system() == 'Linux' : isLinux = True
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
-ADBSerialId = deviceId.init()
-if(not ADBSerialId) : 
-    quit()
-# Global command line helpers
-adb = 'bin\\adb.exe -s ' + ADBSerialId
-tmp = 'tmp/'
-grep = 'bin\\grep.exe'
-curl = 'bin\\curl.exe'
-helpers = 'helpers/'
-if(isLinux) : 
-    adb = 'adb -s ' + ADBSerialId
-    grep = 'grep'
-    curl = 'curl'
 
 def main() :
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -88,13 +77,24 @@ def Exit():
 
 def InstallLegacy(SDKVersion):
     CustomPrint('Installing legacy WhatsApp V2.11.431, hold tight now.')
-    CustomPrint('SDK Version is : ' + str(SDKVersion))
-    os.system(adb + ' install -r -d '+ helpers + 'LegacyWhatsApp.apk')
+    if(SDKVersion >= 17) :
+        os.system(adb + ' install -r -d ' + helpers + 'LegacyWhatsApp.apk')
+    else :
+        os.system(adb + ' install -r ' + helpers + 'LegacyWhatsApp.apk')
     CustomPrint('Installation Complete.')
 
 def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath) : 
     BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
     UninstallWhatsApp(SDKVersion)
+    # Reboot here.
+    if(isAllowReboot) : 
+        print('\n'); CustomPrint('Rebooting device, please wait.','yellow')
+        os.system(adb + ' reboot')
+        while(subprocess.getoutput(adb + ' get-state') != 'device') : 
+            CustomPrint('Waiting for device...')
+            time.sleep(5)
+        CustomInput('Press any key after unlocking device.')
+
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp(); print('\n')
@@ -148,4 +148,27 @@ def USBMode() :
         RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--allow-reboot', action = 'store_true', help = 'Allow reboot of device before installation of LegacyWhatsApp.apk to prevent some issues like [INSTALL_FAILED_VERSION_DOWNGRADE]')
+    args = parser.parse_args()
+    # args = parser.parse_args(['--allow-reboot']) commit
+
+    isAllowReboot = args.allow_reboot
+
+    ADBSerialId = deviceId.init()
+    if(not ADBSerialId) : 
+        quit()
+
+    # Global command line helpers
+    adb = 'bin\\adb.exe -s ' + ADBSerialId
+    tmp = 'tmp/'
+    grep = 'bin\\grep.exe'
+    curl = 'bin\\curl.exe'
+    helpers = 'helpers/'
+    if(isLinux) : 
+        adb = 'adb -s ' + ADBSerialId
+        grep = 'grep'
+        curl = 'curl'
+
     main()
