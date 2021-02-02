@@ -95,7 +95,7 @@ git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.
 ```
 2. Get python requirements
 ```python
-python3 -m pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 3. Install Dependencies (for linux and OSX)
 ```bash
@@ -105,14 +105,6 @@ sudo ./bin/linuxdependencies.sh
 4. Run `wa_kdbe.py`
 ```python
 python3 wa_kdbe.py
-```
-4.1 Select `device`
-```
-List of devices attached
-
-1. 01234ab56c7  device  Redmi 5 Plus
-2. ab0123cd  device  Redmi Note 9 Pro
-Enter device number (for ex : 2) : _
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
