@@ -4,6 +4,7 @@ import re
 import shutil
 import subprocess
 
+import helpers.ADBDeviceSerialId as deviceId
 import protect
 from helpers.CustomCI import CustomInput, CustomPrint
 
@@ -37,7 +38,9 @@ def main() :
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
-    ExtractAB(isJAVAInstalled, callingFromOtherModule = False)
+    ADBSerialId = deviceId.init()
+    sdPath = subprocess.getoutput(adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
+    ExtractAB(isJAVAInstalled,sdPath = sdPath, ADBSerialId = ADBSerialId, callingFromOtherModule = False)
 
 def CheckJAVA() : 
     JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output('java -version'.split(), stderr=subprocess.STDOUT))).group(1)
@@ -72,6 +75,7 @@ def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherMo
         os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder ' + extracted + userName + ' exists.')
         os.rename(tmp + 'whatsapp.ab', extracted + userName + '/whatsapp.ab')
         CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
+        CleanTmp()
         Exit()
     if(not callingFromOtherModule) : 
         if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper() == 'Y') : 
