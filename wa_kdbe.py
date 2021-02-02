@@ -34,7 +34,7 @@ if(isLinux) :
 
 def main() :
     os.system('cls' if os.name == 'nt' else 'clear')
-    CheckBinIfWindows()
+    CheckBin()
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA(); print('\n')
@@ -59,8 +59,8 @@ def BackupWhatsAppDataasAb(SDKVersion):
         CustomPrint(e)
     CustomPrint('Done backing up data.')
 
-def CheckBinIfWindows() : 
-    if (isWindows and not os.path.isdir('bin')) : 
+def CheckBin() : 
+    if (not os.path.isdir('bin')) : 
         CustomPrint('I can not find bin folder, check again...', 'red')
         Exit()
     pass
