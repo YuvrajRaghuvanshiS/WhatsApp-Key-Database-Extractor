@@ -40,6 +40,7 @@
   * [Standalone Operations](#standalone-operations)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
+* [Limitations](#limitations)
 * [Contributing](#contributing)
 * [License](#license)
 * [Agreement](#agreement)
@@ -156,6 +157,10 @@ See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Databas
 * ![Status](https://img.shields.io/badge/Status-Done-sucess) Implement datetime.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
+## Limitations
+
+There always are limitations on how much we can make it work  and this is what allows us to keep going. Well no matter what I do sometimes this tool just won't work on some devices and if that's your case you can try [this fork of MarcoG3's WhatsDump](https://github.com/Tkd-Alex/WhatsDump) by [Alessandro Maggio](https://github.com/Tkd-Alex/).
 
 ## Contributing
 
