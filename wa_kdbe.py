@@ -20,7 +20,8 @@ appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
 ADBSerialId = deviceId.init()
-
+if(not ADBSerialId) : 
+    quit()
 # Global command line helpers
 adb = 'bin\\adb.exe -s ' + ADBSerialId
 tmp = 'tmp/'

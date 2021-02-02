@@ -29,4 +29,6 @@ def ReinstallWhatsApp(ADBSerialId):
 
 if __name__ == "__main__":
     ADBSerialId = deviceId.init()
+    if(not ADBSerialId) : 
+        quit()
     ReinstallWhatsApp(ADBSerialId)

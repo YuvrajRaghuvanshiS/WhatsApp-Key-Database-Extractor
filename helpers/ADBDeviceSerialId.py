@@ -35,8 +35,8 @@ def init() :
 
     if(len(output) == 1) : 
         CustomPrint('Could not find any connected device. Is USB Debugging on?', 'red')
-        Exit()
-
+        return ''
+        
     deviceToConnect = None; i = 1
     if(len(output) == 2) : 
         if(output[1].split()[1] == 'offline') : 

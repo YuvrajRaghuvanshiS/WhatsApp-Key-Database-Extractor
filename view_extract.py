@@ -37,10 +37,13 @@ def main() :
     os.system('cls' if os.name == 'nt' else 'clear')
     ShowBanner()
     global isJAVAInstalled
-    isJAVAInstalled = CheckJAVA()
+    isJAVAInstalled = CheckJAVA() 
     ADBSerialId = deviceId.init()
-    sdPath = subprocess.getoutput(adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
-    ExtractAB(isJAVAInstalled,sdPath = sdPath, ADBSerialId = ADBSerialId, callingFromOtherModule = False)
+    if(ADBSerialId) : 
+        sdPath = subprocess.getoutput(adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
+    else : 
+        sdPath = ''
+    ExtractAB(isJAVAInstalled, sdPath = sdPath, ADBSerialId = ADBSerialId, callingFromOtherModule = False)
 
 def CheckJAVA() : 
     JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output('java -version'.split(), stderr=subprocess.STDOUT))).group(1)
@@ -60,6 +63,7 @@ def CleanTmp() :
         if(os.path.isdir(tmp)) : 
             CustomPrint('Cleaning up tmp folder...','yellow')
             shutil.rmtree(tmp)
+
 def Exit():
     print('\n')
     CustomPrint('Exiting...')
@@ -79,10 +83,12 @@ def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherMo
         Exit()
     if(not callingFromOtherModule) : 
         if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper() == 'Y') : 
-            userName = CustomInput('Enter name for this user (same as before.) : ') or 'user'
+            ListUserFolders(); print('\n')
+            userName = CustomInput('Enter a name of folder from above (case sensitive) : ') or 'user'
             abPass = CustomInput('Enter same password which you entered on device when prompted earlier. : ')
             if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
                 try : 
+                    os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint('Folder ' + tmp + ' already exists.','yellow')
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
                     CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
                     TakingOutMainFiles(userName, sdPath, ADBSerialId)
@@ -102,6 +108,16 @@ def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherMo
         except Exception as e : 
             CustomPrint(e)
 
+def ListUserFolders() : 
+    print('\n')
+    CustomPrint('Available user folders in extracted directory.'); print('\n')
+    allFolders = next(os.walk(extracted))[1]
+    if(len(allFolders)==0) : 
+        CustomPrint('No folders found in ' + extracted + ' folder.','red')
+        Exit()
+    for folder in allFolders : 
+        CustomPrint(folder)
+
 def ShowBanner() : 
     banner_path = 'non_essentials/banner.txt'
     try : 
@@ -114,8 +130,8 @@ def ShowBanner() :
     CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'], False)
     
 def TakingOutMainFiles(userName, sdPath, ADBSerialId) : 
-    os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint('Folder ' + extracted + 'already exists.','yellow')
-    os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.', 'yellow')
+    os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint('Folder ' + extracted + ' already exists.','yellow')
+    os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder ' + extracted + userName + ' already exists.', 'yellow')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try : 
         bin = '' if(isLinux) else 'bin\\'
