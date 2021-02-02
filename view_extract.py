@@ -17,7 +17,7 @@ if platform.system() == 'Linux' : isLinux = True
 isJAVAInstalled = False
 
 # Global command line helpers
-adb = 'bin\\adb.exe'
+adb = 'bin\\adb.exe -s '
 tmp = 'tmp/'
 grep = 'bin\\grep.exe'
 curl = 'bin\\curl.exe'
@@ -26,7 +26,7 @@ bin = 'bin/'
 extracted = 'extracted/'
 tar = 'tar.exe'
 if(isLinux) : 
-    adb = 'adb'
+    adb = 'adb -s '
     grep = 'grep'
     curl = 'curl'
     tar = 'tar'
@@ -37,7 +37,7 @@ def main() :
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
-    ExtractAB(isJAVAInstalled, False)
+    ExtractAB(isJAVAInstalled, callingFromOtherModule = False)
 
 def CheckJAVA() : 
     JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output('java -version'.split(), stderr=subprocess.STDOUT))).group(1)
@@ -63,7 +63,7 @@ def Exit():
     os.system('bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     quit()
 
-def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
+def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherModule = True) :
     if not (isJAVAInstalled) : 
         CustomPrint('Can not detect JAVA on system.')
         # move whatsapp.ab from tmp to user specified folder.
@@ -74,14 +74,14 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
         CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
         Exit()
     if(not callingFromOtherModule) : 
-        if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper()=='y'.upper()) : 
+        if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper() == 'Y') : 
             userName = CustomInput('Enter name for this user (same as before.) : ') or 'user'
             abPass = CustomInput('Enter same password which you entered on device when prompted earlier. : ')
             if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
                 try : 
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
                     CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
-                    TakingOutMainFiles(userName)
+                    TakingOutMainFiles(userName, sdPath, ADBSerialId)
                 except Exception as e : 
                     CustomPrint(e)
             else : 
@@ -94,7 +94,7 @@ def ExtractAB(isJAVAInstalled, callingFromOtherModule = True) :
         try : 
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
             CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ')
-            TakingOutMainFiles(userName)
+            TakingOutMainFiles(userName, sdPath, ADBSerialId)
         except Exception as e : 
             CustomPrint(e)
 
@@ -109,7 +109,7 @@ def ShowBanner() :
         CustomPrint(e)
     CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n', 'green', ['bold'], False)
     
-def TakingOutMainFiles(userName) : 
+def TakingOutMainFiles(userName, sdPath, ADBSerialId) : 
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint('Folder ' + extracted + 'already exists.','yellow')
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder already exists.', 'yellow')
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
@@ -128,11 +128,17 @@ def TakingOutMainFiles(userName) :
         if(createArchive.upper() == 'Y') : 
             print('\n')
             CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \'un-archive\' and access these files you need to run \'python protect.py\' from root directory of this project.','yellow')
-            protect.Compress(userName)
+            protect.Compress(userName, sdPath, ADBSerialId)
         else : 
             print('\n')
             CustomPrint('\aYour whatsapp database along with other files is in ' + extracted + userName + ' folder.','yellow'); print('\n')
             CustomInput('Press any key to continue.')
+            # TODO issue #13 : Ask user to save to sdcard.
+            if(sdPath and ADBSerialId) : 
+                copyTosdCard = CustomInput('Copy msgstore.db file to phone? (y/n) default \'n\' : ') or 'n'
+                if(copyTosdCard.upper() == 'Y') : 
+                    os.system(adb + ADBSerialId + ' push ' + extracted + userName + '/msgstore.db ' + sdPath + '/msgstore.db')
+                    CustomPrint('Done copying msgstore.db to phone.')
             try : # Open in explorer.
                 if(isWindows) : 
                     os.startfile(os.path.realpath(extracted + userName))

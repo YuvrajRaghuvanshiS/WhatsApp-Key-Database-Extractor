@@ -93,14 +93,14 @@ def InstallLegacy(SDKVersion):
         os.system(adb + ' install -r '+ helpers + 'LegacyWhatsApp.apk')
     CustomPrint('Installation Complete.')
 
-def RealDeal(SDKVersion, WhatsAppapkPath, versionName) : 
+def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath) : 
     BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
     UninstallWhatsApp(SDKVersion)
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp(); print('\n')
     CustomPrint('\aOur work with device has finished, it is safe to remove it now.', 'yellow'); print('\n')
-    ExtractAB(isJAVAInstalled)
+    ExtractAB(isJAVAInstalled, sdPath = sdPath, ADBSerialId = ADBSerialId)
 
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
@@ -143,10 +143,10 @@ def UninstallWhatsApp(SDKVersion):
 def USBMode() : 
     if(isWindows) : 
         ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = WindowsUSB(ADBSerialId)
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
+        RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath) if ACReturnCode==1 else Exit()
     else : 
         ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath =  LinuxUSB(ADBSerialId)
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName) if ACReturnCode==1 else Exit()
+        RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath) if ACReturnCode==1 else Exit()
 
 if __name__ == "__main__":
     main()
