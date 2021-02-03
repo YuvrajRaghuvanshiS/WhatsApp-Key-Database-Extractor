@@ -78,7 +78,8 @@ def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherMo
         os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint('Folder ' + extracted + 'already exists.','yellow')
         os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)) else CustomPrint('Folder ' + extracted + userName + ' exists.')
         os.rename(tmp + 'whatsapp.ab', extracted + userName + '/whatsapp.ab')
-        CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Run view_extract.py after installing Java on system.')
+        CustomPrint('Moved whatsapp.ab to ' + extracted + userName + ' folder. Size : ' + str(os.path.getsize(extracted + userName + '/whatsapp.ab')) + ' bytes.')
+        CustomPrint('Run view_extract.py after installing Java on system.')
         CleanTmp()
         Exit()
     if(not callingFromOtherModule) : 
@@ -88,9 +89,10 @@ def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherMo
             abPass = CustomInput('Enter same password which you entered on device when prompted earlier. : ')
             if(os.path.isfile(extracted + userName + '/whatsapp.ab')) : 
                 try : 
+                    CustomPrint('Found whatsapp.ab in ' + extracted + userName + ' folder. Size : ' + str(os.path.getsize(extracted + userName + '/whatsapp.ab')) + ' bytes.')
                     os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint('Folder ' + tmp + ' already exists.','yellow')
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-                    CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ')
+                    CustomPrint('Successfully \'fluffed\' '+ extracted + userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
                     TakingOutMainFiles(userName, sdPath, ADBSerialId)
                 except Exception as e : 
                     CustomPrint(e)
@@ -98,12 +100,12 @@ def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherMo
                 CustomPrint('Could not find whatsapp.ab in ' + extracted + userName + ' folder, did you name your user properly?')
                 Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')) :
-        CustomPrint('Found whatsapp.ab in tmp folder. Continuing')
+        CustomPrint('Found whatsapp.ab in tmp folder. Continuing... Size : ' + str(os.path.getsize(tmp + '/whatsapp.ab')) + ' bytes.')
         userName = CustomInput('Enter a reference name for this user. : ') or 'user'
         abPass = CustomInput('Enter same password which you entered on device when prompted earlier. : ')
         try : 
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-            CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ')
+            CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
             TakingOutMainFiles(userName, sdPath, ADBSerialId)
         except Exception as e : 
             CustomPrint(e)
