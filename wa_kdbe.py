@@ -47,7 +47,7 @@ def BackupWhatsAppDataasAb(SDKVersion):
         os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >= 23) else os.system(adb + ' backup -f '+ tmp + 'whatsapp.ab -noapk com.whatsapp')
     except Exception as e : 
         CustomPrint(e)
-    CustomPrint('Done backing up data.')
+    CustomPrint('Done backing up data. Size : ' + str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
 
 def CheckBin() : 
     if (not os.path.isdir('bin')) : 
@@ -93,7 +93,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath) :
         while(subprocess.getoutput(adb + ' get-state') != 'device') : 
             CustomPrint('Waiting for device...')
             time.sleep(5)
-        CustomInput('Press any key after unlocking device.')
+        CustomInput('Press any key after unlocking device.', 'yellow')
 
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
