@@ -151,17 +151,19 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--allow-reboot', action = 'store_true', help = 'Allow reboot of device before installation of LegacyWhatsApp.apk to prevent some issues like [INSTALL_FAILED_VERSION_DOWNGRADE]')
+    parser.add_argument('--alternate-adb', action= 'store_true', help = 'Use adb v1.0.31 to try to fix 49 bytes backup file (549 in case of encrypted backup.)')
     args = parser.parse_args()
-    # args = parser.parse_args(['--allow-reboot']) commit
+    # args = parser.parse_args(['--alternate-adb']) 
 
     isAllowReboot = args.allow_reboot
+    isAlternateAdb = args.alternate_adb
 
     ADBSerialId = deviceId.init()
     if(not ADBSerialId) : 
         quit()
 
     # Global command line helpers
-    adb = 'bin\\adb.exe -s ' + ADBSerialId
+    adb = 'bin\\adb-1.0.31\\adb.exe -s ' + ADBSerialId if isAlternateAdb else 'bin\\adb.exe -s ' + ADBSerialId
     tmp = 'tmp/'
     grep = 'bin\\grep.exe'
     curl = 'bin\\curl.exe'
