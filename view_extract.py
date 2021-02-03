@@ -105,7 +105,7 @@ def ExtractAB(isJAVAInstalled, sdPath = '', ADBSerialId = '', callingFromOtherMo
         abPass = CustomInput('Enter same password which you entered on device when prompted earlier. : ')
         try : 
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-            CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
+            CustomPrint('Successfully \'fluffed\' '+ tmp + 'whatsapp.ab ' + tmp + 'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
             TakingOutMainFiles(userName, sdPath, ADBSerialId)
         except Exception as e : 
             CustomPrint(e)
