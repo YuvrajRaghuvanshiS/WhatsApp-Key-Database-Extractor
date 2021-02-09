@@ -152,10 +152,10 @@ python restore.py
 
 See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
 #### ToDo
-* ![Status](https://img.shields.io/badge/Status-Done-success) Zip extracted folder with password.
-* ![Status](https://img.shields.io/badge/Status-Removed-red) Command line arguments
-* ![Status](https://img.shields.io/badge/Status-Done-sucess) ADB Devices menu.
-* ![Status](https://img.shields.io/badge/Status-Done-sucess) Implement datetime.
+* ![Status](https://img.shields.io/badge/status-completed-success) Zip extracted folder with password.
+* ![Status](https://img.shields.io/badge/status-limited-teal) Command line arguments
+* ![Status](https://img.shields.io/badge/status-completed-sucess) ADB Devices menu.
+* ![Status](https://img.shields.io/badge/status-completed-sucess) Implement datetime.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
