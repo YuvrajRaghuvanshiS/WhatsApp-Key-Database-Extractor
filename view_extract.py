@@ -60,9 +60,9 @@ def CheckJAVA() :
             Exit()
 
 def CleanTmp() :
-        if(os.path.isdir(tmp)) : 
-            CustomPrint('Cleaning up tmp folder...','yellow')
-            shutil.rmtree(tmp)
+    if(os.path.isdir(tmp)) : 
+        CustomPrint('Cleaning up tmp folder...','yellow')
+        shutil.rmtree(tmp)
 
 def Exit():
     print('\n')
