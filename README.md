@@ -20,7 +20,7 @@
     <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
-  <h3 align="center">WhatsApp Key/DataBase Extractor</h3>
+  <h3 align="center">WhatsApp Key/DataBase Extractor <img src="https://badges.pufler.dev/updated/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor?color=black&logo=github"/> </h3>
 
   <p align="center">
     Extract key/msgstore.db from /data/data/com.whatsapp in android without root.
