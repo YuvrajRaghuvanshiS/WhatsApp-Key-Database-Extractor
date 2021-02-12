@@ -108,10 +108,16 @@ sudo ./bin/linuxdependencies.sh
 python3 wa_kdbe.py
 ```
 
+**Command Line Flags**
+
+| Flag            |               | Behaviour     |
+| -------------   | ------------- | ------------- |
+| --allow-reboot      | Optional      | Reboots device before installing Legacy WhatsApp |
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Standalone operations
-**These operations are standalone implementation of their defined task. One need to run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
+**These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
 1. Run `view_extract.py` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
 ```
