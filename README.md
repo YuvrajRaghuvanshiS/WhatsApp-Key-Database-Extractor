@@ -92,13 +92,13 @@ After [intallation](#installation) follow on screen instructions.
 
 1. Clone the repo
 ```bash
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
+git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
 2. Get python requirements
 ```python
 pip3 install -r requirements.txt
 ```
-3. Install Dependencies (for linux and OSX)
+3. Install dependencies (for linux and OSX)
 ```bash
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linuxdependencies.sh
@@ -116,10 +116,10 @@ python3 wa_kdbe.py
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Standalone operations
+### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `view_extract.py` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
+1. Run `view_extract.py` : To 'fluff' whatsapp.ab to whatsapp.tar and extract files.
 ```
 python3 view_extract.py
 ```
