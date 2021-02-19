@@ -161,6 +161,7 @@ See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Databas
 * ![Status](https://img.shields.io/badge/status-limited-black) Command line arguments
 * ![Status](https://img.shields.io/badge/status-completed-black) ADB Devices menu.
 * ![Status](https://img.shields.io/badge/status-completed-black) Implement datetime.
+* ![Status](https://img.shields.io/badge/status-beta-black) Backup over TCP.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
