@@ -99,13 +99,22 @@ pkg install python git
 ```python
 git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git
 ```
+3. Go into the tools folder
+```python
+cd WhatsApp-Key-Databse-Extractor/
+```
 
-3. Get dependencies II
+4. Get dependencies II
 ```python
 python helpers/termux_dependencies.py
 ```
 
-4. Run the tool
+4.2 optional, connect adb to your device
+```python
+adb connect localhost
+```
+
+5. Run the tool
 ```python
 python wa_kdbe.py
 ```
