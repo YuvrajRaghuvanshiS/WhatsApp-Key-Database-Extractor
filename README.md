@@ -89,18 +89,26 @@ After [installation](#installation-and-usage) follow on screen instructions.
 ### Installation and Usage 
 Note: run all the commands in Termux
 
-1. Gathering prerequsites
-`pkg update && pkg upgrade`
-`pkg install python git`
+1. Install prerequisites I
+```python
+pkg update && pkg upgrade
+pkg install python git
+```
 
 2. Clone the repo
-`git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git`
+```python
+git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git
+```
 
-3. Get Termux requirements
-`python tr.py`
+3. Get prerequisites II
+```python
+python termux_requirements.py
+```
 
 4. Run the tool
-`python wa_kdbe.py`
+```python
+python wa_kdbe.py
+```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
