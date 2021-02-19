@@ -89,12 +89,9 @@ After [intallation](#installation) follow on screen instructions.
 ### Installation and Usage 
 Note: run all the commands in Termux
 
-0. Gathering prerequsites
+1. Gathering prerequsites
 `pkg update && pkg upgrade`
 `pkg install python git`
-
-1. Connect adb to your phone
-`adb connect localhost`
 
 2. Clone the repo
 `git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git`
@@ -102,10 +99,7 @@ Note: run all the commands in Termux
 3. Get Termux requirements
 `python tr.py`
 
-4. Go into the new folder
-`cd WhatsApp-Key-Databse-Extractor/`
-
-5. Run `wa-kdbe.py`
+4. Run `wa-kdbe.py`
 `python wa-kdbe.py`
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
