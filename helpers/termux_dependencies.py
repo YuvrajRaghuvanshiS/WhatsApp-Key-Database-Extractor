@@ -5,7 +5,7 @@ def InstallTermuxDependencies() :
     CustomPrint("Installing dependencies...")
     CustomPrint("Updating Termux")
     os.system('pkg update')
-    ustomPrint("Allow storage permission for storing extracted whatsapp.ab in interal storage:")
+    CustomPrint("Allow storage permission for storing extracted whatsapp.ab in interal storage:")
     os.system('termux-setup-storage')
     CustomPrint("Done. Installing required dependencies...")
     os.system('pkg install curl grep tar proot wget termcolor -y')
