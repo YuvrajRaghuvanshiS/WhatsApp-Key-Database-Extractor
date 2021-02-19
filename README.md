@@ -35,8 +35,8 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
+  * [Prerequisites and preperation](#prerequisites-and-preperation)
+  * [Installation](#installation-and-usage)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -69,7 +69,7 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 
 Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
 For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local backup. Prepare for the worst.               
-After [intallation](#installation) follow on screen instructions.
+After [installation](#installation-and-usage) follow on screen instructions.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
@@ -99,8 +99,8 @@ Note: run all the commands in Termux
 3. Get Termux requirements
 `python tr.py`
 
-4. Run `wa-kdbe.py`
-`python wa-kdbe.py`
+4. Run the tool
+`python wa_kdbe.py`
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
