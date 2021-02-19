@@ -85,7 +85,6 @@ After [intallation](#installation) follow on screen instructions.
 * Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/packages/com.termux)
 
 Run the following commands in the Termux app:
-* Give Termux storage access: `termux-setup-storage`
 * Python 3.x & Git(to download): `pkg install python git` 
 * Update everything: `pkg update`
 
