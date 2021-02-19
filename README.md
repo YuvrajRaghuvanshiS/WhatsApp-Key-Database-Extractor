@@ -162,6 +162,7 @@ See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Databas
 * ![Status](https://img.shields.io/badge/status-completed-black) ADB Devices menu.
 * ![Status](https://img.shields.io/badge/status-completed-black) Implement datetime.
 * ![Status](https://img.shields.io/badge/status-beta-black) Backup over TCP.
+* ![Status](https://img.shields.io/badge/status-todo-black) [ScrCpy](https://github.com/Genymobile/scrcpy)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
