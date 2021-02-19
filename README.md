@@ -8,7 +8,10 @@
 
 ![Termux](https://img.shields.io/badge/Termux-Beta-red)
 
-# For this to work user first needs to run 'adb tcpip port' from computer which defeats the entire purpose. I was too late to notice that. This "Termux Edition" is no longer maintained!
+# Currently still in developing phase!
+# This "Termux Edition" is currently not maintained!
+
+# For this to work on Android devices with Android below version 11, the user first needs to run 'adb tcpip 5555' from their computer which defeats the entire purpose of "no computer" for android devices with android version < 11.
 
 <!-- PROJECT LOGO -->
 <br />
@@ -65,26 +68,36 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local bacakup. Prepare for Worst.               
+For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local bacakup. Prepare for the worst.               
 After [intallation](#installation) follow on screen instructions.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Prerequisites
 
-* Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/repository/browse/?fdid=com.termux)
+* USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
+     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer. 
+* Android device with Android 11 or higher with activated 'ADB over network' setting. Settings -> Developer Options -> ADB over network
+* OR an Android device with Android 4 to 10 (i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q) AND a PC with USB functionality and installed [Android Debug Bridge for PC](https://developer.android.com/studio/releases/platform-tools)
+  * Run the following commands in a terminal opened in the 'platform-tools' folder. Authorize on your phone when prompted:
+  * `adb devices`
+  * `adb tcpip 5555`
+* Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/packages/com.termux)
+
+Run the following commands in the Termux app:
 * Python 3.x : `pkg install python -y`
 * Proot : To make Java work `pkg install proot -y && proot login`
-* [Java](https://github.com/Hax4us/java/) : `apt update && ap install wget -y && wget https://raw.githubusercontent.com/Hax4us/java/master/installjava && sh installjava`
-* [ADB (Android Debug Bridge)](https://github.com/MasterDevX/Termux-ADB) Drivers : `apt update && apt install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh` 
-* USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
-     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer.  
-* Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
+* [Java](https://github.com/Hax4us/java/) : `pkg update && pkg install wget -y && wget https://raw.githubusercontent.com/Hax4us/java/master/installjava && sh installjava`
+* [ADB (Android Debug Bridge)](https://github.com/MasterDevX/Termux-ADB) Drivers : `pkg update && pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh`
+* Git : `pkg install git`
+
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Installation
+### Installation (Not working?)
+
+0. Connect adb to your phone. Run the following command in the Termux window: `adb connect localhost`
 
 1. Clone the repo
 ```
