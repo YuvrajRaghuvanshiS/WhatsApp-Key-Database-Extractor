@@ -99,7 +99,7 @@ Run the following commands in the Termux app:
 2. Clone the repo
 `git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git`
 
-3. Get Termux dependencies
+3. Get Termux requirements
 `python tr.py`
 
 4. Go into the new folder
