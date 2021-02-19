@@ -14,7 +14,7 @@ A clear and concise description of what the bug is.
 Steps to reproduce the behavior:
 1. run '..'
 2. Enter '..'
-4. See error
+3. See error
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
@@ -23,7 +23,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Terminal output**
-`Copy paste terminal output`
+```
+Copy paste terminal output
+```
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows 10]
