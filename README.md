@@ -89,7 +89,7 @@ After [installation](#installation-and-usage) follow on screen instructions.
 ### Installation and Usage 
 Note: run all the commands in Termux
 
-1. Install prerequisites I
+1. Get prerequisites I
 ```python
 pkg update && pkg upgrade
 pkg install python git
@@ -102,7 +102,7 @@ git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.
 
 3. Get prerequisites II
 ```python
-python termux_requirements.py
+python helpers/termux_dependencies.py
 ```
 
 4. Run the tool
