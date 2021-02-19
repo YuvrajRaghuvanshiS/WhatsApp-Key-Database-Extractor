@@ -79,6 +79,9 @@ After [intallation](#installation) follow on screen instructions.
      If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer. 
 * Android device with Android 11 or higher with activated 'ADB over network' setting. Settings -> Developer Options -> ADB over network
 * OR an Android device with Android 4 to 10 (i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q) AND a PC with USB functionality and installed [Android Debug Bridge for PC](https://developer.android.com/studio/releases/platform-tools)
+  * Run the following commands in a terminal opened in the 'platform-tools' folder. Authorize on your phone when prompted:
+  * `adb devices`
+  * `adb tcpip 5555`
 * Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/packages/com.termux)
 
 Run the following commands in the Termux app:
@@ -92,6 +95,8 @@ Run the following commands in the Termux app:
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Installation (Not working?)
+
+0. Connect adb to your phone. Run the following command in the Termux window: `adb connect localhost`
 
 1. Clone the repo
 ```
