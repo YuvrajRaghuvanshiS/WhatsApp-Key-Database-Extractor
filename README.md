@@ -68,53 +68,46 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local bacakup. Prepare for the worst.               
+For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local backup. Prepare for the worst.               
 After [intallation](#installation) follow on screen instructions.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Prerequisites
+### Prerequisites and preparation
 
 * USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
-     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer. 
+  * If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer. 
 * Android device with Android 11 or higher with activated 'ADB over network' setting. Settings -> Developer Options -> ADB over network
 * OR an Android device with Android 4 to 10 (i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q) AND a PC with USB functionality and installed [Android Debug Bridge for PC](https://developer.android.com/studio/releases/platform-tools)
   * Run the following commands in a terminal opened in the 'platform-tools' folder. Authorize on your phone when prompted:
-  * `adb devices`
-  * `adb tcpip 5555`
+   * `adb devices`
+   * `adb tcpip 5555`
 * Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/packages/com.termux)
 
 Run the following commands in the Termux app:
-* Python 3.x : `pkg install python -y`
-* Proot : To make Java work `pkg install proot -y && proot login`
-* [Java](https://github.com/Hax4us/java/) : `pkg update && pkg install wget -y && wget https://raw.githubusercontent.com/Hax4us/java/master/installjava && sh installjava`
-* [ADB (Android Debug Bridge)](https://github.com/MasterDevX/Termux-ADB) Drivers : `pkg update && pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh`
-* Git : `pkg install git`
-
-
+* Give Termux storage access: `termux-setup-storage`
+* Python 3.x & Git(to download): `pkg install python git` 
+* Update everything: `pkg update`
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Installation (Not working?)
+### Installation (run all the commands in Termux)
 
-0. Connect adb to your phone. Run the following command in the Termux window: `adb connect localhost`
+1. Connect adb to your phone
+`adb connect localhost`
 
-1. Clone the repo
-```
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Databse-Extractor
-```
-2. Get python requirements
-```python
-pip install -r requirements.txt
-```
-3. Get Termux dependencies (skip if already installed proot, adb, java etc.)
-```python
-python helpers/termux_dependencies.py
-```
-4. Run `wa-kdbe.py`
-```python
-python wa-kdbe.py
-```
+2. Clone the repo
+`git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git`
+
+3. Get Termux dependencies
+`python tr.py`
+
+4. Go into the new folder
+`cd WhatsApp-Key-Databse-Extractor/`
+
+5. Run `wa-kdbe.py`
+`python wa-kdbe.py`
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting
