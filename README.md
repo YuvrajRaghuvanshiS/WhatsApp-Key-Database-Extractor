@@ -88,7 +88,8 @@ Run the following commands in the Termux app:
 * Python 3.x : `pkg install python -y`
 * Proot : To make Java work `pkg install proot -y && proot login`
 * [Java](https://github.com/Hax4us/java/) : `pkg update && pkg install wget -y && wget https://raw.githubusercontent.com/Hax4us/java/master/installjava && sh installjava`
-* [ADB (Android Debug Bridge)](https://github.com/MasterDevX/Termux-ADB) Drivers : `pkg update && pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh`  
+* [ADB (Android Debug Bridge)](https://github.com/MasterDevX/Termux-ADB) Drivers : `pkg update && pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh`
+* Git : `pkg install git`
 
 
 
@@ -100,7 +101,7 @@ Run the following commands in the Termux app:
 
 1. Clone the repo
 ```
-wget https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor && cd WhatsApp-Key-Databse-Extractor
+git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Databse-Extractor
 ```
 2. Get python requirements
 ```python
