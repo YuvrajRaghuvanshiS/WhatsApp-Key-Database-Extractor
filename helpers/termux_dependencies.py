@@ -19,7 +19,6 @@ def InstallTermuxDependencies() :
     os.system('proot login')
     CustomPrint("Connecting ADB with local device:")
     os.system('adb connect localhost')
-    os.system('cd WhatsApp-Key-Databse-Extractor/')
     CustomPrint("Succesfully installed all dependencies.")
 
 InstallTermuxDependencies()
