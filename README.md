@@ -149,6 +149,15 @@ Contributions are what make the open source community such an amazing place to b
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
+## Credits
+Referenced dependencies and tools (big thank you to all of you!):
+
+* [Nikolay Elenkovs Android Backup Extractor, to convert and decompress the backup files](https://github.com/nelenkov/android-backup-extractor/releases)
+* [MasterDevXs ADB for Termux](https://github.com/MasterDevX/Termux-ADB)
+* [MasterDevXs Java for Termux](https://github.com/MasterDevX/Termux-Java)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
