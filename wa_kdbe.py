@@ -125,6 +125,9 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
                 'Rebooting device in TCP mode break the connection and won\'t work until explicitly turned on in device and/or in PC. Skipping...', 'yellow')
 
     InstallLegacy(SDKVersion)
+    # Before backup run app
+    os.system(adb + ' shell am start -n com.whatsapp/.Main')
+    time.sleep(5)
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
     print('\n')
@@ -199,12 +202,14 @@ if __name__ == "__main__":
     parser.add_argument(
         '--tcp-port', help='Port number to connect to. Default : 5555')
     args = parser.parse_args()
-    # args = parser.parse_args(['--allow-reboot --tcp-ip 192.168.43.130'.split())
+    #args = parser.parse_args('--allow-reboot --tcp-ip 192.168.43.130'.split())
 
     isAllowReboot = args.allow_reboot
     tcpIP = args.tcp_ip
     tcpPort = args.tcp_port
     if(tcpIP):
+        if(not tcpPort):
+            tcpPort = '5555'
         ADBSerialId = tcpDeviceId.init(tcpIP, tcpPort)
     else:
         ADBSerialId = deviceId.init()

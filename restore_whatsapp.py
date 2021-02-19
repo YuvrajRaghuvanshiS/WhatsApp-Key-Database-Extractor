@@ -46,6 +46,8 @@ if __name__ == "__main__":
     tcpIP = args.tcp_ip
     tcpPort = args.tcp_port
     if(tcpIP):
+        if(not tcpPort):
+            tcpPort = '5555'
         ADBSerialId = tcpDeviceId.init(tcpIP, tcpPort)
     else:
         ADBSerialId = deviceId.init()

@@ -22,9 +22,7 @@ def init(tcpIP, tcpPort):
     if(isLinux):
         adb = 'adb'
 
-    combo = tcpIP
-    if(tcpPort):
-        combo = tcpIP + ':' + tcpPort
+    combo = tcpIP + ':' + tcpPort
     cmd = adb + ' connect ' + combo
     os.system(adb + ' kill-server')
     os.system(adb + ' start-server')
