@@ -6,6 +6,7 @@ import subprocess
 import time
 
 import helpers.ADBDeviceSerialId as deviceId
+import helpers.TCPDeviceSerialId as tcpDeviceId
 from helpers.CustomCI import CustomInput, CustomPrint
 from helpers.LinuxUSB import LinuxUSB
 from helpers.WIndowsUSB import WindowsUSB
@@ -111,13 +112,17 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     UninstallWhatsApp(SDKVersion)
     # Reboot here.
     if(isAllowReboot):
-        print('\n')
-        CustomPrint('Rebooting device, please wait.', 'yellow')
-        os.system(adb + ' reboot')
-        while(subprocess.getoutput(adb + ' get-state') != 'device'):
-            CustomPrint('Waiting for device...')
-            time.sleep(5)
-        CustomInput('Press any key after unlocking device.', 'yellow')
+        if(not tcpIP):
+            print('\n')
+            CustomPrint('Rebooting device, please wait.', 'yellow')
+            os.system(adb + ' reboot')
+            while(subprocess.getoutput(adb + ' get-state') != 'device'):
+                CustomPrint('Waiting for device...')
+                time.sleep(5)
+            CustomInput('Press any key after unlocking device.', 'yellow')
+        else:
+            CustomPrint(
+                'Rebooting device in TCP mode break the connection and won\'t work until explicitly turned on in device and/or in PC. Skipping...', 'yellow')
 
     InstallLegacy(SDKVersion)
     BackupWhatsAppDataasAb(SDKVersion)
@@ -189,12 +194,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--allow-reboot', action='store_true',
                         help='Allow reboot of device before installation of LegacyWhatsApp.apk to prevent some issues like [INSTALL_FAILED_VERSION_DOWNGRADE]')
+    parser.add_argument(
+        '--tcp-ip', help='Connects to a remote device via TCP mode.')
+    parser.add_argument(
+        '--tcp-port', help='Port number to connect to. Default : 5555')
     args = parser.parse_args()
-    # args = parser.parse_args(['--allow-reboot']) commit
+    # args = parser.parse_args(['--allow-reboot --tcp-ip 192.168.43.130'.split())
 
     isAllowReboot = args.allow_reboot
-
-    ADBSerialId = deviceId.init()
+    tcpIP = args.tcp_ip
+    tcpPort = args.tcp_port
+    if(tcpIP):
+        ADBSerialId = tcpDeviceId.init(tcpIP, tcpPort)
+    else:
+        ADBSerialId = deviceId.init()
     if(not ADBSerialId):
         quit()
 
