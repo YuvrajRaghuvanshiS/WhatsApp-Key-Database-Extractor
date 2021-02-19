@@ -14,7 +14,7 @@ def InstallTermuxDependencies() :
         os.system('rm -r -f installjava') # Deleting any previous instance of installjava.
     except Exception as e : 
         pass
-    os.system('wget https://raw.githubusercontent.com/Hax4us/java/master/installjava && sh installjava')
+    os.system('wget https://raw.githubusercontent.com/MasterDevX/java/master/installjava && bash installjava')
     os.system('proot login')
     CustomPrint("Connecting ADB with local device:")
     os.system('adb connect localhost')
