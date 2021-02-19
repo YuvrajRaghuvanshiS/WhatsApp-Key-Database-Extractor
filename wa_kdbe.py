@@ -127,7 +127,8 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     InstallLegacy(SDKVersion)
     # Before backup run app
     os.system(adb + ' shell am start -n com.whatsapp/.Main')
-    time.sleep(5)
+    CustomInput(
+        '\aPress any key after running Legacy WhatsApp for a while.', 'yellow')
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
     print('\n')
