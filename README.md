@@ -109,9 +109,9 @@ cd WhatsApp-Key-Databse-Extractor/
 python helpers/termux_dependencies.py
 ```
 
-4.2 optional, connect adb to your device
+4.2 (optional, already happens in termux_dependencies.py) connect adb to your device and start proot
 ```python
-adb connect localhost
+adb connect localhost && proot login
 ```
 
 5. Run the tool
