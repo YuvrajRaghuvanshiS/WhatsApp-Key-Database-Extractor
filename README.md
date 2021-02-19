@@ -35,8 +35,8 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
+  * [Prerequisites and preperation](#prerequisites-and-preperation)
+  * [Installation](#installation-and-usage)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -68,53 +68,48 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local bacakup. Prepare for the worst.               
-After [intallation](#installation) follow on screen instructions.
+For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local backup. Prepare for the worst.               
+After [installation](#installation-and-usage) follow on screen instructions.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Prerequisites
+### Prerequisites and preparation
 
 * USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
-     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer. 
+  * If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer. 
 * Android device with Android 11 or higher with activated 'ADB over network' setting. Settings -> Developer Options -> ADB over network
 * OR an Android device with Android 4 to 10 (i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q) AND a PC with USB functionality and installed [Android Debug Bridge for PC](https://developer.android.com/studio/releases/platform-tools)
   * Run the following commands in a terminal opened in the 'platform-tools' folder. Authorize on your phone when prompted:
-  * `adb devices`
-  * `adb tcpip 5555`
+   * `adb devices`
+   * `adb tcpip 5555`
 * Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/packages/com.termux)
-
-Run the following commands in the Termux app:
-* Python 3.x : `pkg install python -y`
-* Proot : To make Java work `pkg install proot -y && proot login`
-* [Java](https://github.com/Hax4us/java/) : `pkg update && pkg install wget -y && wget https://raw.githubusercontent.com/Hax4us/java/master/installjava && sh installjava`
-* [ADB (Android Debug Bridge)](https://github.com/MasterDevX/Termux-ADB) Drivers : `pkg update && pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh`
-* Git : `pkg install git`
-
-
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Installation (Not working?)
+### Installation and Usage 
+Note: run all of the following commands in Termux
 
-0. Connect adb to your phone. Run the following command in the Termux window: `adb connect localhost`
-
-1. Clone the repo
-```
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Databse-Extractor
-```
-2. Get python requirements
+1. Get dependencies I
 ```python
-pip install -r requirements.txt
+pkg update && pkg upgrade
+pkg install python git
 ```
-3. Get Termux dependencies (skip if already installed proot, adb, java etc.)
+
+2. Clone the repo
+```python
+git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git
+```
+
+3. Get dependencies II
 ```python
 python helpers/termux_dependencies.py
 ```
-4. Run `wa-kdbe.py`
+
+4. Run the tool
 ```python
-python wa-kdbe.py
+python wa_kdbe.py
 ```
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Troubleshooting
@@ -123,7 +118,7 @@ python wa-kdbe.py
 * daemon not running. starting it now on port 5037 *
 * daemon started successfully *
 List of devices attached 
-0123a4b5678	device
+0123a4b5678 device
 emulator-5554 unauthorized
 ```
 * Choose device from "List of devices attached" : 0123a4b5678
@@ -177,4 +172,3 @@ Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extra
 
 [license-url]: https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/blob/master/LICENSE
 [product-screenshot]: https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/termux/helpers/banner.png
-
