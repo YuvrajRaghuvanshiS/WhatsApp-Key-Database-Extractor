@@ -84,13 +84,14 @@ After [intallation](#installation) follow on screen instructions.
    * `adb tcpip 5555`
 * Termux : Install from [Play Store](https://play.google.com/store/apps/details?id=com.termux) or [F-Droid](https://f-droid.org/packages/com.termux)
 
-Run the following commands in the Termux app:
-* Python 3.x & Git(to download): `pkg install python git` 
-* Update everything: `pkg update`
-
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Installation (run all the commands in Termux)
+### Installation and Usage 
+Note: run all the commands in Termux
+
+0. Gathering prerequsites
+`pkg update && pkg upgrade`
+`pkg install python git`
 
 1. Connect adb to your phone
 `adb connect localhost`
