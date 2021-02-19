@@ -20,7 +20,7 @@
     <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
-  <h3 align="center">WhatsApp Key/DataBase Extractor</h3>
+  <h3 align="center">WhatsApp Key/DataBase Extractor <img src="https://badges.pufler.dev/updated/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor?color=black&logo=github"/> </h3>
 
   <p align="center">
     Extract key/msgstore.db from /data/data/com.whatsapp in android without root.
@@ -40,6 +40,7 @@
   * [Standalone Operations](#standalone-operations)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
+* [Limitations](#limitations)
 * [Contributing](#contributing)
 * [License](#license)
 * [Agreement](#agreement)
@@ -52,7 +53,7 @@
 
 <!--[![Glimpse][product-screenshot]](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)-->
 
-This project is inspired by [EliteAndroidApps/WhatsApp-Key-DB-Extractor](https://github.com/EliteAndroidApps/WhatsApp-Key-DB-Extractor). Since Android v4.0+ Google has removed adb backup  and apps no longer supported being abcked up by "adb backup -f myApp.ab -apk com.foobar.app". However there is one catch in this scenario and that is some old version of many apps including WhatsApp support that to this day, and that's the idea...
+This project is inspired by [EliteAndroidApps/WhatsApp-Key-DB-Extractor](https://github.com/EliteAndroidApps/WhatsApp-Key-DB-Extractor). Since Android v4.0+ Google has removed adb backup and apps no longer supported being backed up by "adb backup -f myApp.ab -apk com.foobar.app". However there is one catch in this scenario and that is some old version of many apps including WhatsApp support that to this day, and that's the idea...
 
 The idea is to install "Legacy Version" of WhatsApp on you device via adb and use "adb backup"  to fetch files from "/data/data/com.whatsapp" folder which includes both the 'key' and 'msgstore.db' (non encrypted) file and after that restore current WhatsApp.
 
@@ -69,7 +70,7 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local bacakup. Prepare for Worst.               
+For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Prepare for Worst.               
 After [intallation](#installation) follow on screen instructions.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
@@ -80,8 +81,8 @@ After [intallation](#installation) follow on screen instructions.
 * [Python 3.x](https://www.python.org/downloads/)
 * [Java](https://www.java.com/en/download/)
 * [ADB Drivers](https://developer.android.com/studio/releases/platform-tools) 
-* USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
-     If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer.  
+* USB Debugging must be enabled on the target device. Settings &#8594; Developer Options &#8594; (Debugging) USB debugging  
+     If you cannot find Developer Options then please go to: Settings &#8594; About phone/device and tap the Build number multiple times until you're finally declared a developer.  
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
 
 
@@ -91,13 +92,13 @@ After [intallation](#installation) follow on screen instructions.
 
 1. Clone the repo
 ```bash
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
+git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
 2. Get python requirements
 ```python
 pip3 install -r requirements.txt
 ```
-3. Install Dependencies (for linux and OSX)
+3. Install dependencies (for linux and OSX)
 ```bash
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linuxdependencies.sh
@@ -107,30 +108,35 @@ sudo ./bin/linuxdependencies.sh
 python3 wa_kdbe.py
 ```
 
+**Command Line Flags**
+
+| Flag            |               | Behaviour     |
+| -------------   | ------------- | ------------- |
+| --allow-reboot      | Optional      | Reboots device before installing Legacy WhatsApp |
+| --tcp-ip      | Optional      | Connects to a remote device via TCP mode. |
+| --tcp-port      | Optional      | Port number to connect to. Default : 5555 |
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Standalone operations
-<details><summary>Click to expand</summary>These operations are standalone implementation of their defined task. One need to run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.
+### Standalone Operations
+**These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `view_extract.py` : To 'Fluff' whatsapp.ab to whatsapp.tar and extract files.
+1. Run `view_extract.py` : To 'fluff' whatsapp.ab to whatsapp.tar and extract files.
 ```
-python view_extract.py
-
+python3 view_extract.py
+```
 IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
-```
 
 2. Run `protect.py` : To compress/decompress user folder with(out) password for safekeeping.
 ```
-python protect.py
-
+python3 protect.py
+```
 IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is reference user name you entered earlier.
-```
 
-3. Run `restore.py` : To reinstall WhatsApp on device.
+3. Run `restore_whatsapp.py` : To reinstall WhatsApp on device.
 ```
-python restore.py
+python3 restore_whatsapp.py
 ```
-</details>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
@@ -151,12 +157,17 @@ python restore.py
 
 See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
 #### ToDo
-* ![Status](https://img.shields.io/badge/Status-Done-success) Zip extracted folder with password.
-* ![Status](https://img.shields.io/badge/Status-Removed-red) Command line arguments
-* ![Status](https://img.shields.io/badge/Status-Done-sucess) ADB Devices menu.
-* ![Status](https://img.shields.io/badge/Status-Done-sucess) Implement datetime.
+* ![Status](https://img.shields.io/badge/status-completed-black) Zip extracted folder with password.
+* ![Status](https://img.shields.io/badge/status-limited-black) Command line arguments
+* ![Status](https://img.shields.io/badge/status-completed-black) ADB Devices menu.
+* ![Status](https://img.shields.io/badge/status-completed-black) Implement datetime.
+* ![Status](https://img.shields.io/badge/status-beta-black) Backup over TCP.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
+## Limitations
+
+There always are limitations on how much we can make it work  and this is what allows us to keep going. Well no matter what I do sometimes this tool just won't work on some devices and if that's your case you can try [this fork of MarcoG3's WhatsDump](https://github.com/Tkd-Alex/WhatsDump) by [Alessandro Maggio](https://github.com/Tkd-Alex/).
 
 ## Contributing
 
