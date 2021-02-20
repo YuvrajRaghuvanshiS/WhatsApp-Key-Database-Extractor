@@ -76,8 +76,8 @@ def DeleteUserFolder(userFolder):
     try:
         shutil.rmtree(extracted + userFolder)
     except Exception as e:
-        CustomPrint(e)
-        CustomPrint('Please manually delete it.')
+        CustomPrint(e, 'red')
+        CustomPrint('Please manually delete it.', 'red')
     Exit()
 
 
@@ -86,8 +86,8 @@ def DeleteUserZip(userZip):
     try:
         os.remove(extracted + userZip)
     except Exception as e:
-        CustomPrint(e)
-        CustomPrint('Please manually delete it.')
+        CustomPrint(e, 'red')
+        CustomPrint('Please manually delete it.', 'red')
     Exit()
 
 

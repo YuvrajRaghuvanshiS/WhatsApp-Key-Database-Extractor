@@ -117,7 +117,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
                                 tmp + 'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
                     TakingOutMainFiles(userName, sdPath, ADBSerialId)
                 except Exception as e:
-                    CustomPrint(e)
+                    CustomPrint(e, 'red')
             else:
                 CustomPrint('Could not find whatsapp.ab in ' + extracted +
                             userName + ' folder, did you name your user properly?')
@@ -136,7 +136,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
                         'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
             TakingOutMainFiles(userName, sdPath, ADBSerialId)
         except Exception as e:
-            CustomPrint(e)
+            CustomPrint(e, 'red')
 
 
 def ListUserFolders():
@@ -159,7 +159,7 @@ def ShowBanner():
         CustomPrint(banner_content, 'green', ['bold'], False)
         banner.close()
     except Exception as e:
-        CustomPrint(e)
+        CustomPrint(e, 'red')
     CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n',
                 'green', ['bold'], False)
 
@@ -169,6 +169,7 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
         'Folder ' + extracted + ' already exists.', 'yellow')
     os.mkdir(extracted + userName) if not (os.path.isdir(extracted + userName)
                                            ) else CustomPrint('Folder ' + extracted + userName + ' already exists.', 'yellow')
+    # If user folder already exists ask user to overwrite or skip.
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try:
         bin = '' if(isLinux) else 'bin\\'
@@ -227,7 +228,7 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
                 pass
 
     except Exception as e:
-        CustomPrint(e)
+        CustomPrint(e, 'red')
         CleanTmp()
 
 

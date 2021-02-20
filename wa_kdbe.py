@@ -61,7 +61,7 @@ def BackupWhatsAppDataasAb(SDKVersion):
         os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >=
                                                                              23) else os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab -noapk com.whatsapp')
     except Exception as e:
-        CustomPrint(e)
+        CustomPrint(e, 'red')
     CustomPrint('Done backing up data. Size : ' +
                 str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
 
@@ -144,7 +144,7 @@ def ReinstallWhatsApp():
     try:
         os.system(adb + ' install -r -d ' + tmp + 'WhatsAppbackup.apk')
     except Exception as e:
-        print(e)
+        CustomPrint(e, 'red')
         CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
 
 
@@ -164,7 +164,7 @@ def ShowBanner():
         CustomPrint(banner_content, 'green', ['bold'], False)
         banner.close()
     except Exception as e:
-        CustomPrint(e)
+        CustomPrint(e, 'red')
     CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n',
                 'green', ['bold'], False)
     intro_path = 'non_essentials/intro.txt'
@@ -174,7 +174,7 @@ def ShowBanner():
         CustomPrint(intro_content, 'green', ['bold'], False)
         intro.close()
     except Exception as e:
-        CustomPrint(e)
+        CustomPrint(e, 'red')
 
 
 def UninstallWhatsApp(SDKVersion):
@@ -185,7 +185,7 @@ def UninstallWhatsApp(SDKVersion):
             CustomPrint('Uninstalled.')
         except Exception as e:
             CustomPrint('Could not uninstall WhatsApp.')
-            CustomPrint(e)
+            CustomPrint(e, 'red')
             Exit()
 
 

@@ -14,22 +14,16 @@ if platform.system() == 'Windows':
 if platform.system() == 'Linux':
     isLinux = True
 
-# Global command line helpers
-adb = 'bin\\adb.exe -s '
-tmp = 'tmp/'
-if(isLinux):
-    adb = 'adb -s '
 
-
-def ReinstallWhatsApp(ADBSerialId):
+def ReinstallWhatsApp(adb):
     CustomPrint('Reinstallting original WhatsApp.')
     if(os.path.isfile(tmp + 'WhatsAppbackup.apk')):
         try:
-            os.system(adb + ADBSerialId + ' install -r -d ' +
+            os.system(adb + ' install -r -d ' +
                       tmp + 'WhatsAppbackup.apk')
         except Exception as e:
-            print(e)
-            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
+            CustomPrint(e, 'red')
+            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.', 'red')
     else:
         CustomPrint('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.', 'red')
 
@@ -41,7 +35,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--tcp-port', help='Port number to connect to. Default : 5555')
     args = parser.parse_args()
-    # args = parser.parse_args(['--allow-reboot --tcp-ip 192.168.43.130'.split())
+    #args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
 
     tcpIP = args.tcp_ip
     tcpPort = args.tcp_port
@@ -53,4 +47,11 @@ if __name__ == "__main__":
         ADBSerialId = deviceId.init()
     if(not ADBSerialId):
         quit()
-    ReinstallWhatsApp(ADBSerialId)
+
+    # Global command line helpers
+    adb = 'bin\\adb.exe -s ' + ADBSerialId
+    tmp = 'tmp/'
+    if(isLinux):
+        adb = 'adb -s ' + ADBSerialId
+
+    ReinstallWhatsApp(adb)
