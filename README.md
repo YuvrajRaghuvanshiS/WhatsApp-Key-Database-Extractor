@@ -117,6 +117,11 @@ python3 wa_kdbe.py
 | --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. |
 | --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. |
 
+Example usage : 
+```python
+python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy
+```
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Standalone Operations
