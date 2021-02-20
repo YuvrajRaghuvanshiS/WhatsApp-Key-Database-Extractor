@@ -116,6 +116,11 @@ python3 wa_kdbe.py
 | --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. |
 | --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. |
 
+Example usage : 
+```python
+python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555
+```
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Standalone Operations
