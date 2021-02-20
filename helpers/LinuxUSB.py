@@ -23,11 +23,10 @@ def AfterConnect(ADBSerialId):
         CustomPrint('Cleaning up temporary direcory.', 'red')
         os.system('rm -rf tmp/*')
         Exit()
-    _waPathText = 'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp'
-    WhatsAppapkPath = re.search(
-        '(?<=package:)(.*)(?=apk)', str(check_output(_waPathText.split()))).group(1) + 'apk'
+    WhatsAppapkPath = getoutput(
+        'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp')
     if not (WhatsAppapkPath):
-        CustomPrint('Looks like WhatsApp is not installed on device.')
+        CustomPrint('Looks like WhatsApp is not installed on device.', 'red')
         Exit()
     sdPath = getoutput('adb -s ' + ADBSerialId +
                        ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'

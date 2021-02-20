@@ -28,10 +28,10 @@ def AfterConnect(ADBSerialId):
         CustomPrint('Cleaning up temporary direcory.', 'red')
         os.remove(tmp)
         Exit()
-    WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(
-        adb + ADBSerialId + ' shell pm path com.whatsapp'))).group(1) + 'apk'
+    WhatsAppapkPath = getoutput(
+        adb + ADBSerialId + ' shell pm path com.whatsapp')
     if not (WhatsAppapkPath):
-        CustomPrint('Looks like WhatsApp is not installed on device.')
+        CustomPrint('Looks like WhatsApp is not installed on device.', 'red')
         Exit()
     sdPath = getoutput(adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"')
     # To check if APK even exists at a given path to download!
@@ -55,7 +55,8 @@ def AfterConnect(ADBSerialId):
 
 
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
     os.system('bin\\adb.exe kill-server')
     quit()
 
