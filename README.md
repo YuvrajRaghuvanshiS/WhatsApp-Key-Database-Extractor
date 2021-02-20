@@ -36,11 +36,10 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Standalone Operations](#standalone-operations)
-  * [Features](#features)
+  * [Features & ToDo](#features--todo)
   * [Demo](#demo)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
-  * [ToDo](#todo)
 * [Limitations](#limitations)
 * [Contributing](#contributing)
 * [License](#license)
@@ -140,16 +139,21 @@ python3 restore_whatsapp.py
 ```
 
 
-### Features
+### Features & ToDo
+<!--https://github.com/StylishThemes/GitHub-Dark/wiki/Emoji-->
 
-* Extract msgstore.db from /data/data/com.whatsapp. (duh)
-* Works wirelessly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
-* See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag.
-* Works with any android device v4.0+ so far.
-* Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
-* Move msgstore.db to your phone.
-* Create password protected 7z file so keep your extraction safe.
-* Continue without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python view_extract.py`.
+*  :heavy_check_mark: Extracts msgstore.db from /data/data/com.whatsapp. (duh)
+*  :heavy_check_mark: Works wirelessly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
+*  :heavy_check_mark: See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag. {Working only in Windows.}
+*  :heavy_check_mark: Works with any android device v4.0+ so far.
+*  :heavy_check_mark: Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
+*  :heavy_check_mark: Moves msgstore.db to your phone.
+*  :heavy_check_mark: Creates password protected 7z file so keep your extraction safe.
+*  :heavy_check_mark: Continues without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python view_extract.py`.
+*  :heavy_check_mark: Command line arguments
+*  :heavy_check_mark: ADB Devices menu.
+*  :heavy_check_mark: Implement datetime.
+*  :heavy_minus_sign: Extracts backup created over TCP {bin\tar.exe: Unexpected EOF on archive file in Windows.}.
 
 
 ### Demo
@@ -173,13 +177,6 @@ Coming soon...
 ## Roadmap
 
 See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
-### ToDo
-* ![Status](https://img.shields.io/badge/status-completed-black) Zip extracted folder with password.
-* ![Status](https://img.shields.io/badge/status-limited-black) Command line arguments
-* ![Status](https://img.shields.io/badge/status-completed-black) ADB Devices menu.
-* ![Status](https://img.shields.io/badge/status-completed-black) Implement datetime.
-* ![Status](https://img.shields.io/badge/status-beta-black) Backup over TCP {bin\tar.exe: Unexpected EOF on archive file in Windows.}.
-* ![Status](https://img.shields.io/badge/status-beta-black) [ScrCpy](https://github.com/Genymobile/scrcpy) {Working only in Windows.}
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
