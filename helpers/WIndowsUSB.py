@@ -27,8 +27,8 @@ def AfterConnect(adb):
         CustomPrint('Cleaning up temporary direcory.', 'red')
         os.remove(tmp)
         Exit()
-    WhatsAppapkPath = getoutput(
-        adb + ' shell pm path com.whatsapp')
+    WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(
+        adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     if not (WhatsAppapkPath):
         CustomPrint('Looks like WhatsApp is not installed on device.', 'red')
         Exit()
@@ -54,8 +54,7 @@ def AfterConnect(adb):
 
 
 def Exit():
-    print('\n')
-    CustomPrint('Exiting...')
+    CustomPrint('\nExiting...')
     os.system('bin\\adb.exe kill-server')
     quit()
 
