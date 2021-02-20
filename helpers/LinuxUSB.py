@@ -13,10 +13,8 @@ appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def AfterConnect(ADBSerialId):
-    _sdkVersionText = 'adb -s ' + ADBSerialId + \
-        ' shell getprop ro.build.version.sdk'
-    SDKVersion = int(
-        re.search('[0-9]{2,3}', str(check_output(_sdkVersionText.split()))).group(0))
+    SDKVersion = int(getoutput('adb -s ' + ADBSerialId +
+                               ' shell getprop ro.build.version.sdk'))
     if (SDKVersion <= 13):
         CustomPrint(
             'Unsupported device. This method only works on Android v4.0 or higer.', 'red')

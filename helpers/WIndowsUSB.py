@@ -20,8 +20,8 @@ helpers = 'helpers/'
 
 
 def AfterConnect(ADBSerialId):
-    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(
-        adb + ADBSerialId + ' shell getprop ro.build.version.sdk'))).group(0))
+    SDKVersion = int(getoutput(
+        adb + ADBSerialId + ' shell getprop ro.build.version.sdk'))
     if (SDKVersion <= 13):
         CustomPrint(
             'Unsupported device. This method only works on Android v4.0 or higer.', 'red')
