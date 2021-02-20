@@ -30,8 +30,6 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-<details><summary>Table of Contents</summary>
-
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
@@ -48,7 +46,6 @@
 * [License](#license)
 * [Agreement](#agreement)
 * [Contact](#contact)
-</details>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
