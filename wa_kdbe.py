@@ -3,6 +3,7 @@ import os
 import platform
 import re
 import subprocess
+import threading
 import time
 
 import helpers.ADBDeviceSerialId as deviceId
@@ -147,6 +148,19 @@ def ReinstallWhatsApp():
         CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
 
 
+def RunScrCpy(_isScrCpy):
+    if(_isScrCpy and isWindows):
+        cmd = 'bin\scrcpy.exe'
+        proc = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, shell=False)
+        output, error = proc.communicate()
+        output = output.decode('utf-8')
+        error = error.decode('utf-8')
+        print(output)
+        print('\n\n\n\n\n')
+        print(error)
+
+
 def ShowBanner():
     banner_path = 'non_essentials/banner.txt'
     try:
@@ -183,7 +197,7 @@ def UninstallWhatsApp(SDKVersion):
 def USBMode():
     if(isWindows):
         ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = WindowsUSB(
-            ADBSerialId)
+            adb)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName,
                  sdPath) if ACReturnCode == 1 else Exit()
     else:
@@ -202,12 +216,15 @@ if __name__ == "__main__":
         '--tcp-ip', help='Connects to a remote device via TCP mode.')
     parser.add_argument(
         '--tcp-port', help='Port number to connect to. Default : 5555')
+    parser.add_argument('--scrcpy', action='store_true',
+                        help='Run ScrCpy to see and control Android device.')
     args = parser.parse_args()
-    #args = parser.parse_args('--allow-reboot --tcp-ip 192.168.43.130'.split())
+    #args = parser.parse_args('--scrcpy'.split())
 
     isAllowReboot = args.allow_reboot
     tcpIP = args.tcp_ip
     tcpPort = args.tcp_port
+    isScrCpy = args.scrcpy
     if(tcpIP):
         if(not tcpPort):
             tcpPort = '5555'
@@ -228,4 +245,11 @@ if __name__ == "__main__":
         grep = 'grep'
         curl = 'curl'
 
-    main()
+    t1 = threading.Thread(target=RunScrCpy, args=[isScrCpy])
+    t2 = threading.Thread(target=main)
+    t1.start()
+    t2.start()
+    # t1.join()
+    # t2.join()
+
+   # main()

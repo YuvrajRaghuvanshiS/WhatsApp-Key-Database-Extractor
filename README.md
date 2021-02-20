@@ -112,9 +112,10 @@ python3 wa_kdbe.py
 
 | Flag            |               | Behaviour     |
 | -------------   | ------------- | ------------- |
-| --allow-reboot      | Optional      | Reboots device before installing Legacy WhatsApp |
+| --allow-reboot      | Optional      | Reboots device before installing Legacy WhatsApp. |
 | --tcp-ip      | Optional      | Connects to a remote device via TCP mode. |
-| --tcp-port      | Optional      | Port number to connect to. Default : 5555 |
+| --tcp-port      | Optional      | Port number to connect to. Default : 5555. |
+| --scrcpy      | Optional      | Show device screen as a window using ScrCpy. |
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
