@@ -51,13 +51,13 @@ def AfterConnect(ADBSerialId):
 
 
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
     os.system('adb kill-server')
     quit()
 
 
 def LinuxUSB(ADBSerialId):
-    _deviceName = 'adb -s ' + ADBSerialId + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)",
-                                            str(check_output(_deviceName.split()))).group(1))
+    CustomPrint('Connected to ' + getoutput('adb -s ' +
+                                            ADBSerialId + ' shell getprop ro.product.model'))
     return AfterConnect(ADBSerialId)

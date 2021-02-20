@@ -62,7 +62,6 @@ def Exit():
 
 
 def WindowsUSB(ADBSerialId):
-    deviceName = adb + ADBSerialId + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)",
-                                            str(check_output(deviceName))).group(1))
+    CustomPrint('Connected to ' + getoutput(adb + ADBSerialId +
+                                            ' shell getprop ro.product.model'))
     return AfterConnect(ADBSerialId)
