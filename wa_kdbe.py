@@ -247,8 +247,10 @@ if __name__ == "__main__":
 
     t1 = threading.Thread(target=RunScrCpy, args=[isScrCpy])
     t2 = threading.Thread(target=main)
-    t1.start()
     t2.start()
+    # waiting here before starting scrcpy so that it gets to understand that a device is connected and not throw any error like device offline.
+    time.sleep(2)
+    t1.start()
     # t1.join()
     # t2.join()
 
