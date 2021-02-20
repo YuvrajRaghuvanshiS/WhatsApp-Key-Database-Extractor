@@ -1,9 +1,9 @@
 import argparse
+import concurrent.futures
 import os
 import platform
 import re
 import subprocess
-import threading
 import time
 
 import helpers.ADBDeviceSerialId as deviceId
@@ -153,12 +153,7 @@ def RunScrCpy(_isScrCpy):
         cmd = 'bin\scrcpy.exe'
         proc = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, shell=False)
-        output, error = proc.communicate()
-        output = output.decode('utf-8')
-        error = error.decode('utf-8')
-        print(output)
-        print('\n\n\n\n\n')
-        print(error)
+        proc.communicate()
 
 
 def ShowBanner():
@@ -219,7 +214,7 @@ if __name__ == "__main__":
     parser.add_argument('--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
     args = parser.parse_args()
-    #args = parser.parse_args('--scrcpy'.split())
+    #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 
     isAllowReboot = args.allow_reboot
     tcpIP = args.tcp_ip
@@ -245,13 +240,7 @@ if __name__ == "__main__":
         grep = 'grep'
         curl = 'curl'
 
-    t1 = threading.Thread(target=RunScrCpy, args=[isScrCpy])
-    t2 = threading.Thread(target=main)
-    t2.start()
-    # waiting here before starting scrcpy so that it gets to understand that a device is connected and not throw any error like device offline.
-    time.sleep(2)
-    t1.start()
-    # t1.join()
-    # t2.join()
-
-   # main()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        f1 = executor.submit(main)
+        time.sleep(1)
+        f2 = executor.submit(RunScrCpy, isScrCpy)
