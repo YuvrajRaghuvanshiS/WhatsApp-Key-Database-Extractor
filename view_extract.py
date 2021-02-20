@@ -113,7 +113,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
                         'Folder ' + tmp + ' already exists.', 'yellow')
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted +
                               userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-                    CustomPrint('Successfully \'fluffed\' ' + extracted + userName + '/whatsapp.ab ' +
+                    CustomPrint('Successfully \'fluffed\' ' + extracted + userName + '/whatsapp.ab to ' +
                                 tmp + 'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
                     TakingOutMainFiles(userName, sdPath, ADBSerialId)
                 except Exception as e:
@@ -132,7 +132,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
         try:
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp +
                       'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-            CustomPrint('Successfully \'fluffed\' ' + tmp + 'whatsapp.ab ' + tmp +
+            CustomPrint('Successfully \'fluffed\' ' + tmp + 'whatsapp.ab to ' + tmp +
                         'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
             TakingOutMainFiles(userName, sdPath, ADBSerialId)
         except Exception as e:
