@@ -110,15 +110,16 @@ python3 wa_kdbe.py
 
 **Command Line Flags**
 
-| Flag            |               | Type          | Behaviour     |
-| -------------   | ------------- | ------------- | ------------- |
-| --allow-reboot      | Optional      | Bool | Reboots device before installing Legacy WhatsApp. |
-| --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. |
-| --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. |
+| Flag            |               | Type          | Behaviour     | Status     |
+| -------------   | ------------- | ------------- | ------------- | ------------- |
+| --allow-reboot      | Optional      | Bool | Reboots device before installing Legacy WhatsApp. | Stable |
+| --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. | Beta |
+| --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. | Beta |
+| --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. | Alpha |
 
 Example usage : 
 ```python
-python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555
+python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
@@ -167,7 +168,7 @@ See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Databas
 * ![Status](https://img.shields.io/badge/status-completed-black) ADB Devices menu.
 * ![Status](https://img.shields.io/badge/status-completed-black) Implement datetime.
 * ![Status](https://img.shields.io/badge/status-beta-black) Backup over TCP {bin\tar.exe: Unexpected EOF on archive file in Windows.}.
-* ![Status](https://img.shields.io/badge/status-todo-black) [ScrCpy](https://github.com/Genymobile/scrcpy)
+* ![Status](https://img.shields.io/badge/status-beta-black) [ScrCpy](https://github.com/Genymobile/scrcpy) {Working only in Windows.}
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
