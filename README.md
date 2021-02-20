@@ -38,8 +38,11 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Standalone Operations](#standalone-operations)
+  * [Features](#features)
+  * [Demo](#demo)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
+  * [ToDo](#todo)
 * [Limitations](#limitations)
 * [Contributing](#contributing)
 * [License](#license)
@@ -57,7 +60,6 @@ This project is inspired by [EliteAndroidApps/WhatsApp-Key-DB-Extractor](https:/
 
 The idea is to install "Legacy Version" of WhatsApp on you device via adb and use "adb backup"  to fetch files from "/data/data/com.whatsapp" folder which includes both the 'key' and 'msgstore.db' (non encrypted) file and after that restore current WhatsApp.
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Built With
 * [Python](https://www.python.org/)
@@ -73,7 +75,6 @@ Before doing anything take a backup of your chats and turn off your phone's inte
 For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Prepare for Worst.               
 After [intallation](#installation) follow on screen instructions.
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Prerequisites
 
@@ -86,7 +87,6 @@ After [intallation](#installation) follow on screen instructions.
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
 
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### Installation
 
@@ -122,8 +122,6 @@ Example usage :
 python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
-
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
@@ -144,7 +142,23 @@ IMP : For this to work there should either be "userName" folder or "userName.7z"
 python3 restore_whatsapp.py
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
+### Features
+
+* Extract msgstore.db from /data/data/com.whatsapp. (duh)
+* Works wirelessly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
+* See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag.
+* Works with any android device v4.0+ so far.
+* Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
+* Move msgstore.db to your phone.
+* Create password protected 7z file so keep your extraction safe.
+* Continue without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python view_extract.py`.
+
+
+### Demo
+Coming soon...
+
+
 
 ### Troubleshooting
 
@@ -162,7 +176,7 @@ python3 restore_whatsapp.py
 ## Roadmap
 
 See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
-#### ToDo
+### ToDo
 * ![Status](https://img.shields.io/badge/status-completed-black) Zip extracted folder with password.
 * ![Status](https://img.shields.io/badge/status-limited-black) Command line arguments
 * ![Status](https://img.shields.io/badge/status-completed-black) ADB Devices menu.
@@ -175,6 +189,8 @@ See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Databas
 ## Limitations
 
 There always are limitations on how much we can make it work  and this is what allows us to keep going. Well no matter what I do sometimes this tool just won't work on some devices and if that's your case you can try [this fork of MarcoG3's WhatsDump](https://github.com/Tkd-Alex/WhatsDump) by [Alessandro Maggio](https://github.com/Tkd-Alex/).
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ## Contributing
 
