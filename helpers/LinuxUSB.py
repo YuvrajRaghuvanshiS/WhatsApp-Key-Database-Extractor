@@ -13,21 +13,18 @@ appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def AfterConnect(ADBSerialId):
-    _sdkVersionText = 'adb -s ' + ADBSerialId + \
-        ' shell getprop ro.build.version.sdk'
-    SDKVersion = int(
-        re.search('[0-9]{2,3}', str(check_output(_sdkVersionText.split()))).group(0))
+    SDKVersion = int(getoutput('adb -s ' + ADBSerialId +
+                               ' shell getprop ro.build.version.sdk'))
     if (SDKVersion <= 13):
         CustomPrint(
             'Unsupported device. This method only works on Android v4.0 or higer.', 'red')
         CustomPrint('Cleaning up temporary direcory.', 'red')
         os.system('rm -rf tmp/*')
         Exit()
-    _waPathText = 'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp'
-    WhatsAppapkPath = re.search(
-        '(?<=package:)(.*)(?=apk)', str(check_output(_waPathText.split()))).group(1) + 'apk'
+    WhatsAppapkPath = getoutput(
+        'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp')
     if not (WhatsAppapkPath):
-        CustomPrint('Looks like WhatsApp is not installed on device.')
+        CustomPrint('Looks like WhatsApp is not installed on device.', 'red')
         Exit()
     sdPath = getoutput('adb -s ' + ADBSerialId +
                        ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
@@ -54,13 +51,13 @@ def AfterConnect(ADBSerialId):
 
 
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
     os.system('adb kill-server')
     quit()
 
 
 def LinuxUSB(ADBSerialId):
-    _deviceName = 'adb -s ' + ADBSerialId + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\n)",
-                                            str(check_output(_deviceName.split()))).group(1))
+    CustomPrint('Connected to ' + getoutput('adb -s ' +
+                                            ADBSerialId + ' shell getprop ro.product.model'))
     return AfterConnect(ADBSerialId)

@@ -19,18 +19,18 @@ helpers = 'helpers/'
 
 
 def AfterConnect(adb):
-    SDKVersion = int(re.search('[0-9]{2,3}', str(check_output(
-        adb + ' shell getprop ro.build.version.sdk'))).group(0))
+    SDKVersion = int(getoutput(
+        adb + ' shell getprop ro.build.version.sdk'))
     if (SDKVersion <= 13):
         CustomPrint(
             'Unsupported device. This method only works on Android v4.0 or higer.', 'red')
         CustomPrint('Cleaning up temporary direcory.', 'red')
         os.remove(tmp)
         Exit()
-    WhatsAppapkPath = re.search('(?<=package:)(.*)(?=apk)', str(check_output(
-        adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
+    WhatsAppapkPath = getoutput(
+        adb + ' shell pm path com.whatsapp')
     if not (WhatsAppapkPath):
-        CustomPrint('Looks like WhatsApp is not installed on device.')
+        CustomPrint('Looks like WhatsApp is not installed on device.', 'red')
         Exit()
     sdPath = getoutput(adb + ' shell "echo $EXTERNAL_STORAGE"')
     # To check if APK even exists at a given path to download!
@@ -54,13 +54,13 @@ def AfterConnect(adb):
 
 
 def Exit():
-    CustomPrint('\nExiting...')
+    print('\n')
+    CustomPrint('Exiting...')
     os.system('bin\\adb.exe kill-server')
     quit()
 
 
 def WindowsUSB(adb):
-    deviceName = adb + ' shell getprop ro.product.model'
-    CustomPrint('Connected to ' + re.search("(?<=b')(.*)(?=\\\\r)",
-                                            str(check_output(deviceName))).group(1))
+    CustomPrint('Connected to ' + getoutput(adb +
+                                            ' shell getprop ro.product.model'))
     return AfterConnect(adb)
