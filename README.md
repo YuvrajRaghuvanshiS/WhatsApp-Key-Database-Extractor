@@ -112,6 +112,7 @@ python3 wa_kdbe.py
 | --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. | Beta |
 | --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. | Beta |
 | --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. | Alpha |
+| --fast      | Optional      | Bool | Try to speed up process by taking apk backup inside phone and reinstalling from there. | Stable |
 
 Example usage : 
 ```python
