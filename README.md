@@ -157,8 +157,7 @@ python3 restore_whatsapp.py
 
 
 ### Demo
-Coming soon...
-
+https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussions/33
 
 
 ### Troubleshooting
