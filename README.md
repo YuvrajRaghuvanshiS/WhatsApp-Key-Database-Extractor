@@ -94,10 +94,10 @@ git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.
 ```python
 pip3 install -r requirements.txt
 ```
-3. Install dependencies (for linux and OSX only)
+3. Install dependencies (for linux and OSX only) : skip `sudo` for mac.
 ```bash
 chmod +x bin/linux_dependencies.sh
-sudo ./bin/linuxdependencies.sh
+sudo ./bin/linux_dependencies.sh
 ```
 4. Run `wa_kdbe.py`
 ```python
