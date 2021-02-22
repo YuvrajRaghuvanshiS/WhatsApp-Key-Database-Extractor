@@ -18,8 +18,9 @@ def init(tcpIP, tcpPort):
     currDir = os.path.dirname(os.path.realpath(__file__))
     rootDir = os.path.abspath(os.path.join(currDir, '..'))
 
-    adb = rootDir + '\\bin\\adb.exe'
-    if(isLinux):
+    if(isWindows):
+        adb = rootDir + '\\bin\\adb.exe'
+    else:
         adb = 'adb'
 
     combo = tcpIP + ':' + tcpPort

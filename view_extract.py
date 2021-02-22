@@ -20,15 +20,17 @@ if platform.system() == 'Linux':
 isJAVAInstalled = False
 
 # Global command line helpers
-adb = 'bin\\adb.exe -s '
 tmp = 'tmp/'
-grep = 'bin\\grep.exe'
-curl = 'bin\\curl.exe'
 helpers = 'helpers/'
 bin = 'bin/'
 extracted = 'extracted/'
 tar = 'tar.exe'
-if(isLinux):
+if(isWindows):
+    adb = 'bin\\adb.exe -s '
+
+    grep = 'bin\\grep.exe'
+    curl = 'bin\\curl.exe'
+else:
     adb = 'adb -s '
     grep = 'grep'
     curl = 'curl'
@@ -172,7 +174,7 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
     # If user folder already exists ask user to overwrite or skip.
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try:
-        bin = '' if(isLinux) else 'bin\\'
+        bin = 'bin\\' if(isWindows) else ''
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' +
                   tmp + ' apps/com.whatsapp/f/key')
         os.replace('tmp/apps/com.whatsapp/f/key',

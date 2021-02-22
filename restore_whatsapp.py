@@ -49,9 +49,10 @@ if __name__ == "__main__":
         quit()
 
     # Global command line helpers
-    adb = 'bin\\adb.exe -s ' + ADBSerialId
     tmp = 'tmp/'
-    if(isLinux):
+    if(isWindows):
+        adb = 'bin\\adb.exe -s ' + ADBSerialId
+    else:
         adb = 'adb -s ' + ADBSerialId
 
     ReinstallWhatsApp(adb)

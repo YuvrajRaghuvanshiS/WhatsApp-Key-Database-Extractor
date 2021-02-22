@@ -249,12 +249,15 @@ if __name__ == "__main__":
         quit()
 
     # Global command line helpers
-    adb = 'bin\\adb.exe -s ' + ADBSerialId
+
     tmp = 'tmp/'
-    grep = 'bin\\grep.exe'
-    curl = 'bin\\curl.exe'
+
     helpers = 'helpers/'
-    if(isLinux):
+    if(isWindows):
+        adb = 'bin\\adb.exe -s ' + ADBSerialId
+        grep = 'bin\\grep.exe'
+        curl = 'bin\\curl.exe'
+    else:
         adb = 'adb -s ' + ADBSerialId
         grep = 'grep'
         curl = 'curl'
