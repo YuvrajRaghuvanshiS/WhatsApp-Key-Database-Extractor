@@ -46,6 +46,7 @@ def AfterConnect(adb):
             CustomPrint(
                 'Downloading legacy WhatsApp V2.11.431 to helpers folder')
             wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
+            print('\n')
         else:
             CustomPrint('Found legacy WhatsApp V2.11.431 apk in ' +
                         helpers + ' folder')
