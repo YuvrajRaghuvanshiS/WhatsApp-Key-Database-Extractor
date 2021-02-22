@@ -153,12 +153,11 @@ python3 restore_whatsapp.py
 *  :heavy_check_mark: Command line arguments
 *  :heavy_check_mark: ADB Devices menu.
 *  :heavy_check_mark: Implement datetime.
-*  :heavy_minus_sign: Extracts backup created over TCP {bin\tar.exe: Unexpected EOF on archive file in Windows.}.
+*  :heavy_check_mark: Extracts backup created over TCP ~~{ #24 bin\tar.exe: Unexpected EOF on archive file in Windows.}.~~
 
 
 ### Demo
-Coming soon...
-
+https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussions/33
 
 
 ### Troubleshooting
