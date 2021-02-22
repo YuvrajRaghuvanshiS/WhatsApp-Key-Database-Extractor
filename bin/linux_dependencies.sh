@@ -1,19 +1,18 @@
 #!/bin/bash
 
 echo "Installing dependencies... Hold on."
-echo "Which platform are you on?"
-echo "L : Linux (Kali, Ubuntu, ParrotSec)"
-echo "M : Mac"
-read platform
-echo $platform
+
+UNAME=$(uname)
+
+if [ "$UNAME" == "Linux" ] ; then
+	echo "Linux detected."
+    pkg_man=apt-get
+else [ "$UNAME" == "Darwin" ]
+	echo "Darwin detected"
+    pkg_man=brew
+fi
 
 echo "Updating system."
-
-if [ $platform = 'l' ]; then
-	pkg_man=apt-get
-else
-	pkg_man=brew
-fi
 
 $pkg_man update
 
