@@ -3,13 +3,15 @@
 echo "Installing dependencies... Hold on."
 
 UNAME=$(uname)
+confirm=""
 
 if [ "$UNAME" == "Linux" ] ; then
 	echo "Linux detected."
-    pkg_man=apt-get
+    confirm="-y"
+    pkg_man="apt-get"
 else [ "$UNAME" == "Darwin" ]
 	echo "Darwin detected"
-    pkg_man=brew
+    pkg_man="brew"
 fi
 
 echo "Updating system."
@@ -21,7 +23,7 @@ echo "Installing packages."
 for package in adb curl grep tar openjdk-11-jdk p7zip-full
 do
 
-$pkg_man install -y $package
+$pkg_man install $confirm $package
 
 done
 
