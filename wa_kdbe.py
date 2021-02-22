@@ -45,20 +45,13 @@ def main():
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion >
                                                             11) else os.system(adb + ' shell am kill com.whatsapp')
-    if (isFast):
-        CustomPrint('Backing up WhatsApp ' + versionName +
-                    ' apk, the one installed on device to /sdcard/WhatsAppbackup.apk', 'yellow')
-        os.system(adb + ' shell cp ' + WhatsAppapkPath +
-                  ' sdcard/WhatsAppbackup.apk')
-        CustomPrint('Apk backup complete.')
-    else:
-        CustomPrint('Backing up WhatsApp ' + versionName +
-                    ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk', 'yellow')
-        os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
-            'Folder ' + tmp + ' already exists.', 'yellow')
-        os.system(adb + ' pull ' + WhatsAppapkPath +
-                  ' ' + tmp + 'WhatsAppbackup.apk')
-        CustomPrint('Apk backup complete.')
+    CustomPrint('Backing up WhatsApp ' + versionName +
+                ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
+    os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
+        'Folder ' + tmp + ' already exists.', 'yellow')
+    os.system(adb + ' pull ' + WhatsAppapkPath +
+              ' ' + tmp + 'WhatsAppbackup.apk')
+    CustomPrint('Apk backup complete.')
 
 
 def BackupWhatsAppDataasAb(SDKVersion):
@@ -148,20 +141,11 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
 
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
-    if(isFast):
-        try:
-            os.system(adb + ' install -r -d /sdcard/WhatsAppbackup.apk')
-        except Exception as e:
-            CustomPrint(e, 'red')
-            CustomPrint(
-                'Could not install WhatsApp, install using Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
-    else:
-        try:
-            os.system(adb + ' install -r -d ' + tmp +
-                      'WhatsAppbackup.apk')
-        except Exception as e:
-            CustomPrint(e, 'red')
-            CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
+    try:
+        os.system(adb + ' install -r -d ' + tmp + 'WhatsAppbackup.apk')
+    except Exception as e:
+        CustomPrint(e, 'red')
+        CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
 
 
 def RunScrCpy(_isScrCpy):
@@ -229,16 +213,13 @@ if __name__ == "__main__":
         '--tcp-port', help='Port number to connect to. Default : 5555')
     parser.add_argument('--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
-    parser.add_argument('--fast', action='store_true',
-                        help='Try to speed up process by taking apk backup inside phone and reinstalling from there.')
     args = parser.parse_args()
-    #args = parser.parse_args('--fast --scrcpy'.split())
+    #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 
     isAllowReboot = args.allow_reboot
     tcpIP = args.tcp_ip
     tcpPort = args.tcp_port
     isScrCpy = args.scrcpy
-    isFast = args.fast
     if(tcpIP):
         if(not tcpPort):
             tcpPort = '5555'
