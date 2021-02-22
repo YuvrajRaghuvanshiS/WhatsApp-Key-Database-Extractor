@@ -15,8 +15,9 @@ if platform.system() == 'Linux':
 # Global command line helpers
 extracted = 'extracted/'
 bin = 'bin/'
-sevenZip = 'bin\\7za.exe'
-if(isLinux):
+if(isWindows):
+    sevenZip = 'bin\\7za.exe'
+else:
     sevenZip = '7z'
 
 

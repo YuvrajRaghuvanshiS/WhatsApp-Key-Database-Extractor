@@ -17,9 +17,9 @@ def init():
     # Global command line helpers
     currDir = os.path.dirname(os.path.realpath(__file__))
     rootDir = os.path.abspath(os.path.join(currDir, '..'))
-
-    adb = rootDir + '\\bin\\adb.exe'
-    if(isLinux):
+    if(isWindows):
+        adb = rootDir + '\\bin\\adb.exe'
+    else:
         adb = 'adb'
 
     cmd = adb + ' devices'
