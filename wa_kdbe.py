@@ -49,8 +49,10 @@ def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
                 ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
     os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
         'Folder ' + tmp + ' already exists.', 'yellow')
-    os.system(adb + ' pull ' + WhatsAppapkPath +
-              ' ' + tmp + 'WhatsAppbackup.apk')
+    os.system(adb + ' shell cp ' + WhatsAppapkPath +
+              ' /sdcard/WhatsAppbackup.apk')
+    os.system(adb + ' pull /sdcard/WhatsAppbackup.apk ' +
+              tmp + 'WhatsAppbackup.apk')
     CustomPrint('Apk backup complete.')
 
 
