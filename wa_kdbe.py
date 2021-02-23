@@ -154,8 +154,8 @@ def ReinstallWhatsApp():
 
 def RunScrCpy(_isScrCpy):
     if(_isScrCpy):
-        cmd = 'bin\scrcpy.exe --max-fps 15 -b 4M' if(
-            isWindows) else 'scrcpy --max-fps 15 -b 4M'
+        cmd = 'bin\scrcpy.exe --max-fps 15 -b 4M --always-on-top' if(
+            isWindows) else 'scrcpy --max-fps 15 -b 4M --always-on-top'
         proc = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, shell=False)
         proc.communicate()
