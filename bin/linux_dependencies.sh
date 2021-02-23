@@ -7,10 +7,12 @@ confirm=""
 
 if [ "$UNAME" == "Linux" ] ; then
 	echo "Linux detected."
+    packages="adb curl grep tar openjdk-11-jdk p7zip-full"
     confirm="-y"
     pkg_man="apt-get"
 else [ "$UNAME" == "Darwin" ]
 	echo "Darwin detected"
+    packages="android-platform-tools curl grep gnu-tar openjdk@11 p7zip"
     pkg_man="brew"
 fi
 
@@ -20,7 +22,7 @@ $pkg_man update
 
 echo "Installing packages."
 
-for package in adb curl grep tar openjdk-11-jdk p7zip-full
+for package in $packages
 do
 
 $pkg_man install $confirm $package
