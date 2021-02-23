@@ -111,7 +111,7 @@ python3 wa_kdbe.py
 | --allow-reboot      | Optional      | Bool | Reboots device before installing Legacy WhatsApp. | Stable |
 | --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. | Beta |
 | --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. | Beta |
-| --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. | Alpha |
+| --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. | Beta |
 
 Example usage : 
 ```python
@@ -144,7 +144,7 @@ python3 restore_whatsapp.py
 
 *  :heavy_check_mark: Extracts msgstore.db from /data/data/com.whatsapp. (duh)
 *  :heavy_check_mark: Works wirelessly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
-*  :heavy_check_mark: See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag. {Working only in Windows.}
+*  :heavy_check_mark: See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag.
 *  :heavy_check_mark: Works with any android device v4.0+ so far.
 *  :heavy_check_mark: Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
 *  :heavy_check_mark: Moves msgstore.db to your phone.
