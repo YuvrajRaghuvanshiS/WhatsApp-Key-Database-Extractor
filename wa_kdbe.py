@@ -53,6 +53,8 @@ def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
               ' /sdcard/WhatsAppbackup.apk')
     os.system(adb + ' pull /sdcard/WhatsAppbackup.apk ' +
               tmp + 'WhatsAppbackup.apk')
+    # Delete temp apk from /sdcard.
+    os.system(adb + ' shell rm -rf /sdcard/WhatsAppbackup.apk')
     CustomPrint('Apk backup complete.')
 
 
