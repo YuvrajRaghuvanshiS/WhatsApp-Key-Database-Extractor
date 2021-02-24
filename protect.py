@@ -98,8 +98,10 @@ def Exit():
     try:  # Open in explorer.
         if(isWindows):
             os.startfile(os.path.realpath(extracted))
-        else:
+        elif(isLinux):
             os.system('xdg-open ' + os.path.realpath(extracted))
+        else:
+            os.system('open ' + os.path.realpath(extracted))
     except Exception as e:
         pass
     quit()

@@ -34,6 +34,8 @@ def main():
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
     print('\n')
+    CustomPrint('Current release date : 24/02/2021', 'cyan')
+    print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
     if(readInstruction.upper() == 'Y'):

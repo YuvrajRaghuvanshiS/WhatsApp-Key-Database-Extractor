@@ -223,9 +223,11 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
             try:  # Open in explorer.
                 if(isWindows):
                     os.startfile(os.path.realpath(extracted + userName))
-                else:
+                elif(isLinux):
                     os.system('xdg-open ' +
                               os.path.realpath(extracted + userName))
+                else:
+                    os.system('open ' + os.path.realpath(extracted + userName))
             except Exception as e:
                 pass
 
