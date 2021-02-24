@@ -167,8 +167,15 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
 * WhatsApp crashing? Run `python3 restore_whatsapp.py`. Or "clear data/storage" / uninstall and reinstall from Play Store.
-* In MIUI, `Failure [INSTALL_FAILED_USER_RESTRICTED: Install canceled by user]` occurs during installation of LegacyWhatsapp.apk, fix it by [allowing install via adb](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/16#issuecomment-768927639)
-* if `[INSTALL_FAILED_VERSION_DOWNGRADE]` run with `--allow-reboot` flag. : `python wa_kdbe.py --allow-reboot`
+* In MIUI, "Failure [INSTALL_FAILED_USER_RESTRICTED: Install canceled by user]" occurs during installation of LegacyWhatsapp.apk, fix it by [allowing install via adb](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/16#issuecomment-768927639)
+* If "[INSTALL_FAILED_VERSION_DOWNGRADE]" run with `--allow-reboot` flag.
+  ```
+  python wa_kdbe.py --allow-reboot
+  ```
+* If "adb: error: cannot create 'tmp/WhatsAppbackup.apk': Permission denied" on macOS run script with `sudo`.
+  ```
+  sudo python wa_kdbe.py
+  ```
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
