@@ -90,16 +90,12 @@ After [intallation](#installation) follow on screen instructions.
 ```bash
 git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
-2. Get python requirements
-```python
-pip3 install -r requirements.txt
-```
-3. Install dependencies (for linux and OSX only) : skip `sudo` for mac.
+2. Install dependencies (for linux and OSX only) : skip `sudo` for mac.
 ```bash
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linux_dependencies.sh
 ```
-4. Run `wa_kdbe.py` : use with `sudo` for mac.
+3. Run `wa_kdbe.py`
 ```python
 python3 wa_kdbe.py
 ```

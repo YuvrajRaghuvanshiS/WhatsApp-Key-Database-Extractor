@@ -1,6 +1,20 @@
+# Auto Requirements installer.
+import os
+try:
+    import packaging
+    import termcolor
+    import wget
+except ImportError:
+    print('First run : Auto installing requirements.')
+    try:
+        # Trying both methods of installations
+        os.system('pip3 install termcolor wget packaging')
+    except Exception:
+        os.system('python3 -m pip install termcolor wget packaging')
+
+
 import argparse
 import concurrent.futures
-import os
 import platform
 import re
 import subprocess
@@ -34,7 +48,7 @@ def main():
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
     print('\n')
-    CustomPrint('Current release date : 24/02/2021', 'cyan')
+    CustomPrint('Current release date : 25/02/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'

@@ -209,7 +209,7 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
         else:
             print('\n')
             CustomPrint('\aYour whatsapp database along with other files is in ' +
-                        extracted + userName + ' folder.', 'yellow')
+                        os.path.realpath(extracted + userName) + ' folder.', 'yellow')
             print('\n')
             CustomInput('Press any key to continue.')
             # TODO issue #13 : Ask user to save to sdcard.

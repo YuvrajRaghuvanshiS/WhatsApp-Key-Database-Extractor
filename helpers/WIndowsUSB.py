@@ -2,8 +2,14 @@ import os
 import re
 from subprocess import check_output, getoutput
 
-import wget
-from packaging import version
+try:
+    import wget
+    from packaging import version
+except ImportError:
+    try:
+        os.system('pip3 install wget packaging')
+    except Exception:
+        os.system('python3 -m pip install wget packaging')
 
 from CustomCI import CustomPrint
 

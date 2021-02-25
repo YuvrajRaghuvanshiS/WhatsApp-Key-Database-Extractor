@@ -1,3 +1,0 @@
-termcolor
-packaging
-wget
