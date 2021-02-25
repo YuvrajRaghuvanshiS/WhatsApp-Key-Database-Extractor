@@ -8,9 +8,9 @@ except ImportError:
     print('First run : Auto installing requirements.')
     try:
         # Trying both methods of installations
-        os.system('pip3 install termcolor wget packaging')
+        os.system('pip3 install --upgrade termcolor wget packaging')
     except Exception:
-        os.system('python3 -m pip install termcolor wget packaging')
+        os.system('python3 -m pip install --upgrade termcolor wget packaging')
 
 
 import argparse
@@ -149,7 +149,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     # Before backup run app
     os.system(adb + ' shell am start -n com.whatsapp/.Main')
     CustomInput(
-        '\aPress any key after running Legacy WhatsApp for a while.', 'yellow')
+        '\aPress any key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
     print('\n')
