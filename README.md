@@ -99,7 +99,7 @@ pip3 install -r requirements.txt
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linux_dependencies.sh
 ```
-4. Run `wa_kdbe.py`
+4. Run `wa_kdbe.py` : use with `sudo` for mac.
 ```python
 python3 wa_kdbe.py
 ```
