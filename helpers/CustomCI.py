@@ -6,7 +6,7 @@ try:
 except ImportError:
     try:
         os.system('pip3 install termcolor')
-    except Exception:
+    except:
         os.system('python3 -m pip install termcolor')
 
 

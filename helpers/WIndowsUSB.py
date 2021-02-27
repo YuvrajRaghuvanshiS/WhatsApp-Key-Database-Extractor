@@ -8,7 +8,7 @@ try:
 except ImportError:
     try:
         os.system('pip3 install wget packaging')
-    except Exception:
+    except:
         os.system('python3 -m pip install wget packaging')
 
 from CustomCI import CustomPrint

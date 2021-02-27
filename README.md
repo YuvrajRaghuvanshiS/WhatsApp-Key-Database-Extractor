@@ -117,7 +117,7 @@ python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcp
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `view_extract.py` : To 'fluff' whatsapp.ab to whatsapp.tar and extract files.
+1. Run `view_extract.py` : To unpack whatsapp.ab to whatsapp.tar and extract files.
 ```
 python3 view_extract.py
 ```

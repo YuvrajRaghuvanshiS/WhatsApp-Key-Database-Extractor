@@ -9,7 +9,7 @@ except ImportError:
     try:
         # Trying both methods of installations
         os.system('pip3 install --upgrade termcolor wget packaging')
-    except Exception:
+    except:
         os.system('python3 -m pip install --upgrade termcolor wget packaging')
 
 
