@@ -251,9 +251,7 @@ if __name__ == "__main__":
         quit()
 
     # Global command line helpers
-
     tmp = 'tmp/'
-
     helpers = 'helpers/'
     if(isWindows):
         adb = 'bin\\adb.exe -s ' + ADBSerialId
