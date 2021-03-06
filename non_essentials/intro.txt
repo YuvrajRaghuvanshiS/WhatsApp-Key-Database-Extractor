@@ -8,7 +8,7 @@
 =    This script can extract your WhatsApp   =
 = msgstore.db (non crypt12, unencrypted file)=
 =          and your 'key' file from          =
-=   '\data\data\com.whatsapp' directory in   =
+=   '/data/data/com.whatsapp' directory in   =
 =  Android 4.0+ device without root access.  =
 =  However you need to have JAVA installed   =
 =    on your system in order to 'view the    =

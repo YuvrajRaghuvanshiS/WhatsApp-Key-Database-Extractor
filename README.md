@@ -8,10 +8,7 @@
 
 ![Termux](https://img.shields.io/badge/Termux-Beta-red)
 
-# Currently still in developing phase!
-# This "Termux Edition" is currently not maintained!
-
-# For this to work on Android devices with Android below version 11, the user first needs to run 'adb tcpip 5555' from their computer which defeats the entire purpose of "no computer" for android devices with android version < 11.
+## Under development.
 
 <!-- PROJECT LOGO -->
 <br />
@@ -35,8 +32,8 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites and preperation](#prerequisites-and-preperation)
-  * [Installation](#installation-and-usage)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
   * [Troubleshooting](#troubleshooting)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -68,17 +65,17 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp settings\Chat Settings\Chat Backup' here take a local backup. Prepare for the worst.               
-After [installation](#installation-and-usage) follow on screen instructions.
+For that go to 'WhatsApp settings &#8594; Chat Settings &#8594; Chat Backup' here take a local backup. Prepare for the worst.               
+After [installation](#installation) follow on screen instructions.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Prerequisites and preparation
+### Prerequisites
 
-* USB Debugging must be enabled on the target device. Settings -> Developer Options -> (Debugging) USB debugging  
+* USB Debugging must be enabled on the target device. Settings &#8594; Developer Options &#8594; (Debugging) USB debugging.
   * If you cannot find Developer Options then please go to: Settings -> About phone/device and tap the Build number multiple times until you're finally declared a developer. 
-* Android device with Android 11 or higher with activated 'ADB over network' setting. Settings -> Developer Options -> ADB over network
-* OR an Android device with Android 4 to 10 (i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q) AND a PC with USB functionality and installed [Android Debug Bridge for PC](https://developer.android.com/studio/releases/platform-tools)
+* Android device with Android 11 or higher with activated 'ADB over network' setting. Settings &#8594; Developer Options &#8594; ADB over network
+* OR an Android device with Android 4 to 10 (i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q) and a PC with USB functionality and installed [Android Debug Bridge for PC](https://developer.android.com/studio/releases/platform-tools)
   * Run the following commands in a terminal opened in the 'platform-tools' folder. Authorize on your phone when prompted:
    * `adb devices`
    * `adb tcpip 5555`
@@ -86,10 +83,11 @@ After [installation](#installation-and-usage) follow on screen instructions.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
-### Installation and Usage 
-Note: run all of the following commands in Termux
+### Installation
 
-1. Get dependencies I
+**Note: run all of the following commands in Termux**
+
+1. Get termux packages
 ```python
 pkg update && pkg upgrade
 pkg install python git
@@ -97,14 +95,10 @@ pkg install python git
 
 2. Clone the repo
 ```python
-git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git
-```
-3. Go into the tools folder
-```python
-cd WhatsApp-Key-Databse-Extractor/
+git clone https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
 
-4. Get dependencies II
+3. Get dependencies
 ```python
 python helpers/termux_dependencies.py
 ```
