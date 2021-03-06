@@ -95,7 +95,7 @@ def InstallLegacy(SDKVersion):
     CustomPrint('Installation Complete.')
 
 
-def RealDeal(SDKVersion, WhatsAppapkPath, versionName):
+def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
     UninstallWhatsApp(SDKVersion)
     InstallLegacy(SDKVersion)
@@ -163,7 +163,7 @@ def USBMode():
     ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = TermuxMode(
         adb)
     RealDeal(SDKVersion, WhatsAppapkPath,
-             versionName) if ACReturnCode == 1 else Exit()
+             versionName, sdPath) if ACReturnCode == 1 else Exit()
 
 
 if __name__ == "__main__":
