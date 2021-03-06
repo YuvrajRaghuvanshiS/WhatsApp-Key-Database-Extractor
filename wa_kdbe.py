@@ -169,6 +169,8 @@ def USBMode():
 if __name__ == "__main__":
 
     ADBSerialId = deviceId.init()
+    if(not ADBSerialId):
+        quit()
 
     # Global command line helpers
     adb = 'adb -s ' + ADBSerialId
