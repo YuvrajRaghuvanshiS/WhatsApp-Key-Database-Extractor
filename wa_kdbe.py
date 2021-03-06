@@ -22,17 +22,6 @@ import re
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 isJAVAInstalled = False
-ADBSerialId = deviceId.init()
-
-# Global command line helpers
-adb = 'adb -s ' + ADBSerialId
-delete = 'rm -rf'
-tmp = 'tmp/'
-confirmDelete = ''
-grep = 'grep'
-curl = 'curl'
-helpers = 'helpers/'
-extracted = 'extracted/'
 
 
 def main():
@@ -113,7 +102,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName):
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
     CustomPrint('Our work with device has finished.')
-    ExtractAB(isJAVAInstalled)
+    # ExtractAB(isJAVAInstalled)
     CustomPrint(
         'Extraction is not possible on termux as of now. I have to back \'whatsapp.ab\' up in \'extracted\' folder.')
     userName = CustomInput(
@@ -178,4 +167,17 @@ def USBMode():
 
 
 if __name__ == "__main__":
+
+    ADBSerialId = deviceId.init()
+
+    # Global command line helpers
+    adb = 'adb -s ' + ADBSerialId
+    delete = 'rm -rf'
+    tmp = 'tmp/'
+    confirmDelete = ''
+    grep = 'grep'
+    curl = 'curl'
+    helpers = 'helpers/'
+    extracted = 'extracted/'
+
     main()
