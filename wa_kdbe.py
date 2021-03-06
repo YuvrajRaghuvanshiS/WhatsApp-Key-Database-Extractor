@@ -160,8 +160,8 @@ def UninstallWhatsApp(SDKVersion):
 
 
 def USBMode():
-    ACReturnCode, SDKVersion, WhatsAppapkPath, versionName = TermuxMode(
-        ADBSerialId)
+    ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = TermuxMode(
+        adb)
     RealDeal(SDKVersion, WhatsAppapkPath,
              versionName) if ACReturnCode == 1 else Exit()
 
