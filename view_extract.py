@@ -27,13 +27,8 @@ extracted = 'extracted/'
 tar = 'tar.exe'
 if(isWindows):
     adb = 'bin\\adb.exe -s '
-
-    grep = 'bin\\grep.exe'
-    curl = 'bin\\curl.exe'
 else:
     adb = 'adb -s '
-    grep = 'grep'
-    curl = 'curl'
     tar = 'tar'
 
 

@@ -255,12 +255,8 @@ if __name__ == "__main__":
     helpers = 'helpers/'
     if(isWindows):
         adb = 'bin\\adb.exe -s ' + ADBSerialId
-        grep = 'bin\\grep.exe'
-        curl = 'bin\\curl.exe'
     else:
         adb = 'adb -s ' + ADBSerialId
-        grep = 'grep'
-        curl = 'curl'
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         f1 = executor.submit(main)
