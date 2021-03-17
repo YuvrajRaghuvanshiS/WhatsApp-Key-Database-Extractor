@@ -23,10 +23,10 @@
     <img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/helpers/banner.png" alt="Logo" width="320" height="100">
   </a>
 
-  <h3 align="center">WhatsApp Key/DataBase Extractor <img src="https://badges.pufler.dev/updated/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor?color=black&logo=github"/> </h3>
+  <h3 align="center">WhatsApp Key/Database Extractor</h3>
 
   <p align="center">
-    Extract key/msgstore.db from /data/data/com.whatsapp in android without root.
+    Extract key/msgstore.db from /data/data/com.whatsapp in Android v4.0+ without root.
     <br />
 </p>
 
@@ -63,26 +63,28 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ### Built With
 * [Python](https://www.python.org/)
 * [Bash](https://www.gnu.org/software/bash/) (for Linux and OS X)
-#### Depends upon    
+
+**Depends on**   
+
 * [Java](https://www.java.com/) (To extract backup)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ## Getting Started
 
-Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Prepare for Worst.               
+***Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
+For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Prepare for Worst.***
 After [intallation](#installation) follow on screen instructions.
 
 
 ### Prerequisites
 
-* O/S: Any windows/Mac/Linux. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
+* O/S: Any Windows/Mac/Linux. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
 * [Python 3.x](https://www.python.org/downloads/)
 * [Java](https://www.java.com/en/download/)
 * [ADB Drivers](https://developer.android.com/studio/releases/platform-tools) 
-* USB Debugging must be enabled on the target device. Settings &#8594; Developer Options &#8594; (Debugging) USB debugging  
-     If you cannot find Developer Options then please go to: Settings &#8594; About phone/device and tap the Build number multiple times until you're finally declared a developer.  
+* USB Debugging must be enabled on the target device. Settings &#8594; Developer Options &#8594; USB debugging.
+  * If you cannot find Developer Options then please go to: Settings &#8594; About phone/device and tap the Build number multiple times until you're finally declared a developer.  
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
 
 
@@ -108,9 +110,9 @@ python3 wa_kdbe.py
 | Flag            |               | Type          | Behaviour     | Status     |
 | -------------   | ------------- | ------------- | ------------- | ------------- |
 | --allow-reboot      | Optional      | Bool | Reboots device before installing Legacy WhatsApp. | Stable |
-| --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. | Beta |
-| --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. | Beta |
-| --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. | Beta |
+| --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. | Stable |
+| --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. | Stable |
+| --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. | Stable |
 
 Example usage : 
 ```python
@@ -124,13 +126,13 @@ python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcp
 ```
 python3 view_extract.py
 ```
-IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
+* IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
 
 2. Run `protect.py` : To compress/decompress user folder with(out) password for safekeeping.
 ```
 python3 protect.py
 ```
-IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is reference user name you entered earlier.
+* IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is reference user name you entered earlier.
 
 3. Run `restore_whatsapp.py` : To reinstall WhatsApp on device.
 ```

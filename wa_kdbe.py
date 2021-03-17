@@ -5,7 +5,7 @@ try:
     import termcolor
     import wget
 except ImportError:
-    print('First run : Auto installing requirements.')
+    print('\nFirst run : Auto installing python requirements.\n')
     try:
         # Trying both methods of installations
         os.system('pip3 install --upgrade termcolor wget packaging')
@@ -48,10 +48,13 @@ def main():
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
     print('\n')
-    CustomPrint('Current release date : 25/02/2021', 'cyan')
+    CustomPrint('Current release date : 17/03/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
+    print('\n')
+    CustomInput(
+        '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Press any key to continue.', 'yellow')
     if(readInstruction.upper() == 'Y'):
         USBMode()
     else:
