@@ -116,7 +116,7 @@ python3 wa_kdbe.py
 
 Example usage : 
 ```python
-python wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy
+python3 wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy
 ```
 
 ### Standalone Operations
@@ -150,7 +150,7 @@ python3 restore_whatsapp.py
 *  :heavy_check_mark: Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
 *  :heavy_check_mark: Moves msgstore.db to your phone.
 *  :heavy_check_mark: Creates password protected 7z file so keep your extraction safe.
-*  :heavy_check_mark: Continues without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python view_extract.py`.
+*  :heavy_check_mark: Continues without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python3 view_extract.py`.
 *  :heavy_check_mark: Command line arguments
 *  :heavy_check_mark: ADB Devices menu.
 *  :heavy_check_mark: Implement datetime.
@@ -173,12 +173,12 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
 * If "[INSTALL_FAILED_VERSION_DOWNGRADE]" run with `--allow-reboot` flag.
 
   ```
-  python wa_kdbe.py --allow-reboot
+  python3 wa_kdbe.py --allow-reboot
   ```
 * If "adb: error: cannot create 'tmp/WhatsAppbackup.apk': Permission denied" on macOS run script with `sudo`.
 
   ```
-  sudo python wa_kdbe.py
+  sudo python3 wa_kdbe.py
   ```
 
 
