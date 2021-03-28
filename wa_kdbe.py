@@ -1,16 +1,21 @@
 # Auto Requirements installer.
+import json
 import os
+import socket
+
 try:
     import packaging
+    import psutil
     import termcolor
     import wget
 except ImportError:
     print('\nFirst run : Auto installing python requirements.\n')
     try:
         # Trying both methods of installations
-        os.system('pip3 install --upgrade termcolor wget packaging')
+        os.system('pip3 install --upgrade termcolor wget packaging psutil')
     except:
-        os.system('python3 -m pip install --upgrade termcolor wget packaging')
+        os.system(
+            'python3 -m pip install --upgrade termcolor wget packaging psutil')
 
 
 import argparse
@@ -48,7 +53,13 @@ def main():
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
     print('\n')
-    CustomPrint('Current release date : 17/03/2021', 'cyan')
+    try:
+        CustomPrint('System Info : ' +
+                    json.dumps(GetSysInfo(), indent=2, default=str))
+        print('\n')
+    except:
+        pass
+    CustomPrint('Current release date : 28/03/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
@@ -178,6 +189,19 @@ def RunScrCpy(_isScrCpy):
         proc = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, shell=False)
         proc.communicate()
+
+
+def GetSysInfo():
+    info = {}
+    info['Platform'] = platform.system()
+    info['Platform Release'] = platform.release()
+    info['Platform Version'] = platform.version()
+    info['Architecture'] = platform.machine()
+    info['Hostname'] = socket.gethostname()
+    info['Processor'] = platform.processor()
+    info['RAM'] = str(
+        round(psutil.virtual_memory().total / (1024.0 ** 3)))+" GB"
+    return info
 
 
 def ShowBanner():
