@@ -1,5 +1,6 @@
 import os
 import re
+import pdb
 from subprocess import check_output, getoutput
 
 try:
@@ -25,6 +26,7 @@ helpers = 'helpers/'
 
 
 def AfterConnect(adb):
+    pdb.set_trace()
     SDKVersion = int(getoutput(
         adb + ' shell getprop ro.build.version.sdk'))
     if (SDKVersion <= 13):
@@ -67,6 +69,7 @@ def Exit():
 
 
 def WindowsUSB(adb):
+    pdb.set_trace()
     CustomPrint('Connected to ' + getoutput(adb +
                                             ' shell getprop ro.product.model'))
     return AfterConnect(adb)
