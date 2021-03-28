@@ -1,4 +1,5 @@
 import os
+import pdb
 import re
 from subprocess import check_output, getoutput
 
@@ -19,6 +20,7 @@ appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def AfterConnect(ADBSerialId):
+    pdb.set_trace()
     SDKVersion = int(getoutput('adb -s ' + ADBSerialId +
                                ' shell getprop ro.build.version.sdk'))
     if (SDKVersion <= 13):
@@ -66,6 +68,7 @@ def Exit():
 
 
 def LinuxUSB(ADBSerialId):
+    pdb.set_trace()
     CustomPrint('Connected to ' + getoutput('adb -s ' +
                                             ADBSerialId + ' shell getprop ro.product.model'))
     return AfterConnect(ADBSerialId)
