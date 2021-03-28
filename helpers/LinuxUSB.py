@@ -37,9 +37,13 @@ def AfterConnect(ADBSerialId):
         Exit()
     sdPath = getoutput('adb -s ' + ADBSerialId +
                        ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
-    # To check if APK even exists at a given path to download!
-    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(
-        'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'.split()))).group(1))
+    # To check if APK even exists at a given path to download! 
+    # Since that obviously is not available at whatsapp cdn defaulting that to 0 for GH #46
+    try:
+        contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(
+            'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'.split()))).group(1))
+    except ValueError:
+        contentLength = 0
     _versionNameText = 'adb -s ' + ADBSerialId + \
         ' shell dumpsys package com.whatsapp'
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\n)",
