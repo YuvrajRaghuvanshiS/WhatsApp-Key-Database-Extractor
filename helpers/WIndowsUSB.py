@@ -49,8 +49,12 @@ def AfterConnect(adb):
         adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     sdPath = getoutput(adb + ' shell "echo $EXTERNAL_STORAGE"')
     # To check if APK even exists at a given path to download!
-    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(
-        curl + ' -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))).group(1))
+    # Since that obviously is not available at whatsapp cdn defaulting that to 0 for GH #46
+    try:
+        contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(
+            'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'.split()))).group(1))
+    except ValueError:
+        contentLength = 0
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(
         adb + ' shell dumpsys package com.whatsapp'))).group(1)
     CustomPrint('WhatsApp V' + versionName + ' installed on device')
