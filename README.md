@@ -175,6 +175,7 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
   ```
   python3 wa_kdbe.py --allow-reboot
   ```
+* If "[INSTALL_PARSE_FAILED_NOT_APK]" delete helpers/LegacyWhatsApp.apk and re-run.
 * If "adb: error: cannot create 'tmp/WhatsAppbackup.apk': Permission denied" on macOS run script with `sudo`.
 
   ```
