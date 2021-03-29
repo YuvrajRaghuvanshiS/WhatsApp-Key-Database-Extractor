@@ -1,16 +1,17 @@
 import os
-import re
 import pdb
+import re
 from subprocess import check_output, getoutput
 
 try:
-    import wget
     from packaging import version
+    import requests
+    from tqdm import tqdm
 except ImportError:
     try:
-        os.system('pip3 install wget packaging')
+        os.system('pip3 install packaging requests tqdm')
     except:
-        os.system('python3 -m pip install wget packaging')
+        os.system('python3 -m pip install packaging requests tqdm')
 
 from CustomCI import CustomPrint
 
@@ -53,13 +54,29 @@ def AfterConnect(adb):
         if not (os.path.isfile(helpers + 'LegacyWhatsApp.apk')):
             CustomPrint(
                 'Downloading legacy WhatsApp V2.11.431 to helpers folder')
-            wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
+            DownloadApk(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
+            # wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
             print('\n')
         else:
             CustomPrint('Found legacy WhatsApp V2.11.431 apk in ' +
                         helpers + ' folder')
 
     return 1, SDKVersion, WhatsAppapkPath, versionName, sdPath
+
+
+def DownloadApk(url, fileName):
+    # Streaming, so we can iterate over the response.
+    response = requests.get(url, stream=True)
+    totalSizeInBytes = int(response.headers.get('content-length', 0))
+    blockSize = 1024  # 1 Kibibyte
+    progressBar = tqdm(total=totalSizeInBytes, unit='iB', unit_scale=True)
+    with open(fileName, 'wb') as file:
+        for data in response.iter_content(blockSize):
+            progressBar.update(len(data))
+            file.write(data)
+    progressBar.close()
+    if totalSizeInBytes != 0 and progressBar.n != totalSizeInBytes:
+        CustomPrint('\aSomething went during downloading LegacyWhatsApp.apk')
 
 
 def Exit():

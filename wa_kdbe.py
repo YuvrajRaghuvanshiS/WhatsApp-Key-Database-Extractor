@@ -3,14 +3,16 @@ import os
 try:
     import packaging
     import termcolor
-    import wget
+    import requests
+    from tqdm import tqdm
 except ImportError:
     print('\nFirst run : Auto installing python requirements.\n')
     try:
         # Trying both methods of installations
-        os.system('pip3 install --upgrade termcolor wget packaging')
+        os.system('pip3 install --upgrade termcolor packaging requests tqdm')
     except:
-        os.system('python3 -m pip install --upgrade termcolor wget packaging')
+        os.system(
+            'python3 -m pip install --upgrade termcolor packaging requests tqdm')
 
 
 import argparse
