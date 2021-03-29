@@ -2,6 +2,7 @@ import os
 import pdb
 import re
 from subprocess import check_output, getoutput
+import subprocess
 
 try:
     from packaging import version
@@ -31,11 +32,15 @@ def AfterConnect(ADBSerialId):
         os.system('rm -rf tmp/*')
         Exit()
     _waPathText = 'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp'
-    WhatsAppapkPath = re.search(
-        '(?<=package:)(.*)(?=apk)', str(check_output(_waPathText.split()))).group(1) + 'apk'
-    if not (WhatsAppapkPath):
+    proc = subprocess.Popen(_waPathText.split(), stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
+    out, err = proc.communicate()
+    out = out.decode('utf-8')
+    if(not out):
         CustomPrint('Looks like WhatsApp is not installed on device.', 'red')
         Exit()
+    WhatsAppapkPath = re.search(
+        '(?<=package:)(.*)(?=apk)', str(check_output(_waPathText.split()))).group(1) + 'apk'
     sdPath = getoutput('adb -s ' + ADBSerialId +
                        ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
     # To check if APK even exists at a given path to download!
