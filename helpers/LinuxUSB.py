@@ -1,5 +1,4 @@
 import os
-import pdb
 import re
 from subprocess import check_output, getoutput
 import subprocess
@@ -22,7 +21,6 @@ appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def AfterConnect(ADBSerialId):
-    pdb.set_trace()
     SDKVersion = int(getoutput('adb -s ' + ADBSerialId +
                                ' shell getprop ro.build.version.sdk'))
     if (SDKVersion <= 13):
@@ -45,11 +43,9 @@ def AfterConnect(ADBSerialId):
                        ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
     # To check if APK even exists at a given path to download!
     # Since that obviously is not available at whatsapp cdn defaulting that to 0 for GH #46
-    try:
-        contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(
-            'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'.split()))).group(1))
-    except ValueError:
-        contentLength = 0
+    # Using getoutput instead of this to skip getting data like 0//n//r or whatever was getting recieved on GH #46 bcz check_output returns a byte type object and getoutput returns a str type .
+    contentLength = int(re.findall("(?<=Content-Length:)(.*[0-9])(?=)", getoutput(
+        'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))[0]) or 0
     _versionNameText = 'adb -s ' + ADBSerialId + \
         ' shell dumpsys package com.whatsapp'
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\n)",
@@ -95,7 +91,6 @@ def Exit():
 
 
 def LinuxUSB(ADBSerialId):
-    pdb.set_trace()
     CustomPrint('Connected to ' + getoutput('adb -s ' +
                                             ADBSerialId + ' shell getprop ro.product.model'))
     return AfterConnect(ADBSerialId)
