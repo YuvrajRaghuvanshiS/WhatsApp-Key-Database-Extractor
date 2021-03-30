@@ -65,7 +65,7 @@ def Compress(userFolder):
         CustomPrint('\aYour \'' + userFolder + '.7z\' file is in extracted folder. Password is : ' +
                     password.replace(' -p', ''), 'yellow')
         print('\n')
-        CustomInput('Press any key to continue.')
+        CustomInput('Hit Enter key to continue.')
         if(deleteUserFolder.upper() == 'Y'):
             DeleteUserFolder(userFolder)
         else:
@@ -156,7 +156,7 @@ def Uncompress(userZip):
         CustomPrint('\aYour extracted \'' + userZip.replace('.7z',
                                                             '') + '\' folder is in extracted folder.', 'yellow')
         print('\n')
-        CustomInput('Press any key to continue.')
+        CustomInput('Hit Enter key to continue.')
         if(deleteUserZip.upper() == 'Y'):
             DeleteUserZip(userZip)
         else:

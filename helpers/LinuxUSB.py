@@ -1,15 +1,17 @@
 import os
 import re
 from subprocess import check_output, getoutput
+import subprocess
 
 try:
-    import wget
     from packaging import version
+    import requests
+    from tqdm import tqdm
 except ImportError:
     try:
-        os.system('pip3 install wget packaging')
+        os.system('pip3 install packaging requests tqdm')
     except:
-        os.system('python3 -m pip install wget packaging')
+        os.system('python3 -m pip install packaging requests tqdm')
 
 from CustomCI import CustomPrint
 
@@ -28,16 +30,22 @@ def AfterConnect(ADBSerialId):
         os.system('rm -rf tmp/*')
         Exit()
     _waPathText = 'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp'
-    WhatsAppapkPath = re.search(
-        '(?<=package:)(.*)(?=apk)', str(check_output(_waPathText.split()))).group(1) + 'apk'
-    if not (WhatsAppapkPath):
+    proc = subprocess.Popen(_waPathText.split(), stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
+    out, err = proc.communicate()
+    out = out.decode('utf-8')
+    if(not out):
         CustomPrint('Looks like WhatsApp is not installed on device.', 'red')
         Exit()
+    WhatsAppapkPath = re.search(
+        '(?<=package:)(.*)(?=apk)', str(check_output(_waPathText.split()))).group(1) + 'apk'
     sdPath = getoutput('adb -s ' + ADBSerialId +
                        ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
     # To check if APK even exists at a given path to download!
-    contentLength = int(re.search("(?<=Content-Length:)(.*[0-9])(?=)", str(check_output(
-        'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'.split()))).group(1))
+    # Since that obviously is not available at whatsapp cdn defaulting that to 0 for GH #46
+    # Using getoutput instead of this to skip getting data like 0//n//r or whatever was getting recieved on GH #46 bcz check_output returns a byte type object and getoutput returns a str type .
+    contentLength = int(re.findall("(?<=Content-Length:)(.*[0-9])(?=)", getoutput(
+        'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'))[0]) or 0
     _versionNameText = 'adb -s ' + ADBSerialId + \
         ' shell dumpsys package com.whatsapp'
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\n)",
@@ -49,13 +57,30 @@ def AfterConnect(ADBSerialId):
         if not (os.path.isfile('helpers/LegacyWhatsApp.apk')):
             CustomPrint(
                 'Downloading legacy WhatsApp V2.11.431 to helpers folder')
-            wget.download(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
+            DownloadApk(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
+            # wget.download(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
             print('\n')
         else:
             CustomPrint(
                 'Found legacy WhatsApp V2.11.431 apk in helpers folder')
 
     return 1, SDKVersion, WhatsAppapkPath, versionName, sdPath
+
+
+def DownloadApk(url, fileName):
+    # Streaming, so we can iterate over the response.
+    response = requests.get(url, stream=True)
+    totalSizeInBytes = int(response.headers.get('content-length', 0))
+    blockSize = 1024  # 1 Kibibyte
+    progressBar = tqdm(total=totalSizeInBytes, unit='iB', unit_scale=True)
+    with open('helpers/temp.apk', 'wb') as file:
+        for data in response.iter_content(blockSize):
+            progressBar.update(len(data))
+            file.write(data)
+    progressBar.close()
+    os.rename('helpers/temp.apk', 'helpers/LegacyWhatsApp.apk')
+    if totalSizeInBytes != 0 and progressBar.n != totalSizeInBytes:
+        CustomPrint('\aSomething went during downloading LegacyWhatsApp.apk')
 
 
 def Exit():

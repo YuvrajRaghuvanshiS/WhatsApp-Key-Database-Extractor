@@ -7,15 +7,23 @@ try:
     import packaging
     import psutil
     import termcolor
-    import wget
+    import requests
+    from tqdm import tqdm
 except ImportError:
     print('\nFirst run : Auto installing python requirements.\n')
     try:
         # Trying both methods of installations
+<<<<<<< HEAD
         os.system('pip3 install --upgrade termcolor wget packaging psutil')
     except:
         os.system(
             'python3 -m pip install --upgrade termcolor wget packaging psutil')
+=======
+        os.system('pip3 install --upgrade termcolor packaging requests tqdm')
+    except:
+        os.system(
+            'python3 -m pip install --upgrade termcolor packaging requests tqdm')
+>>>>>>> issues/46
 
 
 import argparse
@@ -65,7 +73,7 @@ def main():
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
     print('\n')
     CustomInput(
-        '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Press any key to continue.', 'yellow')
+        '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Hit Enter key to continue.', 'yellow')
     if(readInstruction.upper() == 'Y'):
         USBMode()
     else:
@@ -154,7 +162,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
             while(subprocess.getoutput(adb + ' get-state') != 'device'):
                 CustomPrint('Waiting for device...')
                 time.sleep(5)
-            CustomInput('Press any key after unlocking device.', 'yellow')
+            CustomInput('Hit Enter key after unlocking device.', 'yellow')
         else:
             CustomPrint(
                 'Rebooting device in TCP mode break the connection and won\'t work until explicitly turned on in device and/or in PC. Skipping...', 'yellow')
@@ -163,7 +171,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     # Before backup run app
     os.system(adb + ' shell am start -n com.whatsapp/.Main')
     CustomInput(
-        '\aPress any key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
+        '\aHit Enter key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
     print('\n')
