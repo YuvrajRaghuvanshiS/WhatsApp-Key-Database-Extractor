@@ -13,17 +13,10 @@ except ImportError:
     print('\nFirst run : Auto installing python requirements.\n')
     try:
         # Trying both methods of installations
-<<<<<<< HEAD
-        os.system('pip3 install --upgrade termcolor wget packaging psutil')
+        os.system('pip3 install --upgrade packaging psutil termcolor requests tqdm')
     except:
         os.system(
-            'python3 -m pip install --upgrade termcolor wget packaging psutil')
-=======
-        os.system('pip3 install --upgrade termcolor packaging requests tqdm')
-    except:
-        os.system(
-            'python3 -m pip install --upgrade termcolor packaging requests tqdm')
->>>>>>> issues/46
+            'python3 -m pip install --upgrade packaging psutil termcolor requests tqdm')
 
 
 import argparse
