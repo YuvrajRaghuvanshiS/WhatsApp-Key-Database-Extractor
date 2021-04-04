@@ -107,16 +107,17 @@ python3 wa_kdbe.py
 
 **Command Line Flags**
 
-| Flag            |               | Type          | Behaviour     | Status     |
-| -------------   | ------------- | ------------- | ------------- | ------------- |
-| --allow-reboot      | Optional      | Bool | Reboots device before installing Legacy WhatsApp. | Stable |
-| --tcp-ip < IP >    | Optional      | String | Connects to a remote device via TCP mode. | Stable |
-| --tcp-port < Port >     | Optional     | String | Port number to connect to. Default : 5555. | Stable |
-| --scrcpy      | Optional      | Bool | Show device screen as a window using ScrCpy. | Stable |
+| Short | Flag                |          | Type   | Behaviour                                         | Status |
+| ----- | ------------------- | -------- | ------ | ------------------------------------------------- | ------ |
+| -ar   |--allow-reboot       | Optional | Bool   | Reboots device before installing Legacy WhatsApp. | Stable |
+| -tip  | --tcp-ip IP_ADDRESS | Optional | String | Connects to a remote device via TCP mode.         | Stable |
+| -tp   |--tcp-port PORT      | Optional | String | Port number to connect to. Default : 5555.        | Stable |
+| -s    | --scrcpy            | Optional | Bool   | Show device screen as a window using ScrCpy.      | Stable |
 
 Example usage : 
 ```python
 python3 wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy
+python3 wa_kdbe.py -ar -tip 192.168.43.130 -tp 5555 -s
 ```
 
 ### Standalone Operations

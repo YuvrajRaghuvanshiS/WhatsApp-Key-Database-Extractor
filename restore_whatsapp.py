@@ -30,10 +30,10 @@ def ReinstallWhatsApp(adb):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--tcp-ip', help='Connects to a remote device via TCP mode.')
-    parser.add_argument(
-        '--tcp-port', help='Port number to connect to. Default : 5555')
+    parser.add_argument('-tip',
+                        '--tcp-ip', help='Connects to a remote device via TCP mode.')
+    parser.add_argument('-tp',
+                        '--tcp-port', help='Port number to connect to. Default : 5555')
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
 

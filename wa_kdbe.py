@@ -254,13 +254,13 @@ def USBMode():
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--allow-reboot', action='store_true',
+    parser.add_argument('-ar', '--allow-reboot', action='store_true',
                         help='Allow reboot of device before installation of LegacyWhatsApp.apk to prevent some issues like [INSTALL_FAILED_VERSION_DOWNGRADE]')
     parser.add_argument(
-        '--tcp-ip', help='Connects to a remote device via TCP mode.')
-    parser.add_argument(
-        '--tcp-port', help='Port number to connect to. Default : 5555')
-    parser.add_argument('--scrcpy', action='store_true',
+        '-tip', '--tcp-ip', help='Connects to a remote device via TCP mode.')
+    parser.add_argument('-tp', '--tcp-port',
+                        help='Port number to connect to. Default : 5555')
+    parser.add_argument('-s', '--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
