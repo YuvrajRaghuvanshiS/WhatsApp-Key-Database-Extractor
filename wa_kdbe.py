@@ -171,7 +171,8 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     CustomPrint(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
     print('\n')
-    ExtractAB(isJAVAInstalled, sdPath=sdPath, ADBSerialId=ADBSerialId)
+    ExtractAB(isJAVAInstalled, sdPath=sdPath,
+              ADBSerialId=ADBSerialId, isTarOnly=isTarOnly)
 
 
 def ReinstallWhatsApp():
@@ -262,6 +263,8 @@ if __name__ == "__main__":
                         help='Port number to connect to. Default : 5555')
     parser.add_argument('-s', '--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
+    parser.add_argument('-to', '--tar-only', action='store_true',
+                        help='Get entire WhatsApp\'s data in <username>.tar file instead just getting few important files.')
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 
@@ -269,6 +272,7 @@ if __name__ == "__main__":
     tcpIP = args.tcp_ip
     tcpPort = args.tcp_port
     isScrCpy = args.scrcpy
+    isTarOnly = args.tar_only
     if(tcpIP):
         if(not tcpPort):
             tcpPort = '5555'

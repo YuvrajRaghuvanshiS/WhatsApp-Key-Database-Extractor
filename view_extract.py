@@ -1,3 +1,4 @@
+import argparse
 import os
 import platform
 import re
@@ -44,7 +45,7 @@ def main():
     else:
         sdPath = ''
     ExtractAB(isJAVAInstalled, sdPath=sdPath,
-              ADBSerialId=ADBSerialId, callingFromOtherModule=False)
+              ADBSerialId=ADBSerialId, callingFromOtherModule=False, isTarOnly=isTarOnly)
 
 
 def CheckJAVA():
@@ -79,7 +80,7 @@ def Exit():
     quit()
 
 
-def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule=True):
+def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule=True, isTarOnly=False):
     if not (isJAVAInstalled):
         CustomPrint('Can not detect JAVA on system.')
         # move whatsapp.ab from tmp to user specified folder.
@@ -112,7 +113,10 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
                               userName + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
                     CustomPrint('Successfully unpacked ' + extracted + userName + '/whatsapp.ab to ' +
                                 tmp + 'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
-                    TakingOutMainFiles(userName, sdPath, ADBSerialId)
+                    if(isTarOnly):
+                        TakingOutOnlyTar(userName)
+                    else:
+                        TakingOutMainFiles(userName, sdPath, ADBSerialId)
                 except Exception as e:
                     CustomPrint(e, 'red')
             else:
@@ -131,7 +135,10 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
                       'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
             CustomPrint('Successfully unpacked ' + tmp + 'whatsapp.ab to ' + tmp +
                         'whatsapp.tar. Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
-            TakingOutMainFiles(userName, sdPath, ADBSerialId)
+            if(isTarOnly):
+                TakingOutOnlyTar(userName)
+            else:
+                TakingOutMainFiles(userName, sdPath, ADBSerialId)
         except Exception as e:
             CustomPrint(e, 'red')
 
@@ -231,5 +238,44 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
         CleanTmp()
 
 
+def TakingOutOnlyTar(userName):
+    os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint(
+        'Folder ' + extracted + ' already exists.', 'yellow')
+    try:
+        CustomPrint('Moving tmp/whatsapp.tar to ' +
+                    extracted + userName + '.tar')
+        os.replace(tmp + 'whatsapp.tar', extracted + userName + '.tar')
+    except Exception as e:
+        CustomPrint('\a' + e, 'red')
+
+    CleanTmp()
+    print('\n')
+    CustomPrint('\aYour ' + userName + '.tar is in ' +
+                os.path.realpath(extracted) + ' folder.', 'yellow')
+
+    print('\n')
+    CustomInput('Hit Enter key to continue.')
+
+    try:  # Open in explorer.
+        if(isWindows):
+            os.startfile(os.path.realpath(extracted))
+        elif(isLinux):
+            os.system('xdg-open ' +
+                      os.path.realpath(extracted))
+        else:
+            os.system('open ' + os.path.realpath(extracted))
+    except:
+        pass
+
+
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-to', '--tar-only', action='store_true',
+                        help='Get entire WhatsApp\'s data in <username>.tar file instead just getting few important files.')
+    args = parser.parse_args()
+    #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
+
+    isTarOnly = args.tar_only
+
     main()
