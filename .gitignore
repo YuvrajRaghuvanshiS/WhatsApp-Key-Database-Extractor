@@ -1,5 +1,6 @@
 .vscode/
 helpers/LegacyWhatsApp.apk
+helpers/WhatsAppbackup.apk
 tmp/*
 */__pycache__/
 extracted/*

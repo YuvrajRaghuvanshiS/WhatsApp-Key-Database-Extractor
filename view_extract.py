@@ -90,7 +90,7 @@ def Exit():
 
 def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule=True, isTarOnly=False):
     if not (isJAVAInstalled):
-        CustomPrint('Can not detect JAVA on system.')
+        CustomPrint('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
         userName = CustomInput('Enter a name for this user. : ')
         os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint(
@@ -164,14 +164,19 @@ def ListUserFolders():
 
 
 def ShowBanner():
-    banner_path = 'non_essentials/banner.txt'
-    try:
-        banner = open(banner_path, 'r')
-        banner_content = banner.read()
-        CustomPrint(banner_content, 'green', ['bold'], False)
-        banner.close()
-    except Exception as e:
-        CustomPrint(e, 'red')
+    banner_content = '''
+================================================================================
+========                                                                ========
+========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ======== 
+========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ======== 
+========  88   I8I   88 88ooo88        88,8P   88   88 88oooY' 88ooooo  ======== 
+========  Y8   I8I   88 88~~~88 C8888D 88`8b   88   88 88~~~b. 88~~~~~  ======== 
+========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ======== 
+========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ======== 
+========                                                                ========
+================================================================================
+    '''
+    CustomPrint(banner_content, 'green', ['bold'], False)
     CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n',
                 'green', ['bold'], False)
 
@@ -285,7 +290,7 @@ if __name__ == "__main__":
                         help='Port number to connect to. Default : 5555')
 
     parser.add_argument('-to', '--tar-only', action='store_true',
-                        help='Get entire WhatsApp\'s data in <username>.tar file instead just getting few important files.')
+                        help='Get entire WhatsApp\'s data in <username>.tar file instead of just getting few important files.')
     # args = parser.parse_args()
     args = parser.parse_args('--tcp-ip 192.168.43.130 -tp 555'.split())
 

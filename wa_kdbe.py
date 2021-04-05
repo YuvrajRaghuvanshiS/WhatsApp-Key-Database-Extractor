@@ -83,7 +83,7 @@ def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell cp ' + WhatsAppapkPath +
               ' /sdcard/WhatsAppbackup.apk')
     os.system(adb + ' pull /sdcard/WhatsAppbackup.apk ' +
-              tmp + 'WhatsAppbackup.apk')
+              helpers + 'WhatsAppbackup.apk')
     # Delete temp apk from /sdcard.
     os.system(adb + ' shell rm -rf /sdcard/WhatsAppbackup.apk')
     CustomPrint('Apk backup complete.')
@@ -134,6 +134,19 @@ def Exit():
     quit()
 
 
+def GetSysInfo():
+    info = {}
+    info['Platform'] = platform.system()
+    info['Platform Release'] = platform.release()
+    info['Platform Version'] = platform.version()
+    info['Architecture'] = platform.machine()
+    info['Hostname'] = socket.gethostname()
+    info['Processor'] = platform.processor()
+    info['RAM'] = str(
+        round(psutil.virtual_memory().total / (1024.0 ** 3)))+" GB"
+    return info
+
+
 def InstallLegacy(SDKVersion):
     CustomPrint('Installing legacy WhatsApp V2.11.431, hold tight now.')
     if(SDKVersion >= 17):
@@ -178,10 +191,10 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
 def ReinstallWhatsApp():
     CustomPrint('Reinstallting original WhatsApp.')
     try:
-        os.system(adb + ' install -r -d ' + tmp + 'WhatsAppbackup.apk')
+        os.system(adb + ' install -r -d ' + helpers + 'WhatsAppbackup.apk')
     except Exception as e:
         CustomPrint(e, 'red')
-        CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.')
+        CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.')
 
 
 def RunScrCpy(_isScrCpy):
@@ -193,38 +206,48 @@ def RunScrCpy(_isScrCpy):
         proc.communicate()
 
 
-def GetSysInfo():
-    info = {}
-    info['Platform'] = platform.system()
-    info['Platform Release'] = platform.release()
-    info['Platform Version'] = platform.version()
-    info['Architecture'] = platform.machine()
-    info['Hostname'] = socket.gethostname()
-    info['Processor'] = platform.processor()
-    info['RAM'] = str(
-        round(psutil.virtual_memory().total / (1024.0 ** 3)))+" GB"
-    return info
-
-
 def ShowBanner():
-    banner_path = 'non_essentials/banner.txt'
-    try:
-        banner = open(banner_path, 'r')
-        banner_content = banner.read()
-        CustomPrint(banner_content, 'green', ['bold'], False)
-        banner.close()
-    except Exception as e:
-        CustomPrint(e, 'red')
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n',
+    banner_content = '''
+================================================================================
+========                                                                ========
+========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ======== 
+========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ======== 
+========  88   I8I   88 88ooo88        88,8P   88   88 88oooY' 88ooooo  ======== 
+========  Y8   I8I   88 88~~~88 C8888D 88`8b   88   88 88~~~b. 88~~~~~  ======== 
+========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ======== 
+========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ======== 
+========                                                                ========
+================================================================================
+    '''
+    CustomPrint(banner_content, 'green', ['bold'], False)
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========',
                 'green', ['bold'], False)
-    intro_path = 'non_essentials/intro.txt'
-    try:
-        intro = open(intro_path, 'r')
-        intro_content = intro.read()
-        CustomPrint(intro_content, 'green', ['bold'], False)
-        intro.close()
-    except Exception as e:
-        CustomPrint(e, 'red')
+    intro_content = '''
+================================================================================
+===                                                                          ===
+===  xxxxx  PLEASE TAKE WHATSAPP CHAT BACKUP BEFORE GETTING STARTED.  xxxxx  ===
+===                                                                          ===
+===     For that go to 'WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup'     ===
+===              here take a local backup. Prepare for Worst.                ===
+===                                                                          ===
+===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===
+===   unencrypted file) and your 'key' file from '/data/data/com.whatsapp'   ===
+===  directory in Android 4.0+ device without root access. However you need  ===
+===   to have JAVA installed on your system in order to 'view the extract'.  ===
+===  If you don't have JAVA installed then you can 'view extract' later by   ===
+===   running 'view_extract.py'. The idea is to install a 'Legacy WhatsApp'  ===
+===       temporarily on your device in order to get the android backup      ===
+===    permission. You should not lose any data and your current WhatsApp    ===
+===   version will be installed after this process so don't panic and don't  ===
+=== stop this script while it's working. However if something fails you can  ===
+===    run 'restore_whatsapp.py' and reinstall current WhatsApp or simply    ===
+===                    update that from Google Play Store.                   ===
+===                                                                          ===
+===                      Script by : Yuvraj Raghuvanshi                      ===
+===                      Github.com/YuvrajRaghuvanshiS                       ===
+================================================================================
+    '''
+    CustomPrint(intro_content, 'green', ['bold'], False)
 
 
 def UninstallWhatsApp(SDKVersion):
@@ -264,7 +287,7 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
     parser.add_argument('-to', '--tar-only', action='store_true',
-                        help='Get entire WhatsApp\'s data in <username>.tar file instead just getting few important files.')
+                        help='Get entire WhatsApp\'s data in <username>.tar file instead of just getting few important files.')
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 

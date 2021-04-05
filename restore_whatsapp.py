@@ -17,15 +17,15 @@ if platform.system() == 'Linux':
 
 def ReinstallWhatsApp(adb):
     CustomPrint('Reinstallting original WhatsApp.')
-    if(os.path.isfile(tmp + 'WhatsAppbackup.apk')):
+    if(os.path.isfile(helpers + 'WhatsAppbackup.apk')):
         try:
             os.system(adb + ' install -r -d ' +
-                      tmp + 'WhatsAppbackup.apk')
+                      helpers + 'WhatsAppbackup.apk')
         except Exception as e:
             CustomPrint(e, 'red')
-            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.', 'red')
+            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.', 'red')
     else:
-        CustomPrint('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from settings => app settings => WhatsApp.', 'red')
+        CustomPrint('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.', 'red')
 
 
 if __name__ == "__main__":
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         quit()
 
     # Global command line helpers
-    tmp = 'tmp/'
+    helpers = 'helpers/'
     if(isWindows):
         adb = 'bin\\adb.exe -s ' + ADBSerialId
     else:
