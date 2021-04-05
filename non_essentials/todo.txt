@@ -35,4 +35,4 @@ Product demo video.
 Done : Your whatsapp database along with other files is in extracted/<userName> folder. Give complete path instead.
 Done : Add release date.
 Done : Automated import/install.
-Get unpacked whatsapp.tar only, do not extract. use flag --only-tar.
+Done : Get unpacked whatsapp.tar only, do not extract. use flag --only-tar.

@@ -6,6 +6,7 @@ import shutil
 import subprocess
 
 import helpers.ADBDeviceSerialId as deviceId
+import helpers.TCPDeviceSerialId as tcpDeviceId
 import protect
 from helpers.CustomCI import CustomInput, CustomPrint
 
@@ -38,7 +39,14 @@ def main():
     ShowBanner()
     global isJAVAInstalled
     isJAVAInstalled = CheckJAVA()
-    ADBSerialId = deviceId.init()
+    global tcpPort
+    if(tcpIP):
+        if(not tcpPort):
+            tcpPort = '5555'
+        ADBSerialId = tcpDeviceId.init(tcpIP, tcpPort)
+    else:
+        ADBSerialId = deviceId.init()
+
     if(ADBSerialId):
         sdPath = subprocess.getoutput(
             adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
@@ -271,11 +279,18 @@ def TakingOutOnlyTar(userName):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-tip', '--tcp-ip', help='Connects to a remote device via TCP mode.')
+    parser.add_argument('-tp', '--tcp-port',
+                        help='Port number to connect to. Default : 5555')
+
     parser.add_argument('-to', '--tar-only', action='store_true',
                         help='Get entire WhatsApp\'s data in <username>.tar file instead just getting few important files.')
-    args = parser.parse_args()
-    #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
+    # args = parser.parse_args()
+    args = parser.parse_args('--tcp-ip 192.168.43.130 -tp 555'.split())
 
+    tcpIP = args.tcp_ip
+    tcpPort = args.tcp_port
     isTarOnly = args.tar_only
 
     main()

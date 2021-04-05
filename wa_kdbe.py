@@ -60,7 +60,7 @@ def main():
         print('\n')
     except:
         pass
-    CustomPrint('Current release date : 28/03/2021', 'cyan')
+    CustomPrint('Current release date : 05/04/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
