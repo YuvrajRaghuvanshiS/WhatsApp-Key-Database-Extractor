@@ -1,3 +1,4 @@
+**Not watching this repository, won't get notified about activities. Mention me in issues/discussions to wake the zombie.**
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=repo%20size">
   <img src="https://img.shields.io/github/languages/top/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
