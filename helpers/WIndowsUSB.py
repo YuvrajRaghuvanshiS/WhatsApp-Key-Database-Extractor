@@ -21,8 +21,6 @@ appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 # Global command line helpers
 tmp = 'tmp/'
-grep = 'bin\\grep.exe'
-curl = 'bin\\curl.exe'
 helpers = 'helpers/'
 
 
