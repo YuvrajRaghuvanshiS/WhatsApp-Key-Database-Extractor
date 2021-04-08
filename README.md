@@ -110,13 +110,14 @@ python3 wa_kdbe.py
 
 **Command Line Flags**
 
-| Short | Flag                |          | Type   | Behaviour                                                              | Status |
-| ----- | ------------------- | -------- | ------ | ---------------------------------------------------------------------- | ------ |
-| -ar   |--allow-reboot       | Optional | Bool   | Reboots device before installing Legacy WhatsApp.                      | Stable |
-| -tip  | --tcp-ip IP_ADDRESS | Optional | String | Connects to a remote device via TCP mode.                              | Stable |
-| -tp   |--tcp-port PORT      | Optional | String | Port number to connect to. Default : 5555.                             | Stable |
-| -s    | --scrcpy            | Optional | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
-| -to   | --tar-only          | Optional | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Beta   |
+| Short | Flag                |          | Type   | Behaviour                                                                             | Status |
+| ----- | ------------------- | -------- | ------ | ------------------------------------------------------------------------------------- | ------ |
+| -ar   |--allow-reboot       | Optional | Bool   | Reboots device before installing Legacy WhatsApp.                                     | Stable |
+| -tip  | --tcp-ip IP_ADDRESS | Optional | String | Connects to a remote device via TCP mode.                                             | Stable |
+| -tp   |--tcp-port PORT      | Optional | String | Port number to connect to. Default : 5555.                                            | Stable |
+| -s    | --scrcpy            | Optional | Bool   | Show device screen as a window using ScrCpy.                                          | Stable |
+| -to   | --tar-only          | Optional | Bool   | Get ALL files as a tarball instead of main files from WhatsApp backup.                | Beta   |
+| -f    | --fast              | Optional | Bool   | Make process fast by backing WhatsApp.apk inside device and installing it from there. | Beta   |
 
 Example usage : 
 ```python
