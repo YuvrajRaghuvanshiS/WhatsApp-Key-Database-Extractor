@@ -135,7 +135,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
         CustomPrint('Found whatsapp.ab in tmp folder. Continuing... Size : ' +
                     str(os.path.getsize(tmp + '/whatsapp.ab')) + ' bytes.')
         userName = CustomInput(
-            'Enter a reference name for this user. : ') or 'user'
+            'Enter a name for this user (default \"user\"). : ') or 'user'
         abPass = CustomInput(
             'Enter same password which you entered on device when prompted earlier. : ')
         try:

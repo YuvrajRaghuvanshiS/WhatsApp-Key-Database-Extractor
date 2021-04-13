@@ -137,7 +137,7 @@ python3 view_extract.py
 ```
 python3 protect.py
 ```
-* IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is reference user name you entered earlier.
+* IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is name of user you entered earlier.
 
 3. Run `restore_whatsapp.py` : To reinstall WhatsApp on device.
 ```
