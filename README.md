@@ -92,7 +92,7 @@ After [intallation](#installation) follow on screen instructions.
 
 ### Installation
 
-1. Clone the repo
+1. Clone the repo, or click download Code in the top right corner
 ```bash
 git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
@@ -103,7 +103,7 @@ sudo ./bin/linux_dependencies.sh
 ```
 If you're getting any error while running above command you need to install the following manually for your linux distro. : [adb](https://developer.android.com/studio/command-line/adb) [curl](https://curl.se/download.html) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
 
-3. Run `wa_kdbe.py`
+3. Run `wa_kdbe.py`, double clicking the file works as well
 ```python
 python3 wa_kdbe.py
 ```
