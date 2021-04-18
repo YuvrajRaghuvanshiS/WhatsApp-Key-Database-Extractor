@@ -1,4 +1,3 @@
-**Not watching this repository, won't get notified about activities. Mention me in issues/discussions to wake the zombie.**
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=repo%20size">
   <img src="https://img.shields.io/github/languages/top/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
@@ -211,6 +210,8 @@ Contributions are what make the open source community such an amazing place to b
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. "Draft" a pull request and mark it "Ready for review" once work is done.
+
+Other ways to contribute is to buy me a coffee but let's just say it is to test out new features of the project. **Checkout [features/fast](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussions/53#discussioncomment-625798) to test backup and reinstallation of WhatsApp on device level.** This makes it quite time saving specially in case of TCP.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
