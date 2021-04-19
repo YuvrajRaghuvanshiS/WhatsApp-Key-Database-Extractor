@@ -64,6 +64,9 @@ def AfterConnect(adb):
         else:
             CustomPrint('Found legacy WhatsApp V2.11.431 apk in ' +
                         helpers + ' folder')
+    else:
+        # Version lower than 2.11.431 installed on device.
+        pass
 
     return 1, SDKVersion, WhatsAppapkPath, versionName, sdPath
 
@@ -82,12 +85,14 @@ def DownloadApk(url, fileName):
     os.rename('helpers/temp.apk', 'helpers/LegacyWhatsApp.apk')
     if totalSizeInBytes != 0 and progressBar.n != totalSizeInBytes:
         CustomPrint('\aSomething went during downloading LegacyWhatsApp.apk')
+        Exit()
 
 
 def Exit():
     print('\n')
     CustomPrint('Exiting...')
     os.system('bin\\adb.exe kill-server')
+    os.system('pause')
     quit()
 
 

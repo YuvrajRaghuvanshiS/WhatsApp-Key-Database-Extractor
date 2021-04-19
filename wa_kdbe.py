@@ -60,14 +60,14 @@ def main():
         print('\n')
     except:
         pass
-    CustomPrint('Current release date : 13/04/2021', 'cyan')
+    CustomPrint('Current release date : 19/04/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
-    print('\n')
-    CustomInput(
-        '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Hit Enter key to continue.', 'yellow')
     if(readInstruction.upper() == 'Y'):
+        print('\n')
+        CustomInput(
+            '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Hit Enter key to continue.', 'yellow')
         USBMode()
     else:
         Exit()
@@ -97,6 +97,7 @@ def BackupWhatsAppDataasAb(SDKVersion):
                                                                              23) else os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab -noapk com.whatsapp')
     except Exception as e:
         CustomPrint(e, 'red')
+        Exit()
     CustomPrint('Done backing up data. Size : ' +
                 str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
 
@@ -105,7 +106,8 @@ def CheckBin():
     if (not os.path.isdir('bin')):
         CustomPrint('I can not find bin folder, check again...', 'red')
         Exit()
-    pass
+    else:
+        pass
 
 
 def CheckJAVA():
@@ -131,6 +133,7 @@ def Exit():
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
+    os.system('pause')
     quit()
 
 
@@ -195,6 +198,7 @@ def ReinstallWhatsApp():
     except Exception as e:
         CustomPrint(e, 'red')
         CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.')
+        Exit()
 
 
 def RunScrCpy(_isScrCpy):
@@ -303,7 +307,7 @@ if __name__ == "__main__":
     else:
         ADBSerialId = deviceId.init()
     if(not ADBSerialId):
-        quit()
+        Exit()
 
     # Global command line helpers
     tmp = 'tmp/'

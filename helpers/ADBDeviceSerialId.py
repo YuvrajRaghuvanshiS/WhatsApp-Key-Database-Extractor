@@ -87,4 +87,5 @@ def init():
 def Exit():
     print('\n')
     CustomPrint('Exiting...')
+    os.system('pause')
     quit()
