@@ -102,7 +102,7 @@ sudo ./bin/linux_dependencies.sh
 ```
 If you're getting any error while running above command you need to install the following manually for your linux distro. : [adb](https://developer.android.com/studio/command-line/adb) [curl](https://curl.se/download.html) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
 
-3. Run `wa_kdbe.py`
+3. Run `wa_kdbe.py` by double clicking the file on Windows or by
 ```python
 python3 wa_kdbe.py
 ```
@@ -168,7 +168,8 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
 
 ### Troubleshooting
 
-* If list is empty close terminal, remove and replug the device, and re-run the script. [Read More](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
+* If running `python3 wa_kdbe.py` or any other file is throwing error like "python3 is recognised as interal or external command." AND python3 is "already added to path (in case of windows)" try running files with `py wa_kdbe.py` instead. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/57)
+* If list is empty close terminal, remove and replug the device, and re-run the script. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
 * If you have never used USB Debugging before, you may also need to verify the fingerprint by ticking the checkbox and tapping 'allow' on device popup.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
