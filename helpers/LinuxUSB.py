@@ -16,7 +16,7 @@ except ImportError:
 from CustomCI import CustomPrint
 
 # Global variables
-appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
+appURLWhatsAppCDN = 'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
@@ -44,8 +44,8 @@ def AfterConnect(ADBSerialId):
     # To check if APK even exists at a given path to download!
     # Since that obviously is not available at whatsapp cdn defaulting that to 0 for GH #46
     # Using getoutput instead of this to skip getting data like 0//n//r or whatever was getting recieved on GH #46 bcz check_output returns a byte type object and getoutput returns a str type .
-    contentLength = int((re.findall("(?<=Content-Length:)(.*[0-9])(?=)", getoutput(
-        'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk')) or ['0'])[0])
+    contentLength = int((re.findall("(?<=content-length:)(.*[0-9])(?=)", getoutput(
+        'curl -sI https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk')) or ['0'])[0])
     _versionNameText = 'adb -s ' + ADBSerialId + \
         ' shell dumpsys package com.whatsapp'
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\n)",
@@ -73,7 +73,8 @@ def AfterConnect(ADBSerialId):
 def DownloadApk(url, fileName):
     # Streaming, so we can iterate over the response.
     response = requests.get(url, stream=True)
-    totalSizeInBytes = int(response.headers.get('content-length', 0))
+    totalSizeInBytes = int(response.headers.get(
+        'x-archive-orig-content-length')) or int(response.headers.get('content-length', 0))
     blockSize = 1024  # 1 Kibibyte
     progressBar = tqdm(total=totalSizeInBytes, unit='iB', unit_scale=True)
     with open('helpers/temp.apk', 'wb') as file:

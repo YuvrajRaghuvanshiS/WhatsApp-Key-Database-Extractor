@@ -59,8 +59,9 @@ def main():
                     json.dumps(GetSysInfo(), indent=2, default=str))
         print('\n')
     except:
-        pass
-    CustomPrint('Current release date : 19/04/2021', 'cyan')
+        CustomPrint(
+            'Can\'t get system information. Continuing anyway...', 'yellow')
+    CustomPrint('Current release date : 22/04/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
