@@ -61,7 +61,7 @@ def main():
     except:
         CustomPrint(
             'Can\'t get system information. Continuing anyway...', 'yellow')
-    CustomPrint('Current release date : 22/04/2021', 'cyan')
+    CustomPrint('Current release date : 24/04/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
@@ -134,7 +134,7 @@ def Exit():
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
-    os.system('pause')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 

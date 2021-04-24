@@ -61,5 +61,5 @@ def init(tcpIP, tcpPort):
 def Exit():
     print('\n')
     CustomPrint('Exiting...')
-    os.system('pause')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()

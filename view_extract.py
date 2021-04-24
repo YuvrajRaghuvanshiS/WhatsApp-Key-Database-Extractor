@@ -85,7 +85,7 @@ def Exit():
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
-    os.system('pause')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 
