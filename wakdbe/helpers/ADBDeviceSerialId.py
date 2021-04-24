@@ -2,7 +2,7 @@ import os
 import platform
 import subprocess as sp
 
-from CustomCI import CustomInput, CustomPrint
+from wakdbe.helpers.CustomCI import CustomInput, CustomPrint
 
 
 def init():

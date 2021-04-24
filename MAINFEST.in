@@ -1,0 +1,4 @@
+include wakdbe/bin/*
+include wakdbe/helpers/*
+include wakdbe/extracted/*
+include wakdbe/non_essentials/*

@@ -1,8 +1,11 @@
 import os
+import pathlib
 import platform
 import shutil
 
-from helpers.CustomCI import CustomInput, CustomPrint
+import pdbr
+
+from wakdbe.helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False
@@ -14,9 +17,11 @@ if platform.system() == 'Linux':
 
 # Global command line helpers
 extracted = 'extracted/'
-bin = 'bin/'
+global mainDir
+mainDir = pathlib.Path(__file__).parent.absolute()
+bin = str(pathlib.Path(mainDir / 'bin')) + '\\'
 if(isWindows):
-    sevenZip = 'bin\\7za.exe'
+    sevenZip = bin + '7za.exe'
 else:
     sevenZip = '7z'
 
@@ -110,6 +115,9 @@ def Exit():
 
 
 def ListUserFiles():
+    if(not os.path.isdir(extracted)):
+        CustomPrint('\aCan\'t find \'extracted\' folder...', 'red')
+        Exit()
     print('\n')
     CustomPrint('Available user files in extracted directory.')
     print('\n')
@@ -123,6 +131,10 @@ def ListUserFiles():
 
 
 def ListUserFolders():
+    pdbr.set_trace()
+    if(not os.path.isdir(extracted)):
+        CustomPrint('\aCan\'t find \'extracted\' folder...', 'red')
+        Exit()
     print('\n')
     CustomPrint('Available user folders in extracted directory.')
     print('\n')

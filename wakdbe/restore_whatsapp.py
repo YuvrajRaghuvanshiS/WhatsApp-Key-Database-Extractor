@@ -2,9 +2,9 @@ import argparse
 import os
 import platform
 
-import helpers.ADBDeviceSerialId as deviceId
-import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomPrint
+from wakdbe.helpers import ADBDeviceSerialId as deviceId
+from wakdbe.helpers import TCPDeviceSerialId as tcpDeviceId
+from wakdbe.helpers.CustomCI import CustomPrint
 
 # Detect OS
 isWindows = False

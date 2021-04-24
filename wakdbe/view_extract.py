@@ -1,14 +1,15 @@
 import argparse
 import os
+import pathlib
 import platform
 import re
 import shutil
 import subprocess
 
-import helpers.ADBDeviceSerialId as deviceId
-import helpers.TCPDeviceSerialId as tcpDeviceId
-import protect
-from helpers.CustomCI import CustomInput, CustomPrint
+from wakdbe import protect
+from wakdbe.helpers import ADBDeviceSerialId as deviceId
+from wakdbe.helpers import TCPDeviceSerialId as tcpDeviceId
+from wakdbe.helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False
@@ -24,11 +25,13 @@ isJAVAInstalled = False
 # Global command line helpers
 tmp = 'tmp/'
 helpers = 'helpers/'
-bin = 'bin/'
+global mainDir
+mainDir = pathlib.Path(__file__).parent.absolute()
+bin = str(pathlib.Path(mainDir / 'bin')) + '\\'
 extracted = 'extracted/'
 tar = 'tar.exe'
 if(isWindows):
-    adb = 'bin\\adb.exe -s '
+    adb = bin + '/adb.exe -s '
 else:
     adb = 'adb -s '
     tar = 'tar'
@@ -84,7 +87,7 @@ def Exit():
     print('\n')
     CustomPrint('Exiting...')
     os.system(
-        'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
+        bin + '/adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
     os.system('pause')
     quit()
 
@@ -197,7 +200,8 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
     # If user folder already exists ask user to overwrite or skip.
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try:
-        bin = 'bin\\' if(isWindows) else ''
+        global bin
+        bin = bin if(isWindows) else ''
         os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' +
                   tmp + ' apps/com.whatsapp/f/key')
         os.replace('tmp/apps/com.whatsapp/f/key',

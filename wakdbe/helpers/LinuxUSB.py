@@ -13,7 +13,7 @@ except ImportError:
     except:
         os.system('python3 -m pip install packaging requests tqdm')
 
-from CustomCI import CustomPrint
+from wakdbe.helpers.CustomCI import CustomPrint
 
 # Global variables
 appURLWhatsAppCDN = 'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk'
@@ -71,6 +71,8 @@ def AfterConnect(ADBSerialId):
 
 
 def DownloadApk(url, fileName):
+    os.mkdir('helpers') if not (os.path.isdir('helpers')) else CustomPrint(
+        'Folder helpers already exists...', 'yellow')
     # Streaming, so we can iterate over the response.
     response = requests.get(url, stream=True)
     totalSizeInBytes = int(response.headers.get(
