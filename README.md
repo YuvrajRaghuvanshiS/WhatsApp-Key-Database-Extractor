@@ -1,18 +1,17 @@
 <p align="center">
-  <img src="https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=repo%20size">
   <img src="https://img.shields.io/github/languages/top/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
   <img src="https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=license">
   <img src="https://img.shields.io/badge/depends-JAVA-informational">
-  <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyuvrajraghuvanshis%2Fwhatsapp-key-database-extractor&count_bg=%233D64C8&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false">
+
 </p>
 
 <br />
 
 <p align="center">
-  <img src="https://img.shields.io/badge/windows-tested-success">
-  <img src="https://img.shields.io/badge/kali-tested-success">
-  <img src="https://img.shields.io/badge/ubuntu-tested-success">
-  <img src="https://img.shields.io/badge/mac-tested-success">  
+  <img src="https://img.shields.io/badge/windows-beta-yellow">
+  <img src="https://img.shields.io/badge/kali-not%20tested-red">
+  <img src="https://img.shields.io/badge/ubuntu-not%20tested-red">
+  <img src="https://img.shields.io/badge/mac-not%20tested-red">  
 </p>
 
 
@@ -42,7 +41,6 @@
   * [Features & ToDo](#features--todo)
   * [Demo](#demo)
   * [Troubleshooting](#troubleshooting)
-* [Roadmap](#roadmap)
 * [Limitations](#limitations)
 * [Contributing](#contributing)
 * [License](#license)
@@ -79,7 +77,7 @@ After [intallation](#installation) follow on screen instructions.
 
 ### Prerequisites
 
-* O/S: Any Windows/Mac/Linux. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
+* O/S: Any Windows/Mac/Linux.
 * [Python 3.x](https://www.python.org/downloads/)
 * [Java](https://www.java.com/en/download/)
 * USB Debugging must be enabled on the target device. Settings &#8594; Developer Options &#8594; USB debugging.
@@ -90,20 +88,21 @@ After [intallation](#installation) follow on screen instructions.
 
 ### Installation
 
-1. Clone the repo
+1. Download and install.
 ```bash
-git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
+pip install wakdbe
 ```
 2. Install dependencies (for linux and OSX only) : skip `sudo` for mac.
 ```bash
+**TODO**
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linux_dependencies.sh
 ```
 If you're getting any error while running above command you need to install the following manually for your linux distro. : [adb](https://developer.android.com/studio/command-line/adb) [curl](https://curl.se/download.html) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
 
-3. Run `wa_kdbe.py` by double clicking the file on Windows or by
+3. Unleash the beast
 ```python
-python3 wa_kdbe.py
+python3 -m wakdbe -h
 ```
 
 **Command Line Flags**
@@ -118,47 +117,47 @@ python3 wa_kdbe.py
 
 Example usage : 
 ```python
-python3 wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only
-python3 wa_kdbe.py -ar -tip 192.168.43.130 -tp 5555 -s -to
+python3 -m wakdbe --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only
+python3 -m wakdbe -ar -tip 192.168.43.130 -tp 5555 -s -to
 ```
 
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `view_extract.py` : To unpack whatsapp.ab to whatsapp.tar and extract files.
+1. Run `view_extract` : To unpack whatsapp.ab to whatsapp.tar and extract files.
 ```
-python3 view_extract.py
+python3 -m wakdbe.view_extract
 ```
-* IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
+* IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder in your directory.
 
-2. Run `protect.py` : To compress/decompress user folder with(out) password for safekeeping.
+2. Run `protect` : To compress/decompress user folder with(out) password for safekeeping.
 ```
-python3 protect.py
+python3 -m wakdbe.protect
 ```
-* IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is name of user you entered earlier.
+* IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder in current directory. Where "userName" is name of user you entered earlier.
 
-3. Run `restore_whatsapp.py` : To reinstall WhatsApp on device.
+3. Run `restore_whatsapp` : To reinstall WhatsApp on device.
 ```
-python3 restore_whatsapp.py
+python3 -m wakdbe.restore_whatsapp
 ```
 
 
 ### Features & ToDo
 <!--https://github.com/StylishThemes/GitHub-Dark/wiki/Emoji-->
 
-*  :heavy_check_mark: Extracts msgstore.db from /data/data/com.whatsapp. (duh)
-*  :heavy_check_mark: Works wirelessly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
-*  :heavy_check_mark: See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag.
-*  :heavy_check_mark: Works with any android device v4.0+ so far.
-*  :heavy_check_mark: Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
-*  :heavy_check_mark: Moves msgstore.db to your phone.
-*  :heavy_check_mark: Creates password protected 7z file so keep your extraction safe.
-*  :heavy_check_mark: Continues without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python3 view_extract.py`.
-*  :heavy_check_mark: Command line arguments
-*  :heavy_check_mark: ADB Devices menu.
-*  :heavy_check_mark: Implement datetime.
-*  :heavy_check_mark: Extracts backup created over TCP ~~{ #24 bin\tar.exe: Unexpected EOF on archive file in Windows.}.~~
-*  :x: Works with WhatsApp Business.
+*  🟢 Extracts msgstore.db from /data/data/com.whatsapp. (duh)
+*  🟢 Works wirelessly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
+*  🟢 See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag.
+*  🟢 Works with any android device v4.0+ so far.
+*  🟢 Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
+*  🟢 Moves msgstore.db to your phone.
+*  🟢 Creates password protected 7z file so keep your extraction safe.
+*  🟢 Continues without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python3 -m wakdbe.view_extract`.
+*  🟢 Command line arguments
+*  🟢 ADB Devices menu.
+*  🟢 Implement datetime.
+*  🟢 Extracts backup created over TCP.
+*  🔴 Works with WhatsApp Business.
 
 
 ### Demo
@@ -167,31 +166,25 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
 
 ### Troubleshooting
 
-* If running `python3 wa_kdbe.py` or any other file is throwing error like "python3 is recognised as interal or external command." AND python3 is "already added to path (in case of windows)" try running files with `py wa_kdbe.py` instead. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/57)
+* If running `python3 -m wa_kdbe` or any other file is throwing error like "python3 is recognised as interal or external command." AND python3 is "already added to path (in case of windows)" try running files with `py -m wa_kdbe` instead.
 * If list is empty close terminal, remove and replug the device, and re-run the script. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
 * If you have never used USB Debugging before, you may also need to verify the fingerprint by ticking the checkbox and tapping 'allow' on device popup.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
-* WhatsApp crashing? Run `python3 restore_whatsapp.py`. Or "clear data/storage" / uninstall and reinstall from Play Store.
+* WhatsApp crashing? Run `python3 -m wakdbe.restore_whatsapp`. Or "clear data/storage" / uninstall and reinstall from Play Store.
 * In MIUI, "Failure [INSTALL_FAILED_USER_RESTRICTED: Install canceled by user]" occurs during installation of LegacyWhatsapp.apk, fix it by [allowing install via adb](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/16#issuecomment-768927639)
 * If "[INSTALL_FAILED_VERSION_DOWNGRADE]" run with `--allow-reboot` flag.
 
   ```
-  python3 wa_kdbe.py --allow-reboot
+  python3 -m wa_kdbe --allow-reboot
   ```
 * If "[INSTALL_PARSE_FAILED_NOT_APK]" delete helpers/LegacyWhatsApp.apk and re-run.
 * If "adb: error: cannot create 'tmp/WhatsAppbackup.apk': Permission denied" on macOS run script with `sudo`.
 
   ```
-  sudo python3 wa_kdbe.py
+  sudo python3 -m wa_kdbe
   ```
 
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
-
-## Roadmap
-
-See the [open issues](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/issues) for a list of proposed features (and known issues).
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
@@ -205,7 +198,7 @@ There always are limitations on how much we can make it work  and this is what a
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-1. Fork the Project
+1. Fork the project on GitHub.
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
