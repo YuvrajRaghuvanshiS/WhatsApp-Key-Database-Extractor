@@ -3,7 +3,6 @@ import pathlib
 import platform
 import shutil
 
-import pdbr
 
 from wakdbe.helpers.CustomCI import CustomInput, CustomPrint
 
@@ -131,7 +130,6 @@ def ListUserFiles():
 
 
 def ListUserFolders():
-    pdbr.set_trace()
     if(not os.path.isdir(extracted)):
         CustomPrint('\aCan\'t find \'extracted\' folder...', 'red')
         Exit()
