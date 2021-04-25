@@ -88,7 +88,7 @@ After [intallation](#installation) follow on screen instructions.
 
 
 
-### Installation
+### Installation (for pip/releases specific instructions go to [builds](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/tree/builds) branch)
 
 1. Clone the repo
 ```bash
