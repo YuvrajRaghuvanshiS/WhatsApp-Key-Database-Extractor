@@ -4,3 +4,7 @@ Forgot to write earlier.
 
 0.3.9 (25-04-2021)
 Updated README.md 
+
+0.4.0 (25-04-2021)
+Fixed : NameError: name 'CustomInput' is not defined in restore_whatsapp
+Fixed : bin path in restore_whatsapp

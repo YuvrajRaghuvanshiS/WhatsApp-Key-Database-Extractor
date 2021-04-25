@@ -1,10 +1,11 @@
 import argparse
 import os
 import platform
+import pathlib
 
 from wakdbe.helpers import ADBDeviceSerialId as deviceId
 from wakdbe.helpers import TCPDeviceSerialId as tcpDeviceId
-from wakdbe.helpers.CustomCI import CustomPrint
+from wakdbe.helpers.CustomCI import CustomPrint, CustomInput
 
 # Detect OS
 isWindows = False
@@ -13,6 +14,11 @@ if platform.system() == 'Windows':
     isWindows = True
 if platform.system() == 'Linux':
     isLinux = True
+
+# Global command line helpers
+global mainDir
+mainDir = pathlib.Path(__file__).parent.absolute()
+bin = str(pathlib.Path(mainDir / 'bin')) + '\\'
 
 
 def Exit():
@@ -62,7 +68,7 @@ if __name__ == "__main__":
     # Global command line helpers
     helpers = 'helpers/'
     if(isWindows):
-        adb = 'bin\\adb.exe -s ' + ADBSerialId
+        adb = bin + 'adb.exe -s ' + ADBSerialId
     else:
         adb = 'adb -s ' + ADBSerialId
 
