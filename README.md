@@ -8,9 +8,9 @@
 <br />
 
 <p align="center">
-  <img src="https://img.shields.io/badge/windows-beta-yellow">
-  <img src="https://img.shields.io/badge/kali-not%20tested-red">
-  <img src="https://img.shields.io/badge/ubuntu-not%20tested-red">
+  <img src="https://img.shields.io/badge/windows-almost-blue">
+  <img src="https://img.shields.io/badge/kali-beta-yellow">
+  <img src="https://img.shields.io/badge/ubuntu-beta-yellow">
   <img src="https://img.shields.io/badge/mac-not%20tested-red">  
 </p>
 

@@ -13,7 +13,7 @@ except ImportError:
     except:
         os.system('python3 -m pip install packaging requests tqdm')
 
-from wakdbe.helpers.CustomCI import CustomPrint
+from wakdbe.helpers.CustomCI import CustomPrint, CustomInput
 
 # Global variables
 appURLWhatsAppCDN = 'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk'

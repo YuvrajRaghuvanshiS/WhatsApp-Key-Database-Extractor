@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="wakdbe",  # Replace with your own username
-    version="0.4.0",
+    version="0.4.1",
     author="Yuvraj Raghuvanshi",
     author_email="YuvrajRaghuvanshi.S@protonmail.com",
     description="Extract WhatsApp key/DB from package directory (/data/data/com.whatsapp) without root access.",

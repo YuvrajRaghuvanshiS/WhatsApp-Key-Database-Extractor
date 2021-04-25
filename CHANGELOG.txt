@@ -8,3 +8,7 @@ Updated README.md
 0.4.0 (25-04-2021)
 Fixed : NameError: name 'CustomInput' is not defined in restore_whatsapp
 Fixed : bin path in restore_whatsapp
+
+0.4.1 (25-04-2021)
+Fixing : Ubuntu - Trying on WSL
+Fixed : Working on Ubuntu WSL at least, with IsJAVAInstalled = False during deubgging, must run on regular Ubuntu.

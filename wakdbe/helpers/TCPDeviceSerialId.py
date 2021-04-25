@@ -2,7 +2,7 @@ import os
 import platform
 import subprocess as sp
 
-from wakdbe.helpers.CustomCI import CustomPrint
+from wakdbe.helpers.CustomCI import CustomPrint, CustomInput
 
 
 def init(tcpIP, tcpPort):
