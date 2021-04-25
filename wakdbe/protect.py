@@ -109,7 +109,7 @@ def Exit():
             os.system('open ' + os.path.realpath(extracted))
     except:
         pass
-    os.system('pause')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 

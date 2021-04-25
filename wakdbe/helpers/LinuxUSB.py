@@ -94,7 +94,7 @@ def Exit():
     print('\n')
     CustomPrint('Exiting...')
     os.system('adb kill-server')
-    os.system('pause')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 
