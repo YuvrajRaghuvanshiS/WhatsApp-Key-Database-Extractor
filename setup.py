@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="wakdbe",  # Replace with your own username
-    version="0.3.7",
+    version="0.3.8",
     author="Yuvraj Raghuvanshi",
     author_email="YuvrajRaghuvanshi.S@protonmail.com",
     description="The most advanced and complete solution for extracting WhatsApp key/DB from package directory (/data/data/com.whatsapp) without root access.",
@@ -24,7 +24,7 @@ setuptools.setup(
     packages=['wakdbe', 'wakdbe/bin', 'wakdbe/extracted',
               'wakdbe/helpers', 'wakdbe/non_essentials'],
     package_data={
-        "": ["*.txt", ".placeholder"],
+        "": ["*.txt", ".placeholder", "bin/*"],
         "wakdbe": ["bin/*.*"],
     },
     python_requires=">=3.6",

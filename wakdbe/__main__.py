@@ -51,6 +51,7 @@ isJAVAInstalled = False
 
 global myDir
 myDir = pathlib.Path(__file__).parent.absolute()
+bin = str(pathlib.Path(myDir / 'bin'))
 
 
 def main():
@@ -320,7 +321,6 @@ if __name__ == "__main__":
     # Global command line helpers
     tmp = 'tmp/'
     helpers = 'helpers/'
-    bin = str(pathlib.Path(myDir / 'bin'))
     if(isWindows):
         adb = bin + '/adb.exe -s ' + ADBSerialId
     else:
