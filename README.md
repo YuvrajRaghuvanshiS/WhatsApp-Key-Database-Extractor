@@ -116,7 +116,7 @@ python3 wa_kdbe.py
 | -s    | --scrcpy            | Optional | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
 | -to   | --tar-only          | Optional | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Beta   |
 
-Example usage : 
+**Example usage** : Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode or USB mode. When Android is plugged with USB don't use TCP flags.
 ```python
 python3 wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only
 python3 wa_kdbe.py -ar -tip 192.168.43.130 -tp 5555 -s -to
