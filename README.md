@@ -37,7 +37,7 @@
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
+  * [Installation](#installation-for-pipreleases-specific-instructions-go-to-builds-branch)
   * [Standalone Operations](#standalone-operations)
   * [Features & ToDo](#features--todo)
   * [Demo](#demo)
@@ -73,8 +73,8 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 ***Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Prepare for Worst.***
-After [intallation](#installation) follow on screen instructions.
+For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Hope for best, prepare for Worst.***
+After [installation](#installation-for-pipreleases-specific-instructions-go-to-builds-branch) follow on screen instructions.
 
 
 ### Prerequisites
@@ -83,7 +83,7 @@ After [intallation](#installation) follow on screen instructions.
 * [Python 3.x](https://www.python.org/downloads/)
 * [Java](https://www.java.com/en/download/)
 * USB Debugging must be enabled on the target device. Settings &#8594; Developer Options &#8594; USB debugging.
-  * If you cannot find Developer Options then please go to: Settings &#8594; About phone/device and tap the Build number multiple times until you're finally declared a developer.  
+  * If you cannot find Developer Options then go to: Settings &#8594; About phone/device and tap the Build number multiple times until you're finally declared a developer.  
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
 
 
@@ -108,19 +108,20 @@ python3 wa_kdbe.py
 
 **Command Line Flags**
 
-| Short | Flag                |          | Type   | Behaviour                                                              | Status |
-| ----- | ------------------- | -------- | ------ | ---------------------------------------------------------------------- | ------ |
-| -ar   |--allow-reboot       | Optional | Bool   | Reboots device before installing Legacy WhatsApp.                      | Stable |
-| -tip  | --tcp-ip IP_ADDRESS | Optional | String | Connects to a remote device via TCP mode.                              | Stable |
-| -tp   |--tcp-port PORT      | Optional | String | Port number to connect to. Default : 5555.                             | Stable |
-| -s    | --scrcpy            | Optional | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
-| -to   | --tar-only          | Optional | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Beta   |
+| Short | Flag                | Mode | Required? | Type   | Behaviour                                                              | Status |
+| ----- | ------------------- | ---- | --------- | ------ | ---------------------------------------------------------------------- | ------ |
+| -ar   |--allow-reboot       | USB  | Optional  | Bool   | Reboots device before installing Legacy WhatsApp.                      | Stable |
+| -tip  | --tcp-ip IP_ADDRESS | TCP  | Optional  | String | Connects to a remote device via TCP mode.                              | Stable |
+| -tp   |--tcp-port PORT      | TCP  | Optional  | String | Port number to connect to. Default : 5555.                             | Stable |
+| -s    | --scrcpy            | Both | Optional  | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
+| -to   | --tar-only          | Both | Optional  | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Stable |
 
-**Example usage** : Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode or USB mode. When Android is plugged with USB don't use TCP flags.
-```python
-python3 wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only
-python3 wa_kdbe.py -ar -tip 192.168.43.130 -tp 5555 -s -to
-```
+Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode or USB mode. When Android is plugged with USB don't use TCP flags.
+
+| Mode | **Example usage** : Long command **OR** Short command                                                                                                                |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| TCP  | `python3 wa_kdbe.py --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only` **OR** `python3 wa_kdbe.py -tip 192.168.43.130 -tp 5555 -s -to` |
+| USB  | `python3 wa_kdbe.py -ar -s -to` **OR** `python3 wa_kdbe.py --allow-reboot --scrcpy --tar-only`                                                   |
 
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
