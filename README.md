@@ -111,7 +111,7 @@ python3 wa_kdbe.py
 | Short | Flag                | Mode | Required? | Type   | Behaviour                                                              | Status |
 | ----- | ------------------- | ---- | --------- | ------ | ---------------------------------------------------------------------- | ------ |
 | -ar   |--allow-reboot       | USB  | Optional  | Bool   | Reboots device before installing Legacy WhatsApp.                      | Stable |
-| -tip  | --tcp-ip IP_ADDRESS | TCP  | Optional  | String | Connects to a remote device via TCP mode.                              | Stable |
+| -tip  | --tcp-ip IP_ADDRESS | TCP  | Required  | String | Connects to a remote device via TCP mode.                              | Stable |
 | -tp   |--tcp-port PORT      | TCP  | Optional  | String | Port number to connect to. Default : 5555.                             | Stable |
 | -s    | --scrcpy            | Both | Optional  | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
 | -to   | --tar-only          | Both | Optional  | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Stable |
@@ -126,23 +126,13 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `view_extract.py` : To unpack whatsapp.ab to whatsapp.tar and extract files.
-```
-python3 view_extract.py
-```
-* IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
+1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp : For this to work there should be 'whatsapp.ab' file either in 'extracted/\<userName\>' folder or in 'tmp' folder. Where "userName" is name of user you entered earlier.
 
-2. Run `protect.py` : To compress/decompress user folder with(out) password for safekeeping.
-```
-python3 protect.py
-```
-* IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is name of user you entered earlier.
 
-3. Run `restore_whatsapp.py` : To reinstall WhatsApp on device.
-```
-python3 restore_whatsapp.py
-```
+2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder.
 
+
+3. Run `python3 restore_whatsapp.py` to reinstall WhatsApp on device. Imp : For this to work there should either be "WhatsAppbackup.apk" in "helpers" folder.
 
 ### Features & ToDo
 <!--https://github.com/StylishThemes/GitHub-Dark/wiki/Emoji-->

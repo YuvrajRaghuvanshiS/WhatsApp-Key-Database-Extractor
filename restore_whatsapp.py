@@ -4,7 +4,7 @@ import platform
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomPrint
+from helpers.CustomCI import CustomPrint, CustomInput
 
 # Detect OS
 isWindows = False
