@@ -55,13 +55,19 @@ def main():
     isJAVAInstalled = CheckJAVA()
     print('\n')
     try:
+        CustomPrint('Arguments passed : ' + str(args))
+        print('\n')
+    except:
+        pass
+
+    try:
         CustomPrint('System Info : ' +
                     json.dumps(GetSysInfo(), indent=2, default=str))
         print('\n')
     except:
         CustomPrint(
             'Can\'t get system information. Continuing anyway...', 'yellow')
-    CustomPrint('Current release date : 24/04/2021', 'cyan')
+    CustomPrint('Current release date : 29/06/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
@@ -285,8 +291,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-ar', '--allow-reboot', action='store_true',
                         help='Allow reboot of device before installation of LegacyWhatsApp.apk to prevent some issues like [INSTALL_FAILED_VERSION_DOWNGRADE]')
-    parser.add_argument(
-        '-tip', '--tcp-ip', help='Connects to a remote device via TCP mode.')
+    parser.add_argument('-tip', '--tcp-ip',
+                        help='Connects to a remote device via TCP mode.')
     parser.add_argument('-tp', '--tcp-port',
                         help='Port number to connect to. Default : 5555')
     parser.add_argument('-s', '--scrcpy', action='store_true',
