@@ -73,7 +73,7 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 ***Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Hope for best, prepare for Worst.***
+For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local backup. Hope for best, prepare for Worst.***
 After [installation](#installation-for-pipreleases-specific-instructions-go-to-builds-branch) follow on screen instructions.
 
 
