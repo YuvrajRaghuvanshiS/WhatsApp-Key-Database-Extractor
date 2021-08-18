@@ -4,6 +4,7 @@ import platform
 import re
 import shutil
 import subprocess
+import tarfile
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
@@ -26,12 +27,10 @@ tmp = 'tmp/'
 helpers = 'helpers/'
 bin = 'bin/'
 extracted = 'extracted/'
-tar = 'tar.exe'
 if(isWindows):
     adb = 'bin\\adb.exe -s '
 else:
     adb = 'adb -s '
-    tar = 'tar'
 
 
 def main():
@@ -197,29 +196,34 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
     # If user folder already exists ask user to overwrite or skip.
     CustomPrint('Taking out main files in ' + tmp + ' folder temporaily.')
     try:
-        bin = 'bin\\' if(isWindows) else ''
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' +
-                  tmp + ' apps/com.whatsapp/f/key')
-        os.replace('tmp/apps/com.whatsapp/f/key',
-                   extracted + userName + '/key')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' +
-                  tmp + ' apps/com.whatsapp/db/msgstore.db')
-        os.replace('tmp/apps/com.whatsapp/db/msgstore.db',
-                   extracted + userName + '/msgstore.db')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' +
-                  tmp + ' apps/com.whatsapp/db/wa.db')
-        os.replace('tmp/apps/com.whatsapp/db/wa.db',
-                   extracted + userName + '/wa.db')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' +
-                  tmp + ' apps/com.whatsapp/db/axolotl.db')
-        os.replace('tmp/apps/com.whatsapp/db/axolotl.db',
-                   extracted + userName + '/axolotl.db')
-        os.system(bin + tar + ' xvf ' + tmp + 'whatsapp.tar -C ' +
-                  tmp + ' apps/com.whatsapp/db/chatsettings.db')
-        os.replace('tmp/apps/com.whatsapp/db/chatsettings.db',
-                   extracted + userName + '/chatsettings.db')
+        tar = tarfile.open(tmp + 'whatsapp.tar')
+        allTarFiles = tar.getnames()
+        filesToExtract = {'key': 'apps/com.whatsapp/f/key',
+                          'msgstore.db': 'apps/com.whatsapp/db/msgstore.db',
+                          'wa.db': 'apps/com.whatsapp/db/wa.db',
+                          'axolotl.db': 'apps/com.whatsapp/db/axolotl.db',
+                          'chatsettings.db': 'apps/com.whatsapp/db/chatsettings.db'}
 
-        CleanTmp()
+        for key in filesToExtract:
+            if(filesToExtract[key] in allTarFiles):
+                tar.extract(filesToExtract[key], tmp)
+                CustomPrint('Extracted successfully in ' + tmp + ' : ' + key)
+                os.replace(tmp + filesToExtract[key],
+                           extracted + userName + '/' + key)
+                CustomPrint('Copied to ' + extracted +
+                            userName + ' successfully : ' + key)
+            else:
+                CustomPrint(
+                    key + ' is not present in tarfile, Go and write @ \'https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\'', 'red', ['bold'])
+        tar.close()
+
+        try:
+            CleanTmp()
+        except Exception as e:
+            CustomPrint(e, 'red')
+            CustomPrint('Go n delete ' + tmp +
+                        ' folder yourself, I can\'t code everything!', 'red')
+            # TODO : Major security risk : Data in tmp is not deleted.
 
         CustomPrint(
             'You should not leave these extracted database and other files hanging in folder, it is very insecure.')
@@ -235,7 +239,6 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
                         os.path.realpath(extracted + userName) + ' folder.', 'yellow')
             print('\n')
             CustomInput('Hit Enter key to continue.')
-            # TODO issue #13 : Ask user to save to sdcard.
             if(sdPath and ADBSerialId):
                 copyTosdCard = CustomInput(
                     'Copy msgstore.db file to phone? (y/n) default \'n\' : ') or 'n'
