@@ -5,6 +5,7 @@ import re
 import shutil
 import subprocess
 import tarfile
+import time
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
@@ -207,22 +208,23 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
         for key in filesToExtract:
             if(filesToExtract[key] in allTarFiles):
                 tar.extract(filesToExtract[key], tmp)
-                CustomPrint('Extracted successfully in ' + tmp + ' : ' + key)
                 os.replace(tmp + filesToExtract[key],
                            extracted + userName + '/' + key)
-                CustomPrint('Copied to ' + extracted +
-                            userName + ' successfully : ' + key)
+                CustomPrint('Copied to \"' + extracted +
+                            userName + '\" : ' + key)
             else:
                 CustomPrint(
-                    key + ' is not present in tarfile, Go and write @ \'https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\'', 'red', ['bold'])
+                    key + ' is not present in tarfile, Go and write to \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\"', 'red', ['bold'])
         tar.close()
-
+        time.sleep(2)  # So that tar is to delete.
         try:
             CleanTmp()
         except Exception as e:
             CustomPrint(e, 'red')
-            CustomPrint('Go n delete ' + tmp +
-                        ' folder yourself, I can\'t code everything!', 'red')
+            print('\n')
+            CustomPrint('Go & delete ' + tmp +
+                        ' folder yourself (It\'s important, DO IT.)', 'red')
+            print('\n')
             # TODO : Major security risk : Data in tmp is not deleted.
 
         CustomPrint(
