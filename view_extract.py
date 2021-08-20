@@ -216,7 +216,7 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
                 CustomPrint(
                     key + ' is not present in tarfile, Go and write to \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\"', 'red', ['bold'])
         tar.close()
-        time.sleep(2)  # So that tar is to delete.
+        time.sleep(2)  # So that 'tar' is free to delete.
         try:
             CleanTmp()
         except Exception as e:
