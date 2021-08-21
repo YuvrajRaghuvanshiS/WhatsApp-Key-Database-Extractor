@@ -85,6 +85,7 @@ def Exit():
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 
@@ -127,15 +128,18 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
                         TakingOutMainFiles(userName, sdPath, ADBSerialId)
                 except Exception as e:
                     CustomPrint(e, 'red')
+                    Exit()
             else:
                 CustomPrint('Could not find whatsapp.ab in ' + extracted +
                             userName + ' folder, did you name your user properly?')
                 Exit()
+        else:
+            Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')):
         CustomPrint('Found whatsapp.ab in tmp folder. Continuing... Size : ' +
                     str(os.path.getsize(tmp + '/whatsapp.ab')) + ' bytes.')
         userName = CustomInput(
-            'Enter a reference name for this user. : ') or 'user'
+            'Enter a name for this user (default \"user\"). : ') or 'user'
         abPass = CustomInput(
             'Enter same password which you entered on device when prompted earlier. : ')
         try:
@@ -149,6 +153,10 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
                 TakingOutMainFiles(userName, sdPath, ADBSerialId)
         except Exception as e:
             CustomPrint(e, 'red')
+            Exit()
+    else:
+        CustomPrint('\aCould not find \'whatsapp.ab\' in tmp folder.')
+        Exit()
 
 
 def ListUserFolders():
@@ -244,11 +252,11 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
                 else:
                     os.system('open ' + os.path.realpath(extracted + userName))
             except:
-                pass
-
+                Exit()
     except Exception as e:
         CustomPrint(e, 'red')
         CleanTmp()
+        Exit()
 
 
 def TakingOutOnlyTar(userName):
@@ -260,6 +268,7 @@ def TakingOutOnlyTar(userName):
         os.replace(tmp + 'whatsapp.tar', extracted + userName + '.tar')
     except Exception as e:
         CustomPrint('\a' + e, 'red')
+        Exit()
 
     CleanTmp()
     print('\n')
@@ -278,7 +287,7 @@ def TakingOutOnlyTar(userName):
         else:
             os.system('open ' + os.path.realpath(extracted))
     except:
-        pass
+        Exit()
 
 
 if __name__ == "__main__":

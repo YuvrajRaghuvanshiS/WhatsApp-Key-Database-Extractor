@@ -13,10 +13,10 @@ except ImportError:
     except:
         os.system('python3 -m pip install packaging requests tqdm')
 
-from CustomCI import CustomPrint
+from CustomCI import CustomPrint, CustomInput
 
 # Global Variables
-appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
+appURLWhatsAppCDN = 'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 # Global command line helpers
@@ -47,8 +47,8 @@ def AfterConnect(adb):
     # To check if APK even exists at a given path to download!
     # Since that obviously is not available at whatsapp cdn defaulting that to 0 for GH #46
     # Using getoutput instead of this to skip getting data like 0//n//r or whatever was getting recieved on GH #46 bcz check_output returns a byte type object and getoutput returns a str type .
-    contentLength = int((re.findall("(?<=Content-Length:)(.*[0-9])(?=)", getoutput(
-        'curl -sI http://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk')) or ['0'])[0])
+    contentLength = int((re.findall("(?<=content-length:)(.*[0-9])(?=)", getoutput(
+        'curl -sI https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk')) or ['0'])[0])
     versionName = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(
         adb + ' shell dumpsys package com.whatsapp'))).group(1)
     CustomPrint('WhatsApp V' + versionName + ' installed on device')
@@ -64,6 +64,9 @@ def AfterConnect(adb):
         else:
             CustomPrint('Found legacy WhatsApp V2.11.431 apk in ' +
                         helpers + ' folder')
+    else:
+        # Version lower than 2.11.431 installed on device.
+        pass
 
     return 1, SDKVersion, WhatsAppapkPath, versionName, sdPath
 
@@ -71,7 +74,24 @@ def AfterConnect(adb):
 def DownloadApk(url, fileName):
     # Streaming, so we can iterate over the response.
     response = requests.get(url, stream=True)
-    totalSizeInBytes = int(response.headers.get('content-length', 0))
+    # For WayBackMachine only.
+    totalSizeInBytes = response.headers.get(
+        'x-archive-orig-content-length') or response.headers.get('content-length', 0)
+    if(totalSizeInBytes):
+        # Fixed where it stuck on "Downloading legacy WhatsApp V2.11.431 to helpers folder"
+        totalSizeInBytes = int(totalSizeInBytes)
+    else:
+        # totalSizeInBytes must be null
+        CustomPrint('\aFor some reason I could not download Legacy WhatsApp, you need to download it on your own now from either of the links given below : ', 'red')
+        print('\n')
+        CustomPrint('1. \'' + appURLWhatsAppCDN +
+                    '\' (official\'s archive)', 'red')
+        CustomPrint('2. \'' + appURLWhatsCryptCDN +
+                    '\' unofficial website.', 'red')
+        print('\n')
+        CustomPrint(
+            'Once downloaded rename it to \'LegacyWhatsApp.apk\' exactly and put in \'helpers\' folder.', 'red')
+        Exit()
     blockSize = 1024  # 1 Kibibyte
     progressBar = tqdm(total=totalSizeInBytes, unit='iB', unit_scale=True)
     with open('helpers/temp.apk', 'wb') as file:
@@ -82,12 +102,14 @@ def DownloadApk(url, fileName):
     os.rename('helpers/temp.apk', 'helpers/LegacyWhatsApp.apk')
     if totalSizeInBytes != 0 and progressBar.n != totalSizeInBytes:
         CustomPrint('\aSomething went during downloading LegacyWhatsApp.apk')
+        Exit()
 
 
 def Exit():
     print('\n')
     CustomPrint('Exiting...')
     os.system('bin\\adb.exe kill-server')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 

@@ -56,19 +56,26 @@ def main():
     isJAVAInstalled = CheckJAVA()
     print('\n')
     try:
+        CustomPrint('Arguments passed : ' + str(args))
+        print('\n')
+    except:
+        pass
+
+    try:
         CustomPrint('System Info : ' +
                     json.dumps(GetSysInfo(), indent=2, default=str))
         print('\n')
     except:
-        pass
-    CustomPrint('Current release date : 08/04/2021', 'cyan')
+        CustomPrint(
+            'Can\'t get system information. Continuing anyway...', 'yellow')
+    CustomPrint('Current release date : 29/06/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
-    print('\n')
-    CustomInput(
-        '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Hit Enter key to continue.', 'yellow')
     if(readInstruction.upper() == 'Y'):
+        print('\n')
+        CustomInput(
+            '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Hit Enter key to continue.', 'yellow')
         USBMode()
     else:
         Exit()
@@ -94,6 +101,7 @@ def BackupWhatsAppDataasAb(SDKVersion):
                                                                              23) else os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab -noapk com.whatsapp')
     except Exception as e:
         CustomPrint(e, 'red')
+        Exit()
     CustomPrint('Done backing up data. Size : ' +
                 str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
 
@@ -102,7 +110,8 @@ def CheckBin():
     if (not os.path.isdir('bin')):
         CustomPrint('I can not find bin folder, check again...', 'red')
         Exit()
-    pass
+    else:
+        pass
 
 
 def CheckJAVA():
@@ -128,6 +137,7 @@ def Exit():
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 
@@ -193,6 +203,7 @@ def ReinstallWhatsApp():
     except Exception as e:
         CustomPrint(e, 'red')
         CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.')
+        Exit()
 
 
 def RunScrCpy(_isScrCpy):
@@ -278,8 +289,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-ar', '--allow-reboot', action='store_true',
                         help='Allow reboot of device before installation of LegacyWhatsApp.apk to prevent some issues like [INSTALL_FAILED_VERSION_DOWNGRADE]')
-    parser.add_argument(
-        '-tip', '--tcp-ip', help='Connects to a remote device via TCP mode.')
+    parser.add_argument('-tip', '--tcp-ip',
+                        help='Connects to a remote device via TCP mode.')
     parser.add_argument('-tp', '--tcp-port',
                         help='Port number to connect to. Default : 5555')
     parser.add_argument('-s', '--scrcpy', action='store_true',
@@ -302,7 +313,7 @@ if __name__ == "__main__":
     else:
         ADBSerialId = deviceId.init()
     if(not ADBSerialId):
-        quit()
+        Exit()
 
     # Global command line helpers
     tmp = 'tmp/'

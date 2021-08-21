@@ -1,10 +1,9 @@
-**Not watching this repository, won't get notified about activities. Mention me in issues/discussions to wake the zombie.**
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=repo%20size">
   <img src="https://img.shields.io/github/languages/top/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
   <img src="https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=license">
   <img src="https://img.shields.io/badge/depends-JAVA-informational">
-  <img src="https://visitor-badge.glitch.me/badge?page_id=yuvrajraghuvanshis.whatsapp-key-database-extractor">
+  <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyuvrajraghuvanshis%2Fwhatsapp-key-database-extractor&count_bg=%233D64C8&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false">
 </p>
 
 <br />
@@ -38,7 +37,7 @@
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
+  * [Installation](#installation-for-pipreleases-specific-instructions-go-to-builds-branch)
   * [Standalone Operations](#standalone-operations)
   * [Features & ToDo](#features--todo)
   * [Demo](#demo)
@@ -74,8 +73,8 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 ***Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Prepare for Worst.***
-After [intallation](#installation) follow on screen instructions.
+For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local backup. Hope for best, prepare for Worst.***
+After [installation](#installation-for-pipreleases-specific-instructions-go-to-builds-branch) follow on screen instructions.
 
 
 ### Prerequisites
@@ -83,14 +82,13 @@ After [intallation](#installation) follow on screen instructions.
 * O/S: Any Windows/Mac/Linux. Do not have access to any of these? Try [Termux Edition.](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/tree/termux) 
 * [Python 3.x](https://www.python.org/downloads/)
 * [Java](https://www.java.com/en/download/)
-* [ADB Drivers](https://developer.android.com/studio/releases/platform-tools) 
 * USB Debugging must be enabled on the target device. Settings &#8594; Developer Options &#8594; USB debugging.
-  * If you cannot find Developer Options then please go to: Settings &#8594; About phone/device and tap the Build number multiple times until you're finally declared a developer.  
+  * If you cannot find Developer Options then go to: Settings &#8594; About phone/device and tap the Build number multiple times until you're finally declared a developer.  
 * Android device with Android 4.0 or higher. i.e. Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie, Q.  
 
 
 
-### Installation
+### Installation (for pip/releases specific instructions go to [builds](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/tree/builds) branch)
 
 1. Clone the repo
 ```bash
@@ -103,47 +101,38 @@ sudo ./bin/linux_dependencies.sh
 ```
 If you're getting any error while running above command you need to install the following manually for your linux distro. : [adb](https://developer.android.com/studio/command-line/adb) [curl](https://curl.se/download.html) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
 
-3. Run `wa_kdbe.py`
+3. Run `wa_kdbe.py` by double clicking the file on Windows or by
 ```python
 python3 wa_kdbe.py
 ```
 
 **Command Line Flags**
 
-| Short | Flag                |          | Type   | Behaviour                                                                             | Status |
-| ----- | ------------------- | -------- | ------ | ------------------------------------------------------------------------------------- | ------ |
-| -ar   |--allow-reboot       | Optional | Bool   | Reboots device before installing Legacy WhatsApp.                                     | Stable |
-| -tip  | --tcp-ip IP_ADDRESS | Optional | String | Connects to a remote device via TCP mode.                                             | Stable |
-| -tp   |--tcp-port PORT      | Optional | String | Port number to connect to. Default : 5555.                                            | Stable |
-| -s    | --scrcpy            | Optional | Bool   | Show device screen as a window using ScrCpy.                                          | Stable |
-| -to   | --tar-only          | Optional | Bool   | Get ALL files as a tarball instead of main files from WhatsApp backup.                | Beta   |
+| Short | Flag                | Mode | Required? | Type   | Behaviour                                                              | Status |
+| ----- | ------------------- | ---- | --------- | ------ | ---------------------------------------------------------------------- | ------ |
+| -ar   |--allow-reboot       | USB  | Optional  | Bool   | Reboots device before installing Legacy WhatsApp.                      | Stable |
+| -tip  | --tcp-ip IP_ADDRESS | TCP  | Required  | String | Connects to a remote device via TCP mode.                              | Stable |
+| -tp   |--tcp-port PORT      | TCP  | Optional  | String | Port number to connect to. Default : 5555.                             | Stable |
+| -s    | --scrcpy            | Both | Optional  | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
+| -to   | --tar-only          | Both | Optional  | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Stable |
 
-Example usage : 
-```python
-python3 wa_kdbe.py --allow-reboot --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only
-python3 wa_kdbe.py -ar -tip 192.168.43.130 -tp 5555 -s -to
-```
+Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode or USB mode. When Android is plugged with USB don't use TCP flags.
+
+| Mode | **Example usage** : Long command **OR** Short command                                                                                                                |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| TCP  | `python3 wa_kdbe.py --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only` **OR** `python3 wa_kdbe.py -tip 192.168.43.130 -tp 5555 -s -to` |
+| USB  | `python3 wa_kdbe.py -ar -s -to` **OR** `python3 wa_kdbe.py --allow-reboot --scrcpy --tar-only`                                                   |
 
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `view_extract.py` : To unpack whatsapp.ab to whatsapp.tar and extract files.
-```
-python3 view_extract.py
-```
-* IMP : For this to work there should be 'whatsapp.ab' file either in 'extracted/<userName>' folder or in 'tmp' folder.
+1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp : For this to work there should be 'whatsapp.ab' file either in 'extracted/\<userName\>' folder or in 'tmp' folder. Where "userName" is name of user you entered earlier.
 
-2. Run `protect.py` : To compress/decompress user folder with(out) password for safekeeping.
-```
-python3 protect.py
-```
-* IMP : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder. Where "userName" is reference user name you entered earlier.
 
-3. Run `restore_whatsapp.py` : To reinstall WhatsApp on device.
-```
-python3 restore_whatsapp.py
-```
+2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder.
 
+
+3. Run `python3 restore_whatsapp.py` to reinstall WhatsApp on device. Imp : For this to work there should either be "WhatsAppbackup.apk" in "helpers" folder.
 
 ### Features & ToDo
 <!--https://github.com/StylishThemes/GitHub-Dark/wiki/Emoji-->
@@ -169,7 +158,8 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
 
 ### Troubleshooting
 
-* If list is empty close terminal, remove and replug the device, and re-run the script. [Read More](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
+* If running `python3 wa_kdbe.py` or any other file is throwing error like "python3 is recognised as interal or external command." AND python3 is "already added to path (in case of windows)" try running files with `py wa_kdbe.py` instead. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/57)
+* If list is empty close terminal, remove and replug the device, and re-run the script. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
 * If you have never used USB Debugging before, you may also need to verify the fingerprint by ticking the checkbox and tapping 'allow' on device popup.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
@@ -212,6 +202,8 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. "Draft" a pull request and mark it "Ready for review" once work is done.
 
+Other ways to contribute is to buy me a coffee but let's just say it is to test out new features of the project. **Checkout [features/fast](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussions/53#discussioncomment-625798) to test backup and reinstallation of WhatsApp on device level.** This makes it quite time saving specially in case of TCP.
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ## License
@@ -229,7 +221,7 @@ This tool is provided "as-is" and hence you will be responsible however you use 
 
 ## Contact
 
-Yuvraj Raghuvanshi - [Send me a mail](mailto:YuvrajRaghuvanshi.S%40protonmail.com?subject=From%20GitHub%20WA-KDBE%20:%20%3CAdd%20subject%20here.%3E "Send me a mail, Don't change subject line.")
+Yuvraj Raghuvanshi - [@Yuvraj_R_S](https://twitter.com/Yuvraj_R_S) - [Send me a mail](mailto:YuvrajRaghuvanshi.S%40protonmail.com?subject=From%20GitHub%20WA-KDBE%20:%20%3CAdd%20subject%20here.%3E "Send me a mail, Don't change subject line.")
 
 Project Link: [https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor](https://github.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor)
 

@@ -47,6 +47,7 @@ def main():
 def Compress(userFolder):
     if(not os.path.isdir(extracted + userFolder)):
         CustomPrint('Could not find directory ' + extracted + userFolder)
+        Exit()
     elif(len(os.listdir(extracted + userFolder)) == 0):
         CustomPrint('User folder is empty.')
         Exit()
@@ -104,6 +105,7 @@ def Exit():
             os.system('open ' + os.path.realpath(extracted))
     except:
         pass
+    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
     quit()
 
 
@@ -135,9 +137,9 @@ def ListUserFolders():
 def Uncompress(userZip):
     if(not str(userZip).endswith('7z')):
         userZip = userZip + '.7z'
-
     if(not os.path.isfile(extracted + userZip)):
         CustomPrint('Could not find ' + extracted + userZip)
+        Exit()
     elif(os.path.getsize(extracted + userZip) <= 0):
         CustomPrint(extracted + userZip + ' is empty.')
         Exit()
