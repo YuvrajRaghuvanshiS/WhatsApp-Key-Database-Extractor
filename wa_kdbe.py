@@ -74,7 +74,7 @@ def main():
     if(readInstruction.upper() == 'Y'):
         print('\n')
         CustomInput(
-            '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup. Hit Enter key to continue.', 'yellow')
+            '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup". Hit \"Enter\" key to continue.', 'yellow')
         USBMode()
     else:
         Exit()
@@ -84,9 +84,9 @@ def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion >
                                                             11) else os.system(adb + ' shell am kill com.whatsapp')
     CustomPrint('Backing up WhatsApp ' + versionName +
-                ' apk, the one installed on device to ' + tmp + 'WhatsAppbackup.apk')
+                ' apk, the one installed on device to \"' + tmp + 'WhatsAppbackup.apk\".')
     os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
-        'Folder ' + tmp + ' already exists.', 'yellow')
+        'Folder \"' + tmp + '\" already exists.', 'yellow')
     os.system(adb + ' shell cp ' + WhatsAppapkPath +
               ' /sdcard/WhatsAppbackup.apk')
     os.system(adb + ' pull /sdcard/WhatsAppbackup.apk ' +
@@ -97,8 +97,8 @@ def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
 
 
 def BackupWhatsAppDataasAb(SDKVersion):
-    CustomPrint('Backing up WhatsApp data as ' + tmp +
-                'whatsapp.ab. May take time, don\'t panic.')
+    CustomPrint('Backing up WhatsApp data as \"' + tmp +
+                'whatsapp.ab\". May take time, don\'t panic.')
     try:
         os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >=
                                                                              23) else os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab -noapk com.whatsapp')
@@ -111,7 +111,7 @@ def BackupWhatsAppDataasAb(SDKVersion):
 
 def CheckBin():
     if (not os.path.isdir('bin')):
-        CustomPrint('I can not find bin folder, check again...', 'red')
+        CustomPrint('I can not find \"bin\" folder, check again...', 'red')
         Exit()
     else:
         pass
@@ -126,10 +126,10 @@ def CheckJAVA():
         return isJAVAInstalled
     else:
         noJAVAContinue = CustomInput(
-            'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \'view extract\' later? or (S)top? : ', 'red') or 'c'
+            'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top? : ', 'red') or 'c'
         if(noJAVAContinue.upper() == 'C'):
             CustomPrint(
-                'Continuing without JAVA, once JAVA is installed on system run \'view_extract.py\'', 'yellow')
+                'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
             return isJAVAInstalled
         else:
             Exit()
@@ -140,7 +140,7 @@ def Exit():
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
-    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
+    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
@@ -178,7 +178,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
             while(subprocess.getoutput(adb + ' get-state') != 'device'):
                 CustomPrint('Waiting for device...')
                 time.sleep(5)
-            CustomInput('Hit Enter key after unlocking device.', 'yellow')
+            CustomInput('Hit \"Enter\" key after unlocking device.', 'yellow')
         else:
             CustomPrint(
                 'Rebooting device in TCP mode break the connection and won\'t work until explicitly turned on in device and/or in PC. Skipping...', 'yellow')
@@ -187,7 +187,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     # Before backup run app
     os.system(adb + ' shell am start -n com.whatsapp/.Main')
     CustomInput(
-        '\aHit Enter key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
+        '\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
     print('\n')
@@ -204,7 +204,7 @@ def ReinstallWhatsApp():
         os.system(adb + ' install -r -d ' + helpers + 'WhatsAppbackup.apk')
     except Exception as e:
         CustomPrint(e, 'red')
-        CustomPrint('Could not install WhatsApp, install by running \'restore_whatsapp.py\' or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.')
+        CustomPrint('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".')
         Exit()
 
 
@@ -238,23 +238,23 @@ def ShowBanner():
 ===                                                                          ===
 ===  xxxxx  PLEASE TAKE WHATSAPP CHAT BACKUP BEFORE GETTING STARTED.  xxxxx  ===
 ===                                                                          ===
-===     For that go to 'WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup'     ===
+===     For that go to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup\"     ===
 ===              here take a local backup. Prepare for Worst.                ===
 ===                                                                          ===
 ===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===
-===   unencrypted file) and your 'key' file from '/data/data/com.whatsapp'   ===
+===   unencrypted file) and your \"key\" file from \"/data/data/com.whatsapp\"   ===
 ===  directory in Android 4.0+ device without root access. However you need  ===
-===   to have JAVA installed on your system in order to 'view the extract'.  ===
-===  If you don't have JAVA installed then you can 'view extract' later by   ===
-===   running 'view_extract.py'. The idea is to install a 'Legacy WhatsApp'  ===
+===   to have JAVA installed on your system in order to \"view the extract\".  ===
+===  If you don't have JAVA installed then you can \"view extract\" later by   ===
+===   running \"view_extract.py\". The idea is to install a \"Legacy WhatsApp\"  ===
 ===       temporarily on your device in order to get the android backup      ===
 ===    permission. You should not lose any data and your current WhatsApp    ===
 ===   version will be installed after this process so don't panic and don't  ===
 === stop this script while it's working. However if something fails you can  ===
-===    run 'restore_whatsapp.py' and reinstall current WhatsApp or simply    ===
+===    run \"restore_whatsapp.py\" and reinstall current WhatsApp or simply    ===
 ===                    update that from Google Play Store.                   ===
 ===                                                                          ===
-===                      Script by : Yuvraj Raghuvanshi                      ===
+===                      Script by: Yuvraj Raghuvanshi                       ===
 ===                      Github.com/YuvrajRaghuvanshiS                       ===
 ================================================================================
     '''
@@ -298,7 +298,7 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
     parser.add_argument('-to', '--tar-only', action='store_true',
-                        help='Get entire WhatsApp\'s data in <username>.tar file instead of just getting few important files.')
+                        help='Get entire WhatsApp\'s data in \"<userName>.tar\" file instead of just getting few important files.')
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 

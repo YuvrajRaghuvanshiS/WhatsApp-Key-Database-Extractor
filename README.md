@@ -57,7 +57,7 @@
 
 This project is inspired by [EliteAndroidApps/WhatsApp-Key-DB-Extractor](https://github.com/EliteAndroidApps/WhatsApp-Key-DB-Extractor). Since Android v4.0+ Google has removed adb backup and apps no longer supported being backed up by "adb backup -f myApp.ab -apk com.foobar.app". However there is one catch in this scenario and that is some old version of many apps including WhatsApp support that to this day, and that's the idea...
 
-The idea is to install "Legacy Version" of WhatsApp on you device via adb and use "adb backup"  to fetch files from "/data/data/com.whatsapp" folder which includes both the 'key' and 'msgstore.db' (non encrypted) file and after that restore current WhatsApp.
+The idea is to install "Legacy Version" of WhatsApp on you device via adb and use "adb backup"  to fetch files from "/data/data/com.whatsapp" folder which includes both the "key" and "msgstore.db" (non encrypted) file and after that restore current WhatsApp.
 
 
 ### Built With
@@ -73,7 +73,7 @@ The idea is to install "Legacy Version" of WhatsApp on you device via adb and us
 ## Getting Started
 
 ***Before doing anything take a backup of your chats and turn off your phone's internet so you don't lose any new messages.
-For that go to 'WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup' here take a local bacakup. Hope for best, prepare for Worst.***
+For that go to "WhatsApp Settings &#8594; Chat Settings &#8594; Chat Backup" here take a local backup. Hope for best, prepare for Worst.***
 After [installation](#installation-for-pipreleases-specific-instructions-go-to-builds-branch) follow on screen instructions.
 
 
@@ -126,10 +126,10 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp : For this to work there should be 'whatsapp.ab' file either in 'extracted/\<userName\>' folder or in 'tmp' folder. Where "userName" is name of user you entered earlier.
+1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp : For this to work there should be "whatsapp.ab" file either in "extracted/\<userName\>" folder or in "tmp" folder. Where "userName" is name of user you entered earlier.
 
 
-2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp : For this to work there should either be "userName" folder or "userName.7z" file in 'extracted' folder.
+2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp : For this to work there should either be "userName" folder or "userName.7z" file in "extracted" folder.
 
 
 3. Run `python3 restore_whatsapp.py` to reinstall WhatsApp on device. Imp : For this to work there should either be "WhatsAppbackup.apk" in "helpers" folder.
@@ -160,7 +160,7 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
 
 * If running `python3 wa_kdbe.py` or any other file is throwing error like "python3 is recognised as interal or external command." AND python3 is "already added to path (in case of windows)" try running files with `py wa_kdbe.py` instead. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/57)
 * If list is empty close terminal, remove and replug the device, and re-run the script. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
-* If you have never used USB Debugging before, you may also need to verify the fingerprint by ticking the checkbox and tapping 'allow' on device popup.  
+* If you have never used USB Debugging before, you may also need to verify the fingerprint by ticking the checkbox and tapping "allow" on device popup.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  
 * WhatsApp crashing? Run `python3 restore_whatsapp.py`. Or "clear data/storage" / uninstall and reinstall from Play Store.
