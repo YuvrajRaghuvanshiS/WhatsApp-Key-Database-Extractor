@@ -103,7 +103,10 @@ def Exit():
         elif(isLinux):
             os.system('xdg-open ' + os.path.realpath(extracted))
         else:
-            os.system('open ' + os.path.realpath(extracted))
+            try:
+                os.system('open ' + os.path.realpath(extracted))
+            except:
+                pass
     except:
         pass
     CustomInput('Hit \"Enter\" key to continue....', 'cyan')

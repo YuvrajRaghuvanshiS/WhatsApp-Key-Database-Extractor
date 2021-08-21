@@ -255,7 +255,11 @@ def TakingOutMainFiles(userName, sdPath, ADBSerialId):
                     os.system('xdg-open ' +
                               os.path.realpath(extracted + userName))
                 else:
-                    os.system('open ' + os.path.realpath(extracted + userName))
+                    try:
+                        os.system(
+                            'open ' + os.path.realpath(extracted + userName))
+                    except:
+                        pass
             except:
                 Exit()
     except Exception as e:
@@ -290,7 +294,10 @@ def TakingOutOnlyTar(userName):
             os.system('xdg-open ' +
                       os.path.realpath(extracted))
         else:
-            os.system('open ' + os.path.realpath(extracted))
+            try:
+                os.system('open ' + os.path.realpath(extracted))
+            except:
+                pass
     except:
         Exit()
 
