@@ -126,10 +126,10 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp : For this to work there should be "whatsapp.ab" file either in "extracted/\<userName\>" folder or in "tmp" folder. Where "userName" is name of user you entered earlier.
+1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp : For this to work there should be "whatsapp.ab" file either in "extracted/\<username\>" folder or in "tmp" folder. Where "username" is name of user you entered earlier.
 
 
-2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp : For this to work there should either be "userName" folder or "userName.7z" file in "extracted" folder.
+2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp : For this to work there should either be "username" folder or "username.7z" file in "extracted" folder.
 
 
 3. Run `python3 restore_whatsapp.py` to reinstall WhatsApp on device. Imp : For this to work there should either be "WhatsAppbackup.apk" in "helpers" folder.

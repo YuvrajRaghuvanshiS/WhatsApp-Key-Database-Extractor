@@ -298,7 +298,7 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
     parser.add_argument('-to', '--tar-only', action='store_true',
-                        help='Get entire WhatsApp\'s data in \"<userName>.tar\" file instead of just getting few important files.')
+                        help='Get entire WhatsApp\'s data in \"<username>.tar\" file instead of just getting few important files.')
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 
