@@ -1,5 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?color=informational&label=repo%20size">
+  <img src="https://tokei.rs/b1/github/yuvrajraghuvanshis/whatsapp-key-database-extractor?category=code">
   <img src="https://img.shields.io/github/languages/top/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor">
   <img src="https://img.shields.io/github/license/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor?label=license">
   <img src="https://img.shields.io/badge/depends-JAVA-informational">
