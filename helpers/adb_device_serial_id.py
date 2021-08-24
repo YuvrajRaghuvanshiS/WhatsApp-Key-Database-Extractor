@@ -89,6 +89,3 @@ def exit():
     custom_print('Exiting...')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
-
-
-print(init())
