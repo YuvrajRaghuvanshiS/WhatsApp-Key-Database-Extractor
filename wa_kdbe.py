@@ -303,8 +303,9 @@ if __name__ == "__main__":
                         help='Run ScrCpy to see and control Android device.')
     parser.add_argument('-to', '--tar-only', action='store_true',
                         help='Get entire WhatsApp\'s data in \"<username>.tar\" file instead of just getting few important files.')
-    args = parser.parse_args()
-    #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
+    # args = parser.parse_args()
+    args = parser.parse_args(
+        '--tcp-ip 192.168.183.130 --scrcpy -tp 5555 -ar -to'.split())
 
     is_allow_reboot = args.allow_reboot
     tcp_ip = args.tcp_ip
