@@ -51,7 +51,7 @@ def compress(user_folder):
                      extracted + user_folder + '\"')
         exit()
     elif(len(os.listdir(extracted + user_folder)) == 0):
-        custom_print('User folder is empty.')
+        custom_print('User folder is empty.', 'red', ['bold'])
         exit()
     else:
         password = custom_input('Choose a password for zip : ')
