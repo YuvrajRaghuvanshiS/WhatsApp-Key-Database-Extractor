@@ -2,28 +2,28 @@ import os
 import platform
 import subprocess as sp
 
-from CustomCI import CustomPrint, CustomInput
+from custom_ci import custom_print, custom_input
 
 
-def init(tcpIP, tcpPort):
+def init(tcp_ip, tcp_port):
     # Detect OS
-    isWindows = False
-    isLinux = False
+    is_windows = False
+    is_linux = False
     if platform.system() == 'Windows':
-        isWindows = True
+        is_windows = True
     if platform.system() == 'Linux':
-        isLinux = True
+        is_linux = True
 
     # Global command line helpers
-    currDir = os.path.dirname(os.path.realpath(__file__))
-    rootDir = os.path.abspath(os.path.join(currDir, '..'))
+    current_directory = os.path.dirname(os.path.realpath(__file__))
+    root_directory = os.path.abspath(os.path.join(current_directory, '..'))
 
-    if(isWindows):
-        adb = rootDir + '\\bin\\adb.exe'
+    if(is_windows):
+        adb = root_directory + '\\bin\\adb.exe'
     else:
         adb = 'adb'
 
-    combo = tcpIP + ':' + tcpPort
+    combo = tcp_ip + ':' + tcp_port
     cmd = adb + ' connect ' + combo
     os.system(adb + ' kill-server')
     os.system(adb + ' start-server')
@@ -35,19 +35,19 @@ def init(tcpIP, tcpPort):
 
     if len(output) == 0 or error:
         output = None
-        CustomPrint(error, 'red')
-        Exit()
+        custom_print(error, 'red')
+        exit()
     else:
         output = [x.strip() for x in output.split() if len(x.strip()) > 0]
 
     if('connected' in (x.lower() for x in output)):
         return combo
     if('authenticate' in (x.lower() for x in output)):
-        CustomPrint(
+        custom_print(
             'Device unauthorized. Please check the confirmation dialog on your device.', 'red')
-        Exit()
+        exit()
     if('refused' in (x.lower() for x in output)):
-        CustomPrint(
+        custom_print(
             'Could not find any connected device. Either USB Debugging is off or device is not running ADB over TCP', 'red')
         return ''
 
@@ -58,8 +58,8 @@ def init(tcpIP, tcpPort):
     '''
 
 
-def Exit():
+def exit():
     print('\n')
-    CustomPrint('Exiting...')
-    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
+    custom_print('Exiting...')
+    custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
