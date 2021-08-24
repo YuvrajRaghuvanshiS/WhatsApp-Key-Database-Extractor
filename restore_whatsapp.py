@@ -2,41 +2,42 @@ import argparse
 import os
 import platform
 
-import helpers.ADBDeviceSerialId as deviceId
-import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomPrint, CustomInput
+import helpers.adb_device_serial_id as deviceId
+import helpers.tcp_device_serial_id as tcpDeviceId
+from helpers.custom_ci import custom_print, custom_input
 
 # Detect OS
-isWindows = False
-isLinux = False
+is_windows = False
+is_linux = False
 if platform.system() == 'Windows':
-    isWindows = True
+    is_windows = True
 if platform.system() == 'Linux':
-    isLinux = True
+    is_linux = True
 
 
-def Exit():
+def exit():
     print('\n')
-    CustomPrint('Exiting...')
+    custom_print('Exiting...')
     os.system(
-        'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
-    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
+        'bin\\adb.exe kill-server') if(is_windows) else os.system('adb kill-server')
+    custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
-def ReinstallWhatsApp(adb):
-    CustomPrint('Reinstallting original WhatsApp.')
+def reinstall_whatsapp(adb):
+    custom_print('Reinstallting original WhatsApp.')
     if(os.path.isfile(helpers + 'WhatsAppbackup.apk')):
         try:
             os.system(adb + ' install -r -d ' +
                       helpers + 'WhatsAppbackup.apk')
+            custom_input('Hit \"Enter\" key to continue.')
         except Exception as e:
-            CustomPrint(e, 'red')
-            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
-            Exit()
+            custom_print(e, 'red')
+            custom_print('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
+            exit()
     else:
-        CustomPrint('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
-        Exit()
+        custom_print('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
+        exit()
 
 
 if __name__ == "__main__":
@@ -48,22 +49,22 @@ if __name__ == "__main__":
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
 
-    tcpIP = args.tcp_ip
-    tcpPort = args.tcp_port
-    if(tcpIP):
-        if(not tcpPort):
-            tcpPort = '5555'
-        ADBSerialId = tcpDeviceId.init(tcpIP, tcpPort)
+    tcp_ip = args.tcp_ip
+    tcp_port = args.tcp_port
+    if(tcp_ip):
+        if(not tcp_port):
+            tcp_port = '5555'
+        adb_serial_id = tcpDeviceId.init(tcp_ip, tcp_port)
     else:
-        ADBSerialId = deviceId.init()
-    if(not ADBSerialId):
-        Exit()
+        adb_serial_id = deviceId.init()
+    if(not adb_serial_id):
+        exit()
 
     # Global command line helpers
     helpers = 'helpers/'
-    if(isWindows):
-        adb = 'bin\\adb.exe -s ' + ADBSerialId
+    if(is_windows):
+        adb = 'bin\\adb.exe -s ' + adb_serial_id
     else:
-        adb = 'adb -s ' + ADBSerialId
+        adb = 'adb -s ' + adb_serial_id
 
-    ReinstallWhatsApp(adb)
+    reinstall_whatsapp(adb)
