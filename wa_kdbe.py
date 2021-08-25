@@ -228,19 +228,26 @@ def ShowBanner():
 ========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ======== 
 ========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ======== 
 ========                                                                ========
+================================================================================'''
+
+    intro_a = '''
+============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n
 ================================================================================
-    '''
-    CustomPrint(banner_content, 'green', ['bold'], False)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========',
-                'green', ['bold'], False)
-    intro_content = '''
-================================================================================
-===                                                                          ===
-===  xxxxx  PLEASE TAKE WHATSAPP CHAT BACKUP BEFORE GETTING STARTED.  xxxxx  ===
-===                                                                          ===
+===                                                                          ==='''
+
+    intro_b = '''===  xxxxx  PLEASE TAKE WHATSAPP CHAT BACKUP BEFORE GETTING STARTED.  xxxxx  ==='''
+
+    intro_c = '''===                                                                          ===
 ===     For that go to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup\"     ===
 ===              here take a local backup. Prepare for Worst.                ===
-===                                                                          ===
+===                                                                          ==='''
+
+    intro_d = '''===  Also if you see a folder \"Android/media/com.whatsapp\" copy it somewhere ===
+===   safe. New versions of WhatsApp are saving data here INCLUDING IMAGES   ===
+===       AND VIDEOS. I try to save it while uninstalling WhatsApp but       ===
+===                        YOU CAN NEVER BE TOO SAFE.                        ==='''
+
+    intro_e = '''===                                                                          ===
 ===     This script can extract your WhatsApp msgstore.db (non crypt12,      ===
 ===   unencrypted file) and your \"key\" file from \"/data/data/com.whatsapp\"   ===
 ===  directory in Android 4.0+ device without root access. However you need  ===
@@ -258,7 +265,12 @@ def ShowBanner():
 ===                      Github.com/YuvrajRaghuvanshiS                       ===
 ================================================================================
     '''
-    CustomPrint(intro_content, 'green', ['bold'], False)
+    CustomPrint(banner_content, 'green', ['bold'], False)
+    CustomPrint(intro_a, 'green', ['bold'], False)
+    CustomPrint(intro_b, 'red', ['bold'], False)
+    CustomPrint(intro_c, 'green', ['bold'], False)
+    CustomPrint(intro_d, 'red', ['bold'], False)
+    CustomPrint(intro_e, 'green', ['bold'], False)
 
 
 def UninstallWhatsApp(SDKVersion):
