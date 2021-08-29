@@ -312,8 +312,8 @@ if __name__ == "__main__":
 
     parser.add_argument('-to', '--tar-only', action='store_true',
                         help='Get entire WhatsApp\'s data in \"<username>.tar\" file instead of just getting few important files.')
-    # args = parser.parse_args()
-    args = parser.parse_args('--tcp-ip 192.168.43.130 -tp 555'.split())
+    args = parser.parse_args()
+    # args = parser.parse_args('--tcp-ip 192.168.43.130 -tp 555'.split())
 
     tcpIP = args.tcp_ip
     tcpPort = args.tcp_port
