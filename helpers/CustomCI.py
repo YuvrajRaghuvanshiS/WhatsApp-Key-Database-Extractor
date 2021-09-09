@@ -9,7 +9,9 @@ except ImportError:
         os.system('pip3 install termcolor')
     except:
         os.system('python3 -m pip install termcolor')
-os.mkdir('log') if not os.path.isdir('log')
+
+if not (os.path.isdir('log')):
+    os.mkdir('log')
 logging.basicConfig(filename='log/wa_kdbe.log', level=logging.DEBUG, format='')
 masked = []
 
