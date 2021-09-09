@@ -37,3 +37,4 @@ Done : Add release date.
 Done : Automated import/install.
 Done : Get unpacked whatsapp.tar only, do not extract. use flag --only-tar.
 Done : While outputing the names of folders use double quotes or single quotes everywhere, appropriately. 
+Ask to log password.
