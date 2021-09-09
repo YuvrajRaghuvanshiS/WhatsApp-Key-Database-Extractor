@@ -45,15 +45,14 @@ if platform.system() == 'Linux':
 # Global Variables
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
-isJAVAInstalled = False
+is_java_installed = False
 
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     CheckBin()
     ShowBanner()
-    global isJAVAInstalled
-    isJAVAInstalled = CheckJAVA()
+    isJAVAInstalled = check_java()
     print('\n')
     try:
         CustomPrint('Arguments passed : ' + str(args))
@@ -118,20 +117,31 @@ def CheckBin():
         pass
 
 
-def CheckJAVA():
-    JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output(
-        'java -version'.split(), stderr=subprocess.STDOUT))).group(1)
-    isJAVAInstalled = True if(JAVAVersion) else False
-    if (isJAVAInstalled):
-        CustomPrint('Found Java installed on system.')
-        return isJAVAInstalled
+def check_java():
+    java_version = ''
+    out = subprocess.getoutput('java -version')
+    if(out):
+        java_version = re.findall('(?<=version ")(.*)(?=")', out)
+    else:
+        CustomPrint(
+            'Could not get output of \"java -version\" in \"wa_kdbe.py\"', 'red')
+        CustomPrint('Continuing without JAVA...', 'red')
+        return False
+    if(java_version):
+        is_java_installed = True
+    else:
+        is_java_installed = False
+    if is_java_installed:
+        CustomPrint('Found Java v' + java_version[0] +
+                    ' installed on system. Continuing...')
+        return is_java_installed
     else:
         noJAVAContinue = CustomInput(
             'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top? : ', 'red') or 'c'
         if(noJAVAContinue.upper() == 'C'):
             CustomPrint(
                 'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
-            return isJAVAInstalled
+            return is_java_installed
         else:
             Exit()
 
@@ -195,7 +205,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     CustomPrint(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
     print('\n')
-    ExtractAB(isJAVAInstalled, sdPath=sdPath,
+    ExtractAB(is_java_installed, sdPath=sdPath,
               ADBSerialId=ADBSerialId, isTarOnly=isTarOnly)
 
 

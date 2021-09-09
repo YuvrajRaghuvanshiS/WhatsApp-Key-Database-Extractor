@@ -4,9 +4,9 @@ import os
 import platform
 import re
 import shutil
-import subprocess
 import tarfile
 import time
+from subprocess import check_output, getoutput
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
@@ -22,7 +22,7 @@ if platform.system() == 'Linux':
     isLinux = True
 
 # Global variables
-isJAVAInstalled = False
+is_java_installed = False
 
 # Global command line helpers
 tmp = 'tmp/'
@@ -39,7 +39,7 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     ShowBanner()
     global isJAVAInstalled
-    isJAVAInstalled = CheckJAVA()
+    isJAVAInstalled = check_java()
     global tcpPort
     if(tcpIP):
         if(not tcpPort):
@@ -49,7 +49,7 @@ def main():
         ADBSerialId = deviceId.init()
 
     if(ADBSerialId):
-        sdPath = subprocess.getoutput(
+        sdPath = getoutput(
             adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
     else:
         sdPath = ''
@@ -57,20 +57,31 @@ def main():
               ADBSerialId=ADBSerialId, callingFromOtherModule=False, isTarOnly=isTarOnly)
 
 
-def CheckJAVA():
-    JAVAVersion = re.search('(?<=version ")(.*)(?=")', str(subprocess.check_output(
-        'java -version'.split(), stderr=subprocess.STDOUT))).group(1)
-    isJAVAInstalled = True if(JAVAVersion) else False
-    if (isJAVAInstalled):
-        CustomPrint('Found Java installed on system. Continuing...')
-        return isJAVAInstalled
+def check_java():
+    java_version = ''
+    out = getoutput('java -version')
+    if(out):
+        java_version = re.findall('(?<=version ")(.*)(?=")', out)
+    else:
+        CustomPrint(
+            'Could not get output of \"java -version\" in \"view_extract.py\"', 'red')
+        CustomPrint('Continuing without JAVA...', 'red')
+        return False
+    if(java_version):
+        is_java_installed = True
+    else:
+        is_java_installed = False
+    if is_java_installed:
+        CustomPrint('Found Java v' + java_version[0] +
+                    ' installed on system. Continuing...')
+        return is_java_installed
     else:
         noJAVAContinue = CustomInput(
             'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top? : ', 'red') or 'C'
         if(noJAVAContinue.upper() == 'C'):
             CustomPrint(
                 'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
-            return isJAVAInstalled
+            return is_java_installed
         else:
             Exit()
 
