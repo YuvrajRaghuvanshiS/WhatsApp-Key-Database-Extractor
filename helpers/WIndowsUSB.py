@@ -94,10 +94,10 @@ def DownloadApk(url, fileName):
         Exit()
     blockSize = 1024  # 1 Kibibyte
     progressBar = tqdm(total=totalSizeInBytes, unit='iB', unit_scale=True)
-    with open('helpers/temp.apk', 'wb') as file:
+    with open('helpers/temp.apk', 'wb') as f:
         for data in response.iter_content(blockSize):
             progressBar.update(len(data))
-            file.write(data)
+            f.write(data)
     progressBar.close()
     os.rename('helpers/temp.apk', 'helpers/LegacyWhatsApp.apk')
     if totalSizeInBytes != 0 and progressBar.n != totalSizeInBytes:

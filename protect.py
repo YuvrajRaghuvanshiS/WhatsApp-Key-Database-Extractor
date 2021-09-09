@@ -122,9 +122,9 @@ def ListUserFiles():
         CustomPrint('No user files found in \"' +
                     extracted + '\" folder.', 'red')
         Exit()
-    for file in allFiles:
-        if(file != '.placeholder'):
-            CustomPrint(file)
+    for f in allFiles:
+        if(f != '.placeholder'):
+            CustomPrint(f)
 
 
 def ListUserFolders():
