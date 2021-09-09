@@ -155,6 +155,7 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 *  :heavy_check_mark: ADB Devices menu.
 *  :heavy_check_mark: Implement datetime.
 *  :heavy_check_mark: Extracts backup created over TCP ~~{ #24 bin\tar.exe: Unexpected EOF on archive file in Windows.}.~~
+*  :heavy_check_mark: Finally logging in "log/wa_kdbe.log". Log excludes passwords, if you see any password here then do let know.
 *  :x: Works with WhatsApp Business.
 
 

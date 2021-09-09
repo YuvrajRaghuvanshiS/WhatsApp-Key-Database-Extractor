@@ -1,10 +1,11 @@
 import argparse
+import datetime
 import os
 import platform
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomPrint, CustomInput
+from helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False
@@ -40,6 +41,11 @@ def ReinstallWhatsApp(adb):
 
 
 if __name__ == "__main__":
+
+    CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', getTime=False)
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-tip',
                         '--tcp-ip', help='Connects to a remote device via TCP mode.')

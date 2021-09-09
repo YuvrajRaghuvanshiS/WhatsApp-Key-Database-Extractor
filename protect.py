@@ -1,3 +1,4 @@
+import datetime
 import os
 import platform
 import shutil
@@ -53,7 +54,7 @@ def Compress(userFolder):
         CustomPrint('User folder is empty.')
         Exit()
     else:
-        password = CustomInput('Choose a password for zip : ')
+        password = CustomInput('Choose a password for zip : ', log=False)
         if(password):
             password = ' -p' + password
         os.system(sevenZip + ' a -t7z -mhe ' + extracted +
@@ -65,7 +66,7 @@ def Compress(userFolder):
             'Delete \"' + userFolder + '\" folder? (default y) : ') or 'y'
         print('\n')
         CustomPrint('\aYour \"' + userFolder + '.7z\" file is in \"' + os.path.realpath(extracted) + '\" folder. Password is : ' +
-                    password.replace(' -p', ''), 'yellow')
+                    password.replace(' -p', ''), 'yellow', log=False)
         print('\n')
         CustomInput('Hit \"Enter\" key to continue.')
         if(deleteUserFolder.upper() == 'Y'):
@@ -149,7 +150,8 @@ def Uncompress(userZip):
         CustomPrint(extracted + userZip + ' is empty.')
         Exit()
     else:
-        password = CustomInput('Enter password, leave empty for none : ')
+        password = CustomInput(
+            'Enter password, leave empty for none : ', log=False)
         if(password):
             password = ' -p' + password
         os.system(sevenZip + ' e -aot ' + extracted + userZip +
@@ -171,6 +173,11 @@ def Uncompress(userZip):
 
 
 if __name__ == "__main__":
+
+    CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', getTime=False)
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     main()
 
 
