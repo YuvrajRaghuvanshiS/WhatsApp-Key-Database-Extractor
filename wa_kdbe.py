@@ -22,7 +22,6 @@ except ImportError:
 
 import argparse
 import concurrent.futures
-import os
 import platform
 import re
 import subprocess
