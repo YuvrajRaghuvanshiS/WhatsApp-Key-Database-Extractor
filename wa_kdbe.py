@@ -45,14 +45,14 @@ if platform.system() == 'Linux':
 # Global Variables
 appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
 appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
-is_java_installed = False
 
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     CheckBin()
     ShowBanner()
-    isJAVAInstalled = check_java()
+    global is_java_installed
+    is_java_installed = check_java()
     print('\n')
     try:
         CustomPrint('Arguments passed : ' + str(args))
