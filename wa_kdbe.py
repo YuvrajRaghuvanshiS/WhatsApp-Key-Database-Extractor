@@ -55,19 +55,17 @@ def main():
     is_java_installed = check_java()
     print('\n')
     try:
-        CustomPrint('Arguments passed : ' + str(args))
-        print('\n')
+        CustomPrint('Arguments passed : ' + str(args), is_print=False)
     except:
         pass
 
     try:
         CustomPrint('System Info : ' +
-                    json.dumps(GetSysInfo(), indent=2, default=str))
-        print('\n')
+                    json.dumps(GetSysInfo(), indent=2, default=str), is_print=False)
     except:
         CustomPrint(
             'Can\'t get system information. Continuing anyway...', 'yellow')
-    CustomPrint('Current release date : 29/06/2021', 'cyan')
+    CustomPrint('Current release date: 13/09/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
