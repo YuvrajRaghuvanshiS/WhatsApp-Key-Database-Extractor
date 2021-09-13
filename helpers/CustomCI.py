@@ -16,10 +16,10 @@ logging.basicConfig(filename='log/wa_kdbe.log', level=logging.DEBUG, format='')
 masked = []
 
 
-def CustomInput(textToInput, color='green', attr=[], getTime=True, log=True):
-    time = GetTime() if getTime else ''
+def CustomInput(textToInput, color='green', attr=[], is_get_time=True, is_log=True):
+    time = GetTime() if is_get_time else ''
     data = input(colored(time + textToInput, color, attrs=attr))
-    if(log):
+    if(is_log):
         logging.debug(time + textToInput + data)
     else:
         logging.debug(time + textToInput + '********')
@@ -28,11 +28,14 @@ def CustomInput(textToInput, color='green', attr=[], getTime=True, log=True):
     return data
 
 
-def CustomPrint(textToPrint, color='green', attr=[], getTime=True, log=True):
-    time = GetTime() if getTime else ''
+def CustomPrint(textToPrint, color='green', attr=[], is_get_time=True, is_log=True, is_print=True):
+    time = GetTime() if is_get_time else ''
     textToPrint = str(textToPrint)
-    cprint(time + textToPrint, color, attrs=attr)
-    if(log):
+    if(is_print):
+        cprint(time + textToPrint, color, attrs=attr)
+    else:
+        pass
+    if(is_log):
         logging.debug(time + textToPrint)
     else:
         # Search for password and mask.

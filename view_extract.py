@@ -123,7 +123,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
             username = CustomInput(
                 'Enter a name of folder from above (case sensitive) : ') or 'user'
             abPass = CustomInput(
-                'Enter same password which you entered on device when prompted earlier. : ', log=False)
+                'Enter same password which you entered on device when prompted earlier. : ', is_log=False)
             if(os.path.isfile(extracted + username + '/whatsapp.ab')):
                 try:
                     CustomPrint('Found \"whatsapp.ab\" in \"' + extracted + username + '\" folder. Size : ' + str(
@@ -153,7 +153,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
         username = CustomInput(
             'Enter a name for this user (default \"user\"). : ') or 'user'
         abPass = CustomInput(
-            'Enter same password which you entered on device when prompted earlier. : ', log=False)
+            'Enter same password which you entered on device when prompted earlier. : ', is_log=False)
         try:
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp +
                       'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
@@ -317,7 +317,7 @@ def TakingOutOnlyTar(username):
 if __name__ == "__main__":
 
     CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
-                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', getTime=False)
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False)
 
     parser = argparse.ArgumentParser()
     parser.add_argument(

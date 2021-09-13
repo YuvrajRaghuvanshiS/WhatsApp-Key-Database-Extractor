@@ -43,7 +43,7 @@ def ReinstallWhatsApp(adb):
 if __name__ == "__main__":
 
     CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
-                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', getTime=False)
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False)
     os.system('cls' if os.name == 'nt' else 'clear')
 
     parser = argparse.ArgumentParser()
