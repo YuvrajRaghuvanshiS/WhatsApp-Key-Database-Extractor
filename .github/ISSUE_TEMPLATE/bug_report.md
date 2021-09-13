@@ -22,18 +22,10 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Terminal output**
+**Terminal output or log file**
 ```
-Copy paste terminal output
+Copy paste terminal output here or drag and drop "log/wa_kdbe.log"
 ```
-
-**Desktop (please complete the following information):**
- - OS: [e.g. Windows 10]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - Android [e.g. Oreo]
- - Version [e.g. 10 QKQ1.191215.002]
 
 **Additional context**
 Add any other context about the problem here.

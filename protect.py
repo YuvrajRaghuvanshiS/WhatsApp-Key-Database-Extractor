@@ -1,3 +1,4 @@
+import datetime
 import os
 import platform
 import shutil
@@ -46,27 +47,28 @@ def main():
 
 def Compress(userFolder):
     if(not os.path.isdir(extracted + userFolder)):
-        CustomPrint('Could not find directory ' + extracted + userFolder)
+        CustomPrint('Could not find directory \"' +
+                    extracted + userFolder + '\"')
         Exit()
     elif(len(os.listdir(extracted + userFolder)) == 0):
         CustomPrint('User folder is empty.')
         Exit()
     else:
-        password = CustomInput('Choose a password for zip : ')
+        password = CustomInput('Choose a password for zip : ', log=False)
         if(password):
             password = ' -p' + password
         os.system(sevenZip + ' a -t7z -mhe ' + extracted +
                   userFolder + ' ' + extracted + userFolder + '/* ' + password)
         print('\n')
         CustomPrint(
-            'If you see \'Everything is OK\' in above line then it is recommended to delete user folder.')
+            'If you see \"Everything is OK\" in above line then it is recommended to delete user folder.')
         deleteUserFolder = CustomInput(
-            'Delete ' + userFolder + ' folder? (default y) : ') or 'y'
+            'Delete \"' + userFolder + '\" folder? (default y) : ') or 'y'
         print('\n')
-        CustomPrint('\aYour \'' + userFolder + '.7z\' file is in ' + os.path.realpath(extracted) + ' folder. Password is : ' +
-                    password.replace(' -p', ''), 'yellow')
+        CustomPrint('\aYour \"' + userFolder + '.7z\" file is in \"' + os.path.realpath(extracted) + '\" folder. Password is : ' +
+                    password.replace(' -p', ''), 'yellow', log=False)
         print('\n')
-        CustomInput('Hit Enter key to continue.')
+        CustomInput('Hit \"Enter\" key to continue.')
         if(deleteUserFolder.upper() == 'Y'):
             DeleteUserFolder(userFolder)
         else:
@@ -102,10 +104,13 @@ def Exit():
         elif(isLinux):
             os.system('xdg-open ' + os.path.realpath(extracted))
         else:
-            os.system('open ' + os.path.realpath(extracted))
+            try:
+                os.system('open ' + os.path.realpath(extracted))
+            except:
+                pass
     except:
         pass
-    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
+    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
@@ -115,11 +120,12 @@ def ListUserFiles():
     print('\n')
     allFiles = next(os.walk(extracted))[2]
     if(len(allFiles) == 1 and os.path.isfile(extracted + '.placeholder')):
-        CustomPrint('No user files found in ' + extracted + ' folder.', 'red')
+        CustomPrint('No user files found in \"' +
+                    extracted + '\" folder.', 'red')
         Exit()
-    for file in allFiles:
-        if(file != '.placeholder'):
-            CustomPrint(file)
+    for f in allFiles:
+        if(f != '.placeholder'):
+            CustomPrint(f)
 
 
 def ListUserFolders():
@@ -128,7 +134,7 @@ def ListUserFolders():
     print('\n')
     allFolders = next(os.walk(extracted))[1]
     if(len(allFolders) == 0):
-        CustomPrint('No folders found in ' + extracted + ' folder.', 'red')
+        CustomPrint('No folders found in \"' + extracted + '\" folder.', 'red')
         Exit()
     for folder in allFolders:
         CustomPrint(folder)
@@ -144,21 +150,22 @@ def Uncompress(userZip):
         CustomPrint(extracted + userZip + ' is empty.')
         Exit()
     else:
-        password = CustomInput('Enter password, leave empty for none : ')
+        password = CustomInput(
+            'Enter password, leave empty for none : ', log=False)
         if(password):
             password = ' -p' + password
         os.system(sevenZip + ' e -aot ' + extracted + userZip +
                   ' -o' + extracted + userZip.replace('.7z', '') + password)
         print('\n')
         CustomPrint(
-            'If you see \'Everything is OK\' in above line then you can delete user zip file.')
+            'If you see \"Everything is OK\" in above line then you can delete user zip file.')
         deleteUserZip = CustomInput(
             'Delete ' + userZip + ' ? (default n) : ') or 'n'
         print('\n')
-        CustomPrint('\aYour extracted \'' + userZip.replace('.7z',
-                                                            '') + '\' folder is in ' + os.path.realpath(extracted + userZip.replace('.7z', '')) + ' folder.', 'yellow')
+        CustomPrint('\aYour extracted \"' + userZip.replace('.7z',
+                                                            '') + '\" folder is in \"' + os.path.realpath(extracted + userZip.replace('.7z', '')) + '\" folder.', 'yellow')
         print('\n')
-        CustomInput('Hit Enter key to continue.')
+        CustomInput('Hit \"Enter\" key to continue.')
         if(deleteUserZip.upper() == 'Y'):
             DeleteUserZip(userZip)
         else:
@@ -166,6 +173,11 @@ def Uncompress(userZip):
 
 
 if __name__ == "__main__":
+
+    CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', getTime=False)
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     main()
 
 

@@ -32,7 +32,9 @@ Control device in tcp mode. So scrcpy is not required. : Control as in send touc
 Make TCP work fast by backing up apk in device itself, and on different thread check and download legacy on device itself. - This is default behaviour now.
 Create backup inside device (This also solves #24) and pull it on differnet thread. Meanwhile install original on different thread. 
 Product demo video.
-Done : Your whatsapp database along with other files is in extracted/<userName> folder. Give complete path instead.
+Done : Your whatsapp database along with other files is in extracted/<username> folder. Give complete path instead.
 Done : Add release date.
 Done : Automated import/install.
 Done : Get unpacked whatsapp.tar only, do not extract. use flag --only-tar.
+Done : While outputing the names of folders use double quotes or single quotes everywhere, appropriately. 
+Ask to log password.

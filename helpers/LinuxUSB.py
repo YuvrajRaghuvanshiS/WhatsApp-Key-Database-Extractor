@@ -26,7 +26,7 @@ def AfterConnect(ADBSerialId):
     if (SDKVersion <= 13):
         CustomPrint(
             'Unsupported device. This method only works on Android v4.0 or higer.', 'red')
-        CustomPrint('Cleaning up temporary direcory.', 'red')
+        CustomPrint('Cleaning up \"tmp\" folder.', 'red')
         os.system('rm -rf tmp/*')
         Exit()
     _waPathText = 'adb -s ' + ADBSerialId + ' shell pm path com.whatsapp'
@@ -56,13 +56,13 @@ def AfterConnect(ADBSerialId):
     if (version.parse(versionName) > version.parse('2.11.431')):
         if not (os.path.isfile('helpers/LegacyWhatsApp.apk')):
             CustomPrint(
-                'Downloading legacy WhatsApp V2.11.431 to helpers folder')
+                'Downloading legacy WhatsApp V2.11.431 to \"helpers\" folder')
             DownloadApk(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
             # wget.download(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
             print('\n')
         else:
             CustomPrint(
-                'Found legacy WhatsApp V2.11.431 apk in helpers folder')
+                'Found legacy WhatsApp V2.11.431 apk in \"helpers\" folder')
     else:
         # Version lower than 2.11.431 installed on device.
         pass
@@ -82,20 +82,20 @@ def DownloadApk(url, fileName):
         # totalSizeInBytes must be null
         CustomPrint('\aFor some reason I could not download Legacy WhatsApp, you need to download it on your own now from either of the links given below : ', 'red')
         print('\n')
-        CustomPrint('1. \'' + appURLWhatsAppCDN +
-                    '\' (official\'s archive)', 'red')
-        CustomPrint('2. \'' + appURLWhatsCryptCDN +
-                    '\' unofficial website.', 'red')
+        CustomPrint('1. \"' + appURLWhatsAppCDN +
+                    '\" (official\'s archive)', 'red')
+        CustomPrint('2. \"' + appURLWhatsCryptCDN +
+                    '\" unofficial website.', 'red')
         print('\n')
         CustomPrint(
-            'Once downloaded rename it to \'LegacyWhatsApp.apk\' exactly and put in \'helpers\' folder.', 'red')
+            'Once downloaded rename it to \"LegacyWhatsApp.apk\" exactly and put in \"helpers\" folder.', 'red')
         Exit()
     blockSize = 1024  # 1 Kibibyte
     progressBar = tqdm(total=totalSizeInBytes, unit='iB', unit_scale=True)
-    with open('helpers/temp.apk', 'wb') as file:
+    with open('helpers/temp.apk', 'wb') as f:
         for data in response.iter_content(blockSize):
             progressBar.update(len(data))
-            file.write(data)
+            f.write(data)
     progressBar.close()
     os.rename('helpers/temp.apk', 'helpers/LegacyWhatsApp.apk')
     if totalSizeInBytes != 0 and progressBar.n != totalSizeInBytes:
@@ -107,7 +107,7 @@ def Exit():
     print('\n')
     CustomPrint('Exiting...')
     os.system('adb kill-server')
-    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
+    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 

@@ -2,7 +2,7 @@ import os
 import platform
 import subprocess as sp
 
-from CustomCI import CustomPrint
+from CustomCI import CustomPrint, CustomInput
 
 
 def init(tcpIP, tcpPort):
@@ -61,5 +61,5 @@ def init(tcpIP, tcpPort):
 def Exit():
     print('\n')
     CustomPrint('Exiting...')
-    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
+    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
     quit()

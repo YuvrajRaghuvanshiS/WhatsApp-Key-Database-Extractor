@@ -1,10 +1,11 @@
 import argparse
+import datetime
 import os
 import platform
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomPrint, CustomInput
+from helpers.CustomCI import CustomInput, CustomPrint
 
 # Detect OS
 isWindows = False
@@ -20,7 +21,7 @@ def Exit():
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
-    CustomInput('Hit \'Enter\' key to continue....', 'cyan')
+    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
@@ -32,14 +33,19 @@ def ReinstallWhatsApp(adb):
                       helpers + 'WhatsAppbackup.apk')
         except Exception as e:
             CustomPrint(e, 'red')
-            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.', 'red')
+            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
             Exit()
     else:
-        CustomPrint('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from settings \u2192 app settings \u2192 WhatsApp.', 'red')
+        CustomPrint('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
         Exit()
 
 
 if __name__ == "__main__":
+
+    CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', getTime=False)
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-tip',
                         '--tcp-ip', help='Connects to a remote device via TCP mode.')
