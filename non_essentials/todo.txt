@@ -29,7 +29,7 @@ Stop server / thread somehow.
 ======= Extras (Not urgent cases) =======
 RunTime of program.
 Control device in tcp mode. So scrcpy is not required. : Control as in send touch signals like WhatsDump does on emulator.
-Make TCP work fast by backing up apk in device itself, and on different thread check and download legacy on device itself.
+Make TCP work fast by backing up apk in device itself, and on different thread check and download legacy on device itself. - This is default behaviour now.
 Create backup inside device (This also solves #24) and pull it on differnet thread. Meanwhile install original on different thread. 
 Product demo video.
 Done : Your whatsapp database along with other files is in extracted/<username> folder. Give complete path instead.
