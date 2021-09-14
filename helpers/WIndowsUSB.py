@@ -60,7 +60,7 @@ def AfterConnect(adb):
                 'Downloading legacy WhatsApp V2.11.431 to \"' + helpers + '\" folder')
             DownloadApk(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
             # wget.download(downloadAppFrom, helpers + 'LegacyWhatsApp.apk')
-            print('\n')
+            CustomPrint('\n', is_get_time=False)
         else:
             CustomPrint(
                 'Found legacy WhatsApp V2.11.431 apk in \"' + helpers + '\" folder')
@@ -83,12 +83,12 @@ def DownloadApk(url, fileName):
     else:
         # totalSizeInBytes must be null
         CustomPrint('\aFor some reason I could not download Legacy WhatsApp, you need to download it on your own now from either of the links given below: ', 'red')
-        print('\n')
+        CustomPrint('\n', is_get_time=False)
         CustomPrint('1. \"' + appURLWhatsAppCDN +
                     '\" (official\'s archive)', 'red')
         CustomPrint('2. \"' + appURLWhatsCryptCDN +
                     '\" unofficial website.', 'red')
-        print('\n')
+        CustomPrint('\n', is_get_time=False)
         CustomPrint(
             'Once downloaded rename it to \"LegacyWhatsApp.apk\" exactly and put in \"helpers\" folder.', 'red')
         Exit()
@@ -106,7 +106,7 @@ def DownloadApk(url, fileName):
 
 
 def Exit():
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('Exiting...')
     os.system('bin\\adb.exe kill-server')
     CustomInput('Hit \"Enter\" key to continue....', 'cyan')

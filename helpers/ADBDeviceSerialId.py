@@ -58,7 +58,7 @@ def init():
         return output[1].split()[0]
 
     CustomPrint(output[0])
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     if deviceToConnect is None:
         for device in output[1:]:
             name = adb + ' -s ' + \
@@ -85,7 +85,7 @@ def init():
 
 
 def Exit():
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('Exiting...')
     CustomInput('Hit \"Enter\" key to continue....', 'cyan')
     quit()

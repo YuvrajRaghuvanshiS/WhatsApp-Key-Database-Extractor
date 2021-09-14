@@ -17,7 +17,7 @@ if platform.system() == 'Linux':
 
 
 def Exit():
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')

@@ -59,7 +59,7 @@ def init(tcpIP, tcpPort):
 
 
 def Exit():
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('Exiting...')
     CustomInput('Hit \"Enter\" key to continue....', 'cyan')
     quit()

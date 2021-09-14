@@ -53,7 +53,7 @@ def main():
     ShowBanner()
     global is_java_installed
     is_java_installed = check_java()
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     try:
         CustomPrint('Arguments passed: ' + str(args), is_print=False)
     except:
@@ -66,11 +66,11 @@ def main():
         CustomPrint(
             'Can\'t get system information. Continuing anyway...', 'yellow')
     CustomPrint('Current release date: 13/09/2021', 'cyan')
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     readInstruction = CustomInput(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
     if(readInstruction.upper() == 'Y'):
-        print('\n')
+        CustomPrint('\n', is_get_time=False)
         CustomInput(
             '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup". Hit \"Enter\" key to continue.', 'yellow')
         USBMode()
@@ -141,7 +141,7 @@ def check_java():
 
 
 def Exit():
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
@@ -177,7 +177,7 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     # Reboot here.
     if(isAllowReboot):
         if(not tcpIP):
-            print('\n')
+            CustomPrint('\n', is_get_time=False)
             CustomPrint('Rebooting device, please wait.', 'yellow')
             os.system(adb + ' reboot')
             while(subprocess.getoutput(adb + ' get-state') != 'device'):
@@ -195,10 +195,10 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
         '\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     ExtractAB(is_java_installed, sdPath=sdPath,
               ADBSerialId=ADBSerialId, isTarOnly=isTarOnly)
 

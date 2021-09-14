@@ -94,7 +94,7 @@ def CleanTmp():
 
 
 def Exit():
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
@@ -172,7 +172,7 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
 
 
 def ListUserFolders():
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('Available user folders in extracted directory.')
     allFolders = next(os.walk(extracted))[1]
     if(len(allFolders) == 0):
@@ -180,7 +180,7 @@ def ListUserFolders():
         Exit()
     for folder in allFolders:
         CustomPrint(folder)
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
 
 
 def ShowBanner():
@@ -233,10 +233,10 @@ def TakingOutMainFiles(username, sdPath, ADBSerialId):
             CleanTmp()
         except Exception as e:
             CustomPrint(e, 'red')
-            print('\n')
+            CustomPrint('\n', is_get_time=False)
             CustomPrint('Go & delete \"' + tmp +
                         '\" folder yourself (It\'s important, DO IT.)', 'red')
-            print('\n')
+            CustomPrint('\n', is_get_time=False)
             # TODO: Major security risk: Data in tmp is not deleted.
 
         CustomPrint(
@@ -244,14 +244,14 @@ def TakingOutMainFiles(username, sdPath, ADBSerialId):
         createArchive = CustomInput(
             'Would you like to create a password protected archive? (default y): ') or 'Y'
         if(createArchive.upper() == 'Y'):
-            print('\n')
+            CustomPrint('\n', is_get_time=False)
             CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \"un-archive\" and access these files you need to run \"python protect.py\" from root directory of this project.', 'yellow')
             protect.Compress(username)
         else:
-            print('\n')
+            CustomPrint('\n', is_get_time=False)
             CustomPrint('\aYour whatsapp database along with other files is in \"' +
                         os.path.realpath(extracted + username) + '\" folder.', 'yellow')
-            print('\n')
+            CustomPrint('\n', is_get_time=False)
             CustomInput('Hit \"Enter\" key to continue.')
             if(sdPath and ADBSerialId):
                 copyTosdCard = CustomInput(
@@ -292,11 +292,11 @@ def TakingOutOnlyTar(username):
         Exit()
 
     CleanTmp()
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomPrint('\aYour \"' + username + '.tar\" is in \"' +
                 os.path.realpath(extracted) + '\" folder.', 'yellow')
 
-    print('\n')
+    CustomPrint('\n', is_get_time=False)
     CustomInput('Hit \"Enter\" key to continue.')
 
     try:  # Open in explorer.
