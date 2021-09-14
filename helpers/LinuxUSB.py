@@ -80,7 +80,7 @@ def DownloadApk(url, fileName):
         totalSizeInBytes = int(totalSizeInBytes)
     else:
         # totalSizeInBytes must be null
-        CustomPrint('\aFor some reason I could not download Legacy WhatsApp, you need to download it on your own now from either of the links given below : ', 'red')
+        CustomPrint('\aFor some reason I could not download Legacy WhatsApp, you need to download it on your own now from either of the links given below: ', 'red')
         print('\n')
         CustomPrint('1. \"' + appURLWhatsAppCDN +
                     '\" (official\'s archive)', 'red')

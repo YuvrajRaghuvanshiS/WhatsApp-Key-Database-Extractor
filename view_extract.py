@@ -77,7 +77,7 @@ def check_java():
         return is_java_installed
     else:
         noJAVAContinue = CustomInput(
-            'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top? : ', 'red') or 'C'
+            'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top?: ', 'red') or 'C'
         if(noJAVAContinue.upper() == 'C'):
             CustomPrint(
                 'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
@@ -105,35 +105,35 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
     if not (isJAVAInstalled):
         CustomPrint('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
-        username = CustomInput('Enter a name for this user. : ')
+        username = CustomInput('Enter a name for this user.: ')
         os.mkdir(extracted) if not (os.path.isdir(extracted)) else CustomPrint(
             'Folder \"' + extracted + '\" already exists.', 'yellow')
         os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
                                                ) else CustomPrint('Folder \"' + extracted + username + '\" exists.')
         os.rename(tmp + 'whatsapp.ab', extracted + username + '/whatsapp.ab')
-        CustomPrint('Moved \"whatsapp.ab\" to \"' + extracted + username + '\" folder. Size : ' +
+        CustomPrint('Moved \"whatsapp.ab\" to \"' + extracted + username + '\" folder. Size: ' +
                     str(os.path.getsize(extracted + username + '/whatsapp.ab')) + ' bytes.')
         CustomPrint('Run \"view_extract.py\" after installing Java on system.')
         CleanTmp()
         Exit()
     if(not callingFromOtherModule):
-        if(CustomInput('Have you already made whatsapp.ab and just extracting it now ? : ').upper() == 'Y'):
+        if(CustomInput('Have you already made whatsapp.ab and just extracting it now ?: ').upper() == 'Y'):
             ListUserFolders()
             print('\n')
             username = CustomInput(
-                'Enter a name of folder from above (case sensitive) : ') or 'user'
+                'Enter a name of folder from above (case sensitive): ') or 'user'
             abPass = CustomInput(
-                'Enter same password which you entered on device when prompted earlier. : ', is_log=False)
+                'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
             if(os.path.isfile(extracted + username + '/whatsapp.ab')):
                 try:
-                    CustomPrint('Found \"whatsapp.ab\" in \"' + extracted + username + '\" folder. Size : ' + str(
+                    CustomPrint('Found \"whatsapp.ab\" in \"' + extracted + username + '\" folder. Size: ' + str(
                         os.path.getsize(extracted + username + '/whatsapp.ab')) + ' bytes. Unpacking...')
                     os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
                         'Folder \"' + tmp + '\" already exists.', 'yellow')
                     os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted +
                               username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
                     CustomPrint('Successfully unpacked \"' + extracted + username + '/whatsapp.ab\" to ' + '\"' +
-                                tmp + 'whatsapp.tar\". Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
+                                tmp + 'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
                     if(isTarOnly):
                         TakingOutOnlyTar(username)
                     else:
@@ -148,17 +148,17 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
         else:
             Exit()
     if(os.path.isfile(tmp + 'whatsapp.ab')):
-        CustomPrint('Found \"whatsapp.ab\" in \"tmp\" folder. Continuing... Size : ' +
+        CustomPrint('Found \"whatsapp.ab\" in \"tmp\" folder. Continuing... Size: ' +
                     str(os.path.getsize(tmp + '/whatsapp.ab')) + ' bytes.')
         username = CustomInput(
-            'Enter a name for this user (default \"user\"). : ') or 'user'
+            'Enter a name for this user (default \"user\").: ') or 'user'
         abPass = CustomInput(
-            'Enter same password which you entered on device when prompted earlier. : ', is_log=False)
+            'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
         try:
             os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp +
                       'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
             CustomPrint('Successfully unpacked \"' + tmp + 'whatsapp.ab\" to \"' + tmp +
-                        'whatsapp.tar\". Size : ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
+                        'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
             if(isTarOnly):
                 TakingOutOnlyTar(username)
             else:
@@ -223,7 +223,7 @@ def TakingOutMainFiles(username, sdPath, ADBSerialId):
                 os.replace(tmp + filesToExtract[key],
                            extracted + username + '/' + key)
                 CustomPrint('Copied to \"' + extracted +
-                            username + '\" : ' + key)
+                            username + '\": ' + key)
             else:
                 CustomPrint(
                     '\"' + key + '\" is not present in tarfile, Go and write to \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\"', 'red', ['bold'])
@@ -237,12 +237,12 @@ def TakingOutMainFiles(username, sdPath, ADBSerialId):
             CustomPrint('Go & delete \"' + tmp +
                         '\" folder yourself (It\'s important, DO IT.)', 'red')
             print('\n')
-            # TODO : Major security risk : Data in tmp is not deleted.
+            # TODO: Major security risk: Data in tmp is not deleted.
 
         CustomPrint(
             'You should not leave these extracted database and other files hanging in folder, it is very insecure.')
         createArchive = CustomInput(
-            'Would you like to create a password protected archive? (default y) : ') or 'y'
+            'Would you like to create a password protected archive? (default y): ') or 'Y'
         if(createArchive.upper() == 'Y'):
             print('\n')
             CustomPrint('Now an archive will be created in extracted folder and original files will be deleted. To later \"un-archive\" and access these files you need to run \"python protect.py\" from root directory of this project.', 'yellow')
@@ -255,7 +255,7 @@ def TakingOutMainFiles(username, sdPath, ADBSerialId):
             CustomInput('Hit \"Enter\" key to continue.')
             if(sdPath and ADBSerialId):
                 copyTosdCard = CustomInput(
-                    'Copy \"msgstore.db\" file to phone? (y/n) default \'n\' : ') or 'n'
+                    'Copy \"msgstore.db\" file to phone? (y/n) default \'n\': ') or 'N'
                 if(copyTosdCard.upper() == 'Y'):
                     os.system(adb + ADBSerialId + ' push ' + extracted +
                               username + '/msgstore.db ' + sdPath + '/msgstore.db')
@@ -316,14 +316,14 @@ def TakingOutOnlyTar(username):
 
 if __name__ == "__main__":
 
-    CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
-                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False)
+    CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-tip', '--tcp-ip', help='Connects to a remote device via TCP mode.')
     parser.add_argument('-tp', '--tcp-port',
-                        help='Port number to connect to. Default : 5555')
+                        help='Port number to connect to. Default: 5555')
 
     parser.add_argument('-to', '--tar-only', action='store_true',
                         help='Get entire WhatsApp\'s data in \"<username>.tar\" file instead of just getting few important files.')

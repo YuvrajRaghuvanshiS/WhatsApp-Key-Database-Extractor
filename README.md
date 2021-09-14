@@ -100,12 +100,12 @@ After [installation](#installation-for-pipreleases-specific-instructions-go-to-b
 ```bash
 git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.git && cd WhatsApp-Key-Database-Extractor
 ```
-2. Install dependencies (for linux and OSX only) : skip `sudo` for mac.
+2. Install dependencies (for linux and OSX only): skip `sudo` for mac.
 ```bash
 chmod +x bin/linux_dependencies.sh
 sudo ./bin/linux_dependencies.sh
 ```
-If you're getting any error while running above command you need to install the following manually for your linux distro. : [adb](https://developer.android.com/studio/command-line/adb) [curl](https://curl.se/download.html) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
+If you're getting any error while running above command you need to install the following manually for your linux distro.: [adb](https://developer.android.com/studio/command-line/adb) [curl](https://curl.se/download.html) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
 
 3. Run `wa_kdbe.py` by double clicking the file on Windows or by
 ```python
@@ -118,27 +118,27 @@ python3 wa_kdbe.py
 | ----- | ------------------- | ---- | --------- | ------ | ---------------------------------------------------------------------- | ------ |
 | -ar   |--allow-reboot       | USB  | Optional  | Bool   | Reboots device before installing Legacy WhatsApp.                      | Stable |
 | -tip  | --tcp-ip IP_ADDRESS | TCP  | Required  | String | Connects to a remote device via TCP mode.                              | Stable |
-| -tp   |--tcp-port PORT      | TCP  | Optional  | String | Port number to connect to. Default : 5555.                             | Stable |
+| -tp   |--tcp-port PORT      | TCP  | Optional  | String | Port number to connect to. Default: 5555.                             | Stable |
 | -s    | --scrcpy            | Both | Optional  | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
 | -to   | --tar-only          | Both | Optional  | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Stable |
 
 Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode or USB mode. When Android is plugged with USB don't use TCP flags.
 
-| Mode | **Example usage** : Long command **OR** Short command                                                                                                                |
+| Mode | **Example usage**: Long command **OR** Short command                                                                                                                |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | TCP  | `python3 wa_kdbe.py --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only` **OR** `python3 wa_kdbe.py -tip 192.168.43.130 -tp 5555 -s -to` |
 | USB  | `python3 wa_kdbe.py -ar -s -to` **OR** `python3 wa_kdbe.py --allow-reboot --scrcpy --tar-only`                                                   |
 
 ### Standalone Operations
-**These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex : Process finished but WhatsApp was not reinstalled on device.**
+**These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex: Process finished but WhatsApp was not reinstalled on device.**
 
-1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp : For this to work there should be "whatsapp.ab" file either in "extracted/\<username\>" folder or in "tmp" folder. Where "username" is name of user you entered earlier.
-
-
-2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp : For this to work there should either be "username" folder or "username.7z" file in "extracted" folder.
+1. Run `python3 view_extract.py` to unpack whatsapp.ab to whatsapp.tar and extract files. Imp: For this to work there should be "whatsapp.ab" file either in "extracted/\<username\>" folder or in "tmp" folder. Where "username" is name of user you entered earlier.
 
 
-3. Run `python3 restore_whatsapp.py` to reinstall WhatsApp on device. Imp : For this to work there should either be "WhatsAppbackup.apk" in "helpers" folder.
+2. Run `python3 protect.py` to compress/decompress user folder with(out) password for safekeeping. Imp: For this to work there should either be "username" folder or "username.7z" file in "extracted" folder.
+
+
+3. Run `python3 restore_whatsapp.py` to reinstall WhatsApp on device. Imp: For this to work there should either be "WhatsAppbackup.apk" in "helpers" folder.
 
 ### Features & ToDo
 <!--https://github.com/StylishThemes/GitHub-Dark/wiki/Emoji-->

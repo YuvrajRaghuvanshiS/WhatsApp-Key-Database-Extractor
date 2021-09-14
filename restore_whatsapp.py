@@ -42,15 +42,15 @@ def ReinstallWhatsApp(adb):
 
 if __name__ == "__main__":
 
-    CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
-                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False)
+    CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-tip',
                         '--tcp-ip', help='Connects to a remote device via TCP mode.')
     parser.add_argument('-tp',
-                        '--tcp-port', help='Port number to connect to. Default : 5555')
+                        '--tcp-port', help='Port number to connect to. Default: 5555')
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
 

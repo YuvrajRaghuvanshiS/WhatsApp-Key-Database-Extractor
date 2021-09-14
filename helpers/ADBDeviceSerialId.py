@@ -68,7 +68,7 @@ def init():
             i += 1
 
     while deviceToConnect is None:
-        deviceIndex = int(CustomInput('Enter device number (for ex : 2) : '))
+        deviceIndex = int(CustomInput('Enter device number (for ex: 2): '))
         if deviceIndex <= 0 or deviceIndex + 1 > len(output):
             continue
         deviceToConnect = output[deviceIndex]

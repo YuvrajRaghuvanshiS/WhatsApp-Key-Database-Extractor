@@ -11,7 +11,7 @@ try:
     import requests
     from tqdm import tqdm
 except ImportError:
-    print('\nFirst run : Auto installing python requirements.\n')
+    print('\nFirst run: Auto installing python requirements.\n')
     try:
         # Trying both methods of installations
         os.system('pip3 install --upgrade packaging psutil termcolor requests tqdm')
@@ -55,12 +55,12 @@ def main():
     is_java_installed = check_java()
     print('\n')
     try:
-        CustomPrint('Arguments passed : ' + str(args), is_print=False)
+        CustomPrint('Arguments passed: ' + str(args), is_print=False)
     except:
         pass
 
     try:
-        CustomPrint('System Info : ' +
+        CustomPrint('System Info: ' +
                     json.dumps(GetSysInfo(), indent=2, default=str), is_print=False)
     except:
         CustomPrint(
@@ -68,7 +68,7 @@ def main():
     CustomPrint('Current release date: 13/09/2021', 'cyan')
     print('\n')
     readInstruction = CustomInput(
-        '\aPlease read above instructions carefully \u2191 . Continue? (default y) : ', 'yellow') or 'y'
+        '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
     if(readInstruction.upper() == 'Y'):
         print('\n')
         CustomInput(
@@ -99,7 +99,7 @@ def BackupWhatsAppDataasAb(SDKVersion):
     except Exception as e:
         CustomPrint(e, 'red')
         Exit()
-    CustomPrint('Done backing up data. Size : ' +
+    CustomPrint('Done backing up data. Size: ' +
                 str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
 
 
@@ -131,7 +131,7 @@ def check_java():
         return is_java_installed
     else:
         noJAVAContinue = CustomInput(
-            'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top? : ', 'red') or 'c'
+            'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top?: ', 'red') or 'C'
         if(noJAVAContinue.upper() == 'C'):
             CustomPrint(
                 'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
@@ -306,8 +306,8 @@ def USBMode():
 
 if __name__ == "__main__":
 
-    CustomPrint('\n\n\n====== Logging start here. ====== \nFile : ' + os.path.basename(__file__) + '\nDate : ' +
-                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False)
+    CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
+                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-ar', '--allow-reboot', action='store_true',
@@ -315,7 +315,7 @@ if __name__ == "__main__":
     parser.add_argument('-tip', '--tcp-ip',
                         help='Connects to a remote device via TCP mode.')
     parser.add_argument('-tp', '--tcp-port',
-                        help='Port number to connect to. Default : 5555')
+                        help='Port number to connect to. Default: 5555')
     parser.add_argument('-s', '--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
     parser.add_argument('-to', '--tar-only', action='store_true',
@@ -328,7 +328,7 @@ if __name__ == "__main__":
     tcpPort = args.tcp_port
     isScrCpy = args.scrcpy
     isTarOnly = args.tar_only
-    # TODO : Download legacy on phone(later). Backup original on phone(done). Create backup on phone. Install original from phone.
+    # TODO: Download legacy on phone(later). Backup original on phone(done). Create backup on phone. Install original from phone.
     if(tcpIP):
         if(not tcpPort):
             tcpPort = '5555'
