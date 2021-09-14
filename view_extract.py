@@ -11,7 +11,7 @@ from subprocess import check_output, getoutput
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
 import protect
-from helpers.CustomCI import CustomInput, CustomPrint
+from helpers.CustomCI import CustomInput, CustomPrint, init_log
 
 # Detect OS
 isWindows = False
@@ -316,6 +316,7 @@ def TakingOutOnlyTar(username):
 
 if __name__ == "__main__":
 
+    init_log(from_file='view_extract')
     CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
 
