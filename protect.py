@@ -140,6 +140,24 @@ def ListUserFolders():
         CustomPrint(folder)
 
 
+def ShowBanner():
+    banner_content = '''
+================================================================================
+========                                                                ========
+========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ======== 
+========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ======== 
+========  88   I8I   88 88ooo88        88,8P   88   88 88oooY' 88ooooo  ======== 
+========  Y8   I8I   88 88~~~88 C8888D 88`8b   88   88 88~~~b. 88~~~~~  ======== 
+========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ======== 
+========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ======== 
+========                                                                ========
+================================================================================
+    '''
+    CustomPrint(banner_content, 'green', ['bold'], False)
+    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n',
+                'green', ['bold'], False)
+
+
 def Uncompress(userZip):
     if(not str(userZip).endswith('7z')):
         userZip = userZip + '.7z'
@@ -177,7 +195,7 @@ if __name__ == "__main__":
     CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
-
+    ShowBanner()
     main()
 
 
