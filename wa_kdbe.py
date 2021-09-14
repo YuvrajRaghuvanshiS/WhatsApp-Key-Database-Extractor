@@ -29,7 +29,7 @@ import time
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomInput, CustomPrint, init_log
+from helpers.CustomCI import CustomInput, CustomPrint
 from helpers.LinuxUSB import LinuxUSB
 from helpers.WIndowsUSB import WindowsUSB
 from view_extract import ExtractAB
@@ -306,7 +306,6 @@ def USBMode():
 
 if __name__ == "__main__":
 
-    init_log(from_file='wa_kdbe')
     CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
 

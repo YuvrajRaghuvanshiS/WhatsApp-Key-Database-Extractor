@@ -12,12 +12,8 @@ except ImportError:
 
 if not (os.path.isdir('log')):
     os.mkdir('log')
+logging.basicConfig(filename='log/wa_kdbe.log', level=logging.DEBUG, format='')
 masked = []
-
-
-def init_log(from_file='unknown_file'):
-    logging.basicConfig(filename='log/' + from_file +
-                        '.log', level=logging.DEBUG, format='')
 
 
 def CustomInput(textToInput, color='green', attr=[], is_get_time=True, is_log=True):
