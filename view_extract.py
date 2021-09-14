@@ -53,6 +53,7 @@ def main():
             adb + ADBSerialId + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
     else:
         sdPath = ''
+    CustomPrint('It not necessary to have phone connected unless you want to copy \"msgstore.db\" to \"/sdcard\".\nSo you can ignore above warning.\n')
     ExtractAB(isJAVAInstalled, sdPath=sdPath,
               ADBSerialId=ADBSerialId, callingFromOtherModule=False, isTarOnly=isTarOnly)
 
@@ -119,31 +120,30 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
     if(not callingFromOtherModule):
         if(CustomInput('Have you already made whatsapp.ab and just extracting it now ?: ').upper() == 'Y'):
             ListUserFolders()
-            print('\n')
             username = CustomInput(
-                'Enter a name of folder from above (case sensitive): ') or 'user'
+                'Enter a name of folder from above (case sensitive): ')
+            while(not os.path.isfile(extracted + username + '/whatsapp.ab')):
+                if(os.path.isdir(extracted + username) and not os.path.isfile(extracted + username + '/whatsapp.ab')):
+                    CustomPrint('Folder \"' + extracted + username +
+                                '\" does not even contain whatsapp.ab')
+                    Exit()
+                username = CustomInput(
+                    'No such folder: \"' + extracted + username + '\". Enter correct name (case sensitive).: ')
             abPass = CustomInput(
                 'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
-            if(os.path.isfile(extracted + username + '/whatsapp.ab')):
-                try:
-                    CustomPrint('Found \"whatsapp.ab\" in \"' + extracted + username + '\" folder. Size: ' + str(
-                        os.path.getsize(extracted + username + '/whatsapp.ab')) + ' bytes. Unpacking...')
-                    os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
-                        'Folder \"' + tmp + '\" already exists.', 'yellow')
-                    os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted +
-                              username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
-                    CustomPrint('Successfully unpacked \"' + extracted + username + '/whatsapp.ab\" to ' + '\"' +
-                                tmp + 'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
-                    if(isTarOnly):
-                        TakingOutOnlyTar(username)
-                    else:
-                        TakingOutMainFiles(username, sdPath, ADBSerialId)
-                except Exception as e:
-                    CustomPrint(e, 'red')
-                    Exit()
-            else:
-                CustomPrint('Could not find \"whatsapp.ab\" in \"' + extracted +
-                            username + '\" folder, did you name your user properly?')
+            try:
+                os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
+                    'Folder \"' + tmp + '\" already exists.', 'yellow')
+                os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted +
+                          username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(abPass))
+                CustomPrint('Successfully unpacked \"' + extracted + username + '/whatsapp.ab\" to ' + '\"' +
+                            tmp + 'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
+                if(isTarOnly):
+                    TakingOutOnlyTar(username)
+                else:
+                    TakingOutMainFiles(username, sdPath, ADBSerialId)
+            except Exception as e:
+                CustomPrint(e, 'red')
                 Exit()
         else:
             Exit()
@@ -174,13 +174,13 @@ def ExtractAB(isJAVAInstalled, sdPath='', ADBSerialId='', callingFromOtherModule
 def ListUserFolders():
     print('\n')
     CustomPrint('Available user folders in extracted directory.')
-    print('\n')
     allFolders = next(os.walk(extracted))[1]
     if(len(allFolders) == 0):
         CustomPrint('No folders found in \"' + extracted + '\" folder.', 'red')
         Exit()
     for folder in allFolders:
         CustomPrint(folder)
+    print('\n')
 
 
 def ShowBanner():
