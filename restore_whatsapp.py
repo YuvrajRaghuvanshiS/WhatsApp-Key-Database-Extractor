@@ -5,7 +5,7 @@ import platform
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomInput, CustomPrint
+from helpers.custom_ci import custom_input, custom_print
 
 # Detect OS
 isWindows = False
@@ -17,26 +17,26 @@ if platform.system() == 'Linux':
 
 
 def Exit():
-    CustomPrint('\n', is_get_time=False)
-    CustomPrint('Exiting...')
+    custom_print('\n', is_get_time=False)
+    custom_print('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
-    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
+    custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
 def ReinstallWhatsApp(adb):
-    CustomPrint('Reinstallting original WhatsApp.')
+    custom_print('Reinstallting original WhatsApp.')
     if(os.path.isfile(helpers + 'WhatsAppbackup.apk')):
         try:
             os.system(adb + ' install -r -d ' +
                       helpers + 'WhatsAppbackup.apk')
         except Exception as e:
-            CustomPrint(e, 'red')
-            CustomPrint('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
+            custom_print(e, 'red')
+            custom_print('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
             Exit()
     else:
-        CustomPrint('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
+        custom_print('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
         Exit()
 
 
@@ -53,15 +53,15 @@ def ShowBanner():
 ========                                                                ========
 ================================================================================
     '''
-    CustomPrint(banner_content, 'green', ['bold'], False)
-    CustomPrint('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n',
-                'green', ['bold'], False)
+    custom_print(banner_content, 'green', ['bold'], False)
+    custom_print('============ WhatsApp Key / Database Extrator for non-rooted Android ===========\n',
+                 'green', ['bold'], False)
 
 
 if __name__ == "__main__":
 
-    CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
-                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
+    custom_print('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
+                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
 
     parser = argparse.ArgumentParser()

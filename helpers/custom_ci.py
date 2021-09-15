@@ -16,35 +16,35 @@ logging.basicConfig(filename='log/wa_kdbe.log', level=logging.DEBUG, format='')
 masked = []
 
 
-def CustomInput(textToInput, color='green', attr=[], is_get_time=True, is_log=True):
-    time = GetTime() if is_get_time else ''
-    data = input(colored(time + textToInput, color, attrs=attr))
+def custom_input(text_to_input, color='green', attr=[], is_get_time=True, is_log=True):
+    time = get_time() if is_get_time else ''
+    data = input(colored(time + text_to_input, color, attrs=attr))
     if(is_log):
-        logging.debug(time + textToInput + data)
+        logging.debug(time + text_to_input + data)
     else:
-        logging.debug(time + textToInput + '********')
+        logging.debug(time + text_to_input + '********')
         # Add that password in list, and mask that while printing also.
         masked.append(data)
     return data
 
 
-def CustomPrint(textToPrint, color='green', attr=[], is_get_time=True, is_log=True, is_print=True):
-    time = GetTime() if is_get_time else ''
-    textToPrint = str(textToPrint)
+def custom_print(text_to_print, color='green', attr=[], is_get_time=True, is_log=True, is_print=True):
+    time = get_time() if is_get_time else ''
+    text_to_print = str(text_to_print)
     if(is_print):
-        cprint(time + textToPrint, color, attrs=attr)
+        cprint(time + text_to_print, color, attrs=attr)
     else:
         pass
     if(is_log):
-        logging.debug(time + textToPrint)
+        logging.debug(time + text_to_print)
     else:
         # Search for password and mask.
         for i in masked:
-            if i in textToPrint:
-                logging.debug(time + textToPrint.replace(i, '********'))
+            if i in text_to_print:
+                logging.debug(time + text_to_print.replace(i, '********'))
 
     # cprint((time + textToPrint).center(shutil.get_terminal_size().columns), color, attrs = attr) to print in center. Later.
 
 
-def GetTime():
+def get_time():
     return '[' + str(datetime.datetime.now().time()) + '] '

@@ -29,7 +29,7 @@ import time
 
 import helpers.ADBDeviceSerialId as deviceId
 import helpers.TCPDeviceSerialId as tcpDeviceId
-from helpers.CustomCI import CustomInput, CustomPrint
+from helpers.custom_ci import custom_input, custom_print
 from helpers.LinuxUSB import LinuxUSB
 from helpers.WIndowsUSB import WindowsUSB
 from view_extract import ExtractAB
@@ -53,25 +53,25 @@ def main():
     ShowBanner()
     global is_java_installed
     is_java_installed = check_java()
-    CustomPrint('\n', is_get_time=False)
+    custom_print('\n', is_get_time=False)
     try:
-        CustomPrint('Arguments passed: ' + str(args), is_print=False)
+        custom_print('Arguments passed: ' + str(args), is_print=False)
     except:
         pass
 
     try:
-        CustomPrint('System Info: ' +
-                    json.dumps(GetSysInfo(), indent=2, default=str), is_print=False)
+        custom_print('System Info: ' +
+                     json.dumps(GetSysInfo(), indent=2, default=str), is_print=False)
     except:
-        CustomPrint(
+        custom_print(
             'Can\'t get system information. Continuing anyway...', 'yellow')
-    CustomPrint('Current release date: 13/09/2021', 'cyan')
-    CustomPrint('\n', is_get_time=False)
-    readInstruction = CustomInput(
+    custom_print('Current release date: 13/09/2021', 'cyan')
+    custom_print('\n', is_get_time=False)
+    readInstruction = custom_input(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
     if(readInstruction.upper() == 'Y'):
-        CustomPrint('\n', is_get_time=False)
-        CustomInput(
+        custom_print('\n', is_get_time=False)
+        custom_input(
             '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup". Hit \"Enter\" key to continue.', 'yellow')
         USBMode()
     else:
@@ -81,31 +81,31 @@ def main():
 def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
     os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion >
                                                             11) else os.system(adb + ' shell am kill com.whatsapp')
-    CustomPrint('Backing up WhatsApp ' + versionName +
-                ' apk, the one installed on device to \"/data/local/tmp/WhatsAppbackup.apk\" in your phone.')
+    custom_print('Backing up WhatsApp ' + versionName +
+                 ' apk, the one installed on device to \"/data/local/tmp/WhatsAppbackup.apk\" in your phone.')
     os.system(adb + ' shell cp ' + WhatsAppapkPath +
               ' /data/local/tmp/WhatsAppbackup.apk')
-    CustomPrint('Apk backup is completed.')
+    custom_print('Apk backup is completed.')
 
 
 def BackupWhatsAppDataasAb(SDKVersion):
-    os.mkdir(tmp) if not (os.path.isdir(tmp)) else CustomPrint(
+    os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
         'Folder ' + tmp + ' already exists.', 'yellow')
-    CustomPrint('Backing up WhatsApp data as \"' + tmp +
-                'whatsapp.ab\". May take time, don\'t panic.')
+    custom_print('Backing up WhatsApp data as \"' + tmp +
+                 'whatsapp.ab\". May take time, don\'t panic.')
     try:
         os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >=
                                                                              23) else os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab -noapk com.whatsapp')
     except Exception as e:
-        CustomPrint(e, 'red')
+        custom_print(e, 'red')
         Exit()
-    CustomPrint('Done backing up data. Size: ' +
-                str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
+    custom_print('Done backing up data. Size: ' +
+                 str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
 
 
 def CheckBin():
     if (not os.path.isdir('bin')):
-        CustomPrint('I can not find \"bin\" folder, check again...', 'red')
+        custom_print('I can not find \"bin\" folder, check again...', 'red')
         Exit()
     else:
         pass
@@ -117,23 +117,23 @@ def check_java():
     if(out):
         java_version = re.findall('(?<=version ")(.*)(?=")', out)
     else:
-        CustomPrint(
+        custom_print(
             'Could not get output of \"java -version\" in \"wa_kdbe.py\"', 'red')
-        CustomPrint('Continuing without JAVA...', 'red')
+        custom_print('Continuing without JAVA...', 'red')
         return False
     if(java_version):
         is_java_installed = True
     else:
         is_java_installed = False
     if is_java_installed:
-        CustomPrint('Found Java v' + java_version[0] +
-                    ' installed on system. Continuing...')
+        custom_print('Found Java v' + java_version[0] +
+                     ' installed on system. Continuing...')
         return is_java_installed
     else:
-        noJAVAContinue = CustomInput(
+        noJAVAContinue = custom_input(
             'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top?: ', 'red') or 'C'
         if(noJAVAContinue.upper() == 'C'):
-            CustomPrint(
+            custom_print(
                 'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
             return is_java_installed
         else:
@@ -141,11 +141,11 @@ def check_java():
 
 
 def Exit():
-    CustomPrint('\n', is_get_time=False)
-    CustomPrint('Exiting...')
+    custom_print('\n', is_get_time=False)
+    custom_print('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
-    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
+    custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
@@ -163,12 +163,12 @@ def GetSysInfo():
 
 
 def InstallLegacy(SDKVersion):
-    CustomPrint('Installing legacy WhatsApp V2.11.431, hold tight now.')
+    custom_print('Installing legacy WhatsApp V2.11.431, hold tight now.')
     if(SDKVersion >= 17):
         os.system(adb + ' install -r -d ' + helpers + 'LegacyWhatsApp.apk')
     else:
         os.system(adb + ' install -r ' + helpers + 'LegacyWhatsApp.apk')
-    CustomPrint('Installation Complete.')
+    custom_print('Installation Complete.')
 
 
 def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
@@ -177,40 +177,40 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     # Reboot here.
     if(isAllowReboot):
         if(not tcpIP):
-            CustomPrint('\n', is_get_time=False)
-            CustomPrint('Rebooting device, please wait.', 'yellow')
+            custom_print('\n', is_get_time=False)
+            custom_print('Rebooting device, please wait.', 'yellow')
             os.system(adb + ' reboot')
             while(subprocess.getoutput(adb + ' get-state') != 'device'):
-                CustomPrint('Waiting for device...')
+                custom_print('Waiting for device...')
                 time.sleep(5)
-            CustomInput('Hit \"Enter\" key after unlocking device.', 'yellow')
+            custom_input('Hit \"Enter\" key after unlocking device.', 'yellow')
         else:
-            CustomPrint(
+            custom_print(
                 'Rebooting device in TCP mode break the connection and won\'t work until explicitly turned on in device and/or in PC. Skipping...', 'yellow')
 
     InstallLegacy(SDKVersion)
     # Before backup run app
     os.system(adb + ' shell am start -n com.whatsapp/.Main')
-    CustomInput(
+    custom_input(
         '\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     BackupWhatsAppDataasAb(SDKVersion)
     ReinstallWhatsApp()
-    CustomPrint('\n', is_get_time=False)
-    CustomPrint(
+    custom_print('\n', is_get_time=False)
+    custom_print(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
-    CustomPrint('\n', is_get_time=False)
+    custom_print('\n', is_get_time=False)
     ExtractAB(is_java_installed, sdPath=sdPath,
               ADBSerialId=ADBSerialId, isTarOnly=isTarOnly)
 
 
 def ReinstallWhatsApp():
-    CustomPrint('Reinstallting original WhatsApp.')
+    custom_print('Reinstallting original WhatsApp.')
     try:
         os.system(
             adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
     except Exception as e:
-        CustomPrint(e, 'red')
-        CustomPrint('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".')
+        custom_print(e, 'red')
+        custom_print('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".')
         Exit()
 
 
@@ -271,23 +271,23 @@ def ShowBanner():
 ===                      Github.com/YuvrajRaghuvanshiS                       ===
 ================================================================================
     '''
-    CustomPrint(banner_content, 'green', ['bold'], False)
-    CustomPrint(intro_a, 'green', ['bold'], False)
-    CustomPrint(intro_b, 'red', ['bold'], False)
-    CustomPrint(intro_c, 'green', ['bold'], False)
-    CustomPrint(intro_d, 'red', ['bold'], False)
-    CustomPrint(intro_e, 'green', ['bold'], False)
+    custom_print(banner_content, 'green', ['bold'], False)
+    custom_print(intro_a, 'green', ['bold'], False)
+    custom_print(intro_b, 'red', ['bold'], False)
+    custom_print(intro_c, 'green', ['bold'], False)
+    custom_print(intro_d, 'red', ['bold'], False)
+    custom_print(intro_e, 'green', ['bold'], False)
 
 
 def UninstallWhatsApp(SDKVersion):
     if(SDKVersion >= 23):
         try:
-            CustomPrint('Uninstalling WhatsApp, skipping data.')
+            custom_print('Uninstalling WhatsApp, skipping data.')
             os.system(adb + ' shell pm uninstall -k com.whatsapp')
-            CustomPrint('Uninstalled.')
+            custom_print('Uninstalled.')
         except Exception as e:
-            CustomPrint('Could not uninstall WhatsApp.')
-            CustomPrint(e, 'red')
+            custom_print('Could not uninstall WhatsApp.')
+            custom_print(e, 'red')
             Exit()
 
 
@@ -306,8 +306,8 @@ def USBMode():
 
 if __name__ == "__main__":
 
-    CustomPrint('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
-                str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
+    custom_print('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
+                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-ar', '--allow-reboot', action='store_true',

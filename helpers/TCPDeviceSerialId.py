@@ -2,7 +2,7 @@ import os
 import platform
 import subprocess as sp
 
-from CustomCI import CustomPrint, CustomInput
+from custom_ci import custom_print, custom_input
 
 
 def init(tcpIP, tcpPort):
@@ -35,7 +35,7 @@ def init(tcpIP, tcpPort):
 
     if len(output) == 0 or error:
         output = None
-        CustomPrint(error, 'red')
+        custom_print(error, 'red')
         Exit()
     else:
         output = [x.strip() for x in output.split() if len(x.strip()) > 0]
@@ -43,11 +43,11 @@ def init(tcpIP, tcpPort):
     if('connected' in (x.lower() for x in output)):
         return combo
     if('authenticate' in (x.lower() for x in output)):
-        CustomPrint(
+        custom_print(
             'Device unauthorized. Please check the confirmation dialog on your device.', 'red')
         Exit()
     if('refused' in (x.lower() for x in output)):
-        CustomPrint(
+        custom_print(
             'Could not find any connected device. Either USB Debugging is off or device is not running ADB over TCP', 'red')
         return ''
 
@@ -59,7 +59,7 @@ def init(tcpIP, tcpPort):
 
 
 def Exit():
-    CustomPrint('\n', is_get_time=False)
-    CustomPrint('Exiting...')
-    CustomInput('Hit \"Enter\" key to continue....', 'cyan')
+    custom_print('\n', is_get_time=False)
+    custom_print('Exiting...')
+    custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
