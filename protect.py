@@ -6,102 +6,103 @@ import shutil
 from helpers.custom_ci import custom_input, custom_print
 
 # Detect OS
-isWindows = False
-isLinux = False
+is_windows = False
+is_linux = False
 if platform.system() == 'Windows':
-    isWindows = True
+    is_windows = True
 if platform.system() == 'Linux':
-    isLinux = True
+    is_linux = True
 
 # Global command line helpers
 extracted = 'extracted/'
 bin = 'bin/'
-if(isWindows):
-    sevenZip = 'bin\\7za.exe'
+if(is_windows):
+    seven_zip = 'bin\\7za.exe'
 else:
-    sevenZip = '7z'
+    seven_zip = '7z'
 
 
 def main():
     custom_print('This utility is for archiving your output folder with password to enchance it\'s security. Secure is a relative term. Choose longer password.')
-    isCompressing = custom_input('Are you (C)ompressing or (D)ecompressing?: ')
+    is_compressing = custom_input(
+        'Are you (C)ompressing or (D)ecompressing?: ')
     while(True):
-        if(isCompressing.upper() == 'C'):
-            ListUserFolders()
+        if(is_compressing.upper() == 'C'):
+            list_user_folders()
             custom_print('\n', is_get_time=False)
-            userFolder = custom_input(
+            user_folder = custom_input(
                 'Enter a name of folder from above (case sensitive): ')
-            Compress(userFolder)
+            compress(user_folder)
             break
-        elif(isCompressing.upper() == 'D'):
-            ListUserFiles()
+        elif(is_compressing.upper() == 'D'):
+            list_user_files()
             custom_print('\n', is_get_time=False)
-            userZip = custom_input(
+            user_zip = custom_input(
                 'Enter a name of file from above (case sensitive): ')
-            Uncompress(userZip)
+            uncompress(user_zip)
             break
         else:
-            isCompressing = custom_input('Choose either \'c\' or \'d\': ')
+            is_compressing = custom_input('Choose either \'c\' or \'d\': ')
             continue
 
 
-def Compress(userFolder):
-    if(not os.path.isdir(extracted + userFolder)):
+def compress(user_folder):
+    if(not os.path.isdir(extracted + user_folder)):
         custom_print('Could not find directory \"' +
-                     extracted + userFolder + '\"')
-        Exit()
-    elif(len(os.listdir(extracted + userFolder)) == 0):
+                     extracted + user_folder + '\"')
+        kill_me()
+    elif(len(os.listdir(extracted + user_folder)) == 0):
         custom_print('User folder is empty.')
-        Exit()
+        kill_me()
     else:
         password = custom_input('Choose a password for zip: ', is_log=False)
         if(password):
             password = ' -p' + password
-        os.system(sevenZip + ' a -t7z -mhe ' + extracted +
-                  userFolder + ' ' + extracted + userFolder + '/* ' + password)
+        os.system(seven_zip + ' a -t7z -mhe ' + extracted +
+                  user_folder + ' ' + extracted + user_folder + '/* ' + password)
         custom_print('\n', is_get_time=False)
         custom_print(
             'If you see \"Everything is OK\" in above line then it is recommended to delete user folder.')
-        deleteUserFolder = custom_input(
-            'Delete \"' + userFolder + '\" folder? (default y): ') or 'Y'
+        is_delete_user_folder = custom_input(
+            'Delete \"' + user_folder + '\" folder? (default y): ') or 'Y'
         custom_print('\n', is_get_time=False)
-        custom_print('\aYour \"' + userFolder + '.7z\" file is in \"' + os.path.realpath(extracted) + '\" folder. Password is: ' +
+        custom_print('\aYour \"' + user_folder + '.7z\" file is in \"' + os.path.realpath(extracted) + '\" folder. Password is: ' +
                      password.replace(' -p', ''), 'yellow', is_log=False)
         custom_print('\n', is_get_time=False)
         custom_input('Hit \"Enter\" key to continue.')
-        if(deleteUserFolder.upper() == 'Y'):
-            DeleteUserFolder(userFolder)
+        if(is_delete_user_folder.upper() == 'Y'):
+            delete_user_folder(user_folder)
         else:
-            Exit()
+            kill_me()
 
 
-def DeleteUserFolder(userFolder):
+def delete_user_folder(user_folder):
     custom_print('Deleting...')
     try:
-        shutil.rmtree(extracted + userFolder)
+        shutil.rmtree(extracted + user_folder)
     except Exception as e:
         custom_print(e, 'red')
         custom_print('Please manually delete it.', 'red')
-    Exit()
+    kill_me()
 
 
-def DeleteUserZip(userZip):
+def delete_user_zip(user_zip):
     custom_print('Deleting...')
     try:
-        os.remove(extracted + userZip)
+        os.remove(extracted + user_zip)
     except Exception as e:
         custom_print(e, 'red')
         custom_print('Please manually delete it.', 'red')
-    Exit()
+    kill_me()
 
 
-def Exit():
+def kill_me():
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     try:  # Open in explorer.
-        if(isWindows):
+        if(is_windows):
             os.startfile(os.path.realpath(extracted))
-        elif(isLinux):
+        elif(is_linux):
             os.system('xdg-open ' + os.path.realpath(extracted))
         else:
             try:
@@ -114,34 +115,34 @@ def Exit():
     quit()
 
 
-def ListUserFiles():
+def list_user_files():
     custom_print('\n', is_get_time=False)
     custom_print('Available user files in extracted directory.')
     custom_print('\n', is_get_time=False)
-    allFiles = next(os.walk(extracted))[2]
-    if(len(allFiles) == 1 and os.path.isfile(extracted + '.placeholder')):
+    all_files = next(os.walk(extracted))[2]
+    if(len(all_files) == 1 and os.path.isfile(extracted + '.placeholder')):
         custom_print('No user files found in \"' +
                      extracted + '\" folder.', 'red')
-        Exit()
-    for f in allFiles:
+        kill_me()
+    for f in all_files:
         if(f != '.placeholder'):
             custom_print(f)
 
 
-def ListUserFolders():
+def list_user_folders():
     custom_print('\n', is_get_time=False)
     custom_print('Available user folders in extracted directory.')
     custom_print('\n', is_get_time=False)
-    allFolders = next(os.walk(extracted))[1]
-    if(len(allFolders) == 0):
+    all_folders = next(os.walk(extracted))[1]
+    if(len(all_folders) == 0):
         custom_print('No folders found in \"' +
                      extracted + '\" folder.', 'red')
-        Exit()
-    for folder in allFolders:
+        kill_me()
+    for folder in all_folders:
         custom_print(folder)
 
 
-def ShowBanner():
+def show_banner():
     banner_content = '''
 ================================================================================
 ========                                                                ========
@@ -159,36 +160,36 @@ def ShowBanner():
                  'green', ['bold'], False)
 
 
-def Uncompress(userZip):
-    if(not str(userZip).endswith('7z')):
-        userZip = userZip + '.7z'
-    if(not os.path.isfile(extracted + userZip)):
-        custom_print('Could not find ' + extracted + userZip)
-        Exit()
-    elif(os.path.getsize(extracted + userZip) <= 0):
-        custom_print(extracted + userZip + ' is empty.')
-        Exit()
+def uncompress(user_zip):
+    if(not str(user_zip).endswith('7z')):
+        user_zip = user_zip + '.7z'
+    if(not os.path.isfile(extracted + user_zip)):
+        custom_print('Could not find ' + extracted + user_zip)
+        kill_me()
+    elif(os.path.getsize(extracted + user_zip) <= 0):
+        custom_print(extracted + user_zip + ' is empty.')
+        kill_me()
     else:
         password = custom_input(
             'Enter password, leave empty for none: ', is_log=False)
         if(password):
             password = ' -p' + password
-        os.system(sevenZip + ' e -aot ' + extracted + userZip +
-                  ' -o' + extracted + userZip.replace('.7z', '') + password)
+        os.system(seven_zip + ' e -aot ' + extracted + user_zip +
+                  ' -o' + extracted + user_zip.replace('.7z', '') + password)
         custom_print('\n', is_get_time=False)
         custom_print(
             'If you see \"Everything is OK\" in above line then you can delete user zip file.')
-        deleteUserZip = custom_input(
-            'Delete ' + userZip + ' ? (default n): ') or 'N'
+        is_delete_user_zip = custom_input(
+            'Delete ' + user_zip + ' ? (default n): ') or 'N'
         custom_print('\n', is_get_time=False)
-        custom_print('\aYour extracted \"' + userZip.replace('.7z',
-                                                             '') + '\" folder is in \"' + os.path.realpath(extracted + userZip.replace('.7z', '')) + '\" folder.', 'yellow')
+        custom_print('\aYour extracted \"' + user_zip.replace('.7z',
+                                                              '') + '\" folder is in \"' + os.path.realpath(extracted + user_zip.replace('.7z', '')) + '\" folder.', 'yellow')
         custom_print('\n', is_get_time=False)
         custom_input('Hit \"Enter\" key to continue.')
-        if(deleteUserZip.upper() == 'Y'):
-            DeleteUserZip(userZip)
+        if(is_delete_user_zip.upper() == 'Y'):
+            delete_user_zip(user_zip)
         else:
-            Exit()
+            kill_me()
 
 
 if __name__ == "__main__":
@@ -196,7 +197,7 @@ if __name__ == "__main__":
     custom_print('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
                  str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
-    ShowBanner()
+    show_banner()
     main()
 
 

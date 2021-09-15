@@ -248,7 +248,7 @@ def TakingOutMainFiles(username, sdPath, ADBSerialId):
         if(createArchive.upper() == 'Y'):
             custom_print('\n', is_get_time=False)
             custom_print('Now an archive will be created in extracted folder and original files will be deleted. To later \"un-archive\" and access these files you need to run \"python protect.py\" from root directory of this project.', 'yellow')
-            protect.Compress(username)
+            protect.compress(username)
         else:
             custom_print('\n', is_get_time=False)
             custom_print('\aYour whatsapp database along with other files is in \"' +
