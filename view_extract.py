@@ -8,8 +8,8 @@ import tarfile
 import time
 from subprocess import check_output, getoutput
 
-import helpers.ADBDeviceSerialId as deviceId
-import helpers.TCPDeviceSerialId as tcpDeviceId
+import helpers.adb_device_serial_id as deviceId
+import helpers.tcp_device_serial_id as tcpDeviceId
 import protect
 from helpers.custom_ci import custom_input, custom_print
 

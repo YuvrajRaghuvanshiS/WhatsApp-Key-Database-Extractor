@@ -19,7 +19,7 @@ fixed - Zip extracted files with password.
 ======= adb menu =======
 
 Done - Readme
-Done - ADBDeviceSerialId.py
+Done - adb_device_serial_id.py
 
 A lot of things deleted, now this file will be tracked..
 

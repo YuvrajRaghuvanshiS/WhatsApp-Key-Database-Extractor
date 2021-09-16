@@ -27,8 +27,8 @@ import re
 import subprocess
 import time
 
-import helpers.ADBDeviceSerialId as deviceId
-import helpers.TCPDeviceSerialId as tcpDeviceId
+import helpers.adb_device_serial_id as deviceId
+import helpers.tcp_device_serial_id as tcpDeviceId
 from helpers.custom_ci import custom_input, custom_print
 from helpers.LinuxUSB import LinuxUSB
 from helpers.WIndowsUSB import WindowsUSB

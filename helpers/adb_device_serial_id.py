@@ -7,18 +7,18 @@ from custom_ci import custom_input, custom_print
 
 def init():
     # Detect OS
-    isWindows = False
-    isLinux = False
+    is_windows = False
+    is_linux = False
     if platform.system() == 'Windows':
-        isWindows = True
+        is_windows = True
     if platform.system() == 'Linux':
-        isLinux = True
+        is_linux = True
 
     # Global command line helpers
-    currDir = os.path.dirname(os.path.realpath(__file__))
-    rootDir = os.path.abspath(os.path.join(currDir, '..'))
-    if(isWindows):
-        adb = rootDir + '\\bin\\adb.exe'
+    curr_dir = os.path.dirname(os.path.realpath(__file__))
+    root_dir = os.path.abspath(os.path.join(curr_dir, '..'))
+    if(is_windows):
+        adb = root_dir + '\\bin\\adb.exe'
     else:
         adb = 'adb'
 
@@ -35,7 +35,7 @@ def init():
     if len(output) == 0 or error:
         output = None
         custom_print(error, 'red')
-        Exit()
+        kill_me()
     else:
         output = [x.strip() for x in output.split('\n') if len(x.strip()) > 0]
 
@@ -44,22 +44,22 @@ def init():
             'Could not find any connected device. Is USB Debugging on?', 'red')
         return ''
 
-    deviceToConnect = None
+    device_to_connect = None
     i = 1
     if(len(output) == 2):
         if(output[1].split()[1] == 'offline'):
             custom_print(
                 'Device is offline, try turning off USB debugging and turn on again.', 'yellow')
-            Exit()
+            kill_me()
         if(output[1].split()[1] == 'unauthorized'):
             custom_print(
                 'Device unauthorized. Please check the confirmation dialog on your device.', 'red')
-            Exit()
+            kill_me()
         return output[1].split()[0]
 
     custom_print(output[0])
     custom_print('\n', is_get_time=False)
-    if deviceToConnect is None:
+    if device_to_connect is None:
         for device in output[1:]:
             name = adb + ' -s ' + \
                 device.split()[0] + ' shell getprop ro.product.model'
@@ -67,24 +67,24 @@ def init():
                          [0] + '  ' + device.split()[1] + '  ' + sp.getoutput(name).strip())
             i += 1
 
-    while deviceToConnect is None:
-        deviceIndex = int(custom_input('Enter device number (for ex: 2): '))
-        if deviceIndex <= 0 or deviceIndex + 1 > len(output):
+    while device_to_connect is None:
+        device_index = int(custom_input('Enter device number (for ex: 2): '))
+        if device_index <= 0 or device_index + 1 > len(output):
             continue
-        deviceToConnect = output[deviceIndex]
+        device_to_connect = output[device_index]
 
-    if(deviceToConnect.split()[1] == 'offline'):
+    if(device_to_connect.split()[1] == 'offline'):
         custom_print(
             'Device is offline, try turning off USB debugging and turn on again.', 'yellow')
-        Exit()
-    if(deviceToConnect.split()[1] == 'unauthorized'):
+        kill_me()
+    if(device_to_connect.split()[1] == 'unauthorized'):
         custom_print(
             'Device unauthorized. Please check the confirmation dialog on your device.', 'red')
-        Exit()
-    return deviceToConnect.split()[0]
+        kill_me()
+    return device_to_connect.split()[0]
 
 
-def Exit():
+def kill_me():
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')

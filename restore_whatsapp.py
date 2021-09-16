@@ -3,8 +3,8 @@ import datetime
 import os
 import platform
 
-import helpers.ADBDeviceSerialId as deviceId
-import helpers.TCPDeviceSerialId as tcpDeviceId
+import helpers.adb_device_serial_id as deviceId
+import helpers.tcp_device_serial_id as tcpDeviceId
 from helpers.custom_ci import custom_input, custom_print
 
 # Detect OS

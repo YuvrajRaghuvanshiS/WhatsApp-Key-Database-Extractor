@@ -5,25 +5,25 @@ import subprocess as sp
 from custom_ci import custom_print, custom_input
 
 
-def init(tcpIP, tcpPort):
+def init(tcp_ip, tcp_port):
     # Detect OS
-    isWindows = False
-    isLinux = False
+    is_windows = False
+    is_linux = False
     if platform.system() == 'Windows':
-        isWindows = True
+        is_windows = True
     if platform.system() == 'Linux':
-        isLinux = True
+        is_linux = True
 
     # Global command line helpers
-    currDir = os.path.dirname(os.path.realpath(__file__))
-    rootDir = os.path.abspath(os.path.join(currDir, '..'))
+    curr_dir = os.path.dirname(os.path.realpath(__file__))
+    root_dir = os.path.abspath(os.path.join(curr_dir, '..'))
 
-    if(isWindows):
-        adb = rootDir + '\\bin\\adb.exe'
+    if(is_windows):
+        adb = root_dir + '\\bin\\adb.exe'
     else:
         adb = 'adb'
 
-    combo = tcpIP + ':' + tcpPort
+    combo = tcp_ip + ':' + tcp_port
     cmd = adb + ' connect ' + combo
     os.system(adb + ' kill-server')
     os.system(adb + ' start-server')
@@ -36,7 +36,7 @@ def init(tcpIP, tcpPort):
     if len(output) == 0 or error:
         output = None
         custom_print(error, 'red')
-        Exit()
+        kill_me()
     else:
         output = [x.strip() for x in output.split() if len(x.strip()) > 0]
 
@@ -45,7 +45,7 @@ def init(tcpIP, tcpPort):
     if('authenticate' in (x.lower() for x in output)):
         custom_print(
             'Device unauthorized. Please check the confirmation dialog on your device.', 'red')
-        Exit()
+        kill_me()
     if('refused' in (x.lower() for x in output)):
         custom_print(
             'Could not find any connected device. Either USB Debugging is off or device is not running ADB over TCP', 'red')
@@ -58,7 +58,7 @@ def init(tcpIP, tcpPort):
     '''
 
 
-def Exit():
+def kill_me():
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
