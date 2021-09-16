@@ -27,30 +27,30 @@ import re
 import subprocess
 import time
 
-import helpers.adb_device_serial_id as deviceId
-import helpers.tcp_device_serial_id as tcpDeviceId
+import helpers.adb_device_serial_id as adb_device_id
+import helpers.tcp_device_serial_id as tcp_device_id
 from helpers.custom_ci import custom_input, custom_print
 from helpers.linux_handler import linux_handler
 from helpers.windows_handler import windows_handler
 from view_extract import extract_ab
 
 # Detect OS
-isWindows = False
-isLinux = False
+is_windows = False
+is_linux = False
 if platform.system() == 'Windows':
-    isWindows = True
+    is_windows = True
 if platform.system() == 'Linux':
-    isLinux = True
+    is_linux = True
 
 # Global Variables
-appURLWhatsAppCDN = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
-appURLWhatsCryptCDN = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
+app_url_whatsapp_cdn = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
+app_url_whatscrypt_cdn = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    CheckBin()
-    ShowBanner()
+    check_bin()
+    show_banner()
     global is_java_installed
     is_java_installed = check_java()
     custom_print('\n', is_get_time=False)
@@ -61,52 +61,52 @@ def main():
 
     try:
         custom_print('System Info: ' +
-                     json.dumps(GetSysInfo(), indent=2, default=str), is_print=False)
+                     json.dumps(get_sys_info(), indent=2, default=str), is_print=False)
     except:
         custom_print(
             'Can\'t get system information. Continuing anyway...', 'yellow')
     custom_print('Current release date: 13/09/2021', 'cyan')
     custom_print('\n', is_get_time=False)
-    readInstruction = custom_input(
+    is_read_instructions = custom_input(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
-    if(readInstruction.upper() == 'Y'):
+    if(is_read_instructions.upper() == 'Y'):
         custom_print('\n', is_get_time=False)
         custom_input(
             '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup". Hit \"Enter\" key to continue.', 'yellow')
-        USBMode()
+        usb_mode()
     else:
-        Exit()
+        kill_me()
 
 
-def BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath):
-    os.system(adb + ' shell am force-stop com.whatsapp') if(SDKVersion >
+def backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device):
+    os.system(adb + ' shell am force-stop com.whatsapp') if(sdk_version >
                                                             11) else os.system(adb + ' shell am kill com.whatsapp')
-    custom_print('Backing up WhatsApp ' + versionName +
+    custom_print('Backing up WhatsApp ' + version_name +
                  ' apk, the one installed on device to \"/data/local/tmp/WhatsAppbackup.apk\" in your phone.')
-    os.system(adb + ' shell cp ' + WhatsAppapkPath +
+    os.system(adb + ' shell cp ' + whatsapp_apk_path_in_device +
               ' /data/local/tmp/WhatsAppbackup.apk')
     custom_print('Apk backup is completed.')
 
 
-def BackupWhatsAppDataasAb(SDKVersion):
+def backup_whatsapp_data_as_ab(sdk_version):
     os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
         'Folder ' + tmp + ' already exists.', 'yellow')
     custom_print('Backing up WhatsApp data as \"' + tmp +
                  'whatsapp.ab\". May take time, don\'t panic.')
     try:
-        os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab com.whatsapp') if(SDKVersion >=
+        os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab com.whatsapp') if(sdk_version >=
                                                                              23) else os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab -noapk com.whatsapp')
     except Exception as e:
         custom_print(e, 'red')
-        Exit()
+        kill_me()
     custom_print('Done backing up data. Size: ' +
                  str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
 
 
-def CheckBin():
+def check_bin():
     if (not os.path.isdir('bin')):
         custom_print('I can not find \"bin\" folder, check again...', 'red')
-        Exit()
+        kill_me()
     else:
         pass
 
@@ -130,26 +130,26 @@ def check_java():
                      ' installed on system. Continuing...')
         return is_java_installed
     else:
-        noJAVAContinue = custom_input(
+        is_no_java_continue = custom_input(
             'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top?: ', 'red') or 'C'
-        if(noJAVAContinue.upper() == 'C'):
+        if(is_no_java_continue.upper() == 'C'):
             custom_print(
                 'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
             return is_java_installed
         else:
-            Exit()
+            kill_me()
 
 
-def Exit():
+def kill_me():
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     os.system(
-        'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
+        'bin\\adb.exe kill-server') if(is_windows) else os.system('adb kill-server')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
-def GetSysInfo():
+def get_sys_info():
     info = {}
     info['Platform'] = platform.system()
     info['Platform Release'] = platform.release()
@@ -162,21 +162,21 @@ def GetSysInfo():
     return info
 
 
-def InstallLegacy(SDKVersion):
+def install_legacy(sdk_version):
     custom_print('Installing legacy WhatsApp V2.11.431, hold tight now.')
-    if(SDKVersion >= 17):
+    if(sdk_version >= 17):
         os.system(adb + ' install -r -d ' + helpers + 'LegacyWhatsApp.apk')
     else:
         os.system(adb + ' install -r ' + helpers + 'LegacyWhatsApp.apk')
     custom_print('Installation Complete.')
 
 
-def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
-    BackupWhatsAppApk(SDKVersion, versionName, WhatsAppapkPath)
-    UninstallWhatsApp(SDKVersion)
+def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path):
+    backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device)
+    uninstall_whatsapp(sdk_version)
     # Reboot here.
-    if(isAllowReboot):
-        if(not tcpIP):
+    if(is_allowed_reboot):
+        if(not tcp_ip):
             custom_print('\n', is_get_time=False)
             custom_print('Rebooting device, please wait.', 'yellow')
             os.system(adb + ' reboot')
@@ -188,22 +188,22 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
             custom_print(
                 'Rebooting device in TCP mode break the connection and won\'t work until explicitly turned on in device and/or in PC. Skipping...', 'yellow')
 
-    InstallLegacy(SDKVersion)
+    install_legacy(sdk_version)
     # Before backup run app
     os.system(adb + ' shell am start -n com.whatsapp/.Main')
     custom_input(
         '\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
-    BackupWhatsAppDataasAb(SDKVersion)
-    ReinstallWhatsApp()
+    backup_whatsapp_data_as_ab(sdk_version)
+    reinstall_whatsapp()
     custom_print('\n', is_get_time=False)
     custom_print(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
     custom_print('\n', is_get_time=False)
-    extract_ab(is_java_installed, sdcard_path=sdPath,
-               adb_device_serial_id=ADBSerialId, is_tar_only=isTarOnly)
+    extract_ab(is_java_installed, sdcard_path=sdcard_path,
+               adb_device_serial_id=adb_device_serial_id, is_tar_only=is_tar_only)
 
 
-def ReinstallWhatsApp():
+def reinstall_whatsapp():
     custom_print('Reinstallting original WhatsApp.')
     try:
         os.system(
@@ -211,19 +211,19 @@ def ReinstallWhatsApp():
     except Exception as e:
         custom_print(e, 'red')
         custom_print('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".')
-        Exit()
+        kill_me()
 
 
-def RunScrCpy(_isScrCpy):
-    if(_isScrCpy):
+def run_scrcpy(_is_scrcpy):
+    if(_is_scrcpy):
         cmd = 'bin\scrcpy.exe --max-fps 15 -b 4M --always-on-top' if(
-            isWindows) else 'scrcpy --max-fps 15 -b 4M --always-on-top'
+            is_windows) else 'scrcpy --max-fps 15 -b 4M --always-on-top'
         proc = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, shell=False)
         proc.communicate()
 
 
-def ShowBanner():
+def show_banner():
     banner_content = '''
 ================================================================================
 ========                                                                ========
@@ -279,8 +279,8 @@ def ShowBanner():
     custom_print(intro_e, 'green', ['bold'], False)
 
 
-def UninstallWhatsApp(SDKVersion):
-    if(SDKVersion >= 23):
+def uninstall_whatsapp(sdk_version):
+    if(sdk_version >= 23):
         try:
             custom_print('Uninstalling WhatsApp, skipping data.')
             os.system(adb + ' shell pm uninstall -k com.whatsapp')
@@ -288,20 +288,20 @@ def UninstallWhatsApp(SDKVersion):
         except Exception as e:
             custom_print('Could not uninstall WhatsApp.')
             custom_print(e, 'red')
-            Exit()
+            kill_me()
 
 
-def USBMode():
-    if(isWindows):
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = windows_handler(
+def usb_mode():
+    if(is_windows):
+        after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path = windows_handler(
             adb)
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName,
-                 sdPath) if ACReturnCode == 1 else Exit()
+        real_deal(sdk_version, whatsapp_apk_path_in_device, version_name,
+                  sdcard_path) if after_connect_return_code == 1 else kill_me()
     else:
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = linux_handler(
-            ADBSerialId)
-        RealDeal(SDKVersion, WhatsAppapkPath, versionName,
-                 sdPath) if ACReturnCode == 1 else Exit()
+        after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path = linux_handler(
+            adb_device_serial_id)
+        real_deal(sdk_version, whatsapp_apk_path_in_device, version_name,
+                  sdcard_path) if after_connect_return_code == 1 else kill_me()
 
 
 if __name__ == "__main__":
@@ -323,30 +323,30 @@ if __name__ == "__main__":
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 
-    isAllowReboot = args.allow_reboot
-    tcpIP = args.tcp_ip
-    tcpPort = args.tcp_port
-    isScrCpy = args.scrcpy
-    isTarOnly = args.tar_only
+    is_allowed_reboot = args.allow_reboot
+    tcp_ip = args.tcp_ip
+    tcp_port = args.tcp_port
+    is_scrcpy = args.scrcpy
+    is_tar_only = args.tar_only
     # TODO: Download legacy on phone(later). Backup original on phone(done). Create backup on phone. Install original from phone.
-    if(tcpIP):
-        if(not tcpPort):
-            tcpPort = '5555'
-        ADBSerialId = tcpDeviceId.init(tcpIP, tcpPort)
+    if(tcp_ip):
+        if(not tcp_port):
+            tcp_port = '5555'
+        adb_device_serial_id = tcp_device_id.init(tcp_ip, tcp_port)
     else:
-        ADBSerialId = deviceId.init()
-    if(not ADBSerialId):
-        Exit()
+        adb_device_serial_id = adb_device_id.init()
+    if(not adb_device_serial_id):
+        kill_me()
 
     # Global command line helpers
     tmp = 'tmp/'
     helpers = 'helpers/'
-    if(isWindows):
-        adb = 'bin\\adb.exe -s ' + ADBSerialId
+    if(is_windows):
+        adb = 'bin\\adb.exe -s ' + adb_device_serial_id
     else:
-        adb = 'adb -s ' + ADBSerialId
+        adb = 'adb -s ' + adb_device_serial_id
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         f1 = executor.submit(main)
         time.sleep(1)
-        f2 = executor.submit(RunScrCpy, isScrCpy)
+        f2 = executor.submit(run_scrcpy, is_scrcpy)

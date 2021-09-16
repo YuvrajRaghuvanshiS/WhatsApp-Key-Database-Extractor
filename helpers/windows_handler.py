@@ -41,7 +41,7 @@ def after_connect(adb):
     if(not out):
         custom_print('Looks like WhatsApp is not installed on device.', 'red')
         kill_me()
-    whatsapp_apk_path = re.search('(?<=package:)(.*)(?=apk)', str(check_output(
+    whatsapp_apk_path_in_device = re.search('(?<=package:)(.*)(?=apk)', str(check_output(
         adb + ' shell pm path com.whatsapp'))).group(1) + 'apk'
     sdcard_path = getoutput(adb + ' shell "echo $EXTERNAL_STORAGE"')
     # To check if APK even exists at a given path to download!
@@ -68,7 +68,7 @@ def after_connect(adb):
         # Version lower than 2.11.431 installed on device.
         pass
 
-    return 1, sdk_version, whatsapp_apk_path, version_name, sdcard_path
+    return 1, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path
 
 
 def download_apk(url, file_name):
