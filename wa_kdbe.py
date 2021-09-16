@@ -30,8 +30,8 @@ import time
 import helpers.adb_device_serial_id as deviceId
 import helpers.tcp_device_serial_id as tcpDeviceId
 from helpers.custom_ci import custom_input, custom_print
-from helpers.LinuxUSB import LinuxUSB
-from helpers.WIndowsUSB import WindowsUSB
+from helpers.linux_handler import linux_handler
+from helpers.windows_handler import windows_handler
 from view_extract import ExtractAB
 
 # Detect OS
@@ -293,12 +293,12 @@ def UninstallWhatsApp(SDKVersion):
 
 def USBMode():
     if(isWindows):
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = WindowsUSB(
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = windows_handler(
             adb)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName,
                  sdPath) if ACReturnCode == 1 else Exit()
     else:
-        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = LinuxUSB(
+        ACReturnCode, SDKVersion, WhatsAppapkPath, versionName, sdPath = linux_handler(
             ADBSerialId)
         RealDeal(SDKVersion, WhatsAppapkPath, versionName,
                  sdPath) if ACReturnCode == 1 else Exit()
