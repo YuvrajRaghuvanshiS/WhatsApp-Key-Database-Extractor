@@ -32,7 +32,7 @@ import helpers.tcp_device_serial_id as tcpDeviceId
 from helpers.custom_ci import custom_input, custom_print
 from helpers.linux_handler import linux_handler
 from helpers.windows_handler import windows_handler
-from view_extract import ExtractAB
+from view_extract import extract_ab
 
 # Detect OS
 isWindows = False
@@ -199,8 +199,8 @@ def RealDeal(SDKVersion, WhatsAppapkPath, versionName, sdPath):
     custom_print(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
     custom_print('\n', is_get_time=False)
-    ExtractAB(is_java_installed, sdPath=sdPath,
-              ADBSerialId=ADBSerialId, isTarOnly=isTarOnly)
+    extract_ab(is_java_installed, sdcard_path=sdPath,
+               adb_device_serial_id=ADBSerialId, is_tar_only=isTarOnly)
 
 
 def ReinstallWhatsApp():
