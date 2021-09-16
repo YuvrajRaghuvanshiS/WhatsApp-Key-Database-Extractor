@@ -2,45 +2,46 @@ import argparse
 import datetime
 import os
 import platform
+import subprocess
 
-import helpers.adb_device_serial_id as deviceId
-import helpers.tcp_device_serial_id as tcpDeviceId
+import helpers.adb_device_serial_id as adb_device_id
+import helpers.tcp_device_serial_id as tcp_device_id
 from helpers.custom_ci import custom_input, custom_print
 
 # Detect OS
-isWindows = False
-isLinux = False
+is_windows = False
+is_linux = False
 if platform.system() == 'Windows':
-    isWindows = True
+    is_windows = True
 if platform.system() == 'Linux':
-    isLinux = True
+    is_linux = True
 
 
-def Exit():
+def kill_me():
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     os.system(
-        'bin\\adb.exe kill-server') if(isWindows) else os.system('adb kill-server')
+        'bin\\adb.exe kill-server') if(is_windows) else os.system('adb kill-server')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
 
-def ReinstallWhatsApp(adb):
+def reinstall_whatsapp(adb):
     custom_print('Reinstallting original WhatsApp.')
-    if(os.path.isfile(helpers + 'WhatsAppbackup.apk')):
+    if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput('adb shell ls /data/local/tmp/WhatsAppbackup.apk')):
         try:
-            os.system(adb + ' install -r -d ' +
-                      helpers + 'WhatsAppbackup.apk')
+            os.system(
+                adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
         except Exception as e:
             custom_print(e, 'red')
             custom_print('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
-            Exit()
+            kill_me()
     else:
         custom_print('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
-        Exit()
+        kill_me()
 
 
-def ShowBanner():
+def show_banner():
     banner_content = '''
 ================================================================================
 ========                                                                ========
@@ -72,24 +73,24 @@ if __name__ == "__main__":
     args = parser.parse_args()
     #args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
 
-    tcpIP = args.tcp_ip
-    tcpPort = args.tcp_port
-    if(tcpIP):
-        if(not tcpPort):
-            tcpPort = '5555'
-        ADBSerialId = tcpDeviceId.init(tcpIP, tcpPort)
+    tcp_ip = args.tcp_ip
+    tcp_port = args.tcp_port
+    if(tcp_ip):
+        if(not tcp_port):
+            tcp_port = '5555'
+        adb_device_serial_id = tcp_device_id.init(tcp_ip, tcp_port)
     else:
-        ADBSerialId = deviceId.init()
-    if(not ADBSerialId):
-        Exit()
+        adb_device_serial_id = adb_device_id.init()
+    if(not adb_device_serial_id):
+        kill_me()
 
     # Global command line helpers
     helpers = 'helpers/'
-    if(isWindows):
-        adb = 'bin\\adb.exe -s ' + ADBSerialId
+    if(is_windows):
+        adb = 'bin\\adb.exe -s ' + adb_device_serial_id
     else:
-        adb = 'adb -s ' + ADBSerialId
+        adb = 'adb -s ' + adb_device_serial_id
 
     os.system('cls' if os.name == 'nt' else 'clear')
-    ShowBanner()
-    ReinstallWhatsApp(adb)
+    show_banner()
+    reinstall_whatsapp(adb)
