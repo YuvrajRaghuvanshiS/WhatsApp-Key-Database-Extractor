@@ -125,7 +125,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', calli
             while(not os.path.isfile(extracted + username + '/whatsapp.ab')):
                 if(os.path.isdir(extracted + username) and not os.path.isfile(extracted + username + '/whatsapp.ab')):
                     custom_print('Folder \"' + extracted + username +
-                                 '\" does not even contain whatsapp.ab')
+                                 '\" does not even contain whatsapp.ab', 'red')
                     kill_me()
                 username = custom_input(
                     'No such folder: \"' + extracted + username + '\". Enter correct name (case sensitive).: ')
@@ -134,8 +134,13 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', calli
             try:
                 os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
                     'Folder \"' + tmp + '\" already exists.', 'yellow')
-                os.system('java -jar ' + bin + 'abe.jar unpack ' + extracted +
-                          username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
+                unpack_out = getoutput('java -jar ' + bin + 'abe.jar unpack ' + extracted +
+                                       username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
+                if('Exception' in unpack_out):
+                    custom_print('Could not unpack \"' +
+                                 tmp + 'whatsapp.ab\"', 'red')
+                    custom_print(unpack_out, 'red')
+                    kill_me()
                 custom_print('Successfully unpacked \"' + extracted + username + '/whatsapp.ab\" to ' + '\"' +
                              tmp + 'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
                 if(is_tar_only):
@@ -156,8 +161,13 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', calli
         ab_pass = custom_input(
             'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
         try:
-            os.system('java -jar ' + bin + 'abe.jar unpack ' + tmp +
-                      'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
+            unpack_out = getoutput('java -jar ' + bin + 'abe.jar unpack ' + tmp +
+                                   'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
+            if('Exception' in unpack_out):
+                custom_print('Could not unpack \"' +
+                             tmp + 'whatsapp.ab\"', 'red')
+                custom_print(unpack_out, 'red')
+                kill_me()
             custom_print('Successfully unpacked \"' + tmp + 'whatsapp.ab\" to \"' + tmp +
                          'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
             if(is_tar_only):
