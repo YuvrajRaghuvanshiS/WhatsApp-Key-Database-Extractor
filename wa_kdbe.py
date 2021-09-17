@@ -221,7 +221,6 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
 def reinstall_whatsapp():
     custom_print('Reinstallting original WhatsApp.')
     try:
-
         reinstall_whatsapp_out = subprocess.getoutput(
             adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
         if('Success' in reinstall_whatsapp_out):
@@ -229,7 +228,6 @@ def reinstall_whatsapp():
         else:
             custom_print('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
             custom_print(reinstall_whatsapp_out, 'red')
-
     except Exception as e:
         custom_print(e, 'red')
         kill_me()

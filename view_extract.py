@@ -54,7 +54,7 @@ def main():
         sdcard_path = ''
     custom_print('It not necessary to have phone connected unless you want to copy \"msgstore.db\" to \"/sdcard\".\nSo you can ignore above warning.\n')
     extract_ab(is_java_installed, sdcard_path=sdcard_path,
-               adb_device_serial_id=adb_device_serial_id, calling_from_other_module=False, is_tar_only=is_tar_only)
+               adb_device_serial_id=adb_device_serial_id, is_calling_from_other_module=False, is_tar_only=is_tar_only)
 
 
 def check_java():
@@ -101,7 +101,7 @@ def kill_me():
     quit()
 
 
-def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', calling_from_other_module=True, is_tar_only=False):
+def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_calling_from_other_module=True, is_tar_only=False):
     if not is_java_installed:
         custom_print('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
@@ -117,7 +117,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', calli
             'Run \"view_extract.py\" after installing Java on system.')
         clean_tmp()
         kill_me()
-    if(not calling_from_other_module):
+    if(not is_calling_from_other_module):
         if(custom_input('Have you already made whatsapp.ab and just extracting it now ?: ').upper() == 'Y'):
             list_user_folders()
             username = custom_input(
@@ -153,7 +153,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', calli
                 kill_me()
         else:
             kill_me()
-    if(os.path.isfile(tmp + 'whatsapp.ab')):
+    if(is_calling_from_other_module and os.path.isfile(tmp + 'whatsapp.ab')):
         custom_print('Found \"whatsapp.ab\" in \"tmp\" folder. Continuing... Size: ' +
                      str(os.path.getsize(tmp + '/whatsapp.ab')) + ' bytes.')
         username = custom_input(
@@ -179,7 +179,8 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', calli
             custom_print(e, 'red')
             kill_me()
     else:
-        custom_print('\aCould not find \"whatsapp.ab\" in \"tmp\" folder.')
+        custom_print(
+            '\aCould not find \"whatsapp.ab\" in \"tmp\" folder.', 'red')
         kill_me()
 
 
@@ -270,9 +271,14 @@ def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
                 is_copy_to_sdcard = custom_input(
                     'Copy \"msgstore.db\" file to phone? (y/n) default \'n\': ') or 'N'
                 if(is_copy_to_sdcard.upper() == 'Y'):
-                    os.system(adb + adb_device_serial_id + ' push ' + extracted +
-                              username + '/msgstore.db ' + sdcard_path + '/msgstore.db')
-                    custom_print('Done copying \"msgstore.db\" to phone.')
+                    copy_out = getoutput(adb + adb_device_serial_id + ' push ' + extracted +
+                                         username + '/msgstore.db ' + sdcard_path + '/msgstore.db')
+                    if('pushed' in copy_out):
+                        custom_print('Done copying \"msgstore.db\" to phone.')
+                    else:
+                        custom_print(
+                            'Could not copy \"msgstore.db\" to phone.', 'red')
+                        custom_print(copy_out, 'red')
             try:  # Open in explorer.
                 if(is_windows):
                     os.startfile(os.path.realpath(extracted + username))
