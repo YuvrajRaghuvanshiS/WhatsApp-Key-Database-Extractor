@@ -252,7 +252,7 @@ def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
             protect.compress(username)
         else:
             custom_print('\n', is_get_time=False)
-            custom_print('\aYour whatsapp database along with other files is in \"' +
+            custom_print('\aYour WhatsApp database along with other files is in \"' +
                          os.path.realpath(extracted + username) + '\" folder.', 'yellow')
             custom_print('\n', is_get_time=False)
             custom_input('Hit \"Enter\" key to continue.')

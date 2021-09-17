@@ -120,7 +120,7 @@ python3 wa_kdbe.py
 | -tip  | --tcp-ip IP_ADDRESS | TCP  | Required  | String | Connects to a remote device via TCP mode.                              | Stable |
 | -tp   |--tcp-port PORT      | TCP  | Optional  | String | Port number to connect to. Default: 5555.                             | Stable |
 | -s    | --scrcpy            | Both | Optional  | Bool   | Show device screen as a window using ScrCpy.                           | Stable |
-| -to   | --tar-only          | Both | Optional  | Bool   | Get ALL files as a tarball instead of main files from whatsapp backup. | Stable |
+| -to   | --tar-only          | Both | Optional  | Bool   | Get ALL files as a tarball instead of main files from WhatsApp backup. | Stable |
 
 Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode or USB mode. When Android is plugged with USB don't use TCP flags.
 

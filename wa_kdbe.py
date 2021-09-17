@@ -165,10 +165,24 @@ def get_sys_info():
 def install_legacy(sdk_version):
     custom_print('Installing legacy WhatsApp V2.11.431, hold tight now.')
     if(sdk_version >= 17):
-        os.system(adb + ' install -r -d ' + helpers + 'LegacyWhatsApp.apk')
+        install_legacy_out = subprocess.getoutput(
+            adb + ' install -r -d ' + helpers + 'LegacyWhatsApp.apk')
+        if('Success' in install_legacy_out):
+            custom_print('Installation Complete.')
+        else:
+            custom_print('Could not install legacy WhatsApp', 'red')
+            custom_print(install_legacy_out, 'red')
+            kill_me()
+
     else:
-        os.system(adb + ' install -r ' + helpers + 'LegacyWhatsApp.apk')
-    custom_print('Installation Complete.')
+        install_legacy_out = subprocess.getoutput(
+            adb + ' install -r ' + helpers + 'LegacyWhatsApp.apk')
+        if('Success' in install_legacy_out):
+            custom_print('Installation Complete.')
+        else:
+            custom_print('Could not install legacy WhatsApp', 'red')
+            custom_print(install_legacy_out, 'red')
+            kill_me()
 
 
 def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path):
@@ -190,7 +204,8 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
 
     install_legacy(sdk_version)
     # Before backup run app
-    os.system(adb + ' shell am start -n com.whatsapp/.Main')
+    custom_print(subprocess.getoutput(
+        adb + ' shell am start -n com.whatsapp/.Main'))
     custom_input(
         '\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     backup_whatsapp_data_as_ab(sdk_version)
@@ -206,11 +221,17 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
 def reinstall_whatsapp():
     custom_print('Reinstallting original WhatsApp.')
     try:
-        os.system(
+
+        reinstall_whatsapp_out = subprocess.getoutput(
             adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
+        if('Success' in reinstall_whatsapp_out):
+            custom_print('Reinstallation Complete.')
+        else:
+            custom_print('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
+            custom_print(reinstall_whatsapp_out, 'red')
+
     except Exception as e:
         custom_print(e, 'red')
-        custom_print('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".')
         kill_me()
 
 
@@ -283,10 +304,15 @@ def uninstall_whatsapp(sdk_version):
     if(sdk_version >= 23):
         try:
             custom_print('Uninstalling WhatsApp, skipping data.')
-            os.system(adb + ' shell pm uninstall -k com.whatsapp')
-            custom_print('Uninstalled.')
+            uninstall_out = subprocess.getoutput(
+                adb + ' shell pm uninstall -k com.whatsapp')
+            if('Success' in uninstall_out):
+                custom_print('Uninstalled.')
+            else:
+                custom_print('Could not uninstall WhatsApp.', 'red')
+                custom_print(uninstall_out, 'red')
+                kill_me()
         except Exception as e:
-            custom_print('Could not uninstall WhatsApp.')
             custom_print(e, 'red')
             kill_me()
 
@@ -321,7 +347,7 @@ if __name__ == "__main__":
     parser.add_argument('-to', '--tar-only', action='store_true',
                         help='Get entire WhatsApp\'s data in \"<username>.tar\" file instead of just getting few important files.')
     args = parser.parse_args()
-    #args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
+    # args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 
     is_allowed_reboot = args.allow_reboot
     tcp_ip = args.tcp_ip

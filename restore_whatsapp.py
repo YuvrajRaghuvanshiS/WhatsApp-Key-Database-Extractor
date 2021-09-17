@@ -30,11 +30,16 @@ def reinstall_whatsapp(adb):
     custom_print('Reinstallting original WhatsApp.')
     if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput('adb shell ls /data/local/tmp/WhatsAppbackup.apk')):
         try:
-            os.system(
+            reinstall_whatsapp_out = subprocess.getoutput(
                 adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
+            if('Success' in reinstall_whatsapp_out):
+                custom_print('Reinstallation Complete.')
+            else:
+                custom_print('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
+                custom_print(reinstall_whatsapp_out, 'red')
+
         except Exception as e:
             custom_print(e, 'red')
-            custom_print('Could not restore WhatsApp, install from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
             kill_me()
     else:
         custom_print('Could not find backup APK, install from play store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')
@@ -71,7 +76,7 @@ if __name__ == "__main__":
     parser.add_argument('-tp',
                         '--tcp-port', help='Port number to connect to. Default: 5555')
     args = parser.parse_args()
-    #args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
+    # args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
 
     tcp_ip = args.tcp_ip
     tcp_port = args.tcp_port
