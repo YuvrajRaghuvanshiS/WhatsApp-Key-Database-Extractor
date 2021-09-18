@@ -53,11 +53,12 @@ def main():
     else:
         sdcard_path = ''
     custom_print('It not necessary to have phone connected unless you want to copy \"msgstore.db\" to \"/sdcard\".\nSo you can ignore above warning.\n')
-    extract_ab(is_java_installed, sdcard_path=sdcard_path,
-               adb_device_serial_id=adb_device_serial_id, is_calling_from_other_module=False, is_tar_only=is_tar_only)
+    extract_self(sdcard_path=sdcard_path,
+                 adb_device_serial_id=adb_device_serial_id, is_tar_only=is_tar_only)
 
 
 def check_java():
+    # TODO: Variable -s_java_installed scope prblems.
     java_version = ''
     out = getoutput('java -version')
     if(out):
@@ -65,7 +66,6 @@ def check_java():
     else:
         custom_print(
             'Could not get output of \"java -version\" in \"view_extract.py\"', 'red')
-        custom_print('Continuing without JAVA...', 'red')
         return False
     if(java_version):
         is_java_installed = True
@@ -77,10 +77,10 @@ def check_java():
         return is_java_installed
     else:
         is_no_java_continue = custom_input(
-            'It looks like you don\'t have JAVA installed on your system. Would you like to (C)ontinue with the process and \"view extract\" later? or (S)top?: ', 'red') or 'C'
+            'It looks like you don\'t have JAVA installed on your system. If you are sure that JAVA is installed you can (C)ontinue with the process or (S)top?: ', 'red') or 's'
         if(is_no_java_continue.upper() == 'C'):
             custom_print(
-                'Continuing without JAVA, once JAVA is installed on system run \"view_extract.py\"', 'yellow')
+                'Continuing without detecting JAVA...', 'yellow')
             return is_java_installed
         else:
             kill_me()
@@ -101,7 +101,7 @@ def kill_me():
     quit()
 
 
-def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_calling_from_other_module=True, is_tar_only=False):
+def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_tar_only=False):
     if not is_java_installed:
         custom_print('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
@@ -110,6 +110,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ca
             'Folder \"' + extracted + '\" already exists.', 'yellow')
         os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
                                                ) else custom_print('Folder \"' + extracted + username + '\" exists.')
+        # TODO: may get overwritten if user folder already exists
         os.rename(tmp + 'whatsapp.ab', extracted + username + '/whatsapp.ab')
         custom_print('Moved \"whatsapp.ab\" to \"' + extracted + username + '\" folder. Size: ' +
                      str(os.path.getsize(extracted + username + '/whatsapp.ab')) + ' bytes.')
@@ -117,43 +118,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ca
             'Run \"view_extract.py\" after installing Java on system.')
         clean_tmp()
         kill_me()
-    if(not is_calling_from_other_module):
-        if(custom_input('Have you already made whatsapp.ab and just extracting it now ?: ').upper() == 'Y'):
-            list_user_folders()
-            username = custom_input(
-                'Enter a name of folder from above (case sensitive): ')
-            while(not os.path.isfile(extracted + username + '/whatsapp.ab')):
-                if(os.path.isdir(extracted + username) and not os.path.isfile(extracted + username + '/whatsapp.ab')):
-                    custom_print('Folder \"' + extracted + username +
-                                 '\" does not even contain whatsapp.ab', 'red')
-                    kill_me()
-                username = custom_input(
-                    'No such folder: \"' + extracted + username + '\". Enter correct name (case sensitive).: ')
-            ab_pass = custom_input(
-                'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
-            try:
-                os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
-                    'Folder \"' + tmp + '\" already exists.', 'yellow')
-                unpack_out = getoutput('java -jar ' + bin + 'abe.jar unpack ' + extracted +
-                                       username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
-                if('Exception' in unpack_out):
-                    custom_print('Could not unpack \"' +
-                                 tmp + 'whatsapp.ab\"', 'red')
-                    custom_print(unpack_out, 'red')
-                    kill_me()
-                custom_print('Successfully unpacked \"' + extracted + username + '/whatsapp.ab\" to ' + '\"' +
-                             tmp + 'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
-                if(is_tar_only):
-                    taking_out_only_tar(username)
-                else:
-                    taking_out_main_files(username, sdcard_path,
-                                          adb_device_serial_id)
-            except Exception as e:
-                custom_print(e, 'red')
-                kill_me()
-        else:
-            kill_me()
-    if(is_calling_from_other_module and os.path.isfile(tmp + 'whatsapp.ab')):
+    if(os.path.isfile(tmp + 'whatsapp.ab')):
         custom_print('Found \"whatsapp.ab\" in \"tmp\" folder. Continuing... Size: ' +
                      str(os.path.getsize(tmp + '/whatsapp.ab')) + ' bytes.')
         username = custom_input(
@@ -181,6 +146,41 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ca
     else:
         custom_print(
             '\aCould not find \"whatsapp.ab\" in \"tmp\" folder.', 'red')
+        kill_me()
+
+
+def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
+    list_user_folders()
+    username = custom_input(
+        'Enter a name of folder from above (case sensitive): ')
+    while(not os.path.isfile(extracted + username + '/whatsapp.ab')):
+        if(os.path.isdir(extracted + username) and not os.path.isfile(extracted + username + '/whatsapp.ab')):
+            custom_print('Folder \"' + extracted + username +
+                         '\" does not even contain whatsapp.ab', 'red')
+            kill_me()
+        username = custom_input(
+            'No such folder: \"' + extracted + username + '\". Enter correct name (case sensitive).: ')
+    ab_pass = custom_input(
+        'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
+    try:
+        os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
+            'Folder \"' + tmp + '\" already exists.', 'yellow')
+        unpack_out = getoutput('java -jar ' + bin + 'abe.jar unpack ' + extracted +
+                               username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
+        if('Exception' in unpack_out):
+            custom_print('Could not unpack \"' +
+                         tmp + 'whatsapp.ab\"', 'red')
+            custom_print(unpack_out, 'red')
+            kill_me()
+        custom_print('Successfully unpacked \"' + extracted + username + '/whatsapp.ab\" to ' + '\"' +
+                     tmp + 'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
+        if(is_tar_only):
+            taking_out_only_tar(username)
+        else:
+            taking_out_main_files(username, sdcard_path,
+                                  adb_device_serial_id)
+    except Exception as e:
+        custom_print(e, 'red')
         kill_me()
 
 
@@ -279,6 +279,8 @@ def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
                         custom_print(
                             'Could not copy \"msgstore.db\" to phone.', 'red')
                         custom_print(copy_out, 'red')
+                else:
+                    kill_me()
             try:  # Open in explorer.
                 if(is_windows):
                     os.startfile(os.path.realpath(extracted + username))

@@ -65,7 +65,7 @@ def main():
     except:
         custom_print(
             'Can\'t get system information. Continuing anyway...', 'yellow')
-    custom_print('Current release date: 13/09/2021', 'cyan')
+    custom_print('Current release date: 18/09/2021', 'cyan')
     custom_print('\n', is_get_time=False)
     is_read_instructions = custom_input(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
@@ -352,7 +352,6 @@ if __name__ == "__main__":
     tcp_port = args.tcp_port
     is_scrcpy = args.scrcpy
     is_tar_only = args.tar_only
-    # TODO: Download legacy on phone(later). Backup original on phone(done). Create backup on phone. Install original from phone.
     if(tcp_ip):
         if(not tcp_port):
             tcp_port = '5555'
