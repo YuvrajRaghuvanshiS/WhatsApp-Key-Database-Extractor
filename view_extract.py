@@ -108,9 +108,20 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ta
         username = custom_input('Enter a name for this user.: ')
         os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
             'Folder \"' + extracted + '\" already exists.', 'yellow')
-        os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
-                                               ) else custom_print('Folder \"' + extracted + username + '\" exists.')
-        # TODO: may get overwritten if user folder already exists
+        if not os.path.isdir(extracted + username):
+            os.mkdir(extracted + username)
+            custom_print('Created folder \"' + extracted + username + '\"')
+        else:
+            while(os.path.isdir(extracted + username)):
+                custom_print('\n', is_get_time=False)
+                custom_print('Folder \"' + extracted +
+                             username + '\" exists, contents may get overwritten.', 'red')
+                username = custom_input('Enter different name of this user.: ')
+                if not (os.path.isdir(extracted + username)):
+                    os.mkdir(extracted + username)
+                    custom_print('Created folder \"' +
+                                 extracted + username + '\"')
+                    break
         os.rename(tmp + 'whatsapp.ab', extracted + username + '/whatsapp.ab')
         custom_print('Moved \"whatsapp.ab\" to \"' + extracted + username + '\" folder. Size: ' +
                      str(os.path.getsize(extracted + username + '/whatsapp.ab')) + ' bytes.')
