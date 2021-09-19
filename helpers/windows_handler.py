@@ -25,6 +25,8 @@ helpers = 'helpers/'
 
 
 def after_connect(adb):
+    custom_print(
+        '>>> I am in windows_handler.after_connect(adb=' + adb + ')', is_print=False)
     sdk_version = int(getoutput(
         adb + ' shell getprop ro.build.version.sdk'))
     if (sdk_version <= 13):
@@ -72,6 +74,8 @@ def after_connect(adb):
 
 
 def download_apk(url, file_name):
+    custom_print('>>> I am in windows_handler.download_apk(url=' +
+                 url + ', file_name=' + file_name + ')', is_print=False)
     # Streaming, so we can iterate over the response.
     response = requests.get(url, stream=True)
     # For WayBackMachine only.
@@ -107,6 +111,7 @@ def download_apk(url, file_name):
 
 
 def kill_me():
+    custom_print('>>> I am in windows_handler.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     os.system('bin\\adb.exe kill-server')
@@ -115,6 +120,8 @@ def kill_me():
 
 
 def windows_handler(adb):
+    custom_print(
+        '>>> I am in windows_handler.windows_handler(adb=' + adb + ')', is_print=False)
     custom_print('Connected to ' + getoutput(adb +
                                              ' shell getprop ro.product.model'))
     return after_connect(adb)

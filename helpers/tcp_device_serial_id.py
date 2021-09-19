@@ -6,6 +6,8 @@ from custom_ci import custom_print, custom_input
 
 
 def init(tcp_ip, tcp_port):
+    custom_print('>>> I am in tcp_device_serial_id.init(tcp_ip=' +
+                 tcp_ip + ', tcp_port=' + tcp_port + ')', is_print=False)
     # Detect OS
     is_windows = False
     is_linux = False
@@ -59,6 +61,7 @@ def init(tcp_ip, tcp_port):
 
 
 def kill_me():
+    custom_print('>>> I am in tcp_device_serial_id.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')

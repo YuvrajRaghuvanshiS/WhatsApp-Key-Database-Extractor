@@ -21,6 +21,8 @@ app_url_whatscrypt_cdn = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def after_connect(adb_serial_id):
+    custom_print('>>> I am in linux_handler.after_connect(adb_serial_id=' +
+                 adb_serial_id + ')', is_print=False)
     sdk_version = int(getoutput('adb -s ' + adb_serial_id +
                                 ' shell getprop ro.build.version.sdk'))
     if (sdk_version <= 13):
@@ -28,7 +30,7 @@ def after_connect(adb_serial_id):
             'Unsupported device. This method only works on Android v4.0 or higer.', 'red')
         custom_print('Cleaning up \"tmp\" folder.', 'red')
         os.system('rm -rf tmp/*')
-        Exit()
+        kill_me()
     _wa_path_text = 'adb -s ' + adb_serial_id + ' shell pm path com.whatsapp'
     proc = subprocess.Popen(_wa_path_text.split(), stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
@@ -36,7 +38,7 @@ def after_connect(adb_serial_id):
     out = out.decode('utf-8')
     if(not out):
         custom_print('Looks like WhatsApp is not installed on device.', 'red')
-        Exit()
+        kill_me()
     whatsapp_apk_path_in_device = re.search(
         '(?<=package:)(.*)(?=apk)', str(check_output(_wa_path_text.split()))).group(1) + 'apk'
     sdcard_path = getoutput('adb -s ' + adb_serial_id +
@@ -71,6 +73,8 @@ def after_connect(adb_serial_id):
 
 
 def download_apk(url, file_name):
+    custom_print('>>> I am in linux_handler.download_apk(url=' +
+                 url + ', file_name=' + file_name + ')', is_print=False)
     # Streaming, so we can iterate over the response.
     response = requests.get(url, stream=True)
     total_size_in_bytes = response.headers.get(
@@ -90,7 +94,7 @@ def download_apk(url, file_name):
         custom_print('\n', is_get_time=False)
         custom_print(
             'Once downloaded rename it to \"LegacyWhatsApp.apk\" exactly and put in \"helpers\" folder.', 'red')
-        Exit()
+        kill_me()
     block_size = 1024  # 1 Kibibyte
     progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
     with open('helpers/temp.apk', 'wb') as f:
@@ -101,10 +105,11 @@ def download_apk(url, file_name):
     os.rename('helpers/temp.apk', file_name)
     if (total_size_in_bytes != 0 and progress_bar.n != total_size_in_bytes):
         custom_print('\aSomething went during downloading LegacyWhatsApp.apk')
-        Exit()
+        kill_me()
 
 
-def Exit():
+def kill_me():
+    custom_print('>>> I am in linux_handler.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     os.system('adb kill-server')
@@ -113,6 +118,8 @@ def Exit():
 
 
 def linux_handler(adb_serial_id):
+    custom_print('>>> I am in linux_handler.linux_handler(adb_serial_id=' +
+                 adb_serial_id + ')', is_print=False)
     custom_print('Connected to ' + getoutput('adb -s ' +
                                              adb_serial_id + ' shell getprop ro.product.model'))
     return after_connect(adb_serial_id)

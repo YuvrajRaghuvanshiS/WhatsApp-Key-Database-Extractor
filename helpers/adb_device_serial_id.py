@@ -6,6 +6,8 @@ from custom_ci import custom_input, custom_print
 
 
 def init():
+    custom_print(
+        '>>> I am in adb_device_serial_id.init()', is_print=False)
     # Detect OS
     is_windows = False
     is_linux = False
@@ -85,6 +87,8 @@ def init():
 
 
 def kill_me():
+    custom_print(
+        '>>> I am in adb_device_serial_id.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
