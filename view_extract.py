@@ -36,6 +36,7 @@ else:
 
 
 def main():
+    custom_print('>>> I am in view_extract.main()', is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
     is_java_installed = check_java()
@@ -58,6 +59,7 @@ def main():
 
 
 def check_java():
+    custom_print('>>> I am in view_extract.check_java()', is_print=False)
     # TODO: Variable -s_java_installed scope prblems.
     java_version = ''
     out = getoutput('java -version')
@@ -87,12 +89,14 @@ def check_java():
 
 
 def clean_tmp():
+    custom_print('>>> I am in view_extract.clean_tmp()', is_print=False)
     if(os.path.isdir(tmp)):
         custom_print('Cleaning up \"' + tmp + '\" folder...', 'yellow')
         shutil.rmtree(tmp)
 
 
 def kill_me():
+    custom_print('>>> I am in view_extract.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     os.system(
@@ -102,6 +106,8 @@ def kill_me():
 
 
 def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_tar_only=False):
+    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + is_java_installed + ', sdcard_path=' +
+                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + is_tar_only + ')', is_print=False)
     if not is_java_installed:
         custom_print('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
@@ -161,6 +167,8 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ta
 
 
 def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
+    custom_print('>>> I am in view_extract.extract_self(sdcard_path=' + sdcard_path +
+                 ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + is_tar_only + ')', is_print=False)
     list_user_folders()
     username = custom_input(
         'Enter a name of folder from above (case sensitive): ')
@@ -196,6 +204,8 @@ def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
 
 
 def list_user_folders():
+    custom_print('>>> I am in view_extract.list_user_folders()',
+                 is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Available user folders in extracted directory.')
     all_folders = next(os.walk(extracted))[1]
@@ -209,6 +219,7 @@ def list_user_folders():
 
 
 def show_banner():
+    custom_print('>>> I am in view_extract.show_banner()', is_print=False)
     banner_content = '''
 ================================================================================
 ========                                                                ========
@@ -227,6 +238,8 @@ def show_banner():
 
 
 def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
+    custom_print('>>> I am in view_extract.taking_out_main_files(username=' + username + ', sdcard_path=' +
+                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ')', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
         'Folder \"' + extracted + '\" already exists.', 'yellow')
     os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
@@ -313,6 +326,8 @@ def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
 
 
 def taking_out_only_tar(username):
+    custom_print('>>> I am in view_extract.taking_out_only_tar(username=' +
+                 username + ')', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
         'Folder \"' + extracted + '\" already exists.', 'yellow')
     try:

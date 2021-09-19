@@ -23,6 +23,7 @@ else:
 
 
 def main():
+    custom_print('>>> I am in protect.main()', is_print=False)
     custom_print('This utility is for archiving your output folder with password to enchance it\'s security. Secure is a relative term. Choose longer password.')
     is_compressing = custom_input(
         'Are you (C)ompressing or (D)ecompressing?: ')
@@ -47,6 +48,8 @@ def main():
 
 
 def compress(user_folder):
+    custom_print('>>> I am in protect.compress(user_folder=' +
+                 user_folder + ')', is_print=False)
     if(not os.path.isdir(extracted + user_folder)):
         custom_print('Could not find directory \"' +
                      extracted + user_folder + '\"')
@@ -77,6 +80,8 @@ def compress(user_folder):
 
 
 def delete_user_folder(user_folder):
+    custom_print('>>> I am in protect.delete_user_folder(user_folder=' +
+                 user_folder + ')', is_print=False)
     custom_print('Deleting...')
     try:
         shutil.rmtree(extracted + user_folder)
@@ -87,6 +92,8 @@ def delete_user_folder(user_folder):
 
 
 def delete_user_zip(user_zip):
+    custom_print('>>> I am in protect.delete_user_zip(user_zip=' +
+                 user_zip + ')', is_print=False)
     custom_print('Deleting...')
     try:
         os.remove(extracted + user_zip)
@@ -97,6 +104,7 @@ def delete_user_zip(user_zip):
 
 
 def kill_me():
+    custom_print('>>> I am in protect.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     try:  # Open in explorer.
@@ -116,6 +124,7 @@ def kill_me():
 
 
 def list_user_files():
+    custom_print('>>> I am in protect.list_user_files()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Available user files in extracted directory.')
     custom_print('\n', is_get_time=False)
@@ -130,6 +139,7 @@ def list_user_files():
 
 
 def list_user_folders():
+    custom_print('>>> I am in protect.list_user_folders()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Available user folders in extracted directory.')
     custom_print('\n', is_get_time=False)
@@ -143,6 +153,7 @@ def list_user_folders():
 
 
 def show_banner():
+    custom_print('>>> I am in protect.show_banner()', is_print=False)
     banner_content = '''
 ================================================================================
 ========                                                                ========
@@ -161,6 +172,8 @@ def show_banner():
 
 
 def uncompress(user_zip):
+    custom_print('>>> I am in protect.uncompress(user_zip=' +
+                 user_zip + ')', is_print=False)
     if(not str(user_zip).endswith('7z')):
         user_zip = user_zip + '.7z'
     if(not os.path.isfile(extracted + user_zip)):

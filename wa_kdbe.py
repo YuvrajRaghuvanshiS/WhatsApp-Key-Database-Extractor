@@ -48,6 +48,7 @@ app_url_whatscrypt_cdn = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def main():
+    custom_print('>>> I am in wa_kdbe.main()', is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
     check_bin()
     show_banner()
@@ -79,6 +80,8 @@ def main():
 
 
 def backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device):
+    custom_print('>>> I am in wa_kdbe.backup_whatsapp_apk(sdk_version=' + sdk_version + ', version_name=' +
+                 version_name + ', whatsapp_apk_path_in_device=' + whatsapp_apk_path_in_device + ')', is_print=False)
     os.system(adb + ' shell am force-stop com.whatsapp') if(sdk_version >
                                                             11) else os.system(adb + ' shell am kill com.whatsapp')
     custom_print('Backing up WhatsApp ' + version_name +
@@ -89,6 +92,8 @@ def backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device):
 
 
 def backup_whatsapp_data_as_ab(sdk_version):
+    custom_print('>>> I am in wa_kdbe.backup_whatsapp_data_as_ab(sdk_version=' +
+                 sdk_version + ')', is_print=False)
     os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
         'Folder ' + tmp + ' already exists.', 'yellow')
     custom_print('Backing up WhatsApp data as \"' + tmp +
@@ -104,6 +109,7 @@ def backup_whatsapp_data_as_ab(sdk_version):
 
 
 def check_bin():
+    custom_print('>>> I am in wa_kdbe.check_bin()', is_print=False)
     if (not os.path.isdir('bin')):
         custom_print('I can not find \"bin\" folder, check again...', 'red')
         kill_me()
@@ -112,6 +118,7 @@ def check_bin():
 
 
 def check_java():
+    custom_print('>>> I am in wa_kdbe.check_java()', is_print=False)
     java_version = ''
     out = subprocess.getoutput('java -version')
     if(out):
@@ -141,6 +148,7 @@ def check_java():
 
 
 def kill_me():
+    custom_print('>>> I am in wa_kdbe.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     os.system(
@@ -150,6 +158,7 @@ def kill_me():
 
 
 def get_sys_info():
+    custom_print('>>> I am in wa_kdbe.get_sys_info()', is_print=False)
     info = {}
     info['Platform'] = platform.system()
     info['Platform Release'] = platform.release()
@@ -163,6 +172,8 @@ def get_sys_info():
 
 
 def install_legacy(sdk_version):
+    custom_print('>>> I am in wa_kdbe.install_legacy(sdk_version=' +
+                 sdk_version + ')', is_print=False)
     custom_print('Installing legacy WhatsApp V2.11.431, hold tight now.')
     if(sdk_version >= 17):
         install_legacy_out = subprocess.getoutput(
@@ -186,6 +197,8 @@ def install_legacy(sdk_version):
 
 
 def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path):
+    custom_print('>>> I am in wa_kdbe.real_deal(sdk_version=' + sdk_version + ', whatsapp_apk_path_in_device=' +
+                 whatsapp_apk_path_in_device + ', version_name=' + version_name + ', sdcard_path=' + sdcard_path + ')', is_print=False)
     backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device)
     uninstall_whatsapp(sdk_version)
     # Reboot here.
@@ -219,6 +232,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
 
 
 def reinstall_whatsapp():
+    custom_print('>>> I am in wa_kdbe.reinstall_whatsapp()', is_print=False)
     custom_print('Reinstallting original WhatsApp.')
     try:
         reinstall_whatsapp_out = subprocess.getoutput(
@@ -234,6 +248,8 @@ def reinstall_whatsapp():
 
 
 def run_scrcpy(_is_scrcpy):
+    custom_print('>>> I am in wa_kdbe.run_scrcpy(_is_scrcpy=' +
+                 _is_scrcpy + ')', is_print=False)
     if(_is_scrcpy):
         cmd = 'bin\scrcpy.exe --max-fps 15 -b 4M --always-on-top' if(
             is_windows) else 'scrcpy --max-fps 15 -b 4M --always-on-top'
@@ -243,6 +259,7 @@ def run_scrcpy(_is_scrcpy):
 
 
 def show_banner():
+    custom_print('>>> I am in wa_kdbe.show_banner()', is_print=False)
     banner_content = '''
 ================================================================================
 ========                                                                ========
@@ -299,6 +316,8 @@ def show_banner():
 
 
 def uninstall_whatsapp(sdk_version):
+    custom_print('>>> I am in wa_kdbe.uninstall_whatsapp(sdk_version=' +
+                 sdk_version + ')', is_print=False)
     if(sdk_version >= 23):
         try:
             custom_print('Uninstalling WhatsApp, skipping data.')
@@ -316,6 +335,7 @@ def uninstall_whatsapp(sdk_version):
 
 
 def usb_mode():
+    custom_print('>>> I am in wa_kdbe.usb_mode()', is_print=False)
     if(is_windows):
         after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path = windows_handler(
             adb)

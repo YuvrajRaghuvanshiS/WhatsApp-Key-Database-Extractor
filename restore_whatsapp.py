@@ -18,6 +18,7 @@ if platform.system() == 'Linux':
 
 
 def kill_me():
+    custom_print('>>> I am in restore_whatsapp.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
     os.system(
@@ -27,6 +28,8 @@ def kill_me():
 
 
 def reinstall_whatsapp(adb):
+    custom_print(
+        '>>> I am in restore_whatsapp.restore_whatsapp(adb=' + adb + ')', is_print=False)
     custom_print('Reinstallting original WhatsApp.')
     if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput('adb shell ls /data/local/tmp/WhatsAppbackup.apk')):
         try:
@@ -47,6 +50,7 @@ def reinstall_whatsapp(adb):
 
 
 def show_banner():
+    custom_print('>>> I am in restore_whatsapp.show_banner()', is_print=False)
     banner_content = '''
 ================================================================================
 ========                                                                ========
