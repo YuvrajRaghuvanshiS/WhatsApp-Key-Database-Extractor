@@ -173,7 +173,7 @@ def show_banner():
 
 def uncompress(user_zip):
     custom_print('>>> I am in protect.uncompress(user_zip=' +
-                 user_zip + ')', is_print=False)
+                 str(user_zip) + ')', is_print=False)
     if(not str(user_zip).endswith('7z')):
         user_zip = user_zip + '.7z'
     if(not os.path.isfile(extracted + user_zip)):

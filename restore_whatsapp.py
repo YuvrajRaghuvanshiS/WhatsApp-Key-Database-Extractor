@@ -31,7 +31,7 @@ def reinstall_whatsapp(adb):
     custom_print(
         '>>> I am in restore_whatsapp.restore_whatsapp(adb=' + adb + ')', is_print=False)
     custom_print('Reinstallting original WhatsApp.')
-    if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput('adb shell ls /data/local/tmp/WhatsAppbackup.apk')):
+    if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput(adb + ' shell ls /data/local/tmp/WhatsAppbackup.apk')):
         try:
             reinstall_whatsapp_out = subprocess.getoutput(
                 adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')

@@ -106,8 +106,8 @@ def kill_me():
 
 
 def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_tar_only=False):
-    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + is_java_installed + ', sdcard_path=' +
-                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + is_tar_only + ')', is_print=False)
+    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + str(is_java_installed) + ', sdcard_path=' +
+                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
     if not is_java_installed:
         custom_print('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
@@ -168,7 +168,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ta
 
 def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
     custom_print('>>> I am in view_extract.extract_self(sdcard_path=' + sdcard_path +
-                 ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + is_tar_only + ')', is_print=False)
+                 ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
     list_user_folders()
     username = custom_input(
         'Enter a name of folder from above (case sensitive): ')
