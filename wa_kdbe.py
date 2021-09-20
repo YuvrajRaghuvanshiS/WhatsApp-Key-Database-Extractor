@@ -66,7 +66,13 @@ def main():
     except:
         custom_print(
             'Can\'t get system information. Continuing anyway...', 'yellow')
-    custom_print('Current release date: 20/09/2021', 'cyan')
+    try:
+        release_date_file = open('non_essentials/DATE', 'r')
+        release_date = release_date_file.readline()
+        release_date_file.close()
+        custom_print('Current release date: ' + release_date, 'cyan')
+    except Exception as e:
+        custom_print(e, is_print=False)
     custom_print('\n', is_get_time=False)
     is_read_instructions = custom_input(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
