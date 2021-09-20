@@ -153,6 +153,16 @@ def check_java():
             kill_me()
 
 
+def countdown(message, time_sec):
+    while time_sec:
+        mins, secs = divmod(time_sec, 60)
+        timeformat = '{:02d}:{:02d}'.format(mins, secs)
+        custom_print(message + timeformat + '.', end='\r')
+        time.sleep(1)
+        time_sec -= 1
+    custom_print('', is_get_time=False)
+
+
 def kill_me():
     custom_print('>>> I am in wa_kdbe.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
@@ -189,6 +199,8 @@ def install_legacy(sdk_version):
         else:
             custom_print('Could not install legacy WhatsApp', 'red')
             custom_print(install_legacy_out, 'red')
+            countdown('Trying to restore WhatsApp in ', 10)
+            reinstall_whatsapp()
             kill_me()
 
     else:

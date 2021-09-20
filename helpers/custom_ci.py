@@ -28,11 +28,11 @@ def custom_input(text_to_input, color='green', attr=[], is_get_time=True, is_log
     return data
 
 
-def custom_print(text_to_print, color='green', attr=[], is_get_time=True, is_log=True, is_print=True):
+def custom_print(text_to_print, color='green', attr=[], is_get_time=True, is_log=True, is_print=True, end='\n'):
     time = get_time() if is_get_time else ''
     text_to_print = str(text_to_print)
     if(is_print):
-        cprint(time + text_to_print, color, attrs=attr)
+        cprint(time + text_to_print, color, attrs=attr, end=end)
     else:
         pass
     if(is_log):
