@@ -57,15 +57,16 @@ def main():
     custom_print('\n', is_get_time=False)
     try:
         custom_print('Arguments passed: ' + str(args), is_print=False)
-    except:
-        pass
+    except Exception as e:
+        custom_print(e, is_print=False)
 
     try:
         custom_print('System Info: ' +
                      json.dumps(get_sys_info(), indent=2, default=str), is_print=False)
-    except:
+    except Exception as e:
         custom_print(
             'Can\'t get system information. Continuing anyway...', 'yellow')
+        custom_print(e, is_print=False)
     try:
         release_date_file = open('non_essentials/DATE', 'r')
         release_date = release_date_file.readline()
@@ -73,7 +74,6 @@ def main():
         custom_print('Current release date: ' + release_date, 'cyan')
     except Exception as e:
         custom_print(e, is_print=False)
-    custom_print('\n', is_get_time=False)
     is_read_instructions = custom_input(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
     if(is_read_instructions.upper() == 'Y'):

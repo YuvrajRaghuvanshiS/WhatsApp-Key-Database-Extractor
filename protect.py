@@ -115,10 +115,10 @@ def kill_me():
         else:
             try:
                 os.system('open ' + os.path.realpath(extracted))
-            except:
-                pass
-    except:
-        pass
+            except Exception as e:
+                custom_print(e, is_print=False)
+    except Exception as e:
+        custom_print(e, is_print=False)
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 

@@ -315,9 +315,10 @@ def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
                     try:
                         os.system(
                             'open ' + os.path.realpath(extracted + username))
-                    except:
-                        pass
-            except:
+                    except Exception as e:
+                        custom_print(e, is_print=False)
+            except Exception as e:
+                custom_print(e, is_print=False)
                 kill_me()
     except Exception as e:
         custom_print(e, 'red')
@@ -355,9 +356,10 @@ def taking_out_only_tar(username):
         else:
             try:
                 os.system('open ' + os.path.realpath(extracted))
-            except:
-                pass
-    except:
+            except Exception as e:
+                custom_print(e, is_print=False)
+    except Exception as e:
+        custom_print(e, is_print=False)
         kill_me()
 
 
