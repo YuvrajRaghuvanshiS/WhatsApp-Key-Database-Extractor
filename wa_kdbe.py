@@ -7,8 +7,8 @@ import socket
 try:
     import packaging
     import psutil
-    import termcolor
     import requests
+    import termcolor
     from tqdm import tqdm
 except ImportError:
     print('\nFirst run: Auto installing python requirements.\n')
@@ -83,6 +83,29 @@ def main():
         usb_mode()
     else:
         kill_me()
+
+
+def animate(message):
+    frames = [
+        "| o    |",
+        "|  o   |",
+        "|   o  |",
+        "|    o |",
+        "|     o|",
+        "|    o |",
+        "|   o  |",
+        "|  o   |",
+        "| o    |",
+        "|o     |"
+    ]
+    message = message + ' '
+    is_log_only_one_instance = True
+    while(subprocess.getoutput(adb + ' get-state') != 'device'):
+        for frame in frames:
+            custom_print(message + frame,
+                         is_log=is_log_only_one_instance, end='\r')
+            is_log_only_one_instance = False
+            time.sleep(0.001 * 80)
 
 
 def backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device):
@@ -225,9 +248,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
             custom_print('\n', is_get_time=False)
             custom_print('Rebooting device, please wait.', 'yellow')
             os.system(adb + ' reboot')
-            while(subprocess.getoutput(adb + ' get-state') != 'device'):
-                custom_print('Waiting for device...')
-                time.sleep(5)
+            animate('Waiting for device to get online')
             custom_input('Hit \"Enter\" key after unlocking device.', 'yellow')
         else:
             custom_print(
