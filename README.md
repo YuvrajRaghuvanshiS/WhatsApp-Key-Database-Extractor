@@ -209,7 +209,7 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. "Draft" a pull request and mark it "Ready for review" once work is done.
 
-Other ways to contribute is to buy me a coffee but let's just say it is to test out new features of the project. **Checkout [features/fast](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussions/53#discussioncomment-625798) to test backup and reinstallation of WhatsApp on device level.** This makes it quite time saving specially in case of TCP.
+Other ways to contribute is to buy me a coffee but let's just say it is to test out new features of the project. **No new features to test.**
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
