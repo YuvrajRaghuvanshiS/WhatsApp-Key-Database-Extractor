@@ -272,7 +272,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
 
 def reinstall_whatsapp():
     custom_print('>>> I am in wa_kdbe.reinstall_whatsapp()', is_print=False)
-    custom_print('Reinstallting original WhatsApp.')
+    custom_print('Reinstalling original WhatsApp.')
     try:
         reinstall_whatsapp_out = subprocess.getoutput(
             adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
