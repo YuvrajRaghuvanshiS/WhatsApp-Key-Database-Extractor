@@ -23,6 +23,8 @@ def kill_me():
     custom_print('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(is_windows) else os.system('adb kill-server')
+    custom_print(
+        'Turn off USB debugging [and USB debugging (Security Settings)] if you\'re done.', 'cyan')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 
@@ -36,7 +38,7 @@ def reinstall_whatsapp(adb):
             reinstall_whatsapp_out = subprocess.getoutput(
                 adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
             if('Success' in reinstall_whatsapp_out):
-                custom_print('Reinstallation Complete.')
+                custom_print('Reinstallation complete.')
                 kill_me()
             else:
                 custom_print('Could not install WhatsApp, install by running \"restore_whatsapp.py\" or manually installing from Play Store.\nHowever if it crashes then you have to clear storage/clear data from \"Settings \u2192 App Settings \u2192 WhatsApp\".', 'red')

@@ -119,6 +119,8 @@ def kill_me():
                 custom_print(e, is_print=False)
     except Exception as e:
         custom_print(e, is_print=False)
+    custom_print(
+        'Turn off USB debugging [and USB debugging (Security Settings)] if you\'re done.', 'cyan')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
 

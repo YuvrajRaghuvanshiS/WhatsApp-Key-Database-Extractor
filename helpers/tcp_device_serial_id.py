@@ -64,5 +64,7 @@ def kill_me():
     custom_print('>>> I am in tcp_device_serial_id.kill_me()', is_print=False)
     custom_print('\n', is_get_time=False)
     custom_print('Exiting...')
+    custom_print(
+        'Turn off USB debugging [and USB debugging (Security Settings)] if you\'re done.', 'cyan')
     custom_input('Hit \"Enter\" key to continue....', 'cyan')
     quit()
