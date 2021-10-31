@@ -31,7 +31,7 @@ def after_connect(adb):
         adb + ' shell getprop ro.build.version.sdk'))
     if (sdk_version <= 13):
         custom_print(
-            'Unsupported device. This method only works on Android v4.0 or higer.', 'red')
+            'Unsupported device. This method only works on Android v4.0 or higher.', 'red')
         custom_print('Cleaning up \"tmp\" folder.', 'red')
         os.remove(tmp)
         kill_me()
@@ -48,7 +48,7 @@ def after_connect(adb):
     sdcard_path = getoutput(adb + ' shell "echo $EXTERNAL_STORAGE"')
     # To check if APK even exists at a given path to download!
     # Since that obviously is not available at whatsapp cdn defaulting that to 0 for GH #46
-    # Using getoutput instead of this to skip getting data like 0//n//r or whatever was getting recieved on GH #46 bcz check_output returns a byte type object and getoutput returns a str type .
+    # Using getoutput instead of this to skip getting data like 0//n//r or whatever was getting received on GH #46 bcz check_output returns a byte type object and getoutput returns a str type .
     content_length = int((re.findall("(?<=content-length:)(.*[0-9])(?=)", getoutput(
         'curl -sI https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk')) or ['0'])[0])
     version_name = re.search("(?<=versionName=)(.*?)(?=\\\\r)", str(check_output(

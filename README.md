@@ -114,7 +114,7 @@ python3 wa_kdbe.py
 
 **Command Line Flags**
 
-| Short | Flag                | Mode | Required? | Type   | Behaviour                                                              | Status |
+| Short | Flag                | Mode | Required? | Type   | Behavior                                                              | Status |
 | ----- | ------------------- | ---- | --------- | ------ | ---------------------------------------------------------------------- | ------ |
 | -ar   |--allow-reboot       | USB  | Optional  | Bool   | Reboots device before installing Legacy WhatsApp.                      | Stable |
 | -tip  | --tcp-ip IP_ADDRESS | TCP  | Required  | String | Connects to a remote device via TCP mode.                              | Stable |
@@ -144,7 +144,7 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 <!--https://github.com/StylishThemes/GitHub-Dark/wiki/Emoji-->
 
 *  :heavy_check_mark: Extracts msgstore.db from /data/data/com.whatsapp. (duh)
-*  :heavy_check_mark: Works wirelessly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
+*  :heavy_check_mark: Works wireless-ly without USB cable using "ADB over TCP" with `--tcp-ip IP --tcp-port PORT` flags.
 *  :heavy_check_mark: See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag.
 *  :heavy_check_mark: Works with any android device v4.0+ so far.
 *  :heavy_check_mark: Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
@@ -165,8 +165,8 @@ https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussion
 
 ### Troubleshooting
 
-* If running `python3 wa_kdbe.py` or any other file is throwing error like "python3 is recognised as interal or external command." AND python3 is "already added to path (in case of windows)" try running files with `py wa_kdbe.py` instead. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/57)
-* If list is empty close terminal, remove and replug the device, and re-run the script. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
+* If running `python3 wa_kdbe.py` or any other file is throwing error like "python3 is recognized as internal or external command." AND python3 is "already added to path (in case of windows)" try running files with `py wa_kdbe.py` instead. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/57)
+* If list is empty close terminal, remove and re-plug the device, and re-run the script. [Read more.](https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/11#issuecomment-768500899)
 * If you have never used USB Debugging before, you may also need to verify the fingerprint by ticking the checkbox and tapping "allow" on device popup.  
 * If you have set a default backup password in your Android settings, then this MUST be the  backup password that you PROVIDE when prompted to backup your data. Else it WILL fail!  
 * If you get an error saying "AES encryption not allowed" then you need to update your Oracle Java Cryptography Extension (JCE) to Unlimited Strength Jurisdiction Policy Files.  

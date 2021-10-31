@@ -218,6 +218,6 @@ if __name__ == "__main__":
 
 # For zipping and unzipping the extracted folder.
 # .\bin\7za.exe a      -t7z     .\extracted\yuvraj    .\extracted\yuvraj\*    -p1234 -mhe
-#             (add) (type 7z) (name of ouput archive) (what to archive)  (passowrd) (header ecnryption)
+#             (add) (type 7z) (name of output archive) (what to archive)  (password) (header encryption)
 # check if already exists.
-# .\bin\7za.exe e -aot .\extracted\yuvraj.7z -oextracted\yuvraj -p1234
+# .\bin\7za.exe e -aot .\extracted\yuvraj.7z -o extracted\yuvraj -p1234

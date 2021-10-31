@@ -60,7 +60,7 @@ def main():
 
 def check_java():
     custom_print('>>> I am in view_extract.check_java()', is_print=False)
-    # TODO: Variable -s_java_installed scope prblems.
+    # TODO: Variable -s_java_installed scope problems.
     java_version = ''
     out = getoutput('java -version')
     if(out):
@@ -247,7 +247,8 @@ def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
     os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
                                            ) else custom_print('Folder \"' + extracted + username + '\" already exists.', 'yellow')
     # If user folder already exists ask user to overwrite or skip.
-    custom_print('Taking out main files in \"' + tmp + '\" folder temporaily.')
+    custom_print('Taking out main files in \"' +
+                 tmp + '\" folder temporarily.')
     try:
         tar = tarfile.open(tmp + 'whatsapp.tar')
         all_tar_files = tar.getnames()
