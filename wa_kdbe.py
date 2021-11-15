@@ -101,11 +101,16 @@ def animate(message):
     message = message + ' '
     is_log_only_one_instance = True
     while(subprocess.getoutput(adb + ' get-state') != 'device'):
-        for frame in frames:
-            custom_print(message + frame,
-                         is_log=is_log_only_one_instance, end='\r')
-            is_log_only_one_instance = False
-            time.sleep(0.001 * 80)
+        # 6 iterations of 0.8 seconds sleep before checking again.
+        temp = 6
+        while(temp >= 0):
+            for frame in frames:
+                custom_print(message + frame,
+                             is_log=is_log_only_one_instance, end='\r')
+                is_log_only_one_instance = False
+                # 0.8 seconds sleep: 0.08 * 10(frames)
+                time.sleep(0.08)
+            temp -= 1
 
 
 def backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device):
