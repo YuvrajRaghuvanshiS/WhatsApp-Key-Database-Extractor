@@ -159,8 +159,10 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 
 
 ### Demo
-https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/discussions/33
 
+Following gif shows the output of `python3 wa_kdbe.py -ar -s -to`
+
+<img src="https://raw.githubusercontent.com/yuvrajraghuvanshis/WhatsApp-Key-Database-Extractor/master/non_essentials/wa-kdbe.gif" alt="Project GIF">
 
 ### Troubleshooting
 
