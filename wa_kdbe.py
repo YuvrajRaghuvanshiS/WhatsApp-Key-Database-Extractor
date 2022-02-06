@@ -67,6 +67,9 @@ def main():
         custom_print(
             'Can\'t get system information. Continuing anyway...', 'yellow')
         custom_print(e, is_print=False)
+
+    # TODO: Turn data and wifi off if not using TCP mode.
+
     try:
         release_date_file = open('non_essentials/DATE', 'r')
         release_date = release_date_file.readline()
@@ -206,14 +209,15 @@ def kill_me():
 def get_sys_info():
     custom_print('>>> I am in wa_kdbe.get_sys_info()', is_print=False)
     info = {}
+    info['Architecture'] = platform.machine()
+    info['Hostname'] = socket.gethostname()
     info['Platform'] = platform.system()
     info['Platform Release'] = platform.release()
     info['Platform Version'] = platform.version()
-    info['Architecture'] = platform.machine()
-    info['Hostname'] = socket.gethostname()
     info['Processor'] = platform.processor()
     info['RAM'] = str(
         round(psutil.virtual_memory().total / (1024.0 ** 3)))+" GB"
+    info['Python'] = platform.python_build()
     return info
 
 
@@ -223,7 +227,7 @@ def install_legacy(sdk_version):
     custom_print('Installing legacy WhatsApp V2.11.431, hold tight now.')
     if(sdk_version >= 17):
         install_legacy_out = subprocess.getoutput(
-            adb + ' install -r -d ' + helpers + 'LegacyWhatsApp.apk')
+            adb + ' install -r -d -g ' + helpers + 'LegacyWhatsApp.apk')
         if('Success' in install_legacy_out):
             custom_print('Installation Complete.')
         else:
@@ -265,8 +269,10 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
     # Before backup run app
     custom_print(subprocess.getoutput(
         adb + ' shell am start -n com.whatsapp/.Main'))
-    custom_input(
-        '\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
+    # custom_input('\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
+    custom_print(
+        'Running legacy WhatsApp, it may crash, do not check for updates if it prompts.')
+    time.sleep(5)
     backup_whatsapp_data_as_ab(sdk_version)
     reinstall_whatsapp()
     custom_print('\n', is_get_time=False)
