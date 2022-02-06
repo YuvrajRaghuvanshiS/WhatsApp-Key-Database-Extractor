@@ -54,7 +54,7 @@ def main():
     show_banner()
     global is_java_installed
     is_java_installed = check_java()
-    custom_print('\n', is_get_time=False)
+    custom_print('', is_get_time=False)
     try:
         custom_print('Arguments passed: ' + str(args), is_print=False)
     except Exception as e:
@@ -69,6 +69,13 @@ def main():
         custom_print(e, is_print=False)
 
     # TODO: Turn data and wifi off if not using TCP mode.
+    if(tcp_ip):
+        custom_print('TCP mode, not turning data and wifi off...',
+                     is_print=False)
+    else:
+        os.system(adb + ' shell svc data disable')
+        os.system(adb + ' shell svc wifi disable')
+        custom_print('Turned off wifi and mobile data...', 'yellow')
 
     try:
         release_date_file = open('non_essentials/DATE', 'r')
