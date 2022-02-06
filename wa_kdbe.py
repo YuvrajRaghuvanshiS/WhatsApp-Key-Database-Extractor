@@ -68,7 +68,6 @@ def main():
             'Can\'t get system information. Continuing anyway...', 'yellow')
         custom_print(e, is_print=False)
 
-    # TODO: Turn data and wifi off if not using TCP mode.
     if(tcp_ip):
         custom_print('TCP mode, not turning data and wifi off...',
                      is_print=False)
@@ -77,13 +76,6 @@ def main():
         os.system(adb + ' shell svc wifi disable')
         custom_print('Turned off wifi and mobile data...', 'yellow')
 
-    try:
-        release_date_file = open('non_essentials/DATE', 'r')
-        release_date = release_date_file.readline()
-        release_date_file.close()
-        custom_print('Current release date: ' + release_date, 'cyan')
-    except Exception as e:
-        custom_print(e, is_print=False)
     is_read_instructions = custom_input(
         '\aPlease read above instructions carefully \u2191 . Continue? (default y): ', 'yellow') or 'Y'
     if(is_read_instructions.upper() == 'Y'):
@@ -319,8 +311,17 @@ def run_scrcpy(_is_scrcpy):
 
 def show_banner():
     custom_print('>>> I am in wa_kdbe.show_banner()', is_print=False)
-    banner_content = '''
+    release_date = 'xx/xx/xxxx'
+    try:
+        release_date_file = open('non_essentials/DATE', 'r')
+        release_date = release_date_file.readline()
+        release_date_file.close()
+    except Exception as e:
+        custom_print(e, is_print=False)
+
+    banner_content = f'''
 ================================================================================
+========                Current release date: {release_date.strip()}                ========
 ========                                                                ========
 ========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ======== 
 ========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ======== 

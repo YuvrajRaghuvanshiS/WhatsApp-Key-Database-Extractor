@@ -294,20 +294,7 @@ def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
                          os.path.realpath(extracted + username) + '\" folder.', 'yellow')
             custom_print('\n', is_get_time=False)
             custom_input('Hit \"Enter\" key to continue.')
-            if(sdcard_path and adb_device_serial_id):
-                is_copy_to_sdcard = custom_input(
-                    'Copy \"msgstore.db\" file to phone? (y/n) default \'n\': ') or 'N'
-                if(is_copy_to_sdcard.upper() == 'Y'):
-                    copy_out = getoutput(adb + adb_device_serial_id + ' push ' + extracted +
-                                         username + '/msgstore.db ' + sdcard_path + '/msgstore.db')
-                    if('pushed' in copy_out):
-                        custom_print('Done copying \"msgstore.db\" to phone.')
-                    else:
-                        custom_print(
-                            'Could not copy \"msgstore.db\" to phone.', 'red')
-                        custom_print(copy_out, 'red')
-                else:
-                    kill_me()
+
             try:  # Open in explorer.
                 if(is_windows):
                     os.startfile(os.path.realpath(extracted + username))
