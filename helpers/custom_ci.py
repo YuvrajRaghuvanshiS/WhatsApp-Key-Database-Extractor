@@ -1,6 +1,8 @@
-import datetime
 import logging
 import os
+from datetime import datetime
+
+dt = datetime.now()
 
 try:
     from termcolor import colored, cprint
@@ -47,4 +49,4 @@ def custom_print(text_to_print, color='green', attr=[], is_get_time=True, is_log
 
 
 def get_time():
-    return '[' + str(datetime.datetime.now().time()) + '] '
+    return f"[{dt.strftime('%A %d/%m/%Y, %H:%M:%S')}] "
