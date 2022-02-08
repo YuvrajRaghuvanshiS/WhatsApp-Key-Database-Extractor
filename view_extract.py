@@ -8,7 +8,6 @@ import tarfile
 import time
 from subprocess import getoutput
 
-from helpers.serial_id import SerialID
 import protect
 from helpers.custom_ci import custom_input, custom_print
 
@@ -39,25 +38,7 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
     is_java_installed = check_java()
-    if(tcp_ip):
-        s = SerialID(conn_type='TCP', platform=platform.system(),
-                     ip_port=f'{tcp_ip}:{tcp_port}')
-        adb_device_serial_id = s.tcp_mode()
-    else:
-        s = SerialID(conn_type='USB', platform=platform.system())
-        adb_device_serial_id = s.usb_mode()
-
-    if(not adb_device_serial_id):
-        kill_me()
-    if(adb_device_serial_id):
-        # TODO: No longer required to push into sdcard.
-        sdcard_path = getoutput(
-            adb + adb_device_serial_id + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
-    else:
-        sdcard_path = ''
-    custom_print('It not necessary to have phone connected unless you want to copy \"msgstore.db\" to \"/sdcard\".\nSo you can ignore above warning.\n')
-    extract_self(sdcard_path=sdcard_path,
-                 adb_device_serial_id=adb_device_serial_id, is_tar_only=is_tar_only)
+    extract_self(is_tar_only=is_tar_only)
 
 
 def check_java():
@@ -170,9 +151,9 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ta
         kill_me()
 
 
-def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
-    custom_print('>>> I am in view_extract.extract_self(sdcard_path=' + sdcard_path +
-                 ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
+def extract_self(is_tar_only=False):
+    custom_print('>>> I am in view_extract.extract_self(is_tar_only=' +
+                 str(is_tar_only) + ')', is_print=False)
     list_user_folders()
     username = custom_input(
         'Enter a name of folder from above (case sensitive): ')
@@ -200,8 +181,7 @@ def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
         if(is_tar_only):
             taking_out_only_tar(username)
         else:
-            taking_out_main_files(username, sdcard_path,
-                                  adb_device_serial_id)
+            taking_out_main_files(username)
     except Exception as e:
         custom_print(e, 'red')
         kill_me()
@@ -241,9 +221,9 @@ def show_banner():
                  'green', ['bold'], False)
 
 
-def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
-    custom_print('>>> I am in view_extract.taking_out_main_files(username=' + username + ', sdcard_path=' +
-                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ')', is_print=False)
+def taking_out_main_files(username):
+    custom_print('>>> I am in view_extract.taking_out_main_files(username=' +
+                 username + ')', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
         'Folder \"' + extracted + '\" already exists.', 'yellow')
     os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
@@ -361,18 +341,9 @@ if __name__ == "__main__":
                  str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '-tip', '--tcp-ip', help='Connects to a remote device via TCP mode.')
-    parser.add_argument('-tp', '--tcp-port', default='5555',
-                        help='Port number to connect to. Default: 5555')
-
     parser.add_argument('-to', '--tar-only', action='store_true',
                         help='Get entire WhatsApp\'s data in \"<username>.tar\" file instead of just getting few important files.')
     args = parser.parse_args()
-    # args = parser.parse_args('--tcp-ip 192.168.43.130 -tp 555'.split())
-
-    tcp_ip = args.tcp_ip
-    tcp_port = args.tcp_port
     is_tar_only = args.tar_only
 
     main()
