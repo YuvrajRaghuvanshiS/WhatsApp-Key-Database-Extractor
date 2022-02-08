@@ -1,3 +1,12 @@
+__author__ = 'Yuvraj Raghuvanshi'
+
+__license__ = 'MIT'
+__version__ = '2.0.0'
+__maintainer__ = 'Yuvraj Raghuvanshi'
+__email__ = 'YuvrajRaghuvanshi.S@protonmail.com'
+__status__ = 'Production'
+
+
 # Auto Requirements installer.
 import datetime
 import json
@@ -27,11 +36,12 @@ import re
 import subprocess
 import time
 
-from helpers.serial_id import SerialID
 from helpers.custom_ci import custom_input, custom_print
-from helpers.linux_handler import linux_handler
-from helpers.windows_handler import windows_handler
+from helpers.handler import Handler
+from helpers.serial_id import SerialID
 from view_extract import extract_ab
+
+handle = Handler(platform.system())
 
 # Detect OS
 is_windows = False
@@ -239,9 +249,9 @@ def install_legacy(sdk_version):
             kill_me()
 
 
-def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path):
+def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name):
     custom_print('>>> I am in wa_kdbe.real_deal(sdk_version=' + str(sdk_version) + ', whatsapp_apk_path_in_device=' +
-                 whatsapp_apk_path_in_device + ', version_name=' + version_name + ', sdcard_path=' + sdcard_path + ')', is_print=False)
+                 whatsapp_apk_path_in_device + ', version_name=' + version_name + ')', is_print=False)
     backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device)
     uninstall_whatsapp(sdk_version)
     # Reboot here.
@@ -386,16 +396,10 @@ def uninstall_whatsapp(sdk_version):
 
 def usb_mode():
     custom_print('>>> I am in wa_kdbe.usb_mode()', is_print=False)
-    if(is_windows):
-        after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path = windows_handler(
-            adb)
-        real_deal(sdk_version, whatsapp_apk_path_in_device, version_name,
-                  sdcard_path) if after_connect_return_code == 1 else kill_me()
-    else:
-        after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path = linux_handler(
-            adb_device_serial_id)
-        real_deal(sdk_version, whatsapp_apk_path_in_device, version_name,
-                  sdcard_path) if after_connect_return_code == 1 else kill_me()
+    after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name = handle.handle(
+        adb_device_serial_id)
+    real_deal(sdk_version, whatsapp_apk_path_in_device,
+              version_name) if after_connect_return_code == 1 else kill_me()
 
 
 if __name__ == "__main__":

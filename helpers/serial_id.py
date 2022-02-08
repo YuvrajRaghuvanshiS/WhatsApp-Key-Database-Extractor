@@ -1,3 +1,12 @@
+__author__ = 'Yuvraj Raghuvanshi'
+
+__license__ = 'MIT'
+__version__ = '2.0.0'
+__maintainer__ = 'Yuvraj Raghuvanshi'
+__email__ = 'YuvrajRaghuvanshi.S@protonmail.com'
+__status__ = 'Production'
+
+
 import json
 import os
 from platform import platform
@@ -10,9 +19,9 @@ class SerialID():
         """Get ADB device ID.
 
         Args:
-            conn_type (str): Either of TCP/USB.\n
-            platform (str): Windows/Linux.\n
-            ip_port (str): In case of TCP, in form of IP:Port.\n
+            * conn_type (str): Either of TCP/USB.
+            * platform (str): Windows/Linux.
+            * ip_port (str): In case of TCP, in form of IP:Port.
         """
         # Variables assignment.
         self.ip_port = ip_port
