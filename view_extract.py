@@ -8,8 +8,7 @@ import tarfile
 import time
 from subprocess import getoutput
 
-import helpers.adb_device_serial_id as adb_device_id
-import helpers.tcp_device_serial_id as tcp_device_id
+from helpers.serial_id import SerialID
 import protect
 from helpers.custom_ci import custom_input, custom_print
 
@@ -40,15 +39,18 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
     is_java_installed = check_java()
-    global tcp_port
     if(tcp_ip):
-        if(not tcp_port):
-            tcp_port = '5555'
-        adb_device_serial_id = tcp_device_id.init(tcp_ip, tcp_port)
+        s = SerialID(conn_type='TCP', platform=platform.system(),
+                     ip_port=f'{tcp_ip}:{tcp_port}')
+        adb_device_serial_id = s.tcp_mode()
     else:
-        adb_device_serial_id = adb_device_id.init()
+        s = SerialID(conn_type='USB', platform=platform.system())
+        adb_device_serial_id = s.usb_mode()
 
+    if(not adb_device_serial_id):
+        kill_me()
     if(adb_device_serial_id):
+        # TODO: No longer required to push into sdcard.
         sdcard_path = getoutput(
             adb + adb_device_serial_id + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
     else:
@@ -361,7 +363,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-tip', '--tcp-ip', help='Connects to a remote device via TCP mode.')
-    parser.add_argument('-tp', '--tcp-port',
+    parser.add_argument('-tp', '--tcp-port', default='5555',
                         help='Port number to connect to. Default: 5555')
 
     parser.add_argument('-to', '--tar-only', action='store_true',

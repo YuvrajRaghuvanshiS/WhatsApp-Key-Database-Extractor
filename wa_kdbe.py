@@ -27,8 +27,7 @@ import re
 import subprocess
 import time
 
-import helpers.adb_device_serial_id as adb_device_id
-import helpers.tcp_device_serial_id as tcp_device_id
+from helpers.serial_id import SerialID
 from helpers.custom_ci import custom_input, custom_print
 from helpers.linux_handler import linux_handler
 from helpers.windows_handler import windows_handler
@@ -418,7 +417,7 @@ if __name__ == "__main__":
                         help='Allow reboot of device before installation of LegacyWhatsApp.apk to prevent some issues like [INSTALL_FAILED_VERSION_DOWNGRADE]')
     parser.add_argument('-tip', '--tcp-ip',
                         help='Connects to a remote device via TCP mode.')
-    parser.add_argument('-tp', '--tcp-port',
+    parser.add_argument('-tp', '--tcp-port', default='5555',
                         help='Port number to connect to. Default: 5555')
     parser.add_argument('-s', '--scrcpy', action='store_true',
                         help='Run ScrCpy to see and control Android device.')
@@ -433,11 +432,13 @@ if __name__ == "__main__":
     is_scrcpy = args.scrcpy
     is_tar_only = args.tar_only
     if(tcp_ip):
-        if(not tcp_port):
-            tcp_port = '5555'
-        adb_device_serial_id = tcp_device_id.init(tcp_ip, tcp_port)
+        s = SerialID(conn_type='TCP', platform=platform.system(),
+                     ip_port=f'{tcp_ip}:{tcp_port}')
+        adb_device_serial_id = s.tcp_mode()
     else:
-        adb_device_serial_id = adb_device_id.init()
+        s = SerialID(conn_type='USB', platform=platform.system())
+        adb_device_serial_id = s.usb_mode()
+
     if(not adb_device_serial_id):
         kill_me()
 
