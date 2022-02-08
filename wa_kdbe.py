@@ -35,15 +35,8 @@ from view_extract import extract_ab
 
 # Detect OS
 is_windows = False
-is_linux = False
 if platform.system() == 'Windows':
     is_windows = True
-if platform.system() == 'Linux':
-    is_linux = True
-
-# Global Variables
-app_url_whatsapp_cdn = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
-app_url_whatscrypt_cdn = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 
 
 def main():
@@ -86,7 +79,7 @@ def main():
         kill_me()
 
 
-def animate(message):
+def wait_for_device(message):
     frames = [
         "| o    |",
         "|  o   |",
@@ -257,7 +250,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
             custom_print('\n', is_get_time=False)
             custom_print('Rebooting device, please wait.', 'yellow')
             os.system(adb + ' reboot')
-            animate('Waiting for device to get online')
+            wait_for_device('Waiting for device to get online')
             custom_input('Hit \"Enter\" key after unlocking device.', 'yellow')
         else:
             custom_print(
@@ -267,7 +260,6 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
     # Before backup run app
     custom_print(subprocess.getoutput(
         adb + ' shell am start -n com.whatsapp/.Main'))
-    # custom_input('\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     custom_print(
         'Running legacy WhatsApp, it may crash, do not check for updates if it prompts.')
     time.sleep(5)
