@@ -90,9 +90,9 @@ def kill_me():
     quit()
 
 
-def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_tar_only=False):
-    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + str(is_java_installed) + ', sdcard_path=' +
-                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
+def extract_ab(is_java_installed, is_tar_only=False):
+    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + str(
+        is_java_installed) + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
     if not is_java_installed:
         custom_print('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
@@ -140,8 +140,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ta
             if(is_tar_only):
                 taking_out_only_tar(username)
             else:
-                taking_out_main_files(
-                    username, sdcard_path, adb_device_serial_id)
+                taking_out_main_files(username)
         except Exception as e:
             custom_print(e, 'red')
             kill_me()

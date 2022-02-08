@@ -277,8 +277,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
     custom_print(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
     custom_print('\n', is_get_time=False)
-    extract_ab(is_java_installed, sdcard_path=sdcard_path,
-               adb_device_serial_id=adb_device_serial_id, is_tar_only=is_tar_only)
+    extract_ab(is_java_installed, is_tar_only=is_tar_only)
 
 
 def reinstall_whatsapp():
