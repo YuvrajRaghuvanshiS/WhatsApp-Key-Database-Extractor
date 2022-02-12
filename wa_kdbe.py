@@ -238,7 +238,7 @@ def install_legacy(sdk_version):
 
     else:
         install_legacy_out = subprocess.getoutput(
-            adb + ' install -r ' + helpers + 'LegacyWhatsApp.apk')
+            adb + ' install -r -g ' + helpers + 'LegacyWhatsApp.apk')
         if('Success' in install_legacy_out):
             custom_print('Installation Complete.')
         else:
