@@ -1,4 +1,3 @@
-from curses.ascii import isprint
 import os
 import re
 import shutil

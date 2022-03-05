@@ -4,8 +4,7 @@ import os
 import platform
 import subprocess
 
-import helpers.adb_device_serial_id as adb_device_id
-import helpers.tcp_device_serial_id as tcp_device_id
+import helpers.device_serial_id as device_id
 from helpers.custom_ci import custom_input, custom_print
 
 # Detect OS
@@ -83,19 +82,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-tip',
                         '--tcp-ip', help='Connects to a remote device via TCP mode.')
-    parser.add_argument('-tp',
-                        '--tcp-port', help='Port number to connect to. Default: 5555')
+    parser.add_argument('-tp', '--tcp-port', default='5555',
+                        help='Port number to connect to. Default: 5555')
     args = parser.parse_args()
-    # args = parser.parse_args('--tcp-ip 192.168.43.130'.split())
+    # args = parser.parse_args('--tcp-ip 192.168.168.117'.split())
 
     tcp_ip = args.tcp_ip
     tcp_port = args.tcp_port
     if(tcp_ip):
-        if(not tcp_port):
-            tcp_port = '5555'
-        adb_device_serial_id = tcp_device_id.init(tcp_ip, tcp_port)
+        adb_device_serial_id = device_id.init('TCP', tcp_ip, tcp_port)
     else:
-        adb_device_serial_id = adb_device_id.init()
+        adb_device_serial_id = device_id.init('USB')
     if(not adb_device_serial_id):
         kill_me()
 
