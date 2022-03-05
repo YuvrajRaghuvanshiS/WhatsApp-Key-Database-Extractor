@@ -48,8 +48,8 @@ def main():
 
 
 def compress(user_folder):
-    custom_print('>>> I am in protect.compress(user_folder=' +
-                 user_folder + ')', is_print=False)
+    custom_print(
+        f'>>> I am in protect.compress({user_folder=!s})', is_print=False)
     if(not os.path.isdir(extracted + user_folder)):
         custom_print('Could not find directory \"' +
                      extracted + user_folder + '\"')
@@ -80,8 +80,8 @@ def compress(user_folder):
 
 
 def delete_user_folder(user_folder):
-    custom_print('>>> I am in protect.delete_user_folder(user_folder=' +
-                 user_folder + ')', is_print=False)
+    custom_print(
+        f'>>> I am in protect.delete_user_folder({user_folder=!s})', is_print=False)
     custom_print('Deleting...')
     try:
         shutil.rmtree(extracted + user_folder)
@@ -92,8 +92,8 @@ def delete_user_folder(user_folder):
 
 
 def delete_user_zip(user_zip):
-    custom_print('>>> I am in protect.delete_user_zip(user_zip=' +
-                 user_zip + ')', is_print=False)
+    custom_print(
+        f'>>> I am in protect.delete_user_zip({user_zip=!s})', is_print=False)
     custom_print('Deleting...')
     try:
         os.remove(extracted + user_zip)
@@ -174,8 +174,8 @@ def show_banner():
 
 
 def uncompress(user_zip):
-    custom_print('>>> I am in protect.uncompress(user_zip=' +
-                 str(user_zip) + ')', is_print=False)
+    custom_print(
+        f'>>> I am in protect.uncompress({user_zip=!s})', is_print=False)
     if(not str(user_zip).endswith('7z')):
         user_zip = user_zip + '.7z'
     if(not os.path.isfile(extracted + user_zip)):
@@ -208,9 +208,11 @@ def uncompress(user_zip):
 
 
 if __name__ == "__main__":
+    from datetime import datetime
+    dt = datetime.now()
 
-    custom_print('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
-                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
+    custom_print(
+        f'\n\n\n====== Logging starts here. ====== \nFile: {os.path.basename(__file__)}\nDate: {dt.strftime("%A %d/%m/%Y, %H:%M:%S")}\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
     main()

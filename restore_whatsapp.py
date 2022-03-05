@@ -31,7 +31,7 @@ def kill_me():
 
 def reinstall_whatsapp(adb):
     custom_print(
-        '>>> I am in restore_whatsapp.restore_whatsapp(adb=' + adb + ')', is_print=False)
+        f'>>> I am in restore_whatsapp.restore_whatsapp({adb=!s})', is_print=False)
     custom_print('Reinstalling original WhatsApp.')
     if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput(adb + ' shell ls /data/local/tmp/WhatsAppbackup.apk')):
         try:
@@ -73,9 +73,11 @@ def show_banner():
 
 
 if __name__ == "__main__":
+    from datetime import datetime
+    dt = datetime.now()
 
-    custom_print('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
-                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
+    custom_print(
+        f'\n\n\n====== Logging starts here. ====== \nFile: {os.path.basename(__file__)}\nDate: {dt.strftime("%A %d/%m/%Y, %H:%M:%S")}\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
 
     parser = argparse.ArgumentParser()

@@ -6,8 +6,8 @@ from custom_ci import custom_print, custom_input
 
 
 def init(tcp_ip, tcp_port):
-    custom_print('>>> I am in tcp_device_serial_id.init(tcp_ip=' +
-                 tcp_ip + ', tcp_port=' + tcp_port + ')', is_print=False)
+    custom_print(
+        f'>>> I am in tcp_device_serial_id.init({tcp_ip=!s}, {tcp_port=!s})', is_print=False)
     # Detect OS
     is_windows = False
     is_linux = False

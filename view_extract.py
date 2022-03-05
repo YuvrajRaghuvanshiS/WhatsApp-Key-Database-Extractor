@@ -91,8 +91,8 @@ def kill_me():
 
 
 def extract_ab(is_java_installed, is_tar_only=False):
-    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + str(
-        is_java_installed) + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
+    custom_print(
+        f'>>> I am in view_extract.extract_ab({is_java_installed=!s}, {is_tar_only=!s})', is_print=False)
     if not is_java_installed:
         custom_print('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
@@ -151,8 +151,8 @@ def extract_ab(is_java_installed, is_tar_only=False):
 
 
 def extract_self(is_tar_only=False):
-    custom_print('>>> I am in view_extract.extract_self(is_tar_only=' +
-                 str(is_tar_only) + ')', is_print=False)
+    custom_print(
+        f'>>> I am in view_extract.extract_self({is_tar_only=!s})', is_print=False)
     list_user_folders()
     username = custom_input(
         'Enter a name of folder from above (case sensitive): ')
@@ -221,8 +221,8 @@ def show_banner():
 
 
 def taking_out_main_files(username):
-    custom_print('>>> I am in view_extract.taking_out_main_files(username=' +
-                 username + ')', is_print=False)
+    custom_print(
+        f'>>> I am in view_extract.taking_out_main_files({username=!s})', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
         'Folder \"' + extracted + '\" already exists.', 'yellow')
     os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
@@ -298,8 +298,8 @@ def taking_out_main_files(username):
 
 
 def taking_out_only_tar(username):
-    custom_print('>>> I am in view_extract.taking_out_only_tar(username=' +
-                 username + ')', is_print=False)
+    custom_print(
+        f'>>> I am in view_extract.taking_out_only_tar({username=!s})', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
         'Folder \"' + extracted + '\" already exists.', 'yellow')
     try:
@@ -335,9 +335,11 @@ def taking_out_only_tar(username):
 
 
 if __name__ == "__main__":
+    from datetime import datetime
+    dt = datetime.now()
 
-    custom_print('\n\n\n====== Logging start here. ====== \nFile: ' + os.path.basename(__file__) + '\nDate: ' +
-                 str(datetime.datetime.now()) + '\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
+    custom_print(
+        f'\n\n\n====== Logging starts here. ====== \nFile: {os.path.basename(__file__)}\nDate: {dt.strftime("%A %d/%m/%Y, %H:%M:%S")}\nIf you see any password here then do let know @github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor\n\n\n', is_get_time=False, is_print=False)
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
