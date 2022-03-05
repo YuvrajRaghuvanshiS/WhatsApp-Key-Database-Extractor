@@ -8,8 +8,6 @@ import tarfile
 import time
 from subprocess import getoutput
 
-import helpers.adb_device_serial_id as adb_device_id
-import helpers.tcp_device_serial_id as tcp_device_id
 import protect
 from helpers.custom_ci import custom_input, custom_print
 
@@ -40,22 +38,7 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
     is_java_installed = check_java()
-    global tcp_port
-    if(tcp_ip):
-        if(not tcp_port):
-            tcp_port = '5555'
-        adb_device_serial_id = tcp_device_id.init(tcp_ip, tcp_port)
-    else:
-        adb_device_serial_id = adb_device_id.init()
-
-    if(adb_device_serial_id):
-        sdcard_path = getoutput(
-            adb + adb_device_serial_id + ' shell "echo $EXTERNAL_STORAGE"') or '/sdcard'
-    else:
-        sdcard_path = ''
-    custom_print('It not necessary to have phone connected unless you want to copy \"msgstore.db\" to \"/sdcard\".\nSo you can ignore above warning.\n')
-    extract_self(sdcard_path=sdcard_path,
-                 adb_device_serial_id=adb_device_serial_id, is_tar_only=is_tar_only)
+    extract_self(is_tar_only=is_tar_only)
 
 
 def check_java():
@@ -107,9 +90,9 @@ def kill_me():
     quit()
 
 
-def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_tar_only=False):
-    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + str(is_java_installed) + ', sdcard_path=' +
-                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
+def extract_ab(is_java_installed, is_tar_only=False):
+    custom_print('>>> I am in view_extract.extract_ab(is_java_installed=' + str(
+        is_java_installed) + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
     if not is_java_installed:
         custom_print('\aCan not detect JAVA on system.', 'red')
         # move whatsapp.ab from tmp to user specified folder.
@@ -157,8 +140,7 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ta
             if(is_tar_only):
                 taking_out_only_tar(username)
             else:
-                taking_out_main_files(
-                    username, sdcard_path, adb_device_serial_id)
+                taking_out_main_files(username)
         except Exception as e:
             custom_print(e, 'red')
             kill_me()
@@ -168,9 +150,9 @@ def extract_ab(is_java_installed, sdcard_path='', adb_device_serial_id='', is_ta
         kill_me()
 
 
-def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
-    custom_print('>>> I am in view_extract.extract_self(sdcard_path=' + sdcard_path +
-                 ', adb_device_serial_id=' + adb_device_serial_id + ', is_tar_only=' + str(is_tar_only) + ')', is_print=False)
+def extract_self(is_tar_only=False):
+    custom_print('>>> I am in view_extract.extract_self(is_tar_only=' +
+                 str(is_tar_only) + ')', is_print=False)
     list_user_folders()
     username = custom_input(
         'Enter a name of folder from above (case sensitive): ')
@@ -198,8 +180,7 @@ def extract_self(sdcard_path='', adb_device_serial_id='', is_tar_only=False):
         if(is_tar_only):
             taking_out_only_tar(username)
         else:
-            taking_out_main_files(username, sdcard_path,
-                                  adb_device_serial_id)
+            taking_out_main_files(username)
     except Exception as e:
         custom_print(e, 'red')
         kill_me()
@@ -239,9 +220,9 @@ def show_banner():
                  'green', ['bold'], False)
 
 
-def taking_out_main_files(username, sdcard_path, adb_device_serial_id):
-    custom_print('>>> I am in view_extract.taking_out_main_files(username=' + username + ', sdcard_path=' +
-                 sdcard_path + ', adb_device_serial_id=' + adb_device_serial_id + ')', is_print=False)
+def taking_out_main_files(username):
+    custom_print('>>> I am in view_extract.taking_out_main_files(username=' +
+                 username + ')', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
         'Folder \"' + extracted + '\" already exists.', 'yellow')
     os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)

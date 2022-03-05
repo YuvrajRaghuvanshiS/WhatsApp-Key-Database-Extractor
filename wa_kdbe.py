@@ -30,8 +30,7 @@ import time
 import helpers.adb_device_serial_id as adb_device_id
 import helpers.tcp_device_serial_id as tcp_device_id
 from helpers.custom_ci import custom_input, custom_print
-from helpers.linux_handler import linux_handler
-from helpers.windows_handler import windows_handler
+from helpers.handler import handler
 from view_extract import extract_ab
 
 # Detect OS
@@ -247,9 +246,9 @@ def install_legacy(sdk_version):
             kill_me()
 
 
-def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path):
+def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name):
     custom_print('>>> I am in wa_kdbe.real_deal(sdk_version=' + str(sdk_version) + ', whatsapp_apk_path_in_device=' +
-                 whatsapp_apk_path_in_device + ', version_name=' + version_name + ', sdcard_path=' + sdcard_path + ')', is_print=False)
+                 whatsapp_apk_path_in_device + ', version_name=' + version_name + ')', is_print=False)
     backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device)
     uninstall_whatsapp(sdk_version)
     # Reboot here.
@@ -278,8 +277,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_pat
     custom_print(
         '\aOur work with device has finished, it is safe to remove it now.', 'yellow')
     custom_print('\n', is_get_time=False)
-    extract_ab(is_java_installed, sdcard_path=sdcard_path,
-               adb_device_serial_id=adb_device_serial_id, is_tar_only=is_tar_only)
+    extract_ab(is_java_installed, is_tar_only=is_tar_only)
 
 
 def reinstall_whatsapp():
@@ -396,16 +394,10 @@ def uninstall_whatsapp(sdk_version):
 
 def usb_mode():
     custom_print('>>> I am in wa_kdbe.usb_mode()', is_print=False)
-    if(is_windows):
-        after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path = windows_handler(
-            adb)
-        real_deal(sdk_version, whatsapp_apk_path_in_device, version_name,
-                  sdcard_path) if after_connect_return_code == 1 else kill_me()
-    else:
-        after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name, sdcard_path = linux_handler(
-            adb_device_serial_id)
-        real_deal(sdk_version, whatsapp_apk_path_in_device, version_name,
-                  sdcard_path) if after_connect_return_code == 1 else kill_me()
+    after_connect_return_code, sdk_version, whatsapp_apk_path_in_device, version_name = handler(
+        adb)
+    real_deal(sdk_version, whatsapp_apk_path_in_device,
+              version_name) if after_connect_return_code == 1 else kill_me()
 
 
 if __name__ == "__main__":

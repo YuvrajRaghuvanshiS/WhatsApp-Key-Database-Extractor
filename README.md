@@ -104,7 +104,7 @@ git clone https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor.
 ```bash
 sudo ./bin/linux_dependencies.sh
 ```
-If you're getting any error while running above command you need to install the following manually for your linux distro.: [adb](https://developer.android.com/studio/command-line/adb) [curl](https://curl.se/download.html) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
+If you're getting any error while running above command you need to install the following manually for your linux distro.: [adb](https://developer.android.com/studio/command-line/adb) [tar]() [openjdk11]() [7zip](https://www.7-zip.org/download.html) [scrcpy](https://github.com/Genymobile/scrcpy)
 
 3. Run `wa_kdbe.py` by double clicking the file on Windows or by
 ```python
