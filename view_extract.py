@@ -57,8 +57,8 @@ def check_java():
     else:
         is_java_installed = False
     if is_java_installed:
-        custom_print('Found Java v' + java_version[0] +
-                     ' installed on system. Continuing...')
+        custom_print(
+            f'Found Java v{java_version[0]} installed on system. Continuing...')
         return is_java_installed
     else:
         is_no_java_continue = custom_input(
@@ -74,7 +74,7 @@ def check_java():
 def clean_tmp():
     custom_print('>>> I am in view_extract.clean_tmp()', is_print=False)
     if(os.path.isdir(tmp)):
-        custom_print('Cleaning up \"' + tmp + '\" folder...', 'yellow')
+        custom_print(f'Cleaning up \"{tmp}\" folder...', 'yellow')
         shutil.rmtree(tmp)
 
 
@@ -98,45 +98,43 @@ def extract_ab(is_java_installed, is_tar_only=False):
         # move whatsapp.ab from tmp to user specified folder.
         username = custom_input('Enter a name for this user.: ')
         os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
-            'Folder \"' + extracted + '\" already exists.', 'yellow')
-        if not os.path.isdir(extracted + username):
-            os.mkdir(extracted + username)
-            custom_print('Created folder \"' + extracted + username + '\"')
+            f'Folder \"{extracted}\" already exists.', 'yellow')
+        if not os.path.isdir(f'{extracted}{username}'):
+            os.mkdir(f'{extracted}{username}')
+            custom_print(f'Created folder \"{extracted}{username}\"')
         else:
-            while(os.path.isdir(extracted + username)):
+            while(os.path.isdir(f'{extracted}{username}')):
                 custom_print('\n', is_get_time=False)
-                custom_print('Folder \"' + extracted +
-                             username + '\" exists, contents may get overwritten.', 'red')
+                custom_print(
+                    f'Folder \"{extracted}{username}\" exists, contents may get overwritten.', 'red')
                 username = custom_input('Enter different name of this user.: ')
-                if not (os.path.isdir(extracted + username)):
-                    os.mkdir(extracted + username)
-                    custom_print('Created folder \"' +
-                                 extracted + username + '\"')
+                if not (os.path.isdir(f'{extracted}{username}')):
+                    os.mkdir(f'{extracted}{username}')
+                    custom_print(f'Created folder \"{extracted}{username}\"')
                     break
-        os.rename(tmp + 'whatsapp.ab', extracted + username + '/whatsapp.ab')
-        custom_print('Moved \"whatsapp.ab\" to \"' + extracted + username + '\" folder. Size: ' +
-                     str(os.path.getsize(extracted + username + '/whatsapp.ab')) + ' bytes.')
+        os.rename(f'{tmp}whatsapp.ab, {extracted}{username}/whatsapp.ab')
+        custom_print(
+            f'Moved \"whatsapp.ab\" to \"{extracted}{username}\" folder. Size: {os.path.getsize(extracted + username + "/whatsapp.ab")} bytes.')
         custom_print(
             'Run \"view_extract.py\" after installing Java on system.')
         clean_tmp()
         kill_me()
-    if(os.path.isfile(tmp + 'whatsapp.ab')):
-        custom_print('Found \"whatsapp.ab\" in \"tmp\" folder. Continuing... Size: ' +
-                     str(os.path.getsize(tmp + '/whatsapp.ab')) + ' bytes.')
+    if(os.path.isfile(f'{tmp}whatsapp.ab')):
+        custom_print(
+            f'Found \"whatsapp.ab\" in \"tmp\" folder. Continuing... Size: {os.path.getsize(tmp + "/whatsapp.ab")} bytes.')
         username = custom_input(
             'Enter a name for this user (default \"user\").: ') or 'user'
         ab_pass = custom_input(
             'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
         try:
-            unpack_out = getoutput('java -jar ' + bin + 'abe.jar unpack ' + tmp +
-                                   'whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
+            unpack_out = getoutput(
+                f'java -jar {bin}abe.jar unpack {tmp}whatsapp.ab {tmp}whatsapp.tar {ab_pass}')
             if('Exception' in unpack_out):
-                custom_print('Could not unpack \"' +
-                             tmp + 'whatsapp.ab\"', 'red')
+                custom_print(f'Could not unpack \"{tmp}whatsapp.ab\"', 'red')
                 custom_print(unpack_out, 'red')
                 kill_me()
-            custom_print('Successfully unpacked \"' + tmp + 'whatsapp.ab\" to \"' + tmp +
-                         'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
+            custom_print(
+                f'Successfully unpacked \"{tmp}whatsapp.ab\" to \"{tmp}whatsapp.tar\". Size: {os.path.getsize(tmp + "whatsapp.tar")} bytes.')
             if(is_tar_only):
                 taking_out_only_tar(username)
             else:
@@ -156,27 +154,26 @@ def extract_self(is_tar_only=False):
     list_user_folders()
     username = custom_input(
         'Enter a name of folder from above (case sensitive): ')
-    while(not os.path.isfile(extracted + username + '/whatsapp.ab')):
-        if(os.path.isdir(extracted + username) and not os.path.isfile(extracted + username + '/whatsapp.ab')):
-            custom_print('Folder \"' + extracted + username +
-                         '\" does not even contain whatsapp.ab', 'red')
+    while(not os.path.isfile(f'{extracted}{username}/whatsapp.ab')):
+        if(os.path.isdir(f'{extracted}{username}') and not os.path.isfile(f'{extracted}{username}/whatsapp.ab')):
+            custom_print(
+                f'Folder \"{extracted}{username}\" does not even contain whatsapp.ab', 'red')
             kill_me()
         username = custom_input(
-            'No such folder: \"' + extracted + username + '\". Enter correct name (case sensitive).: ')
+            f'No such folder: \"{extracted}{username}\". Enter correct name (case sensitive).: ')
     ab_pass = custom_input(
         'Enter same password which you entered on device when prompted earlier.: ', is_log=False)
     try:
         os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
-            'Folder \"' + tmp + '\" already exists.', 'yellow')
-        unpack_out = getoutput('java -jar ' + bin + 'abe.jar unpack ' + extracted +
-                               username + '/whatsapp.ab ' + tmp + 'whatsapp.tar ' + str(ab_pass))
+            f'Folder \"{tmp}\" already exists.', 'yellow')
+        unpack_out = getoutput(
+            f'java -jar {bin}abe.jar unpack {extracted}{username}/whatsapp.ab {tmp}whatsapp.tar {ab_pass}')
         if('Exception' in unpack_out):
-            custom_print('Could not unpack \"' +
-                         tmp + 'whatsapp.ab\"', 'red')
+            custom_print(f'Could not unpack \"{tmp}whatsapp.ab\"', 'red')
             custom_print(unpack_out, 'red')
             kill_me()
-        custom_print('Successfully unpacked \"' + extracted + username + '/whatsapp.ab\" to ' + '\"' +
-                     tmp + 'whatsapp.tar\". Size: ' + str(os.path.getsize(tmp + 'whatsapp.tar')) + ' bytes.')
+        custom_print(
+            f'Successfully unpacked \"{extracted}{username}/whatsapp.ab\" to \"{tmp}whatsapp.tar\". Size: {os.path.getsize(tmp + "whatsapp.tar")} bytes.')
         if(is_tar_only):
             taking_out_only_tar(username)
         else:
@@ -193,8 +190,7 @@ def list_user_folders():
     custom_print('Available user folders in extracted directory.')
     all_folders = next(os.walk(extracted))[1]
     if(len(all_folders) == 0):
-        custom_print('No folders found in \"' +
-                     extracted + '\" folder.', 'red')
+        custom_print(f'No folders found in \"{extracted}\" folder.', 'red')
         kill_me()
     for folder in all_folders:
         custom_print(folder)
@@ -224,14 +220,13 @@ def taking_out_main_files(username):
     custom_print(
         f'>>> I am in view_extract.taking_out_main_files({username=!s})', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
-        'Folder \"' + extracted + '\" already exists.', 'yellow')
-    os.mkdir(extracted + username) if not (os.path.isdir(extracted + username)
-                                           ) else custom_print('Folder \"' + extracted + username + '\" already exists.', 'yellow')
+        f'Folder \"{extracted}\" already exists.', 'yellow')
+    os.mkdir(f'{extracted}{username}') if not (os.path.isdir(f'{extracted}{username}')
+                                               ) else custom_print(f'Folder \"{extracted}{username}\" already exists.', 'yellow')
     # If user folder already exists ask user to overwrite or skip.
-    custom_print('Taking out main files in \"' +
-                 tmp + '\" folder temporarily.')
+    custom_print(f'Taking out main files in \"{tmp}\" folder temporarily.')
     try:
-        tar = tarfile.open(tmp + 'whatsapp.tar')
+        tar = tarfile.open(f'{tmp}whatsapp.tar')
         all_tar_files = tar.getnames()
         files_to_extract = {'key': 'apps/com.whatsapp/f/key',
                             'msgstore.db': 'apps/com.whatsapp/db/msgstore.db',
@@ -242,13 +237,12 @@ def taking_out_main_files(username):
         for key in files_to_extract:
             if(files_to_extract[key] in all_tar_files):
                 tar.extract(files_to_extract[key], tmp)
-                os.replace(tmp + files_to_extract[key],
-                           extracted + username + '/' + key)
-                custom_print('Copied to \"' + extracted +
-                             username + '\": ' + key)
+                os.replace(
+                    f'{tmp}{files_to_extract[key]}', f'{extracted}{username}/{key}')
+                custom_print(f'Copied to \"{extracted}{username}\": {key}')
             else:
                 custom_print(
-                    '\"' + key + '\" is not present in tarfile, Go and write to \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\"', 'red', ['bold'])
+                    f'\"{key}\" is not present in tarfile, visit \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\" for more details.', 'red', ['bold'])
         tar.close()
         time.sleep(2)  # So that 'tar' is free to delete.
         try:
@@ -256,8 +250,8 @@ def taking_out_main_files(username):
         except Exception as e:
             custom_print(e, 'red')
             custom_print('\n', is_get_time=False)
-            custom_print('Go & delete \"' + tmp +
-                         '\" folder yourself (It\'s important, DO IT.)', 'red')
+            custom_print(
+                f'Go & delete \"{tmp}\" folder yourself (It\'s important, DO IT.)', 'red')
             custom_print('\n', is_get_time=False)
             # TODO: Major security risk: Data in tmp is not deleted.
 
@@ -271,21 +265,21 @@ def taking_out_main_files(username):
             protect.compress(username)
         else:
             custom_print('\n', is_get_time=False)
-            custom_print('\aYour WhatsApp database along with other files is in \"' +
-                         os.path.realpath(extracted + username) + '\" folder.', 'yellow')
+            custom_print(
+                f'\aYour WhatsApp database along with other files is in \"{os.path.realpath(extracted + username)}\" folder.', 'yellow')
             custom_print('\n', is_get_time=False)
             custom_input('Hit \"Enter\" key to continue.')
 
             try:  # Open in explorer.
                 if(is_windows):
-                    os.startfile(os.path.realpath(extracted + username))
+                    os.startfile(os.path.realpath(f'{extracted}{username}'))
                 elif(is_linux):
-                    os.system('xdg-open ' +
-                              os.path.realpath(extracted + username))
+                    os.system(
+                        f'xdg-open {os.path.realpath(extracted + username)}')
                 else:
                     try:
                         os.system(
-                            'open ' + os.path.realpath(extracted + username))
+                            f'open {os.path.realpath(extracted + username)}')
                     except Exception as e:
                         custom_print(e, is_print=False)
             except Exception as e:
@@ -301,19 +295,19 @@ def taking_out_only_tar(username):
     custom_print(
         f'>>> I am in view_extract.taking_out_only_tar({username=!s})', is_print=False)
     os.mkdir(extracted) if not (os.path.isdir(extracted)) else custom_print(
-        'Folder \"' + extracted + '\" already exists.', 'yellow')
+        f'Folder \"{extracted}\" already exists.', 'yellow')
     try:
-        custom_print('Moving \"tmp/whatsapp.tar\" to \"' +
-                     extracted + username + '.tar\"')
-        os.replace(tmp + 'whatsapp.tar', extracted + username + '.tar')
+        custom_print(
+            f'Moving \"tmp/whatsapp.tar\" to \"{extracted}{username}.tar\"')
+        os.replace(f'{tmp}whatsapp.tar', f'{extracted}{username}.tar')
     except Exception as e:
-        custom_print('\a' + e, 'red')
+        custom_print(f'\a{e}', 'red')
         kill_me()
 
     clean_tmp()
     custom_print('\n', is_get_time=False)
-    custom_print('\aYour \"' + username + '.tar\" is in \"' +
-                 os.path.realpath(extracted) + '\" folder.', 'yellow')
+    custom_print(
+        f'\aYour \"{username}.tar\" is in \"{os.path.realpath(extracted)}\" folder.', 'yellow')
 
     custom_print('\n', is_get_time=False)
     custom_input('Hit \"Enter\" key to continue.')
@@ -322,11 +316,10 @@ def taking_out_only_tar(username):
         if(is_windows):
             os.startfile(os.path.realpath(extracted))
         elif(is_linux):
-            os.system('xdg-open ' +
-                      os.path.realpath(extracted))
+            os.system(f'xdg-open {os.path.realpath(extracted)}')
         else:
             try:
-                os.system('open ' + os.path.realpath(extracted))
+                os.system(f'open {os.path.realpath(extracted)}')
             except Exception as e:
                 custom_print(e, is_print=False)
     except Exception as e:

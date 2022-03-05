@@ -1,3 +1,4 @@
+from curses.ascii import isprint
 import os
 import re
 import shutil
@@ -23,14 +24,14 @@ app_url_whatscrypt_cdn = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
 def after_connect(adb):
     custom_print(
         f'>>> I am in handler.after_connect({adb=!s})', is_print=False)
-    sdk_version = int(getoutput(adb + ' shell getprop ro.build.version.sdk'))
+    sdk_version = int(getoutput(f'{adb} shell getprop ro.build.version.sdk'))
     if (sdk_version <= 13):
         custom_print(
             'Unsupported device. This method only works on Android v4.0 or higher.', 'red')
         custom_print('Cleaning up \"tmp\" folder.', 'red')
         shutil.rmtree('tmp')
         kill_me()
-    _wa_path_text = adb + ' shell pm path com.whatsapp'
+    _wa_path_text = f'{adb} shell pm path com.whatsapp'
     whatsapp_apk_path_in_device = subprocess.getoutput(_wa_path_text)
     if(not whatsapp_apk_path_in_device):
         custom_print('Looks like WhatsApp is not installed on device.', 'red')
@@ -41,16 +42,22 @@ def after_connect(adb):
     try:
         resp = requests.head(
             'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk', timeout=5)
-        content_length = resp.headers['content_length']
+        try:
+            content_length = resp.headers['content-length']
+        except KeyError as e:
+            custom_print(e, is_print=False)
+            custom_print(
+                'No \"content-length\" field in header, defaulting to 0.')
+            content_length = 0
     except requests.exceptions.RequestException as e:
         custom_print(e, is_print=False)
         custom_print(
             'An exception has occured while checking for LegacyWhatsApp existence at web.archive.org, defaulting to whatscrypt.com, check log for futher details.', 'yellow')
         content_length = 0
-    _version_name_text = adb + ' shell dumpsys package com.whatsapp'
+    _version_name_text = f'{adb} shell dumpsys package com.whatsapp'
     version_name = re.findall(
         "(?<=versionName=)(.*?)(?=\n)", getoutput(_version_name_text))[0]
-    custom_print('WhatsApp V' + version_name + ' installed on device')
+    custom_print(f'WhatsApp v{version_name} installed on device')
     download_app_from = app_url_whatsapp_cdn if(
         content_length == 18329558) else app_url_whatscrypt_cdn
     if (version.parse(version_name) > version.parse('2.11.431')):
@@ -86,10 +93,10 @@ def download_apk(url, file_name):
         custom_print(
             '\aFor some reason I could not download Legacy WhatsApp, you need to download it on your own now from either of the links given below: ', 'red')
         custom_print('\n', is_get_time=False)
-        custom_print('1. \"' + app_url_whatsapp_cdn +
-                     '\" (official\'s archive)', 'red')
-        custom_print('2. \"' + app_url_whatscrypt_cdn +
-                     '\" unofficial website.', 'red')
+        custom_print(
+            f'1. \"{app_url_whatsapp_cdn}\" (official\'s archive)', 'red')
+        custom_print(
+            f'2. \"{app_url_whatscrypt_cdn}\" unofficial website.', 'red')
         custom_print('\n', is_get_time=False)
         custom_print(
             'Once downloaded rename it to \"LegacyWhatsApp.apk\" exactly and put in \"helpers\" folder.', 'red')
@@ -122,6 +129,6 @@ def kill_me():
 def handler(adb):
     custom_print(
         f'>>> I am in handler.handler({adb=!s})', is_print=False)
-    custom_print('Connected to ' + getoutput(adb +
-                                             ' shell getprop ro.product.model'))
+    custom_print(
+        f'Connected to {getoutput(adb + " shell getprop ro.product.model")}')
     return after_connect(adb)

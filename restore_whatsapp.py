@@ -33,10 +33,10 @@ def reinstall_whatsapp(adb):
     custom_print(
         f'>>> I am in restore_whatsapp.restore_whatsapp({adb=!s})', is_print=False)
     custom_print('Reinstalling original WhatsApp.')
-    if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput(adb + ' shell ls /data/local/tmp/WhatsAppbackup.apk')):
+    if('/data/local/tmp/WhatsAppbackup.apk' in subprocess.getoutput(f'{adb} shell ls /data/local/tmp/WhatsAppbackup.apk')):
         try:
             reinstall_whatsapp_out = subprocess.getoutput(
-                adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
+                f'{adb} shell pm install /data/local/tmp/WhatsAppbackup.apk')
             if('Success' in reinstall_whatsapp_out):
                 custom_print('Reinstallation complete.')
                 kill_me()
@@ -102,9 +102,9 @@ if __name__ == "__main__":
     # Global command line helpers
     helpers = 'helpers/'
     if(is_windows):
-        adb = 'bin\\adb.exe -s ' + adb_device_serial_id
+        adb = f'bin\\adb.exe -s {adb_device_serial_id}'
     else:
-        adb = 'adb -s ' + adb_device_serial_id
+        adb = f'adb -s {adb_device_serial_id}'
 
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()

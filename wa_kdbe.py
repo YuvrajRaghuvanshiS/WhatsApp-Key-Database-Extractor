@@ -55,13 +55,13 @@ def main():
     is_java_installed = check_java()
     custom_print('', is_get_time=False)
     try:
-        custom_print('Arguments passed: ' + str(args), is_print=False)
+        custom_print(f'Arguments passed: {args}', is_print=False)
     except Exception as e:
         custom_print(e, is_print=False)
 
     try:
-        custom_print('System Info: ' +
-                     json.dumps(get_sys_info(), indent=2, default=str), is_print=False)
+        custom_print(
+            f'System Info: {json.dumps(get_sys_info(), indent=2, default=str)}', is_print=False)
     except Exception as e:
         custom_print(
             'Can\'t get system information. Continuing anyway...', 'yellow')
@@ -71,8 +71,8 @@ def main():
         custom_print('TCP mode, not turning data and wifi off...',
                      is_print=False)
     else:
-        os.system(adb + ' shell svc data disable')
-        os.system(adb + ' shell svc wifi disable')
+        os.system(f'{adb} shell svc data disable')
+        os.system(f'{adb} shell svc wifi disable')
         custom_print('Turned off wifi and mobile data...', 'yellow')
 
     is_read_instructions = custom_input(
@@ -99,14 +99,14 @@ def animate(message):
         "| o    |",
         "|o     |"
     ]
-    message = message + ' '
+    message = f'{message} '
     is_log_only_one_instance = True
-    while(subprocess.getoutput(adb + ' get-state') != 'device'):
+    while(subprocess.getoutput(f'{adb} get-state') != 'device'):
         # 6 iterations of 0.8 seconds sleep before checking again.
         temp = 6
         while(temp >= 0):
             for frame in frames:
-                custom_print(message + frame,
+                custom_print(f'{message}{frame}',
                              is_log=is_log_only_one_instance, end='\r')
                 is_log_only_one_instance = False
                 # 0.8 seconds sleep: 0.08 * 10(frames)
@@ -117,12 +117,12 @@ def animate(message):
 def backup_whatsapp_apk(sdk_version, version_name, whatsapp_apk_path_in_device):
     custom_print(
         f'>>> I am in wa_kdbe.backup_whatsapp_apk({sdk_version=!s}, {version_name=!s}, {whatsapp_apk_path_in_device=!s})', is_print=False)
-    os.system(adb + ' shell am force-stop com.whatsapp') if(sdk_version >
-                                                            11) else os.system(adb + ' shell am kill com.whatsapp')
-    custom_print('Backing up WhatsApp ' + version_name +
-                 ' apk, the one installed on device to \"/data/local/tmp/WhatsAppbackup.apk\" in your phone.')
-    os.system(adb + ' shell cp ' + whatsapp_apk_path_in_device +
-              ' /data/local/tmp/WhatsAppbackup.apk')
+    os.system(f'{adb} shell am force-stop com.whatsapp') if(sdk_version >
+                                                            11) else os.system(f'{adb} shell am kill com.whatsapp')
+    custom_print(
+        f'Backing up WhatsApp {version_name} apk, the one installed on device to \"/data/local/tmp/WhatsAppbackup.apk\" in your phone.')
+    os.system(
+        f'{adb} shell cp {whatsapp_apk_path_in_device} /data/local/tmp/WhatsAppbackup.apk')
     custom_print('Apk backup is completed.')
 
 
@@ -130,17 +130,17 @@ def backup_whatsapp_data_as_ab(sdk_version):
     custom_print(
         f'>>> I am in wa_kdbe.backup_whatsapp_data_as_ab({sdk_version=!s})', is_print=False)
     os.mkdir(tmp) if not (os.path.isdir(tmp)) else custom_print(
-        'Folder ' + tmp + ' already exists.', 'yellow')
-    custom_print('Backing up WhatsApp data as \"' + tmp +
-                 'whatsapp.ab\". May take time, don\'t panic.')
+        f'Folder {tmp} already exists.', 'yellow')
+    custom_print(
+        f'Backing up WhatsApp data as \"{tmp}whatsapp.ab\". May take time, don\'t panic.')
     try:
-        os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab com.whatsapp') if(sdk_version >=
-                                                                             23) else os.system(adb + ' backup -f ' + tmp + 'whatsapp.ab -noapk com.whatsapp')
+        os.system(f'{adb} backup -f {tmp}whatsapp.ab com.whatsapp') if(sdk_version >=
+                                                                       23) else os.system(f'{adb} backup -f {tmp}whatsapp.ab -noapk com.whatsapp')
     except Exception as e:
         custom_print(e, 'red')
         kill_me()
-    custom_print('Done backing up data. Size: ' +
-                 str(os.path.getsize(tmp + 'whatsapp.ab')) + ' bytes.')
+    custom_print(
+        f'Done backing up data. Size: {os.path.getsize(tmp + "whatsapp.ab")} bytes.')
 
 
 def check_bin():
@@ -168,8 +168,8 @@ def check_java():
     else:
         is_java_installed = False
     if is_java_installed:
-        custom_print('Found Java v' + java_version[0] +
-                     ' installed on system. Continuing...')
+        custom_print(
+            f'Found Java v{java_version[0]} installed on system. Continuing...')
         return is_java_installed
     else:
         is_no_java_continue = custom_input(
@@ -186,7 +186,7 @@ def countdown(message, time_sec):
     while time_sec:
         mins, secs = divmod(time_sec, 60)
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
-        custom_print(message + timeformat + '.', end='\r')
+        custom_print(f'{message}{timeformat}.', end='\r')
         time.sleep(1)
         time_sec -= 1
     custom_print('', is_get_time=False)
@@ -213,8 +213,7 @@ def get_sys_info():
     info['Platform Release'] = platform.release()
     info['Platform Version'] = platform.version()
     info['Processor'] = platform.processor()
-    info['RAM'] = str(
-        round(psutil.virtual_memory().total / (1024.0 ** 3)))+" GB"
+    info['RAM'] = f'{round(psutil.virtual_memory().total / (1024.0 ** 3))} GB'
     info['Python'] = platform.python_build()
     return info
 
@@ -225,7 +224,7 @@ def install_legacy(sdk_version):
     custom_print('Installing legacy WhatsApp V2.11.431, hold tight now.')
     if(sdk_version >= 17):
         install_legacy_out = subprocess.getoutput(
-            adb + ' install -r -d -g ' + helpers + 'LegacyWhatsApp.apk')
+            f'{adb} install -r -d -g {helpers}LegacyWhatsApp.apk')
         if('Success' in install_legacy_out):
             custom_print('Installation Complete.')
         else:
@@ -237,7 +236,7 @@ def install_legacy(sdk_version):
 
     else:
         install_legacy_out = subprocess.getoutput(
-            adb + ' install -r -g ' + helpers + 'LegacyWhatsApp.apk')
+            f'{adb} install -r -g {helpers}LegacyWhatsApp.apk')
         if('Success' in install_legacy_out):
             custom_print('Installation Complete.')
         else:
@@ -256,7 +255,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name):
         if(not tcp_ip):
             custom_print('\n', is_get_time=False)
             custom_print('Rebooting device, please wait.', 'yellow')
-            os.system(adb + ' reboot')
+            os.system(f'{adb} reboot')
             animate('Waiting for device to get online')
             custom_input('Hit \"Enter\" key after unlocking device.', 'yellow')
         else:
@@ -266,7 +265,7 @@ def real_deal(sdk_version, whatsapp_apk_path_in_device, version_name):
     install_legacy(sdk_version)
     # Before backup run app
     custom_print(subprocess.getoutput(
-        adb + ' shell am start -n com.whatsapp/.Main'))
+        f'{adb} shell am start -n com.whatsapp/.Main'))
     # custom_input('\aHit \"Enter\" key after running Legacy WhatsApp for a while. Ignore invalid date warning.', 'yellow')
     custom_print(
         'Running legacy WhatsApp, it may crash, do not check for updates if it prompts.')
@@ -285,7 +284,7 @@ def reinstall_whatsapp():
     custom_print('Reinstalling original WhatsApp.')
     try:
         reinstall_whatsapp_out = subprocess.getoutput(
-            adb + ' shell pm install /data/local/tmp/WhatsAppbackup.apk')
+            f'{adb} shell pm install /data/local/tmp/WhatsAppbackup.apk')
         if('Success' in reinstall_whatsapp_out):
             custom_print('Reinstallation complete.')
         else:
@@ -380,7 +379,7 @@ def uninstall_whatsapp(sdk_version):
         try:
             custom_print('Uninstalling WhatsApp, skipping data.')
             uninstall_out = subprocess.getoutput(
-                adb + ' shell pm uninstall -k com.whatsapp')
+                f'{adb} shell pm uninstall -k com.whatsapp')
             if('Success' in uninstall_out):
                 custom_print('Uninstalled.')
             else:
@@ -439,9 +438,9 @@ if __name__ == "__main__":
     tmp = 'tmp/'
     helpers = 'helpers/'
     if(is_windows):
-        adb = 'bin\\adb.exe -s ' + adb_device_serial_id
+        adb = f'bin\\adb.exe -s {adb_device_serial_id}'
     else:
-        adb = 'adb -s ' + adb_device_serial_id
+        adb = f'adb -s {adb_device_serial_id}'
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         f1 = executor.submit(main)

@@ -21,14 +21,14 @@ def init(tcp_ip, tcp_port):
     root_dir = os.path.abspath(os.path.join(curr_dir, '..'))
 
     if(is_windows):
-        adb = root_dir + '\\bin\\adb.exe'
+        adb = f'{root_dir}\\bin\\adb.exe'
     else:
         adb = 'adb'
 
-    combo = tcp_ip + ':' + tcp_port
-    cmd = adb + ' connect ' + combo
-    os.system(adb + ' kill-server')
-    os.system(adb + ' start-server')
+    combo = f'{tcp_ip}:{tcp_port}'
+    cmd = f'{adb} connect {combo}'
+    os.system(f'{adb} kill-server')
+    os.system(f'{adb} start-server')
     proc = sp.Popen(cmd.split(), stdin=sp.PIPE, stdout=sp.PIPE,
                     stderr=sp.PIPE, shell=False)
     output, error = proc.communicate()

@@ -20,11 +20,11 @@ masked = []
 
 def custom_input(text_to_input, color='green', attr=[], is_get_time=True, is_log=True):
     time = get_time() if is_get_time else ''
-    data = input(colored(time + text_to_input, color, attrs=attr))
+    data = input(colored(f'{time}{text_to_input}', color, attrs=attr))
     if(is_log):
-        logging.debug(time + text_to_input + data)
+        logging.debug(f'{time}{text_to_input}{data}')
     else:
-        logging.debug(time + text_to_input + '********')
+        logging.debug(f'{time}{text_to_input}********')
         # Add that password in list, and mask that while printing also.
         masked.append(data)
     return data
@@ -34,18 +34,18 @@ def custom_print(text_to_print, color='green', attr=[], is_get_time=True, is_log
     time = get_time() if is_get_time else ''
     text_to_print = str(text_to_print)
     if(is_print):
-        cprint(time + text_to_print, color, attrs=attr, end=end)
+        cprint(f'{time}{text_to_print}', color, attrs=attr, end=end)
     else:
         pass
     if(is_log):
-        logging.debug(time + text_to_print)
+        logging.debug(f'{time}{text_to_print}')
     else:
         # Search for password and mask.
         for i in masked:
             if i in text_to_print:
-                logging.debug(time + text_to_print.replace(i, '********'))
+                logging.debug(f'{time}{text_to_print.replace(i, "********")}')
 
-    # cprint((time + textToPrint).center(shutil.get_terminal_size().columns), color, attrs = attr) to print in center. Later.
+    # cprint((f{time}{textToPrint}').center(shutil.get_terminal_size().columns), color, attrs = attr) to print in center. Later.
 
 
 def get_time():

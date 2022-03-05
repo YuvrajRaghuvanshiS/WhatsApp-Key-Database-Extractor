@@ -20,14 +20,14 @@ def init():
     curr_dir = os.path.dirname(os.path.realpath(__file__))
     root_dir = os.path.abspath(os.path.join(curr_dir, '..'))
     if(is_windows):
-        adb = root_dir + '\\bin\\adb.exe'
+        adb = f'{root_dir}\\bin\\adb.exe'
     else:
         adb = 'adb'
 
-    cmd = adb + ' devices'
+    cmd = f'{adb} devices'
     # Kill server before getting list to avoid daemon texts.
-    os.system(adb + ' kill-server')
-    os.system(adb + ' start-server')
+    os.system(f'{adb} kill-server')
+    os.system(f'{adb} start-server')
     proc = sp.Popen(cmd.split(), stdin=sp.PIPE, stdout=sp.PIPE,
                     stderr=sp.PIPE, shell=False)
     output, error = proc.communicate()
@@ -62,12 +62,10 @@ def init():
     custom_print(output[0])
     custom_print('\n', is_get_time=False)
     if device_to_connect is None:
-        for device in output[1:]:
-            name = adb + ' -s ' + \
-                device.split()[0] + ' shell getprop ro.product.model'
-            custom_print(str(i) + '. ' + device.split()
-                         [0] + '  ' + device.split()[1] + '  ' + sp.getoutput(name).strip())
-            i += 1
+        for index, device in enumerate(output[1:]):
+            name = f'{adb} -s {device.split()[0]} shell getprop ro.product.model'
+            custom_print(
+                f'{index}. {device.split()[0]} {device.split()[1]} {sp.getoutput(name).strip()}')
 
     while device_to_connect is None:
         device_index = int(custom_input('Enter device number (for ex: 2): '))

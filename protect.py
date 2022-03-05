@@ -50,27 +50,26 @@ def main():
 def compress(user_folder):
     custom_print(
         f'>>> I am in protect.compress({user_folder=!s})', is_print=False)
-    if(not os.path.isdir(extracted + user_folder)):
-        custom_print('Could not find directory \"' +
-                     extracted + user_folder + '\"')
+    if(not os.path.isdir(f'{extracted}{user_folder}')):
+        custom_print(f'Could not find directory \"{extracted}{user_folder}\"')
         kill_me()
-    elif(len(os.listdir(extracted + user_folder)) == 0):
+    elif(len(os.listdir(f'{extracted}{user_folder}')) == 0):
         custom_print('User folder is empty.')
         kill_me()
     else:
         password = custom_input('Choose a password for zip: ', is_log=False)
         if(password):
-            password = ' -p' + password
-        os.system(seven_zip + ' a -t7z -mhe ' + extracted +
-                  user_folder + ' ' + extracted + user_folder + '/* ' + password)
+            password = f' -p{password}'
+        os.system(
+            f'{seven_zip} a -t7z -mhe {extracted}{user_folder} {extracted}{user_folder}/* {password}')
         custom_print('\n', is_get_time=False)
         custom_print(
             'If you see \"Everything is OK\" in above line then it is recommended to delete user folder.')
         is_delete_user_folder = custom_input(
-            'Delete \"' + user_folder + '\" folder? (default y): ') or 'Y'
+            f'Delete \"{user_folder}\" folder? (default y): ') or 'Y'
         custom_print('\n', is_get_time=False)
-        custom_print('\aYour \"' + user_folder + '.7z\" file is in \"' + os.path.realpath(extracted) + '\" folder. Password is: ' +
-                     password.replace(' -p', ''), 'yellow', is_log=False)
+        custom_print(
+            f'\aYour \"{user_folder}.7z\" file is in \"{os.path.realpath(extracted)}\" folder. Password is: {password.replace(" -p", "")}', 'yellow', is_log=False)
         custom_print('\n', is_get_time=False)
         custom_input('Hit \"Enter\" key to continue.')
         if(is_delete_user_folder.upper() == 'Y'):
@@ -84,7 +83,7 @@ def delete_user_folder(user_folder):
         f'>>> I am in protect.delete_user_folder({user_folder=!s})', is_print=False)
     custom_print('Deleting...')
     try:
-        shutil.rmtree(extracted + user_folder)
+        shutil.rmtree(f'{extracted}{user_folder}')
     except Exception as e:
         custom_print(e, 'red')
         custom_print('Please manually delete it.', 'red')
@@ -96,7 +95,7 @@ def delete_user_zip(user_zip):
         f'>>> I am in protect.delete_user_zip({user_zip=!s})', is_print=False)
     custom_print('Deleting...')
     try:
-        os.remove(extracted + user_zip)
+        os.remove(f'{extracted}{user_zip}')
     except Exception as e:
         custom_print(e, 'red')
         custom_print('Please manually delete it.', 'red')
@@ -111,10 +110,10 @@ def kill_me():
         if(is_windows):
             os.startfile(os.path.realpath(extracted))
         elif(is_linux):
-            os.system('xdg-open ' + os.path.realpath(extracted))
+            os.system(f'xdg-open {os.path.realpath(extracted)}')
         else:
             try:
-                os.system('open ' + os.path.realpath(extracted))
+                os.system(f'open {os.path.realpath(extracted)}')
             except Exception as e:
                 custom_print(e, is_print=False)
     except Exception as e:
@@ -131,9 +130,8 @@ def list_user_files():
     custom_print('Available user files in extracted directory.')
     custom_print('\n', is_get_time=False)
     all_files = next(os.walk(extracted))[2]
-    if(len(all_files) == 1 and os.path.isfile(extracted + '.placeholder')):
-        custom_print('No user files found in \"' +
-                     extracted + '\" folder.', 'red')
+    if(len(all_files) == 1 and os.path.isfile(f'{extracted}.placeholder')):
+        custom_print(f'No user files found in \"{extracted}\" folder.', 'red')
         kill_me()
     for f in all_files:
         if(f != '.placeholder'):
@@ -147,8 +145,7 @@ def list_user_folders():
     custom_print('\n', is_get_time=False)
     all_folders = next(os.walk(extracted))[1]
     if(len(all_folders) == 0):
-        custom_print('No folders found in \"' +
-                     extracted + '\" folder.', 'red')
+        custom_print(f'No folders found in \"{extracted}\" folder.', 'red')
         kill_me()
     for folder in all_folders:
         custom_print(folder)
@@ -177,28 +174,28 @@ def uncompress(user_zip):
     custom_print(
         f'>>> I am in protect.uncompress({user_zip=!s})', is_print=False)
     if(not str(user_zip).endswith('7z')):
-        user_zip = user_zip + '.7z'
-    if(not os.path.isfile(extracted + user_zip)):
-        custom_print('Could not find ' + extracted + user_zip)
+        user_zip = f'{user_zip}.7z'
+    if(not os.path.isfile(f'{extracted}{user_zip}')):
+        custom_print(f'Could not find {extracted}{user_zip}')
         kill_me()
-    elif(os.path.getsize(extracted + user_zip) <= 0):
-        custom_print(extracted + user_zip + ' is empty.')
+    elif(os.path.getsize(f'{extracted}{user_zip}') <= 0):
+        custom_print(f'{extracted}{user_zip} is empty.')
         kill_me()
     else:
         password = custom_input(
             'Enter password, leave empty for none: ', is_log=False)
         if(password):
-            password = ' -p' + password
-        os.system(seven_zip + ' e -aot ' + extracted + user_zip +
-                  ' -o' + extracted + user_zip.replace('.7z', '') + password)
+            password = f' -p{password}'
+        os.system(
+            f'{seven_zip} e -aot {extracted}{user_zip} -o{extracted}{user_zip.replace(".7z", "")} {password}')
         custom_print('\n', is_get_time=False)
         custom_print(
             'If you see \"Everything is OK\" in above line then you can delete user zip file.')
         is_delete_user_zip = custom_input(
-            'Delete ' + user_zip + ' ? (default n): ') or 'N'
+            f'Delete {user_zip} ? (default n): ') or 'N'
         custom_print('\n', is_get_time=False)
-        custom_print('\aYour extracted \"' + user_zip.replace('.7z',
-                                                              '') + '\" folder is in \"' + os.path.realpath(extracted + user_zip.replace('.7z', '')) + '\" folder.', 'yellow')
+        custom_print(
+            f'\aYour extracted \"{user_zip.replace(".7z","")}\" folder is in \"{os.path.realpath(extracted + user_zip.replace(".7z", ""))}\" folder.', 'yellow')
         custom_print('\n', is_get_time=False)
         custom_input('Hit \"Enter\" key to continue.')
         if(is_delete_user_zip.upper() == 'Y'):
