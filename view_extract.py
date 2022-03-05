@@ -112,7 +112,7 @@ def extract_ab(is_java_installed, is_tar_only=False):
                     os.mkdir(f'{extracted}{username}')
                     custom_print(f'Created folder \"{extracted}{username}\"')
                     break
-        os.rename(f'{tmp}whatsapp.ab, {extracted}{username}/whatsapp.ab')
+        os.rename(f'{tmp}whatsapp.ab', f'{extracted}{username}/whatsapp.ab')
         custom_print(
             f'Moved \"whatsapp.ab\" to \"{extracted}{username}\" folder. Size: {os.path.getsize(extracted + username + "/whatsapp.ab")} bytes.')
         custom_print(
