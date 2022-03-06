@@ -73,10 +73,14 @@ def init(mode, tcp_ip='', tcp_port=''):
         custom_print(output[0])
         custom_print('\n', is_get_time=False)
         if device_to_connect is None:
+            padding = f' {" " * 25}'
             for index, device in enumerate(output[1:]):
-                name = f'{adb} -s {device.split()[0]} shell getprop ro.product.model'
-                custom_print(
-                    f'{index}. {device.split()[0]} {device.split()[1]} {sp.getoutput(name).strip()}')
+                serial = device.split()[0]
+                state = device.split()[1]
+                name = 'Unknown' if state == 'unauthorized' else sp.getoutput(
+                    f'{adb} -s {device.split()[0]} shell getprop ro.product.model').strip()
+                custom_print('{}. {:.15s} {:.15s} {}'
+                             .format(index + 1, serial + padding, state + padding, name))
 
         while device_to_connect is None:
             device_index = int(custom_input(
