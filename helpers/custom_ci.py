@@ -9,7 +9,7 @@ try:
 except ImportError:
     try:
         os.system('pip3 install termcolor')
-    except:
+    except Exception:
         os.system('python3 -m pip install termcolor')
 
 if not (os.path.isdir('log')):

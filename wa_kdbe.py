@@ -1,5 +1,4 @@
 # Auto Requirements installer.
-import datetime
 import json
 import os
 import socket
@@ -15,7 +14,7 @@ except ImportError:
     try:
         # Trying both methods of installations
         os.system('pip3 install --upgrade packaging psutil termcolor requests tqdm')
-    except:
+    except Exception:
         os.system(
             'python3 -m pip install --upgrade packaging psutil termcolor requests tqdm')
 
@@ -298,7 +297,7 @@ def run_scrcpy(_is_scrcpy):
     custom_print(
         f'>>> I am in wa_kdbe.run_scrcpy({_is_scrcpy=!s})', is_print=False)
     if(_is_scrcpy):
-        cmd = 'bin\scrcpy.exe --max-fps 15 -b 4M --always-on-top' if(
+        cmd = 'bin\\scrcpy.exe --max-fps 15 -b 4M --always-on-top' if(
             is_windows) else 'scrcpy --max-fps 15 -b 4M --always-on-top'
         proc = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, shell=False)
@@ -319,12 +318,12 @@ def show_banner():
 ================================================================================
 ========                Current release date: {release_date.strip()}                ========
 ========                                                                ========
-========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ======== 
-========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ======== 
-========  88   I8I   88 88ooo88        88,8P   88   88 88oooY' 88ooooo  ======== 
-========  Y8   I8I   88 88~~~88 C8888D 88`8b   88   88 88~~~b. 88~~~~~  ======== 
-========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ======== 
-========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ======== 
+========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ========
+========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ========
+========  88   I8I   88 88ooo88        88,8P   88   88 88oooY' 88ooooo  ========
+========  Y8   I8I   88 88~~~88 C8888D 88`8b   88   88 88~~~b. 88~~~~~  ========
+========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ========
+========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ========
 ========                                                                ========
 ================================================================================'''
 

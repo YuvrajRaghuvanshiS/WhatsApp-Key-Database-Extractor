@@ -1,5 +1,4 @@
 import argparse
-import datetime
 import os
 import platform
 import re
@@ -19,8 +18,6 @@ if platform.system() == 'Windows':
 if platform.system() == 'Linux':
     is_linux = True
 
-# Global variables
-global is_java_installed
 
 # Global command line helpers
 tmp = 'tmp/'
@@ -37,13 +34,12 @@ def main():
     custom_print('>>> I am in view_extract.main()', is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
-    is_java_installed = check_java()
+    check_java()
     extract_self(is_tar_only=is_tar_only)
 
 
 def check_java():
     custom_print('>>> I am in view_extract.check_java()', is_print=False)
-    # TODO: Variable -s_java_installed scope problems.
     java_version = ''
     out = getoutput('java -version')
     if(out):
@@ -51,24 +47,19 @@ def check_java():
     else:
         custom_print(
             'Could not get output of \"java -version\" in \"view_extract.py\"', 'red')
-        return False
-    if(java_version):
-        is_java_installed = True
-    else:
-        is_java_installed = False
-    if is_java_installed:
+        kill_me()
+
+    if java_version:
         custom_print(
             f'Found Java v{java_version[0]} installed on system. Continuing...')
-        return is_java_installed
     else:
         is_no_java_continue = custom_input(
             'It looks like you don\'t have JAVA installed on your system. If you are sure that JAVA is installed you can (C)ontinue with the process or (S)top?: ', 'red') or 's'
         if(is_no_java_continue.upper() == 'C'):
             custom_print(
                 'Continuing without detecting JAVA...', 'yellow')
-            return is_java_installed
         else:
-            kill_me()
+            kill_me('Can not view extract without java installed on system!')
 
 
 def clean_tmp():
@@ -78,9 +69,12 @@ def clean_tmp():
         shutil.rmtree(tmp)
 
 
-def kill_me():
-    custom_print('>>> I am in view_extract.kill_me()', is_print=False)
+def kill_me(reason: str = ''):
+    custom_print(
+        f'>>> I am in view_extract.kill_me({reason=!s})', is_print=False)
     custom_print('\n', is_get_time=False)
+    if reason:
+        custom_print(reason)
     custom_print('Exiting...')
     os.system(
         'bin\\adb.exe kill-server') if(is_windows) else os.system('adb kill-server')
@@ -202,12 +196,12 @@ def show_banner():
     banner_content = '''
 ================================================================================
 ========                                                                ========
-========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ======== 
-========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ======== 
-========  88   I8I   88 88ooo88        88,8P   88   88 88oooY' 88ooooo  ======== 
-========  Y8   I8I   88 88~~~88 C8888D 88`8b   88   88 88~~~b. 88~~~~~  ======== 
-========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ======== 
-========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ======== 
+========  db   d8b   db  .d8b.         db   dD d8888b. d8888b. d88888b  ========
+========  88   I8I   88 d8' `8b        88 ,8P' 88  `8D 88  `8D 88'      ========
+========  88   I8I   88 88ooo88        88,8P   88   88 88oooY' 88ooooo  ========
+========  Y8   I8I   88 88~~~88 C8888D 88`8b   88   88 88~~~b. 88~~~~~  ========
+========  `8b d8'8b d8' 88   88        88 `88. 88  .8D 88   8D 88.      ========
+========   `8b8' `8d8'  YP   YP        YP   YD Y8888D' Y8888P' Y88888P  ========
 ========                                                                ========
 ================================================================================
     '''

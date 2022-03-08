@@ -2,7 +2,7 @@ import os
 import re
 import shutil
 import subprocess
-from subprocess import check_output, getoutput
+from subprocess import getoutput
 try:
     import requests
     from packaging import version
@@ -10,7 +10,7 @@ try:
 except ImportError:
     try:
         os.system('pip3 install packaging requests tqdm')
-    except:
+    except Exception:
         os.system('python3 -m pip install packaging requests tqdm')
 
 from custom_ci import custom_input, custom_print

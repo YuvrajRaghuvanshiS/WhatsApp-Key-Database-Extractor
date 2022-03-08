@@ -10,11 +10,8 @@ def init(mode, tcp_ip='', tcp_port=''):
         f'>>> I am in device_serial_id.init({mode=!s}, {tcp_ip=!s}, {tcp_port=!s})', is_print=False)
     # Detect OS
     is_windows = False
-    is_linux = False
     if platform.system() == 'Windows':
         is_windows = True
-    if platform.system() == 'Linux':
-        is_linux = True
 
     # Global command line helpers
     curr_dir = os.path.dirname(os.path.realpath(__file__))
@@ -58,7 +55,6 @@ def init(mode, tcp_ip='', tcp_port=''):
             return ''
 
         device_to_connect = None
-        i = 1
         if(len(output) == 2):
             if(output[1].split()[1] == 'offline'):
                 custom_print(
@@ -113,7 +109,7 @@ def init(mode, tcp_ip='', tcp_port=''):
             return ''
         ''' Possible outputs
         ['connected', 'to', '192.168.43.130:5555']
-        ['failed', 'to', 'authenticate', 'to', '192.168.43.130:5555'] 
+        ['failed', 'to', 'authenticate', 'to', '192.168.43.130:5555']
         ['cannot', 'connect', 'to', '192.168.43.130:5555:', 'No', 'connection', 'could', 'be', 'made', 'because', 'the', 'target', 'machine', 'actively', 'refused', 'it.', '(10061)']
         '''
     else:
