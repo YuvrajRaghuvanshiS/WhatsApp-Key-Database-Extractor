@@ -63,7 +63,7 @@ def after_connect(adb):
         if not (os.path.isfile('helpers/LegacyWhatsApp.apk')):
             custom_print(
                 'Downloading legacy WhatsApp V2.11.431 to \"helpers\" folder')
-            download_apk(adb, download_app_from, 'helpers/LegacyWhatsApp.apk')
+            download_apk(download_app_from, 'helpers/LegacyWhatsApp.apk')
             # wget.download(downloadAppFrom, 'helpers/LegacyWhatsApp.apk')
             custom_print('\n', is_get_time=False)
         else:
