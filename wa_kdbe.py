@@ -78,7 +78,7 @@ def main():
     if(is_read_instructions.upper() == 'Y'):
         custom_print('\n', is_get_time=False)
         custom_input(
-            '\aIf you haven\'t already, it is adviced to take a WhatsApp chat backup by going to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup". Hit \"Enter\" key to continue.', 'yellow')
+            '\aIf you haven\'t already, it is advised to take a WhatsApp chat backup by going to \"WhatsApp settings \u2192 Chat Settings \u2192 Chat Backup". Hit \"Enter\" key to continue.', 'yellow')
         usb_mode()
     else:
         kill_me()
@@ -416,7 +416,6 @@ if __name__ == "__main__":
     parser.add_argument('-to', '--tar-only', action='store_true',
                         help='Get entire WhatsApp\'s data in \"<username>.tar\" file instead of just getting few important files.')
     args = parser.parse_args()
-    # args = parser.parse_args('--tcp-ip 192.168.43.130 --scrcpy'.split())
 
     is_allowed_reboot = args.allow_reboot
     tcp_ip = args.tcp_ip

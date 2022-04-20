@@ -222,11 +222,15 @@ def taking_out_main_files(username):
     try:
         tar = tarfile.open(f'{tmp}whatsapp.tar')
         all_tar_files = tar.getnames()
-        files_to_extract = {'key': 'apps/com.whatsapp/f/key',
-                            'msgstore.db': 'apps/com.whatsapp/db/msgstore.db',
-                            'wa.db': 'apps/com.whatsapp/db/wa.db',
-                            'axolotl.db': 'apps/com.whatsapp/db/axolotl.db',
-                            'chatsettings.db': 'apps/com.whatsapp/db/chatsettings.db'}
+        files_to_extract = {
+            'axolotl.db': 'apps/com.whatsapp/db/axolotl.db',
+            'encrypted_backup.key': 'apps/com.whatsapp/f/encrypted_backup.key',
+            'password_data.key': 'apps/com.whatsapp/f/password_data.key',
+            'chatsettings.db': 'apps/com.whatsapp/db/chatsettings.db',
+            'key': 'apps/com.whatsapp/f/key',
+            'msgstore.db': 'apps/com.whatsapp/db/msgstore.db',
+            'wa.db': 'apps/com.whatsapp/db/wa.db',
+        }
 
         for key in files_to_extract:
             if(files_to_extract[key] in all_tar_files):
@@ -235,8 +239,12 @@ def taking_out_main_files(username):
                     f'{tmp}{files_to_extract[key]}', f'{extracted}{username}/{key}')
                 custom_print(f'Copied to \"{extracted}{username}\": {key}')
             else:
-                custom_print(
-                    f'\"{key}\" is not present in tarfile, visit \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\" for more details.', 'red', ['bold'])
+                if key in ['encrypted_backup.key', 'password_data.key']:
+                    custom_print(
+                        f'\"{key}\" is not present in tarfile, if you have crypt15 backups then visit \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/94\" for more details.', 'red', ['bold'])
+                else:
+                    custom_print(
+                        f'\"{key}\" is not present in tarfile, visit \"https://github.com/YuvrajRaghuvanshiS/WhatsApp-Key-Database-Extractor/issues/73\" for more details.', 'red', ['bold'])
         tar.close()
         time.sleep(2)  # So that 'tar' is free to delete.
         try:
