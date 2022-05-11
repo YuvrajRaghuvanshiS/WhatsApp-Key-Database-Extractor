@@ -16,9 +16,8 @@ except ImportError:
 from custom_ci import custom_input, custom_print
 
 # Global variables
-app_url_whatsapp_cdn = 'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk'
-app_url_whatscrypt_cdn = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
-
+app_url_primary_cdn = 'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk'
+app_url_alternate_cdn = 'https://legacy-static-assets.androidapksfree.com/earth/androidbucket/WhatsApp-v2.11.431-AndroidBucket.com.apk'
 
 def after_connect(adb):
     custom_print(
@@ -39,8 +38,7 @@ def after_connect(adb):
     # To check if APK even exists at a given path to download!
     # Since that obviously is not available at whatsapp cdn defaulting that content_length to 0 for GH #46
     try:
-        resp = requests.head(
-            'https://web.archive.org/web/20141111030303if_/http://www.whatsapp.com/android/current/WhatsApp.apk', timeout=5)
+        resp = requests.head(app_url_primary_cdn, timeout=5)
         try:
             content_length = resp.headers['content-length']
         except KeyError as e:
@@ -51,14 +49,14 @@ def after_connect(adb):
     except requests.exceptions.RequestException as e:
         custom_print(e, is_print=False)
         custom_print(
-            'An exception has occured while checking for LegacyWhatsApp existence at web.archive.org, defaulting to whatscrypt.com, check log for futher details.', 'yellow')
+            'An exception has occured while checking for LegacyWhatsApp existence at web.archive.org, defaulting to alternate CDN server, check log for futher details.', 'yellow')
         content_length = 0
     _version_name_text = f'{adb} shell dumpsys package com.whatsapp'
     version_name = re.findall(
         "(?<=versionName=)(.*?)(?=\n)", getoutput(_version_name_text))[0]
     custom_print(f'WhatsApp v{version_name} installed on device')
-    download_app_from = app_url_whatsapp_cdn if(
-        content_length == 18329558) else app_url_whatscrypt_cdn
+    download_app_from = app_url_primary_cdn if(
+        content_length == 18329558) else app_url_alternate_cdn
     if (version.parse(version_name) > version.parse('2.11.431')):
         if not (os.path.isfile('helpers/LegacyWhatsApp.apk')):
             custom_print(
@@ -93,9 +91,9 @@ def download_apk(url, file_name):
             '\aFor some reason I could not download Legacy WhatsApp, you need to download it on your own now from either of the links given below: ', 'red')
         custom_print('\n', is_get_time=False)
         custom_print(
-            f'1. \"{app_url_whatsapp_cdn}\" (official\'s archive)', 'red')
+            f'1. \"{app_url_primary_cdn}\" (official\'s archive)', 'red')
         custom_print(
-            f'2. \"{app_url_whatscrypt_cdn}\" unofficial website.', 'red')
+            f'2. \"{app_url_alternate_cdn}\" unofficial website.', 'red')
         custom_print('\n', is_get_time=False)
         custom_print(
             'Once downloaded rename it to \"LegacyWhatsApp.apk\" exactly and put in \"helpers\" folder.', 'red')
