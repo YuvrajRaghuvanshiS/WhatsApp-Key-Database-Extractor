@@ -1,5 +1,5 @@
 packaging 
 psutil 
 requests 
-termcolor 
+rich 
 tqdm 

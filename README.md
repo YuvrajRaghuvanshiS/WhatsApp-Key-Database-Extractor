@@ -126,7 +126,7 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 | Mode | **Example usage**: Long command **OR** Short command                                                                                                                |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | TCP  | `python3 wa_kdbe.py --tcp-ip 192.168.43.130 --tcp-port 5555 --scrcpy --tar-only` **OR** `python3 wa_kdbe.py -tip 192.168.43.130 -tp 5555 -s -to` |
-| USB  | `python3 wa_kdbe.py -ar -s -to` **OR** `python3 wa_kdbe.py --allow-reboot --scrcpy --tar-only`                                                   |
+| USB  | `python3 wa_kdbe.py --allow-reboot --scrcpy --tar-only` **OR** `python3 wa_kdbe.py -ar -s -to`                                                   |
 
 ### Standalone Operations
 **These operations are standalone implementation of their defined task. One should run these when specifically needed. For ex: Process finished but WhatsApp was not reinstalled on device.**
@@ -147,14 +147,10 @@ Note that TCP mode and USB mode are mutually exclusive. Either use with TCP mode
 *  :heavy_check_mark: See and control your android phone with your computer using [ScrCpy](https://github.com/Genymobile/scrcpy) using `--scrcpy` flag.
 *  :heavy_check_mark: Works with any android device v4.0+ so far.
 *  :heavy_check_mark: Works with any android device no matter where it is in universe as long as it is running ADB over TCP.
-*  :heavy_check_mark: Moves msgstore.db to your phone.
 *  :heavy_check_mark: Creates password protected 7z file so keep your extraction safe.
 *  :heavy_check_mark: Continues without JAVA installed and make "whatsapp.tar" out of "whatsapp.ab" once java is installed by running `python3 view_extract.py`.
-*  :heavy_check_mark: Command line arguments
-*  :heavy_check_mark: ADB Devices menu.
-*  :heavy_check_mark: Implement datetime.
-*  :heavy_check_mark: Extracts backup created over TCP ~~{ #24 bin\tar.exe: Unexpected EOF on archive file in Windows.}.~~
 *  :heavy_check_mark: Finally logging in "log/wa_kdbe.log". Log excludes passwords, if you see any password in log file then do let know.
+*  :heavy_check_mark: Added (not fully tested) support for crypt15/E2E encrypted backups.
 *  :x: Works with WhatsApp Business.
 
 

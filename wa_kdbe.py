@@ -7,16 +7,16 @@ try:
     import packaging
     import psutil
     import requests
-    import termcolor
+    import rich
     from tqdm import tqdm
 except ImportError:
     print('\nFirst run: Auto installing python requirements.\n')
     try:
         # Trying both methods of installations
-        os.system('pip3 install --upgrade packaging psutil termcolor requests tqdm')
+        os.system('pip3 install --upgrade packaging psutil rich requests tqdm')
     except Exception:
         os.system(
-            'python3 -m pip install --upgrade packaging psutil termcolor requests tqdm')
+            'python3 -m pip install --upgrade packaging psutil rich requests tqdm')
 
 
 import argparse
