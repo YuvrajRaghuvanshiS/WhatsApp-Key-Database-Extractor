@@ -1,3 +1,4 @@
+from rich.console import Console
 import logging
 import os
 from datetime import datetime
