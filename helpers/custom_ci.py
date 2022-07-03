@@ -1,19 +1,9 @@
-from rich.console import Console
 import logging
 import os
 from datetime import datetime
 
 dt = datetime.now()
 
-try:
-    from rich.console import Console
-except ImportError:
-    try:
-        os.system('pip3 install rich')
-    except Exception:
-        os.system('python3 -m pip install rich')
-
-console = Console()
 
 if not (os.path.isdir('log')):
     os.mkdir('log')
@@ -24,7 +14,7 @@ masked = []
 def custom_input(text_to_input, color='green', attr=[], is_get_time=True, is_log=True):
     time = get_time() if is_get_time else ''
     # data = input(colored(f'{time}{text_to_input}', color, attrs=attr))
-    data = console.input(f'{time}{text_to_input}')
+    data = input(f'{time}{text_to_input}')
     if(is_log):
         logging.debug(f'{time}{text_to_input}{data}')
     else:
@@ -38,8 +28,8 @@ def custom_print(text_to_print, color='green', attr=[], is_get_time=True, is_log
     time = get_time() if is_get_time else ''
     text_to_print = str(text_to_print)
     if(is_print):
-        console.print(text_to_print, style=f'{color} {"".join(attr)}')
-        # cprint(f'{time}{text_to_print}', color, a ttrs=attr, end=end)
+        # print(text_to_print, style=f'{color} {"".join(attr)}')
+        print(text_to_print)
     else:
         pass
     if(is_log):
