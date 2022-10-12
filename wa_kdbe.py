@@ -39,11 +39,6 @@ if platform.system() == 'Windows':
 if platform.system() == 'Linux':
     is_linux = True
 
-# Global Variables
-app_url_whatsapp_cdn = 'https://www.cdn.whatsapp.net/android/2.11.431/WhatsApp.apk'
-app_url_whatscrypt_cdn = 'https://whatcrypt.com/WhatsApp-2.11.431.apk'
-
-
 def main():
     custom_print('>>> I am in wa_kdbe.main()', is_print=False)
     os.system('cls' if os.name == 'nt' else 'clear')
